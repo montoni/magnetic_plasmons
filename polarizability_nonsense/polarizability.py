@@ -15,7 +15,7 @@ ns_sec = np.loadtxt('../../unfused_twomer/NS_corners')'''
 
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 
-for r in range(10,11):
+for r in range(1,30):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 6 #number of particles
 	a0 = r*10**-7 #sphere radius in cm
@@ -68,7 +68,7 @@ for r in range(10,11):
 			else:
 				R = Loc[(n)]-Loc[(m)] #pick out the location of each dipole, compute the distance between them
 				Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
-				nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
+				nhat = (Loc[(n)]-Loc[(m)])/float(Rmag) #compute unit vector between dipoles
 				p_dot_p = np.dot(pol_vectors[n],pol_vectors[m]) # this is one dipole dotted into the other
 				p_nn_p = np.dot(pol_vectors[n],nhat)*np.dot(nhat,pol_vectors[m]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 				r_cubed = Rmag**-3 #this is the 1/r^3 term (static)
@@ -76,7 +76,7 @@ for r in range(10,11):
 				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
 				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
-	alpha_eff = 1/((1/alpha_mlwa)+S)
+	alpha_eff = 1/((1/alpha_mlwa)-S)
 	plt.figure(1)
 	plt.plot(frequency,np.real(alpha_eff),frequency,np.imag(alpha_eff))#,frequency,freq_alpha)
 	plt.show()

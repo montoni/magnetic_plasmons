@@ -3,10 +3,11 @@ import math
 import scipy.linalg
 import matplotlib.pyplot as plt
 
-
+ll = 1
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 north_north = np.loadtxt('../dielectric_study/NN_right.txt')
 north_south = np.loadtxt('../dielectric_study/NS_right.txt')
+frequency = np.linspace(1,6,1001)
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 NN = []
 NS = []
@@ -131,17 +132,57 @@ for r in range(1,30):
 
 
 	x,y = zip(*part_positions)
-	vec = np.reshape(eigenVectors[:,2*numPart-1], (numPart,2))
-	mag_dipole = (np.sum(np.linalg.norm(vec,axis=1)) + np.linalg.norm(vec[:,0],axis=1) np.linalg.norm(vec[:,7],axis=1))*eigen[2*numPart-1]*mag_rad/(2*c)
-	numRings = 2
-	mag_loc = [np.array([0,0]),np.array(ux,0)]
+	vec = np.reshape(eigenVectors[:,(2*numPart)-1], (numPart,2))
+	#mag_dipole = (np.sum(np.linalg.norm(vec,axis=1)) + np.linalg.norm(vec[:,0],axis=1) np.linalg.norm(vec[:,7],axis=1))*eigen[2*numPart-1]*mag_rad/(2*c)
+	#numRings = 2
+	#mag_loc = [np.array([0,0]),np.array(ux,0)]
+
+	### now compute polarizability of a single ring ###
+	freq_eps = epsinf - ((9.1)**2)/(np.square(frequency)+(0.05j/16)*frequency)
+	#print freq_eps
+	freq_alpha = (a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
+	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*(frequency/c*elec/hbar)**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
 	
+	'''initialize w_0 and eigen'''
+	
+	
+	S = 0
+	#u,v = zip(*vec)
+	pol_vectors = vec
+	norm_factor = 1./np.sqrt(np.square(pol_vectors[:,0]) + np.square(pol_vectors[:,1]))
+
+	print pol_vectors
+	print norm_factor
+	for n in range (0,numPart):
+		for m in range (n,numPart):
+			if n == m:
+				S = S
+			#elif m == n+1 and n%2 == 0:
+				#S = S
+			else:
+				R = Loc[(n)]-Loc[(m)] #pick out the location of each dipole, compute the distance between them
+				Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
+				nhat = (Loc[(n)]-Loc[(m)])/float(Rmag) #compute unit vector between dipoles
+				p_dot_p = np.dot(pol_vectors[n],pol_vectors[m]) # this is one dipole dotted into the other
+				p_nn_p = np.dot(pol_vectors[n],nhat)*np.dot(nhat,pol_vectors[m]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+				r_cubed = Rmag**-3 #this is the 1/r^3 term (static)
+				r_squared = 1j*(frequency*elec/hbar)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
+				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
+	alpha_eff = 1/((1/alpha_mlwa)-S*2)
+	plt.figure(1)
+	plt.plot(frequency,np.real(alpha_eff),frequency,np.imag(alpha_eff))# frequency,freq_alpha)
+	plt.plot(frequency,np.real(alpha_mlwa),frequency,np.imag(alpha_mlwa))
+	plt.show()
+
+
 	#print Loc[:]
 	
 	#y = Loc[:,1]
-	u,v = zip(*vec)
+	#u,v = zip(*vec)
 	#v = vec[:,1]
-	plt.title(' '.join(['radius =',str(r)]))
-	plt.quiver(x,y,u,v)
-	plt.show()
+	#plt.title(' '.join(['radius =',str(r)]))
+	#plt.quiver(x,y,u,v)
+	#plt.show()
 	
