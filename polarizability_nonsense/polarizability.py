@@ -32,6 +32,8 @@ for r in range(1,30):
 		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
 	pol_vectors = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
 		   		   np.array([1,0]),np.array([0.5,math.sqrt(3)/2]),np.array([-0.5,math.sqrt(3)/2])]
+	E_pol = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
+		   		   np.array([1,0]),np.array([0.5,math.sqrt(3)/2]),np.array([-0.5,math.sqrt(3)/2])]
 	Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
 
 	'''More constants'''
@@ -52,11 +54,11 @@ for r in range(1,30):
 	freq_eps = epsinf - ((9.1)**2)/(np.square(frequency)+(0.05j/16)*frequency)
 	#print freq_eps
 	freq_alpha = (a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
-	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*(frequency/c*elec/hbar)**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
+	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
 	wsp_0 = (mie_omegas[mie_index])*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = wsp_0
-	eigen = np.zeros(2*numPart)
+	
 	count = 1
 	S = 0
 	for n in range (0,numPart):
