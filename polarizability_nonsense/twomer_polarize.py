@@ -18,7 +18,7 @@ ns_sec = np.loadtxt('../../unfused_twomer/NS_corners')'''
 
 for r in range(1,30):
 	elec = 1.60217662e-19 # regular coulombs
-	numPart = 6 #number of particles
+	numPart = 10 #number of particles
 	a0 = r*10**-7 #sphere radius in cm
 	mie_index = (r*10)
 	index = r-1
@@ -28,14 +28,15 @@ for r in range(1,30):
 	# make unit vectors in centimeters.
 	e1 = float(1)/float(2) * (2.2*a0) ; #short side of 30-60-90 triangle
 	e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
-	mag_x = 2*e2
-	mag_y = 3*e1
+	m_sep = 2*e2
 	Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),
-		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
+		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1]),
+		   np.array([2*e2,2*e1]),np.array([3*e2,e1]),np.array([4*e2,-e1]),
+		   np.array([3*e2,-2*e1])]
 	#pol_vectors = [np.array([-1/math.sqrt(3),0]),np.array([-0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),np.array([0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),
 		   		   #np.array([1/math.sqrt(3),0]),np.array([0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)]),np.array([-0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)])]
-	vec = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
-		   		   np.array([1,0]),np.array([0.5,math.sqrt(3)/2]),np.array([-0.5,math.sqrt(3)/2])]
+	#pol_vectors = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
+		   		   #np.array([1,0]),np.array([0.5,math.sqrt(3)/2]),np.array([-0.5,math.sqrt(3)/2])]
 	Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
 
 	'''More constants'''
@@ -64,7 +65,7 @@ for r in range(1,30):
 	eigen = np.zeros(2*numPart)
 	count = 1
 	H = np.zeros((2*numPart,2*numPart))
-	'''while np.sqrt(np.square(w_0*hbar/elec - eigen[2*numPart-1])) > 0.00000001:
+	while np.sqrt(np.square(w_0*hbar/elec - eigen[2*numPart-1])) > 0.00000001:
 		if count == 1:
 			w_0 = wsp_0
 			count = count + 1
@@ -119,9 +120,8 @@ for r in range(1,30):
 		eigenValues = w[idx] # sorting
 		eigenVectors = v[:,idx] # sorting
 		eigen=(eigenValues) # redefine
-		lowest = eigen[2*numPart-1]
-	print lowest
-	vec = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))'''
+	print eigen[2*numPart-1]
+	vec = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))
 	S = 0
 	for n in range (0,numPart):
 		for m in range (n,numPart):
@@ -140,7 +140,7 @@ for r in range(1,30):
 				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
 				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
-	alpha_eff = 1/((1/alpha_mlwa)-(S/np.sqrt(6)))
+	alpha_eff = 1/((1/alpha_mlwa)-(2*S))
 	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff)
 	#print (2*math.pi*hbar*c)/(elec*np.power(np.imag(S[400]),(1./3.)))
 	plt.figure(1)
@@ -164,16 +164,14 @@ for r in range(1,30):
 	right_idx = np.where(d < 0)[-1]
 	fwhm = frequency[right_idx] - frequency[left_idx] #return the difference (full width)
 	print fwhm
-	volume = 6*a0**3
+	volume = 10*a0**3
 	eps_cluster = (-volume - 2*alpha_eff)/(alpha_eff - volume)
 	#print np.real(alpha_eff)
 	res = zip(np.where(np.imag(alpha_eff) == np.imag(alpha_eff).max()))
 	print frequency[res]
 
-	### Okay! Time to calculate permeability! ###
-
 	km = frequency/c
-	ring_density = 1/(14.58*(a0**3)*math.pi)
+	ring_density = 2/(1.8*14.58*(a0**3)*math.pi)
 	'''quasistat = km*a0
 	conc = 0.5
 	fxn = 1/(quasistat**2) - np.cos(quasistat)/(np.sin(quasistat)*quasistat)
@@ -182,32 +180,18 @@ for r in range(1,30):
 
 	perm_eff = ((1 + 2*conc)*perm + 2 * (1 - conc))/((1 - conc) * perm + (conc + 2))'''
 
-	perm_eff = 1 + ((ring_density**-1)*((alpha_eff**-1) + 1j*(km**3)/(6*math.pi)) - (1./3.))**-1
+	perm_eff = 1 + ((ring_density**-1)*((alpha_mlwa**-1) + 1j*(km**3)/(6*math.pi)) - (1./3.))**-1
 
 	plt.figure()
 	plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
 	plt.show()
 
+	'''n_ref = np.sqrt((np.square(np.real(eps_cluster))+np.square(np.imag(eps_cluster)) + np.real(eps_cluster))/2)
+	k_ref = np.sqrt((np.square(np.real(eps_cluster))-np.square(np.imag(eps_cluster)) + np.real(eps_cluster))/2)
+	plt.figure()
+	plt.plot(frequency, n_ref, frequency, k_ref)
+	plt.show()'''
 	'''plt.figure()
 	plt.plot(frequency,np.real(eps_cluster),frequency,np.imag(eps_cluster))
 	plt.show()'''
-
-	'''ring_loc = []
-	array_size = [10,1]
-	for y_hop in range(0,array_size[1]):
-		x_pos = y_hop*mag_x/2.
-		y_pos = y_hop*mag_y
-		for x_hop in range(0,array_size[0]):
-			x_pos = x_pos + x_hop*mag_x
-			ring_loc.append([x_pos,y_pos])
-
-	numRings = np.size(ring_loc)
-	q_mag = 6*lowest*2.2*a0*np.norm(vec[0])/(2*c*np.sqrt(max(alpha_eff)*lowest))'''
-
-	#for z in range(0,numRings):
-	#	for zz in range(z,numRings):
-
-
-
-
 
