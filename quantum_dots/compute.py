@@ -1,6 +1,7 @@
 def eps(R,nF,den,name):
     import math
     import numpy as np
+    #import os
     # physical parameters
     M=300
     pi=math.pi
@@ -15,7 +16,7 @@ def eps(R,nF,den,name):
     coeff = (0.391697)/(R**2)
     
     # Loop to initial omegas
-    omegas = np.linspace(0.1,6,591) # these are in eV
+    omegas = np.linspace(0.0,2.0,201) # these are in eV
     epsinf = 3.71 #epsilon infinity for ZnO
     epsilon_real = np.zeros(np.size(omegas))
     epsilon_imag = np.zeros(np.size(omegas))
@@ -44,7 +45,8 @@ def eps(R,nF,den,name):
     #epsilon = [epsilon_real, epsilon_imag]
     
     data_to_save = [omegas, epsilon_real, epsilon_imag]
-    np.savetxt('_'.join(['epsilon',str(name)]),data_to_save)
+    #os.system('mkdir den_' + str(den))
+    np.savetxt('_'.join(['density_' + str(den) + '/epsilon',str(name)]),data_to_save)
 
     return
 

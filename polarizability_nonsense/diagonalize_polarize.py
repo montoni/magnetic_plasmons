@@ -30,6 +30,7 @@ for r in range(1,30):
 	e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
 	mag_x = 2*e2
 	mag_y = 3*e1
+	rad = 2.2*a0
 	Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),
 		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
 	#pol_vectors = [np.array([-1/math.sqrt(3),0]),np.array([-0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),np.array([0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),
@@ -140,7 +141,21 @@ for r in range(1,30):
 				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
 				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
-	alpha_eff = 1/((1/alpha_mlwa)-(S/np.sqrt(6)))
+	
+	'''for n in range(0,numPart):
+		for m in range(0,numPart):
+			if m == n:
+				S = S
+			else:
+				S = S + (3 + np.cos(2*math.pi*(m-n)/numPart))/((abs(np.sin(math.pi*(m-n)/numPart)))**3)'''
+
+	km = (frequency*elec/hbar)/c
+
+	alpha_eff = (1)/((1/alpha_mlwa)-(S/np.sqrt(6)))
+
+	#alpha_eff = (4*epsb)/(numPart*(km**2)*(rad**2)*alpha_mlwa) - 1j*((km**3)/(6*math.pi) - (2*km)/(3*math.pi*numPart*rad**2)) + S/(16*math.pi*numPart*(km**2)*(rad**5))
+
+
 	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff)
 	#print (2*math.pi*hbar*c)/(elec*np.power(np.imag(S[400]),(1./3.)))
 	plt.figure(1)
@@ -172,8 +187,8 @@ for r in range(1,30):
 
 	### Okay! Time to calculate permeability! ###
 
-	km = frequency/c
-	ring_density = 1/(14.58*(a0**3)*math.pi)
+	
+	ring_density = 1/(rad**2*math.pi*a0*2)
 	'''quasistat = km*a0
 	conc = 0.5
 	fxn = 1/(quasistat**2) - np.cos(quasistat)/(np.sin(quasistat)*quasistat)
@@ -182,15 +197,19 @@ for r in range(1,30):
 
 	perm_eff = ((1 + 2*conc)*perm + 2 * (1 - conc))/((1 - conc) * perm + (conc + 2))'''
 
-	perm_eff = 1 + ((ring_density**-1)*((alpha_eff**-1) + 1j*(km**3)/(6*math.pi)) - (1./3.))**-1
+	perm_eff = 1 + ((ring_density**-1)*((alpha_eff**-1) + 1j*(km**3)/6*math.pi) - (1./3.))**-1
 
 	plt.figure()
 	plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
 	plt.show()
 
-	'''plt.figure()
-	plt.plot(frequency,np.real(eps_cluster),frequency,np.imag(eps_cluster))
-	plt.show()'''
+
+	first_n = np.sqrt(alpha_eff)
+	second_n = np.sqrt(perm_eff)
+	total_n = first_n * second_n
+	plt.figure()
+	plt.plot(frequency,np.real(total_n),frequency,np.imag(total_n))
+	plt.show()
 
 	'''ring_loc = []
 	array_size = [10,1]
