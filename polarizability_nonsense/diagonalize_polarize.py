@@ -16,7 +16,7 @@ ns_sec = np.loadtxt('../../unfused_twomer/NS_corners')'''
 
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 
-for r in range(1,30):
+for r in range(1,31):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 6 #number of particles
 	a0 = r*10**-7 #sphere radius in cm
@@ -35,8 +35,9 @@ for r in range(1,30):
 		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
 	#pol_vectors = [np.array([-1/math.sqrt(3),0]),np.array([-0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),np.array([0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),
 		   		   #np.array([1/math.sqrt(3),0]),np.array([0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)]),np.array([-0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)])]
-	vec = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
+	vec_mag = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
 		   		   np.array([1,0]),np.array([0.5,math.sqrt(3)/2]),np.array([-0.5,math.sqrt(3)/2])]
+	vec_ele = [[0,1],[0,1],[0,1],[0,1],[0,1],[0,1]]
 	Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
 
 	'''More constants'''
@@ -58,9 +59,9 @@ for r in range(1,30):
 	#print freq_eps
 	freq_alpha = (a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
 	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
-	wsp_0 = (mie_omegas[mie_index])*elec/hbar
+	#wsp_0 = (mie_omegas[mie_index])*elec/hbar
 	'''initialize w_0 and eigen'''
-	w_0 = wsp_0
+	#w_0 = wsp_0
 	alphasp_stat = ((a0**3)*3)/(epsinf+2)
 	eigen = np.zeros(2*numPart)
 	count = 1
@@ -124,18 +125,18 @@ for r in range(1,30):
 	print lowest
 	vec = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))'''
 	S = 0
-	for n in range (0,numPart):
+	for n in range (0,1):
 		for m in range (n,numPart):
 			if n == m:
 				S = S
-			#elif m == n+1 and n%2 == 0:
-			#	S = S
+		#elif m == n+1 and n%2 == 0:
+		#	S = S
 			else:
 				R = Loc[(n)]-Loc[(m)] #pick out the location of each dipole, compute the distance between them
 				Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
 				nhat = (Loc[(n)]-Loc[(m)])/float(Rmag) #compute unit vector between dipoles
-				p_dot_p = np.dot(vec[n],vec[m]) # this is one dipole dotted into the other
-				p_nn_p = np.dot(vec[n],nhat)*np.dot(nhat,vec[m]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+				p_dot_p = np.dot(vec_mag[n],vec_mag[m]) # this is one dipole dotted into the other
+				p_nn_p = np.dot(vec_mag[n],nhat)*np.dot(nhat,vec_mag[m]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 				r_cubed = Rmag**-3 #this is the 1/r^3 term (static)
 				r_squared = 1j*(frequency*elec/hbar)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
 				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
@@ -151,16 +152,39 @@ for r in range(1,30):
 
 	km = (frequency*elec/hbar)/c
 
-	alpha_eff = (1)/((1/alpha_mlwa)-(S/np.sqrt(6)))
+	alpha_eff_mag = ((1/alpha_mlwa) - S)**-1
+	alpha_eff_mag = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S)) #*1j
+	#alpha_eff_mag = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
 
 	#alpha_eff = (4*epsb)/(numPart*(km**2)*(rad**2)*alpha_mlwa) - 1j*((km**3)/(6*math.pi) - (2*km)/(3*math.pi*numPart*rad**2)) + S/(16*math.pi*numPart*(km**2)*(rad**5))
 
+	S = 0
+	for n in range (0,1):
+		for m in range (1,numPart):
+			if n == m:
+				S = S
+			#elif m == n+1 and n%2 == 0:
+			#	S = S
+			else:
+				R = Loc[(n)]-Loc[(m)] #pick out the location of each dipole, compute the distance between them
+				Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
+				nhat = (Loc[(n)]-Loc[(m)])/float(Rmag) #compute unit vector between dipoles
+				p_dot_p = np.dot(vec_ele[n],vec_ele[m]) # this is one dipole dotted into the other
+				p_nn_p = np.dot(vec_ele[n],nhat)*np.dot(nhat,vec_ele[m]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+				r_cubed = Rmag**-3 #this is the 1/r^3 term (static)
+				r_squared = 1j*(frequency*elec/hbar)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
+				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
 
-	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff)
+	alpha_eff_ele = ((1/alpha_mlwa) - S)**-1
+	alpha_eff_ele = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
+	alpha_eff_ele = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S))
+	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff_mag)
 	#print (2*math.pi*hbar*c)/(elec*np.power(np.imag(S[400]),(1./3.)))
 	plt.figure(1)
-	plt.plot(frequency,np.real(alpha_eff),frequency,np.imag(alpha_eff))#,frequency,freq_alpha)
-	#plt.plot(frequency,np.real(alpha_mlwa),frequency,np.imag(alpha_mlwa))
+	plt.plot(frequency,np.real(alpha_eff_mag),frequency,np.imag(alpha_eff_mag))#,frequency,freq_alpha)
+	plt.plot(frequency,np.real(alpha_eff_ele),frequency,np.imag(alpha_eff_ele))
 	plt.show()
 	'''plt.figure(2)
 	plt.plot(frequency,np.real(S),frequency,np.imag(S))
@@ -180,31 +204,25 @@ for r in range(1,30):
 	fwhm = frequency[right_idx] - frequency[left_idx] #return the difference (full width)
 	print fwhm
 	volume = 6*a0**3
-	eps_cluster = (-volume - 2*alpha_eff)/(alpha_eff - volume)
+	#eps_cluster = (-volume - 2*alpha_eff)/(alpha_eff - volume)
 	#print np.real(alpha_eff)
-	res = zip(np.where(np.imag(alpha_eff) == np.imag(alpha_eff).max()))
+	res = zip(np.where(np.imag(alpha_eff_mag) == np.imag(alpha_eff_mag).max()))
 	print frequency[res]
 
 	### Okay! Time to calculate permeability! ###
 
 	
-	ring_density = 1/(rad**2*math.pi*a0*2)
-	'''quasistat = km*a0
-	conc = 0.5
-	fxn = 1/(quasistat**2) - np.cos(quasistat)/(np.sin(quasistat)*quasistat)
+	ring_density = 1/(2*a0*rad*e2/2)
+	
 
-	perm = 2*fxn/(1-fxn)
-
-	perm_eff = ((1 + 2*conc)*perm + 2 * (1 - conc))/((1 - conc) * perm + (conc + 2))'''
-
-	perm_eff = 1 + ((ring_density**-1)*((alpha_eff**-1) + 1j*(km**3)/6*math.pi) - (1./3.))**-1
-
-	plt.figure()
-	plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
-	plt.show()
+	perm_eff = 1 + ((ring_density**-1)*((alpha_eff_mag**-1)) - (1./3.))**-1
+	eps_eff = 1 + ((ring_density**-1)*((alpha_eff_ele**-1)) - (1./3.))**-1
+	#plt.figure()
+	#plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
+	#plt.show()
 
 
-	first_n = np.sqrt(alpha_eff)
+	first_n = np.sqrt(eps_eff)
 	second_n = np.sqrt(perm_eff)
 	total_n = first_n * second_n
 	plt.figure()
