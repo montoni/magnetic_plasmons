@@ -155,6 +155,7 @@ The first systems we examine are a magnetic dimer\cite{Cherqui2014}, a three-rin
 \begin{figure}
 \begin{center}
 \includegraphics{theory_bem_comparison_fig1.pdf}
+\caption{Pending.}
 \label{theory_simul}
 \end{center}
 \end{figure}
@@ -164,6 +165,7 @@ The results of our theoretical calculations and full-wave simulations for the af
 \begin{figure}
 \begin{center}
 \includegraphics{twomer_dimer.pdf}
+\caption{Pending.}
 \label{twomer_dimer}
 \end{center}
 \end{figure}
@@ -173,6 +175,7 @@ This is an unexpected phenomenon. When one considers the energy-order of the fou
 \begin{figure}
 \begin{center}
 \includegraphics{interactions.pdf}
+\caption{Pending.}
 \label{int_strength}
 \end{center}
 \end{figure}
@@ -182,6 +185,7 @@ To gain a more visual and intuitive sense of the length scales of each of the te
 \begin{figure}
 \begin{center}
 \includegraphics{coupling_comparison.pdf}
+\caption{Pending.}
 \label{ring_spacing}
 \end{center}
 \end{figure}
@@ -204,6 +208,7 @@ As an additional exercise, and to emphasize the tunability and versatility of ma
 \begin{figure}
 \begin{center}
 \includegraphics{diel_magnetization.pdf}
+\caption{Pending.}
 \label{diel_eff}
 \end{center}
 \end{figure}

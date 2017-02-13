@@ -16,7 +16,7 @@ ns_sec = np.loadtxt('../../unfused_twomer/NS_corners')'''
 
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 
-for r in range(1,31):
+for r in range(1,30):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 6 #number of particles
 	a0 = r*10**-7 #sphere radius in cm
@@ -54,19 +54,20 @@ for r in range(1,31):
 	gamma = 0.05*elec/(hbar)
 	wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 	''' First make epsilon(omega)'''
-
+	km = (frequency/c)*(elec/hbar)
 	freq_eps = epsinf - ((9.1)**2)/(np.square(frequency)+(0.05j)*frequency)
 	#print freq_eps
-	freq_alpha = (a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
-	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
-	#wsp_0 = (mie_omegas[mie_index])*elec/hbar
+	freq_alpha = 4*math.pi*(a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
+	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha )
+	alpha_rad = (freq_alpha**-1 - 1j*(1./(math.pi*6.))*km**3 - (km**2)/(4*math.pi*a0))**-1
+	wsp_0 = (mie_omegas[mie_index])*elec/hbar
 	'''initialize w_0 and eigen'''
-	#w_0 = wsp_0
+	w_0 = wsp_0
 	alphasp_stat = ((a0**3)*3)/(epsinf+2)
 	eigen = np.zeros(2*numPart)
 	count = 1
 	H = np.zeros((2*numPart,2*numPart))
-	'''while np.sqrt(np.square(w_0*hbar/elec - eigen[2*numPart-1])) > 0.00000001:
+	while np.sqrt(np.square(w_0*hbar/elec - eigen[2*numPart-1])) > 0.00000001:
 		if count == 1:
 			w_0 = wsp_0
 			count = count + 1
@@ -100,9 +101,9 @@ for r in range(1,31):
 					nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 					p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 					p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
-					r_cubed = alphasp_stat*Rmag**-3 #this is the 1/r^3 term (static)
-					r_squared = (alphasp_stat*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-					r_unit = (alphasp_stat*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+					r_cubed = alphasp_mlwa*Rmag**-3 #this is the 1/r^3 term (static)
+					r_squared = (alphasp_mlwa*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alphasp_mlwa*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 					#space_exp = np.exp(1j*w_0*Rmag/c)
 					space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
@@ -123,9 +124,10 @@ for r in range(1,31):
 		eigen=(eigenValues) # redefine
 		lowest = eigen[2*numPart-1]
 	print lowest
-	vec = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))'''
+	vec_mag = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))
+	vec_ele = np.reshape(eigenVectors[:,(2*numPart)-2],(numPart,2))
 	S = 0
-	for n in range (0,1):
+	for n in range (0,numPart):
 		for m in range (n,numPart):
 			if n == m:
 				S = S
@@ -153,13 +155,13 @@ for r in range(1,31):
 	km = (frequency*elec/hbar)/c
 
 	alpha_eff_mag = ((1/alpha_mlwa) - S)**-1
-	alpha_eff_mag = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S)) #*1j
+	alpha_eff_mag = ((numPart*(km*rad)**2)/4)*(alpha_rad/(1-(alpha_rad*S/(4*math.pi)))) #*1j
 	#alpha_eff_mag = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
 
 	#alpha_eff = (4*epsb)/(numPart*(km**2)*(rad**2)*alpha_mlwa) - 1j*((km**3)/(6*math.pi) - (2*km)/(3*math.pi*numPart*rad**2)) + S/(16*math.pi*numPart*(km**2)*(rad**5))
 
 	S = 0
-	for n in range (0,1):
+	for n in range (0,numPart):
 		for m in range (1,numPart):
 			if n == m:
 				S = S
@@ -179,7 +181,7 @@ for r in range(1,31):
 
 	alpha_eff_ele = ((1/alpha_mlwa) - S)**-1
 	alpha_eff_ele = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
-	alpha_eff_ele = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S))
+	alpha_eff_ele = (1)*(alpha_rad/(1-(alpha_rad*S/(4*math.pi))))
 	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff_mag)
 	#print (2*math.pi*hbar*c)/(elec*np.power(np.imag(S[400]),(1./3.)))
 	plt.figure(1)
@@ -212,11 +214,12 @@ for r in range(1,31):
 	### Okay! Time to calculate permeability! ###
 
 	
-	ring_density = 1/(2*a0*rad*e2/2)
+	ring_density = 1/(2*a0*math.pi*rad**2)
 	
 
-	perm_eff = 1 + ((ring_density**-1)*((alpha_eff_mag**-1)) - (1./3.))**-1
-	eps_eff = 1 + ((ring_density**-1)*((alpha_eff_ele**-1)) - (1./3.))**-1
+	perm_eff = 1 + ((ring_density**-1)*(alpha_eff_mag**-1 + (1./(math.pi*6.))*1j*(km**3)))**-1
+	eps_eff = 1 + ((ring_density**-1)*(alpha_eff_ele**-1 + (1./(math.pi*6.))*1j*(km**3)))**-1
+	# - 1j/(km**3)
 	#plt.figure()
 	#plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
 	#plt.show()
@@ -226,9 +229,11 @@ for r in range(1,31):
 	second_n = np.sqrt(perm_eff)
 	total_n = first_n * second_n
 	plt.figure()
-	plt.plot(frequency,np.real(total_n),frequency,np.imag(total_n))
+	plt.plot(frequency,np.real(total_n))
 	plt.show()
 
+	np.savetxt('real_n_onemer',np.real(total_n))
+	np.savetxt('imag_n_onemer',np.imag(total_n))
 	'''ring_loc = []
 	array_size = [10,1]
 	for y_hop in range(0,array_size[1]):
