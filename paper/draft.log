@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 JAN 2017 12:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 FEB 2017 10:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**draft.
+**draft.tex
 (./draft.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
@@ -678,6 +678,9 @@ Overfull \hbox (13.94028pt too wide) in paragraph at lines 157--158
  [] 
  []
 
+
+LaTeX Warning: Float too large for page by 20.23398pt on input line 161.
+
 [4] [5 <./theory_bem_comparison_fig1.pdf>]
 <twomer_dimer.pdf, id=1770, 483.69685pt x 202.01457pt>
 File: twomer_dimer.pdf Graphic file (type pdf)
@@ -706,7 +709,11 @@ File: coupling_comparison.pdf Graphic file (type pdf)
 <use coupling_comparison.pdf>
 Package pdftex.def Info: coupling_comparison.pdf used on input line 187.
 (pdftex.def)             Requested size: 241.84784pt x 540.60106pt.
- [8] [9 <./coupling_comparison.pdf>]
+
+
+LaTeX Warning: Float too large for page by 0.17067pt on input line 191.
+
+[8] [9 <./coupling_comparison.pdf>]
 <diel_magnetization.pdf, id=2787, 458.08937pt x 156.49016pt>
 File: diel_magnetization.pdf Graphic file (type pdf)
 
@@ -714,59 +721,67 @@ File: diel_magnetization.pdf Graphic file (type pdf)
 Package pdftex.def Info: diel_magnetization.pdf used on input line 210.
 (pdftex.def)             Requested size: 458.08826pt x 156.48976pt.
  [10] [11 <./diel_magnetization.pdf>] [12]
-(./draft.bbl [13] [14] [15] [16] [17]) [18]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 246.
+<contour_n_plot.pdf, id=2811, 483.69685pt x 227.62204pt>
+File: contour_n_plot.pdf Graphic file (type pdf)
+
+<use contour_n_plot.pdf>
+Package pdftex.def Info: contour_n_plot.pdf used on input line 251.
+(pdftex.def)             Requested size: 483.69566pt x 227.62148pt.
+
+Overfull \hbox (13.94028pt too wide) in paragraph at lines 251--252
+ [] 
+ []
+
+[13 <./contour_n_plot.pdf>] [14] (./draft.bbl [15] [16] [17] [18]) [19]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 285.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \vbox (badness 10000) detected at line 246
+Underfull \vbox (badness 10000) detected at line 285
  []
 
-[19] (./draft.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[20] (./draft.aux) ) 
 Here is how much of TeX's memory you used:
- 14846 strings out of 493014
- 274623 string characters out of 6133351
- 339272 words of memory out of 5000000
- 18216 multiletter control sequences out of 15000+600000
+ 14847 strings out of 493014
+ 274612 string characters out of 6133351
+ 339573 words of memory out of 5000000
+ 18217 multiletter control sequences out of 15000+600000
  26317 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,94p,10402b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-dist/fon
-ts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fonts
-/type1/public/cm-super/sfsi0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/cm-super/sfss0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/cm-super/sfss1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/cm-super/sfss1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/cm-super/sfss1440.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/cm-super/sfti1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-cm-super/sftt0800.pfb>
-Output written on draft.pdf (19 pages, 906337 bytes).
+ 60i,12n,94p,10405b,431s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-supe
+r/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmex
+tra/cmmib8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on draft.pdf (20 pages, 1017700 bytes).
 PDF statistics:
- 2914 PDF objects out of 2984 (max. 8388607)
- 1770 compressed objects within 18 object streams
+ 2928 PDF objects out of 2984 (max. 8388607)
+ 1780 compressed objects within 18 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

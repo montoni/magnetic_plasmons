@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{46}
+\begin{mcitethebibliography}{44}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -391,22 +391,6 @@ Purcell,~E.~M.; Pennypacker,~C.~R. Scattering and Absorption of Light by
 {Yang},~A.; {Hoang},~T.~B.; {Dridi},~M.; {Deeb},~C.; {Mikkelson},~M.~H.;
   {Schatz},~G.~C.; {Odom},~T.~W. {Real-time tunable lasing from plasmonic
   nanocavity arrays}. \emph{Nature Comm.} \textbf{2015}, \emph{6}, 6939\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{Kadirko} \latin{et~al.}(2011){Kadirko}, {Ziegler}, and
-  {Kogan}]{kogan2011}
-{Kadirko},~V.; {Ziegler},~K.; {Kogan},~E. {Next-nearest-neighbor Tight-binding
-  Model of Plasmons in Graphene}. \emph{ArXiv e-prints} \textbf{2011}, \relax
-\mciteBstWouldAddEndPunctfalse
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{Grigorenko} \latin{et~al.}(2012){Grigorenko}, {Polini}, and
-  {Novoselov}]{novoselov2012}
-{Grigorenko},~A.~N.; {Polini},~M.; {Novoselov},~K.~S. {Graphene plasmonics}.
-  \emph{Nat. Photon} \textbf{2012}, \emph{6}, 749--758\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

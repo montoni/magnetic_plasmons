@@ -150,22 +150,22 @@ In this Hamiltonian we introduce the near, intermediate, and far-field coupling 
 It should be noted that this Hamiltonian, when diagonilzed, results in a transcendental equation. The eigenvalues of the Hamiltonian are functions of $\omega$, which are the frequencies of the collective modes, that is, the eigenvalues of the eigenvectors. In order to fully solve this problem, we make a first guess of $\omega$ for a particular mode of interest and iteratively compute the eigenvalues. Using the eigenvalue associated with the mode of interest, the Hamiltonian is diagonalized to convergence. The process is repeated for each mode of interest.
 
 \section{results and discussion}
-The first systems we examine are a magnetic dimer\cite{Cherqui2014}, a three-ring chain, and three rings arranged in a triangle. Because we are interested in the effects of scale, we must define a scaling parameter for the system. Each of our systems begins from a unit cell: six silver, spherical MNPs placed at the corners of a regular hexagon. To create the dimer, two unit cells are tiled so that they share an edge, and thus two particles. In general, if any two unit cells share an edge, they also share two nanoparticles, as in the diagrams in Figure~\ref{theory_simul} Each particle has radius $a_0$ and particles are separated by lattice spacing $r=2.2\times a_0$. With the radius of the particles defining the scale of the system, there now exists a way to probe the energy ordering of the modes as a function of size.
+The first systems we examine are a magnetic two-mer\cite{Cherqui2014}, three-mer chain, and three-mer triangle. Because we are interested in the effects of scale, we must define a scaling parameter for the system. Each of our systems begins from a unit cell called the one-mer: six silver, spherical MNPs placed at the corners of a regular hexagon. To create the two-mer, two unit cells are tiled so that they share an edge, and thus two particles. In general, if any two unit cells share an edge, they also share two nanoparticles, as in the diagrams in Figure~\ref{theory_simul} Each particle has radius $a_0$ and particles are separated by lattice spacing $r=2.2\times a_0$. With the radius of the particles defining the scale of the system, there now exists a way to probe the energy ordering of the modes as a function of size.
 
 \begin{figure}
 \begin{center}
 \includegraphics{theory_bem_comparison_fig1.pdf}
-\caption{Pending.}
+\caption{Eigenvalues for the magnetic two-mer (A), three-mer chain (B), and three-mer triangle (C) as computed from the tight binding model (left) and compared to MNPBEM simulations (right). For all three geometries, the net magnetic mode is higher in energy than the net electric mode(s) at small sizes and becomes lower at a certain critical scale value. The tight binding model incorrectly predicts the critical scale value but otherwise is fairly quantitatively accurate.}
 \label{theory_simul}
 \end{center}
 \end{figure}
 
-The results of our theoretical calculations and full-wave simulations for the aforementioned oligomers are dispayed in Figure~\ref{theory_simul}. Both theory and simulation predict that as a function of size, the energy ordering of the magnetic plasmon modes should change. In the dimer system, there are two magnetic modes. When the system is small, the lowest energy mode is the alternating north-south (NS) mode and the in-phase north-north mode is highest. When we add a ring to the system, we see a trend emerge. The alternating (NSN) mode is lower than the N-S mode, which is in turn lower than the NNN mode. As a function of size, the modes change order. The triangle system, as a result of its threefold symmetry (as opposed to twofold for the chains) has slightly different properties. At small size, its lowest energy mode is a pair of degenerate NS modes, while its higher energy mode is an all-north mode. These again switch order as a function of size. In chains with more than three rings, the pattern continues - the magnetic resonances with the most nodes between rings are the lowest energy when small, but the highest when large.
+The results of our theoretical calculations and full-wave simulations for the aforementioned oligomers are dispayed in Figure~\ref{theory_simul}. Both theory and simulation predict that as a function of size, the energy ordering of the magnetic plasmon modes should change. In the two-mer system, there are two magnetic modes. When the system is small, the lowest energy mode is the alternating north-south (NS) mode and the in-phase north-north mode is highest. When we add a ring to the system, we see a trend emerge. The alternating (NSN) mode is lower than the N-S mode, which is in turn lower than the NNN mode. As a function of size, the modes change order. The triangle system, as a result of its threefold symmetry (as opposed to twofold for the chains) has slightly different properties. At small size, its lowest energy mode is a pair of degenerate NS modes, while its higher energy mode is an all-north mode. These again switch order as a function of size. In chains with more than three rings, the pattern continues - the magnetic resonances with the most nodes between rings are the lowest energy when small, but the highest when large.
 
 \begin{figure}
 \begin{center}
 \includegraphics{twomer_dimer.pdf}
-\caption{Pending.}
+\caption{Comparison of the magnetic two-mer (A) and the nanoparticle dimer (B) eigenmodes as a function of scale. Significantly, the two-mer exhibits and change in the energy-ordering of its magnetic modes. However, the nanoparticle dimer does not ever exhibit a change in energy ordering of its eigenmodes. This make energy ordering a uniquely tunable property of fused-ring magnetic oligomers.}
 \label{twomer_dimer}
 \end{center}
 \end{figure}
@@ -175,7 +175,7 @@ This is an unexpected phenomenon. When one considers the energy-order of the fou
 \begin{figure}
 \begin{center}
 \includegraphics{interactions.pdf}
-\caption{Pending.}
+\caption{Plots of the interaction terms in the fully retarded electric field for (A) collinear, (B) anti-parallel, (C) anti-collinear, and (D) parallel arrangements of dipoles in a nanoparticle dimer as a function of separation distance. The plots show that at different length scales, different terms in the electric field contribute more to the interaction strength between the particles. As a result, the interactions between one pair of particles in a larger aggregate may be dominated by the interactions between another pair of particles.}
 \label{int_strength}
 \end{center}
 \end{figure}
@@ -185,30 +185,30 @@ To gain a more visual and intuitive sense of the length scales of each of the te
 \begin{figure}
 \begin{center}
 \includegraphics{coupling_comparison.pdf}
-\caption{Pending.}
+\caption{Comparison of coupling schemes for nearest neighbors (A), next-nearest neighbors (B), and next-next nearest neighbors (C) using the electric dipole basis (left) and the magnetic dipole basis parametrized from the electric dipole basis (right). It is clear to see that by parametrizing the coupling between two rings as the difference between the eigenvalues of the NN and NS modes of two rings, we recover exactly the quantitative description provided by the electric dipole basis at much lower computational cost.}
 \label{ring_spacing}
 \end{center}
 \end{figure}
 
-With a functional and accurate electric dipole tight binding model, we seek a way to simplify our model. Figure~\ref{ring_spacing} displays the eigenvalue curves for three arrangements of two-ring systems, with the rings as (A) nearest neighbors (B) next-nearest neighbors and (C) next-next-nearest neighbors. It is clear that again, at different length scales and relative orientations, the eigenvalue curves behave differently, having different crossing points and energy ordering. Using these eigenvalue curves, the electric dipole model is transformed into a magnetic dipole model. A magnetic dipole is placed at the center of each ring with orientation perpendicular to the plane of the ring. Each dipole has natural frequency $\omega_{\textrm{M}}$, which we determine using the electric tight-binding model for a single ring. The coupling between each magnetic dipole is pulled from the plots in figure (w/e) - depending on the spacing between the rings, the dipoles couple through nearest, next-nearest, or next-next-nearest neighbor coupling. The Hamiltonian
+With a functional and accurate electric dipole tight binding model, we seek a way to simplify our model. Figure~\ref{ring_spacing} displays the eigenvalue curves for three arrangements of two-ring systems, with the rings as (A) nearest neighbors (B) next-nearest neighbors and (C) next-next-nearest neighbors. It is clear that again, at different length scales and relative orientations, the eigenvalue curves behave differently, having different crossing points and energy ordering. Using these eigenvalue curves, the electric dipole model is transformed into a magnetic dipole model. A magnetic dipole is placed at the center of each ring with orientation perpendicular to the plane of the ring. Each dipole has natural frequency $\omega_{\textrm{M}}$, which we determine using the electric tight-binding model for a single ring. The coupling between each magnetic dipole is pulled from the plots in Figure~\ref{ring_spacing} - depending on the spacing between the rings, the dipoles couple through nearest, next-nearest, or next-next-nearest neighbor coupling. The Hamiltonian
 
 \begin{equation}
 H = \frac{\hbar\omega_{\textrm{M}}}{2}\sum_{i}^{n}[\pi_{i}^{2}+q_{i}^{2}]+\frac{\hbar\omega_{\textrm{M}}}{2}\sum_{i\neq j}g_{ij}^{\textrm{M}}q_{i}q_{j}
 \label{mag_hammy}
 \end{equation}
 
-is used in the same way as Equation~\ref{elec_hammy_2} - diagonalizing it for a set of $n$ magnetic dipoles produces $n$ collective magnetic modes. The benefit of this model is shown by example. For the oligomer dimer, there are ten MNPs, each with two electric dipoles, resulting in twenty collectivel electric modes, two of which were magnetic in character. In the magnetic dipole basis, because there are two rings, there are only two modes - the magnetic modes. This simplifies the data analysis procedures greatly. We find that when the couplings between rings are parametrized by the differences between the eigenvalues of the dimers in figure (whatever), the magnetic dipole Hamiltonian reproduces the results of the electric dipole Hamiltonian exactly. We find, furthermore, that truncating to nearest or next-nearest neighbors in the magnetic dipole model does not lead to any significant loss in quantitative or qualitative agreement between the models. It is this finding that will allow us the extension of the model to larger systems considering only nearest or next-nearest neigbor coupling.
+is used in the same way as Equation~\ref{elec_hammy_2} - diagonalizing it for a set of $n$ magnetic dipoles produces $n$ collective magnetic modes. The benefit of this model is shown by example. For the two-mer, there are ten MNPs, each with two electric dipoles, resulting in twenty collectivel electric modes, two of which were magnetic in character. In the magnetic dipole basis, because there are two rings, there are only two modes - the magnetic modes. This simplifies the data analysis procedures greatly. We find that when the couplings between rings are parametrized by the differences between the eigenvalues of the dimers in Figure~\ref{ring_spacing}, the magnetic dipole Hamiltonian reproduces the results of the electric dipole Hamiltonian exactly. We find, furthermore, that truncating to nearest or next-nearest neighbors in the magnetic dipole model does not lead to any significant loss in quantitative or qualitative agreement between the models. It is this finding that will allow us the extension of the model to larger systems considering only nearest or next-nearest neigbor coupling.
 
-The significant challenge here is to find a colloquial, qualitative, and accurate way to describe extended systems. By considering the magnetic dimer to be a unit cell of extended systems, the path to characterizing large systems is through a method similar to a two-atom basis molecular tight-binding model. Here, however, the atoms are the rings of the dimer, and the elements of the hopping matrix are determined by the inter-ring couplings calculated above. More on this model will be presented later.
+The significant challenge here is to find a colloquial, qualitative, and accurate way to describe extended systems. By considering the magnetic two-mer to be a unit cell of extended systems, the path to characterizing large systems is through a method similar to a two-atom basis molecular tight-binding model. Here, however, the atoms are the rings of the two-mer, and the elements of the hopping matrix are determined by the inter-ring couplings calculated above. More on this model will be presented later.
 
 \section{Dielectric Background and a Measure of Quasistaticity}
 
-As an additional exercise, and to emphasize the tunability and versatility of magnetic plasmon oligomers, the effect of the dielectric constant of the background ($\varepsilon_{b}$) is also taken into account. The dielectric constant screens the electric dipoles from each other by effectively weakening their induced electric fields. This means that as $\varepsilon_{b}$ gets large, intermediate and far field effects will weaken in comparison to near field contributions to the electric field. Thus, magnetic plasmon oligomers will be more likely to behave quasistatically when large. In Figure~\ref{diel_eff}A, the difference between the NN and NS modes for magnetic dimers of four different scaling factors embedded in media with $\varepsilon_{b} = 1$ to $10$ are presented as an example of the impact of screening on the energy ordering of magnetic modes. The results show that when highly screened, even large magnetic plasmon oligomers behave quasistatically.
+As an additional exercise, and to emphasize the tunability and versatility of magnetic plasmon oligomers, the effect of the dielectric constant of the background ($\varepsilon_{b}$) is also taken into account. The dielectric constant screens the electric dipoles from each other by effectively weakening their induced electric fields. This means that as $\varepsilon_{b}$ gets large, intermediate and far field effects will weaken in comparison to near field contributions to the electric field. Thus, magnetic plasmon oligomers will be more likely to behave quasistatically when large. In Figure~\ref{diel_eff}A, the difference between the NN and NS modes for magnetic two-mers of four different scaling factors embedded in media with $\varepsilon_{b} = 1$ to $10$ are presented as an example of the impact of screening on the energy ordering of magnetic modes. The results show that when highly screened, even large magnetic plasmon oligomers behave quasistatically.
 
 \begin{figure}
 \begin{center}
 \includegraphics{diel_magnetization.pdf}
-\caption{Pending.}
+\caption{Two measures of the impact of dielectric background on the energy ordering of magnetic modes. In panel A, the difference in energy between the NN and NS modes is plotted for four scale factors as a function of background dielectric constant. This shows that as the dielectric background becomes more opaque, the constituent particles are screened from each other and the two-mer behaves quasistatically. Panel B shows the net magnetization of a periodic chain of six-membered rings at multiple values of epsilon. This again shows that as the constituent particles are screened from each other, the collective behavior becomes more quasistatic. Significantly, this plot also exhibits the property of extended magnetic systems to ``turn on'' their magnetic response within certain size regimes.}
 \label{diel_eff}
 \end{center}
 \end{figure}
@@ -222,36 +222,50 @@ To determine the permeability, permittivity, and index of refraction of the six-
 \textrm{\textbf{p}}_{i} = p\hat{\textrm{\textbf{p}}}_{i} = \alpha_{sp}\left(\textrm{\textbf{E}}_{0} + p\sum_{i\neq j}\boldsymbol{\Lambda_{ij}}\cdot\hat{\textrm{\textbf{p}}}_{i}\right)
 \label{dipolemoment}
 \end{equation} 
- responds to the incident electric field defined by $\Nabla \times \textrm{\textbf{E}}_{0} = i\omega\mu_{0}\textrm{\textbf{H}}_{0}$ and the fields scattered by each of the other dipoles. For the magnetic mode, $\textrm{\textbf{E}}_{0} = \frac{i\omega\mu_{0}R\textrm{H}_{0}}{2}\hat{\textrm{\textbf{p}}}_{i}$. We are interested in finding the magnetic polarizability, $\alpha_{M}$ that satisfies $\textrm{\textbf{m}} = \alpha_{M}\textrm{\textbf{H}}_{0}$, where
+ responds to the incident electric field defined by $\nabla \times \textrm{\textbf{E}}_{0} = i\omega\mu_{0}\textrm{\textbf{H}}_{0}$ and the fields scattered by each of the other dipoles. For the magnetic mode, $\textrm{\textbf{E}}_{0} = \frac{i\omega\mu_{0}R\textrm{H}_{0}}{2}\hat{\textrm{\textbf{p}}}_{i}$ with $\omega$ the field frequency, $N$ the number of particles in the ring, and $\mu_{0}$ the background permeability. We are interested in finding the magnetic polarizability, $\alpha_{M}$ that satisfies $\textrm{\textbf{m}} = \alpha_{M}\textrm{\textbf{H}}_{0}$, where
 
 \begin{equation}
-\textrm{\textbf{m}} = -\frac{-i\omega NRp}{2}\hat{\textrm{\textbf{z}}}
+\textrm{\textbf{m}} = -\frac{i\omega NRp}{2}\hat{\textrm{\textbf{z}}}
 \label{magneticmoment}
 \end{equation}
-is the magnetic dipole moment. From these equations, we find that
+is the magnetic dipole moment of a ring of radius $R$. From these equations, we find that
 
 \begin{equation}
 \alpha_{M} = \frac{(kR)^{2}N}{4\varepsilon_{b}}\left(\frac{\alpha_{sp}}{1 - \alpha_{sp}\sum_{i\neq j}\hat{\textrm{\textbf{p}}}_{i} \cdot \boldsymbol{\Lambda}_{ij}\cdot\hat{\textrm{\textbf{p}}}_{j} }\right)
 \label{alphaM}
 \end{equation}
 
-The effective permeability of a material made of a periodic arrangement of this unit cell is given by $\mu_{\textrm{eff}} = 1 + N_{d}\left(\alpha_{M} - i\frac{6\pi}{k^3}\right)$.
+The effective permeability of a material made of a periodic arrangement of this unit cell is given by $\mu_{\textrm{eff}} = 1 + N_{d}\left(\alpha_{M} - i\frac{6\pi}{k^3}\right)$. Here $N_{d}$ is the number density of rings per unit volume, and $k = \frac{\omega}{c}$ is the wavenumber in the medium.
 
-To compute the effective permittivity of the same ring of nanoparticles, the unit cell is prepared in a uniform electric field. This results in a net dipole moment $\textrm{\textbf{p}}_{E} = \sum_{i=1}^{N} \textrm{\textbf{p}}_{i}$. The dipole moment on each particle is as above in Eq. \equation{dipolemoment}. Now however, the total dipole moment satisfies $\textrm{\textbf{p}}_{E} = \alpha_{E}\textrm{\textbf{E}}_{0}$. This polarizability governs the total electric response of the ring to an electric field, as opposed to the polarizability of a single particle, and is given by
+To compute the effective permittivity of the same ring of nanoparticles, the unit cell is prepared in a uniform electric field. This results in a net dipole moment $\textrm{\textbf{p}}_{E} = \sum_{i=1}^{N} \textrm{\textbf{p}}_{i}$. The dipole moment on each particle is as above in Eq.~\ref{dipolemoment}. Now however, the total dipole moment satisfies $\textrm{\textbf{p}}_{E} = \alpha_{E}\textrm{\textbf{E}}_{0}$. This polarizability governs the total electric response of the ring to an electric field, as opposed to the polarizability of a single particle, and is given by
 
 \begin{equation}
-\alpha_{E} = \frac{\alpha_{sp}}{N\left(1 - \alpha_{sp}\sum_{i\neq j}\hat{\textrm{\textbf{p}}}_{i} \cdot \boldsymbol{\Lambda}_{ij}\cdot\hat{\textrm{\textbf{p}}}_{j}\right)}.
+\alpha_{E} = \frac{N\alpha_{sp}}{\left(1 - \alpha_{sp}\sum_{i\neq j}\hat{\textrm{\textbf{p}}}_{i} \cdot \boldsymbol{\Lambda}_{ij}\cdot\hat{\textrm{\textbf{p}}}_{j}\right)}.
 \label{alphaE}
 \end{equation}
 
-From this polarizability, the effective permittivity of a periodic lattice of this unit cell is $\varepsilon-{\textrm{eff}} = 1 + N_{d}\left(\alpha_{E} - i\frac{6\pi}{k^3} \right)$. The index of refraction of such a material is given by $n = \sqrt{\varesilon_{\textrm{eff}}\mu_{\textrm{eff}}}$ and will take negative values in the frequency range for which both $\varepsilon_{\textrm{eff}}$ and $\mu_{\textrm{eff}}$ are negative. A frequency and size regime for which a six-member ring has negative index is shown in the next figure which I haven't made yet.
+From this polarizability, the effective permittivity of a periodic lattice of this unit cell is $\varepsilon-{\textrm{eff}} = 1 + N_{d}\left(\alpha_{E} - i\frac{6\pi}{k^3} \right)$. The index of refraction of such a material is given by $n = \sqrt{\varepsilon_{\textrm{eff}}\mu_{\textrm{eff}}}$ and will take negative values in the frequency range for which both $\varepsilon_{\textrm{eff}}$ and $\mu_{\textrm{eff}}$ are negative.
 
-Repeat this for more complicated unit cells! (twomer + sixmer) 
-\section{Same as above, but qds}
+\begin{figure}
+\begin{center}
+\includegraphics{contour_n_plot.pdf}
+\caption{Contour plots of the real index of refraction of a periodic array of one-mer unit cells (A) and two-mer unit cells (B) as a function of energy and scale factor. The blue slices of the plots indicate the regions in which an extended material would exhibit a negative index of refraction.}
+\label{onemer_twomer_n}
+\end{center}
+\end{figure}
+
+Extending this concept to more complicated unit cells leads to similar results. Figure~\ref{onemer_twomer_n} shows plots of index of refraction for unit cells composed of one ring (A) and two rings (B) as a function of energy and scale factor. The figures show that at certain sizes materials made of periodic arrays of these unit cells will exhibit a negative index of refraction. This becomes more apparent when a larger unit cell is used, such as the sixmer from Cherqui's work\cite{Cherqui2014}. So far, the model used to determine the index of refraction does not recover the same quantitative accuract as the tight-binding model. However, it offers a powerful qualitative picture to show that a material composed of particles of a certain size will exhibit a negative index of refraction over a small range of colors.
+
+\section{works in progress}
+I'd like to get plots of the index of refraction as a function of a) ring spacing and b) dielectric background. I think people in the field will care about this.
+\section{To-do list}
+Quantum dots: I don't think small, low-density quantum dots have an appreciable magnetic moment, and thus won't have a negative index of refraction. Everything I've computed so far doesn't have a negative index. Let's talk about this.
+Constructing lenses, calculating transmittance/refelctance: Not sure how to do these calculations or if I should save them for future work.
+The sixmer: I'd love to talk more about my work with the sixmer. I've computed its indeces of refraction, but I'm not sure how to put all of the information together.
 
 
 \section{Conclusion}
-It has been shown that magnetic plasmon oligomers are a highly versatile, highly tunable material. The magnetic behavior of tesselated rings of nanoparticles is dependent on size, spacing, arrangement, and environment. Equipped with an understanding of how information propagates along these materials and how to actively influence that information, we are now in a position to study large chains and arrays of magnetic plasmon oligomers. By combining these theoretical studies with existing experimental techniques, there exist ways to directly inlfuence the propagation of information in real time, leading to new applications in detection mechanisms and perhaps leading to a new kind of plamsonic ``circuit.'' What remains is to understand the dynamics of these systems from a theoretical perspective, an exercise which is left for future studies.
+It has been shown that magnetic plasmon oligomers are a highly versatile, highly tunable material. The magnetic behavior of tesselated rings of nanoparticles is dependent on size, spacing, arrangement, and environment. Equipped with an understanding of how information propagates along these materials and how to actively influence that information, we are now in a position to study large chains and arrays of magnetic plasmon oligomers. By combining these theoretical studies with existing experimental techniques, there exist ways to directly inlfuence the propagation of information in real time, leading to new applications in detection mechanisms and plamsonic information propagation. Furthermore, we have shown that extended networks of magnetic plasmon oligomers exhibit a negative index of refraction at optical frequencies. Future studies will elucidate the capabilities of materials designed using the knowledge gained in this exploration.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The ``Acknowledgement'' section can be given in all manuscript

@@ -234,28 +234,9 @@ for r in range(1,30):
 	plt.plot(frequency,np.real(total_n))
 	plt.show()
 
-<<<<<<< HEAD
+
 	real_n.append(np.real(total_n))
 	imag_n.append(np.imag(total_n))
-=======
-	np.savetxt('real_n_onemer',np.real(total_n))
-	np.savetxt('imag_n_onemer',np.imag(total_n))
-	'''ring_loc = []
-	array_size = [10,1]
-	for y_hop in range(0,array_size[1]):
-		x_pos = y_hop*mag_x/2.
-		y_pos = y_hop*mag_y
-		for x_hop in range(0,array_size[0]):
-			x_pos = x_pos + x_hop*mag_x
-			ring_loc.append([x_pos,y_pos])
->>>>>>> af6f383c912738fc30946f22fe41147088780df4
 
-	np.savetxt('real_n',real_n)
-	np.savetxt('imag_n', imag_n)
-
-	
-
-
-
-
-
+np.savetxt('real_n_onemer',np.real(real_n))
+np.savetxt('imag_n_onemer',np.imag(real_n))

@@ -56,17 +56,83 @@ for r in range(1,30):
 
 	freq_eps = epsinf - ((9.1)**2)/(np.square(frequency)+(0.05j)*frequency)
 	#print freq_eps
-	freq_alpha = (a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
-	alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/a0)
+	freq_alpha = 4*math.pi*(a0**3 )* ll*(freq_eps - epsb)/((ll*(freq_eps + epsb)) + epsb)
+	alpha_mlwa = freq_alpha/(1-((1.0/(6.0*math.pi))*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha - ((frequency/c * elec/hbar)**2)*freq_alpha/(a0*4*math.pi))
 	wsp_0 = (mie_omegas[mie_index])*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = wsp_0
 	alphasp_stat = ((a0**3)*3)/(epsinf+2)
-
+	eigen = np.zeros(2*numPart)
+	count = 1
+	H = np.zeros((2*numPart,2*numPart))
+	while np.sqrt(np.square(w_0*hbar/elec - eigen[2*numPart-1])) > 0.00000001:
+		if count == 1:
+			w_0 = wsp_0
+			count = count + 1
+			wsp = wsp_0
+		else:
+			count = count + 1
+			w_0 = eigen[2*numPart-1]*elec/hbar
+			#if w_0 > wsp:
+			#	w_0 = 3.5*elec/hbar
+			msp = (ch**2)/(alphasp_mlwa*((wsp)**2)); # sp mass (grams)
+			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
+			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
+			#print gamma_ret
+			gamma_eV = gamma_ret*hbar/elec
+			wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2);
+		print eigen[2*numPart-1]
+		eps_sp = epsinf - ((wsp**2))/((w_0**2)-1j*w_0*gamma)
+		alphasp = (a0**3)*(eps_sp - epsb)/(eps_sp + 2*epsb); # polarizability (cm^3)
+		alphasp_mlwa = alphasp/(1 - (2./3.)*1j*(w_0/c)*alphasp_stat-(alphasp_stat/a0)*(w_0/c)**2)
+		print wsp
+		for n in range (0,2*numPart):
+			for m in range (n,2*numPart):
+				if m == n: #if m and n are the same, the hammy gets the plasmon energy
+					H[n,m] = (hbar*wsp/elec)
+					#print H[n,m]
+				elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
+					H[n,m] = 0
+				else: # all other dipoles are fair game
+					R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
+					Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
+					nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
+					p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
+					p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+					r_cubed = alphasp_stat*Rmag**-3 #this is the 1/r^3 term (static)
+					r_squared = (alphasp_stat*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alphasp_stat*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+					#space_exp = np.exp(1j*w_0*Rmag/c)
+					space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
+					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
+					ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+					gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
+					H[n,m] = -(ge*wsp)*((hbar/elec)) #this has the minus sign we need.
+					#print H[n,m]
+		diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
+		Ht = np.matrix.transpose(H) # this is the transpose of H
+		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
+		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
+		#print Hfull
+		w,v = np.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		#print w
+		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
+		eigenValues = w[idx] # sorting
+		eigenVectors = v[:,idx] # sorting
+		eigen=(eigenValues) # redefine
+		#lowest = eigen[2*numPart-1]
+	#print lowest
+	if abs(np.sum(eigenVectors[:,(2*numPart)-1])) < 1e-10:
+		vec_mag = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))
+		vec_ele = np.reshape(eigenVectors[:,(2*numPart)-2],(numPart,2))
+	else:
+		vec_mag = np.reshape(eigenVectors[:,(2*numPart)-2],(numPart,2))
+		vec_ele = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))
+	
 	km = (elec/hbar)*frequency/c
 	
 	S = 0
-	for n in range (0,1):
+	for n in range (0,numPart):
 		for m in range (n,numPart):
 			if n == m:
 				S = S
@@ -83,15 +149,24 @@ for r in range(1,30):
 				r_unit = np.square(frequency*elec/hbar)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 				exponent = np.exp((1j*Rmag*frequency*elec/hbar)/(c))
 				S = S + ((r_unit * (p_dot_p - p_nn_p) + ((r_cubed - r_squared) * (3*p_nn_p - p_dot_p))) * exponent)
+	
+	'''for n in range(0,numPart):
+		for m in range(0,numPart):
+			if m == n:
+				S = S
+			else:
+				S = S + (3 + np.cos(2*math.pi*(m-n)/numPart))/((abs(np.sin(math.pi*(m-n)/numPart)))**3)'''
+
+	km = (frequency*elec/hbar)/c
 
 	alpha_eff_mag = ((1/alpha_mlwa) - S)**-1
-	alpha_eff_mag = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S)) #*1j
+	alpha_eff_mag = ((numPart*(km*rad)**2)/4)*(alpha_mlwa/(1-(alpha_mlwa*S/(4*math.pi)))) #*1j
 	#alpha_eff_mag = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
 
 	#alpha_eff = (4*epsb)/(numPart*(km**2)*(rad**2)*alpha_mlwa) - 1j*((km**3)/(6*math.pi) - (2*km)/(3*math.pi*numPart*rad**2)) + S/(16*math.pi*numPart*(km**2)*(rad**5))
 
 	S = 0
-	for n in range (0,1):
+	for n in range (0,numPart):
 		for m in range (1,numPart):
 			if n == m:
 				S = S
@@ -111,13 +186,13 @@ for r in range(1,30):
 
 	alpha_eff_ele = ((1/alpha_mlwa) - S)**-1
 	alpha_eff_ele = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1
-	alpha_eff_ele = (numPart*km*rad/2)*(alpha_mlwa/(1-alpha_mlwa*S))
+	alpha_eff_ele = (1)*(alpha_mlwa/(1-(alpha_mlwa*S/(4*math.pi))))
 	c_abs = 4*math.pi*(frequency/c)*np.imag(alpha_eff_mag)
 	#print (2*math.pi*hbar*c)/(elec*np.power(np.imag(S[400]),(1./3.)))
-	plt.figure(1)
-	plt.plot(frequency,np.real(alpha_eff_mag),frequency,np.imag(alpha_eff_mag))#,frequency,freq_alpha)
-	plt.plot(frequency,np.real(alpha_eff_ele),frequency,np.imag(alpha_eff_ele))
-	plt.show()
+	#plt.figure(1)
+	#plt.plot(frequency,np.real(alpha_eff_mag),frequency,np.imag(alpha_eff_mag))#,frequency,freq_alpha)
+	#plt.plot(frequency,np.real(alpha_eff_ele),frequency,np.imag(alpha_eff_ele))
+	#plt.show()
 	'''plt.figure(2)
 	plt.plot(frequency,np.real(S),frequency,np.imag(S))
 	plt.show()'''
@@ -145,11 +220,12 @@ for r in range(1,30):
 	### Okay! Time to calculate permeability! ###
 
 	
-	ring_density = 1/(2*2*a0*rad*e2/2)
+	ring_density = 1/(2*a0*math.pi*rad**2)
 	
 
-	perm_eff = 1 + ((ring_density**-1)*((alpha_eff_mag**-1)) - (1./3.))**-1
-	eps_eff = 1 + ((ring_density**-1)*((alpha_eff_ele**-1)) - (1./3.))**-1
+	perm_eff = 1 + ((ring_density**-1)*(alpha_eff_mag**-1 + (1./(math.pi*6.))*1j*(km**3)))**-1
+	eps_eff = 1 + ((ring_density**-1)*(alpha_eff_ele**-1 + (1./(math.pi*6.))*1j*(km**3)))**-1
+	# - 1j/(km**3)
 	#plt.figure()
 	#plt.plot(frequency, np.real(perm_eff), frequency, np.imag(perm_eff))
 	#plt.show()
@@ -159,11 +235,11 @@ for r in range(1,30):
 	second_n = np.sqrt(perm_eff)
 	total_n = first_n * second_n
 	plt.figure()
-	plt.plot(frequency,np.real(total_n),frequency,np.imag(total_n))
+	plt.plot(frequency,np.real(total_n))
 	plt.show()
-
 	real_n.append(np.real(total_n))
 	imag_n.append(np.imag(total_n))
+
 
 	np.savetxt('real_n_twomer',real_n)
 	np.savetxt('imag_n_twomer', imag_n)
