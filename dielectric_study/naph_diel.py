@@ -31,8 +31,8 @@ for epsb in range(1,2):
 		print index
 		# make unit vectors in centimeters.
 		rij = 2.2*a0
-		e1 = float(1)/float(2) * (2.5*a0) ; #short side of 30-60-90 triangle
-		e2 = float(math.sqrt(3))/float(2) * (2.5*a0); #long side of 30-60-90 triangle
+		e1 = float(1)/float(2) * (2.2*a0) ; #short side of 30-60-90 triangle
+		e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
 		Loc = [np.array([0, e1]),np.array([-e2, 2*e1]),np.array([-2*e2, e1]),np.array([-2*e2, -e1]),np.array([-e2, -2*e1]),np.array([0, -e1]),np.array([e2, -2*e1]),np.array([2*e2, -e1]),np.array([2*e2 , e1]),np.array([e2 , 2*e1])] #location vectors for center of each sphere - they go counterclockwise, with one being the top center particle and six being the bottom center particle.
 
 		'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
@@ -44,7 +44,7 @@ for epsb in range(1,2):
 		#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
 		wsp_0 = (mie_omegas[index])*elec/hbar
 		'''initialize w_0 and eigen'''
-		w_0 = 3*elec/hbar
+		w_0 = 0
 		eigen = np.ones(2*numPart)
 		for mode in range(0,2):
 			while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
@@ -87,11 +87,13 @@ for epsb in range(1,2):
 				Ht = np.matrix.transpose(H) # this is the transpose of H
 				Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 				Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
+				#print Hfull*(wsp*hbar/elec)
+				#raw_input()
 				w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 				idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 				eigenValues = w[idx] # sorting
 				eigenVectors = v[:,idx] # sorting
-				eigen=(hbar/elec)*wsp*(eigenValues) # the eigenvalues have units of energy^2, so we take the square root
+				eigen=(hbar/elec)*wsp*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
 				#print eigen
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]

@@ -30,8 +30,7 @@ for den in np.linspace(0.4,0.4,1):
 		mag_x = 2*e2
 		mag_y = 3*e1
 		rad = 2.2*a0
-		Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),
-			   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
+		Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
 		#pol_vectors = [np.array([-1/math.sqrt(3),0]),np.array([-0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),np.array([0.5/math.sqrt(3),-math.sqrt(3)/2/math.sqrt(3)]),
 			   		   #np.array([1/math.sqrt(3),0]),np.array([0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)]),np.array([-0.5/math.sqrt(3),math.sqrt(3)/2/math.sqrt(3)])]
 		vec_mag = [np.array([-1,0]),np.array([-0.5,-math.sqrt(3)/2]),np.array([0.5,-math.sqrt(3)/2]),
@@ -50,7 +49,8 @@ for den in np.linspace(0.4,0.4,1):
 		epsinf = 3.71; # does this have units?
 		'''Properties for silver.'''
 		Eplasma = 0.928317; # eV
-		gamma = (elec/hbar)*0.075+(0.1*0.553)/(a0*1e-2) #eV
+		gamma = (elec/hbar)*0.075+(0.1*0.553)/(a0*1e-2) #Hz
+		print gamma
 		wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 		''' First make epsilon(omega)'''
 		km = (frequency/c)*(elec/hbar)
@@ -60,6 +60,7 @@ for den in np.linspace(0.4,0.4,1):
 		alpha_mlwa = freq_alpha/(1-((2.0/3.0)*1j*((frequency/c)*(elec/hbar))**3)*freq_alpha )
 		alpha_rad = (freq_alpha**-1 - 1j*(1./(math.pi*6.))*km**3 - (km**2)/(4*math.pi*a0))**-1
 		wsp_0 = (dielectrics[0][freq_index])*elec/hbar
+		print wsp_0
 		#initialize w_0 and eigen
 		w_0 = wsp_0
 		alphasp_stat = ((a0**3)*3)/(epsinf+2)
@@ -81,7 +82,8 @@ for den in np.linspace(0.4,0.4,1):
 				gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 				#print gamma_ret
 				gamma_eV = gamma_ret*hbar/elec
-				wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2);
+				wsp = math.sqrt((wsp_0)**2 - (gamma/2)**2);
+				print wsp
 			print eigen[2*numPart-1]
 			eps_sp = dielectrics[1][freq_index] + 1j*dielectrics[2][freq_index]
 			#print eps_sp
@@ -115,7 +117,7 @@ for den in np.linspace(0.4,0.4,1):
 			Ht = np.matrix.transpose(H) # this is the transpose of H
 			Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 			Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-			#print Hfull
+			print Hfull
 			w,v = np.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 			#print w
 			idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
@@ -124,6 +126,7 @@ for den in np.linspace(0.4,0.4,1):
 			
 			eigen=(eigenValues) # redefine
 			lowest = eigen[2*numPart-1]
+		print eigen
 		print eigenVectors
 		vec_mag = np.reshape(eigenVectors[:,(2*numPart)-1],(numPart,2))
 		vec_ele = np.reshape(eigenVectors[:,(2*numPart)-2],(numPart,2))
@@ -156,7 +159,7 @@ for den in np.linspace(0.4,0.4,1):
 		km = (frequency*elec/hbar)/c
 
 		#alpha_eff_mag = ((1/alpha_mlwa) - S)**-1
-		print (km*rad)**2
+		#print (km*rad)**2
 		alpha_eff_mag = ((numPart*(km*rad)**2)/4)*(alpha_rad/(1-(alpha_rad*S/(4*math.pi)))) #*1j
 		#alpha_eff_mag = ((4*epsb)/(numPart*(km*rad)**2)*(alpha_mlwa**-1 - S))**-1 *(km*rad)**2
 
