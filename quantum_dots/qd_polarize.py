@@ -79,7 +79,7 @@ for den in np.linspace(0.4,0.4,1):
 				#	w_0 = 3.5*elec/hbar
 				msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 				tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
-				gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
+				gamma_ret = gamma+tau*(w_0**2) 
 				#print gamma_ret
 				gamma_eV = gamma_ret*hbar/elec
 				wsp = math.sqrt((wsp_0)**2 - (gamma/2)**2);
