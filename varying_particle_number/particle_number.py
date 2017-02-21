@@ -10,7 +10,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 10; #number of particles
+numPart = 14; #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -68,9 +68,9 @@ for r in range (10,301):
 	#print places
 	Loc = places
 	xloc, yloc = zip(*Loc)
-	plt.scatter(xloc,yloc)
+	#plt.scatter(xloc,yloc)
 	#raw_input()
-	plt.show()
+	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
 	H = np.zeros((2*numPart,2*numPart)) #initialize Hammy with zeros, twenty by twenty in this case.
@@ -126,29 +126,31 @@ for r in range (10,301):
 			Ht = np.matrix.transpose(H) # this is the transpose of H
 			Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 			Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-			print Hfull
+			#print Hfull
 			#raw_input()
 			w,v = np.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 			idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
-			print idx
+			#print idx
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
 			eigen=((hbar/elec)*wsp)*((eigenValues))# the eigenvalues have units of energy^2, so we take the square root
-			print eigen
-			print eigenVectors
+			#print eigen
+			#print eigenVectors
 			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
 			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
-			print new_vec_1
-			print new_vec_2
-			raw_input()
-		    #w_old = w_0
-		    #w_0 = eigen[2*numPart-1]
+			#print new_vec_1
+			#print new_vec_2
+			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
+			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)
+		print new_new_vec_1
+		print new_new_vec_2
+			
 		            
-		if abs(np.sum(eigenVectors[:,(2*numPart)-(mode+1)])) <= 10**-5:
-			NN.append(eigen[(2*numPart)-(mode+1)])
+		if mode == 0:
+			NS.append(eigen[(2*numPart)-(mode+1)])
 			
 		else:
-			NS.append(eigen[(2*numPart)-(mode+1)])
+			NN.append(eigen[(2*numPart)-(mode+1)])
 
 
 	
