@@ -111,7 +111,7 @@ for r in range(1,30):
 		Ht = np.matrix.transpose(H) # this is the transpose of H
 		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-		w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		w,v = np.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 		eigenValues = w[idx] # sorting
 		eigenVectors = v[:,idx] # sorting
