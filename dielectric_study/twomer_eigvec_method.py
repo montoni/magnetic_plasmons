@@ -46,8 +46,44 @@ for epsb in range(1,2):
 		'''initialize w_0 and eigen'''
 		w_0 = 0
 		eigen = np.ones(2*numPart)
+		alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
+		for n in range (0,2*numPart):
+			for m in range (n,2*numPart):
+				if m == n: #if m and n are the same, the hammy gets the plasmon energy
+					H[n,m] = 1#(hbar/elec)*wsp
+				elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
+					H[n,m] = 0
+				else: # all other dipoles are fair game
+					R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
+					Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
+					nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
+					p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
+					p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+					r_cubed = alphasp/(Rmag**3) #this is the 1/r^3 term (static)
+					r_squared = (alphasp*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alphasp*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+					#space_exp = np.exp(1j*w_0*Rmag/c)
+					space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
+					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
+					ge = (r_unit *space_cos * (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+					gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
+					H[n,m] = -(np.sqrt(epsb)*ge)/2.#*(hbar/elec)*wsp #this has the minus sign we need.
+		diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
+		Ht = np.matrix.transpose(H) # this is the transpose of H
+		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
+		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
+		#print Hfull
+		#raw_input()
+		w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
+		eigenValues = w[idx] # sorting
+		eigenVectors = v[:,idx] # sorting
+		eigen=((hbar/elec)*wsp_0)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
+
 		for mode in range(0,2):
 			while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
+				vec = np.reshape(eigenVectors[:,(2*numPart)-(mode+1)], (numPart,2))
+				
 				if count == 1:
 					wsp = wsp_0
 					count = count + 1
@@ -69,11 +105,13 @@ for epsb in range(1,2):
 						elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 							H[n,m] = 0
 						else: # all other dipoles are fair game
+							
 							R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
 							Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
 							nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
-							p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
-							p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+							p_dot_p = np.dot(vec[n/2,n%2],vec[m/2,m%2]) # this is one dipole dotted into the other
+							p_nn_p = vec[n/2,n%2]*np.dot(nhat,nhat)*vec[m/2,m%2] # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
+							
 							r_cubed = alphasp/(Rmag**3) #this is the 1/r^3 term (static)
 							r_squared = (alphasp*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
 							r_unit = (alphasp*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
@@ -82,8 +120,8 @@ for epsb in range(1,2):
 							space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 							ge = (r_unit *space_cos * (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 							gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-							H[n,m] = -(np.sqrt(epsb)*ge)/2.#*(hbar/elec)*wsp #this has the minus sign we need.
-							H[n,m] = 0
+							
+							H[n,m] = -(np.sqrt(epsb)*ge)/2.
 
 				diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 				Ht = np.matrix.transpose(H) # this is the transpose of H
@@ -99,8 +137,14 @@ for epsb in range(1,2):
 				#print eigen
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
+			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
+			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
+			#print new_vec_1
+			#print new_vec_2
+			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
+			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)
 			            
-			if abs(np.sum(eigenVectors[:,(2*numPart)-(mode+1)])) <= 10**-10:
+			if abs(np.sum(new_new_vec_2)) <= 10**-10:
 				NN.append(eigen[(2*numPart)-(mode+1)])
 				
 			else:
