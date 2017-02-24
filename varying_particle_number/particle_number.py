@@ -68,9 +68,9 @@ for r in range (10,301):
 	#print places
 	Loc = places
 	xloc, yloc = zip(*Loc)
-	plt.scatter(xloc,yloc)
+	#plt.scatter(xloc,yloc)
 	#raw_input()
-	plt.show()
+	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
 	H = np.zeros((2*numPart,2*numPart)) #initialize Hammy with zeros, twenty by twenty in this case.
@@ -92,7 +92,7 @@ for r in range (10,301):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
+			alphasp = (a0**3)*(1/(epsinf+2*epsb)); # polarizability (cm^3)
 			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
@@ -133,22 +133,22 @@ for r in range (10,301):
 			print idx
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
-			eigen=((hbar/elec)*wsp)*((eigenValues))# the eigenvalues have units of energy^2, so we take the square root
+			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
 			print eigen
 			print eigenVectors
 			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
 			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
 			print new_vec_1
 			print new_vec_2
-			raw_input()
+			#raw_input()
 		    #w_old = w_0
 		    #w_0 = eigen[2*numPart-1]
 		            
-		if abs(np.sum(eigenVectors[:,(2*numPart)-(mode+1)])) <= 10**-5:
-			NN.append(eigen[(2*numPart)-(mode+1)])
-			
-		else:
-			NS.append(eigen[(2*numPart)-(mode+1)])
+		
+		NN.append(eigen[(2*numPart)-(mode+1)])
+		
+	
+		NS.append(eigen[(2*numPart)-(mode+2)])
 
 
 	
