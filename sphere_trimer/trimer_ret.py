@@ -86,7 +86,7 @@ for r in range(10,301):
 						#space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 						ge = (r_unit * (p_dot_p - p_nn_p) + (r_cubed - r_squared) * (3*p_nn_p - p_dot_p)) * space_exp #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(ge) #this has the minus sign we need.
+						H[n,m] = -np.absolute(ge) #this has the minus sign we need.
 						#print H[n,m]
 			diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 			Ht = np.matrix.transpose(H) # this is the transpose of H

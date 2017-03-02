@@ -4,12 +4,12 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
-north_north = np.loadtxt('../dielectric_study/NN_right.txt')
-north_south = np.loadtxt('../dielectric_study/NS_right.txt')
+#north_north = np.loadtxt('../dielectric_study/NN_right.txt')
+#north_south = np.loadtxt('../dielectric_study/NS_right.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 NN = []
 NS = []
-for r in range(10,301):
+for r in range(100,101):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 6 #number of particles
 	a0 = .1*r*10**-7 #sphere radius in cm
@@ -73,7 +73,7 @@ for r in range(10,301):
 		for n in range (0,2*numPart):
 			for m in range (n,2*numPart):
 				if m == n: #if m and n are the same, the hammy gets the plasmon energy
-					H[n,m] = (hbar*wsp/elec)
+					H[n,m] = 1
 					#print H[n,m]
 				elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 					H[n,m] = 0
@@ -89,9 +89,9 @@ for r in range(10,301):
 					#space_exp = np.exp(1j*w_0*Rmag/c)
 					space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-					ge = (ch**2)*(r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+					ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 					gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-					H[n,m] = -(ge*wsp)*((hbar/elec)) #this has the minus sign we need.
+					H[n,m] = -(ge) #this has the minus sign we need.
 					#print H[n,m]
 		diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 		Ht = np.matrix.transpose(H) # this is the transpose of H
@@ -103,7 +103,7 @@ for r in range(10,301):
 		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 		eigenValues = w[idx] # sorting
 		eigenVectors = v[:,idx] # sorting
-		eigen=(eigenValues) # the eigenvalues have units of energy^2, so we take the square root
+		eigen=np.sqrt(eigenValues)*wsp*hbar/elec # the eigenvalues have units of energy^2, so we take the square root
 		print eigen
 	print eigen[2*numPart-1]
 	#raw_input("press Enter to continue...")
