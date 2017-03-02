@@ -10,7 +10,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 10; #number of particles
+numPart = 8; #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -92,7 +92,7 @@ for r in range (10,301):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			alphasp = (a0**3)*(1/(epsinf+2*epsb)); # polarizability (cm^3)
+			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
@@ -138,17 +138,19 @@ for r in range (10,301):
 			print eigenVectors
 			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
 			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
-			print new_vec_1
-			print new_vec_2
+			#print new_vec_1
+			#print new_vec_2
+			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
+			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
 			#raw_input()
 		    #w_old = w_0
 		    #w_0 = eigen[2*numPart-1]
 		            
+		if abs(np.sum(new_vec_2)) < 10e-5:
+			NN.append(eigen[2*numPart-(mode+1)])
+		else:
+			NS.append(eigen[2*numPart-(mode+2)])
 		
-		NN.append(eigen[(2*numPart)-(mode+1)])
-		
-	
-		NS.append(eigen[(2*numPart)-(mode+2)])
 
 
 	

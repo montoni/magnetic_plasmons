@@ -11,16 +11,16 @@ para = []
 anti_coll = []
 anti_para = []
 
-for r in range(10,301):
+for sep in range(0,101):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 2; #number of particles
-	a0 = 0.1*r*10**-7; #sphere radius in cm
-	index = r-10
+	a0 = 10*10**-7; #sphere radius in cm
+	index = 100
 	''' now determine geometry.'''
 
 	# make unit vectors in centimeters.
-	e1 = float(1)/float(2) * (2.2*a0) ; #short side of 30-60-90 triangle
-	e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
+	e1 = float(1)/float(2) * (2*a0+sep*10**-7) ; #short side of 30-60-90 triangle
+	e2 = float(math.sqrt(3))/float(2) * (2*a0+sep*10**-7); #long side of 30-60-90 triangle
 	Loc = [np.array([e1, 0]),np.array([-e1, 0])]
 	Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
 
@@ -58,7 +58,7 @@ for r in range(10,301):
 				#if w_0 > wsp:
 				#	w_0 = 3.5*elec/hbar
 			print count
-			alphasp = (a0**3)*(1/(epsinf+2*epsb)); # polarizability (cm^3)
+			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 			msp = (ch**2)/(alphasp*((w_0)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
@@ -126,7 +126,7 @@ print len(anti_para)
 print len(anti_coll)
 
 	
-r = np.linspace(1,30,291)
+r = np.linspace(0,100,101)
 plt.figure()
 plt.plot(r,coll,r,anti_para,r,para,r,anti_coll,linewidth=3)	
 plt.xlabel('Particle Radius (nm)')
