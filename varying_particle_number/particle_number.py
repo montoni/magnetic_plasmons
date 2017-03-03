@@ -18,7 +18,7 @@ hbar = 1.054571726e-34; # modified Planck in J*s
 c = 2.99e10; # speed of light in cm/s
 eps0 = 8.85418782e-12; # permittivity of free space
 Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
-epsinf = 3.77; # does this have units?
+epsinf = 3.77; 
 '''Properties for silver.'''
 Eplasma = 1.46599161e-18; # J
 gamma = 0.05*elec/(hbar*16)
@@ -73,7 +73,7 @@ for r in range (10,301):
 	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-	H = np.zeros((2*numPart,2*numPart)) #initialize Hammy with zeros, twenty by twenty in this case.
+	H = (np.zeros((2*numPart,2*numPart),dtype=np.complex64))#initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
 
@@ -84,7 +84,7 @@ for r in range (10,301):
 	w_0 = 0
 	eigen = np.ones(2*numPart)
 	for mode in range(0,2):
-		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
+		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00001:
 			if count == 1:
 				wsp = wsp_0
 				count = count + 1
@@ -95,7 +95,7 @@ for r in range (10,301):
 			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
-			gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
+			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
 			#wsp = wsp_0
 			wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2) # sp frequency (rad/s) corrected for radiation damping
@@ -117,29 +117,33 @@ for r in range (10,301):
 						#space_exp = np.exp(1j*w_0*Rmag/c)
 						space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 						space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-						ge = (r_unit *space_cos * (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+						exponent = np.exp(1j*w_0*Rmag/c)
+						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(np.sqrt(epsb)*ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[n,m] = -(np.sqrt(epsb)*ge)/2#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
 					
 
-			diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
+			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 			Ht = np.matrix.transpose(H) # this is the transpose of H
 			Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 			Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-			print Hfull
-			#raw_input()
-			w,v = np.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+			#print Hfull
+			#raw_input()'''
+			w,v = scipy.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 			idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
-			print idx
+			#print idx
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
 			print eigen
-			print eigenVectors
+			#print eigen
+			#print eigenVectors
 			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
 			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
 			#print new_vec_1
 			#print new_vec_2
+<<<<<<< HEAD
 			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
 			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
 			#raw_input()
@@ -151,6 +155,19 @@ for r in range (10,301):
 		else:
 			NS.append(eigen[2*numPart-(mode+2)])
 		
+=======
+			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
+			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)
+		#print new_new_vec_1
+		#print new_new_vec_2
+			
+		            
+		if mode == 0:
+			NS.append(eigen[(2*numPart)-(mode+1)])
+			
+		else:
+			NN.append(eigen[(2*numPart)-(mode+1)])
+>>>>>>> 2b3637a10229ec7e34963a643d1786b48a06c83c
 
 
 	

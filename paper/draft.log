@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 FEB 2017 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 MAR 2017 13:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -664,25 +664,213 @@ LaTeX Font Info:    Try loading font information for T1+cmss on input line 87.
 File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-<theory_bem_comparison_fig1.pdf, id=33, 483.69685pt x 559.66574pt>
-File: theory_bem_comparison_fig1.pdf Graphic file (type pdf)
+Package natbib Warning: Citation `Lucas1976' on page 2 undefined on input line 
+127.
 
-<use theory_bem_comparison_fig1.pdf>
-Package pdftex.def Info: theory_bem_comparison_fig1.pdf used on input line 157.
 
-(pdftex.def)             Requested size: 483.69566pt x 559.66437pt.
+Package natbib Warning: Citation `ARAVIND1981' on page 2 undefined on input lin
+e 127.
 
-Overfull \hbox (13.94028pt too wide) in paragraph at lines 157--158
+
+Package natbib Warning: Citation `Xu1995' on page 2 undefined on input line 127
+.
+
+
+Package natbib Warning: Citation `Mischenko1995' on page 2 undefined on input l
+ine 127.
+
+
+Package natbib Warning: Citation `NordHal2003' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `NordProdan2004' on page 2 undefined on input 
+line 127.
+
+
+Package natbib Warning: Citation `Oubre2004' on page 2 undefined on input line 
+127.
+
+
+Package natbib Warning: Citation `Gomez2009' on page 2 undefined on input line 
+127.
+
+
+Package natbib Warning: Citation `Abajo2008' on page 2 undefined on input line 
+127.
+
+
+Package natbib Warning: Citation `Gu2010' on page 2 undefined on input line 127
+.
+
+
+Package natbib Warning: Citation `vonPlessen2007' on page 2 undefined on input 
+line 127.
+
+
+Package natbib Warning: Citation `Rechbacher2003' on page 2 undefined on input 
+line 127.
+
+
+Package natbib Warning: Citation `Kottman2001' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Schatz2003' on page 2 undefined on input line
+ 127.
+
+
+Package natbib Warning: Citation `Royer2005' on page 2 undefined on input line 
+127.
+
+
+Package natbib Warning: Citation `Chumanov2010' on page 2 undefined on input li
+ne 127.
+
+
+Package natbib Warning: Citation `Alu2006' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Alu2008' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Liu2011' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Nord2006' on page 2 undefined on input line 1
+27.
+
+
+Package natbib Warning: Citation `Cherqui2014' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Cherqui2016' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Shalaev2007' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Qian2015' on page 2 undefined on input line 1
+27.
+
+
+Package natbib Warning: Citation `Nord2007' on page 2 undefined on input line 1
+27.
+
+
+Package natbib Warning: Citation `Graydon2011' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Alu2014solar' on page 2 undefined on input li
+ne 127.
+
+
+Package natbib Warning: Citation `Le2015solar' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `Zia2010trans' on page 2 undefined on input li
+ne 127.
+
+
+Package natbib Warning: Citation `Noginova2008trans' on page 2 undefined on inp
+ut line 127.
+
+
+Package natbib Warning: Citation `Wang:13' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Fan2015' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Wei2015' on page 2 undefined on input line 12
+7.
+
+
+Package natbib Warning: Citation `Shvets2012' on page 2 undefined on input line
+ 127.
+
+
+Package natbib Warning: Citation `Altug2012bio' on page 2 undefined on input li
+ne 127.
+
+
+Package natbib Warning: Citation `Nord2011fano' on page 2 undefined on input li
+ne 127.
+
+
+Package natbib Warning: Citation `Zhang2006' on page 2 undefined on input line 
+127.
+
+
+Package natbib Warning: Citation `NordHal2011' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `NordHal2012' on page 2 undefined on input lin
+e 127.
+
+
+Package natbib Warning: Citation `jackson_classical_1999' on page 2 undefined o
+n input line 129.
+
+
+Package natbib Warning: Citation `jackson_classical_1999' on page 2 undefined o
+n input line 129.
+
+
+Package natbib Warning: Citation `Hohenester2012' on page 2 undefined on input 
+line 129.
+
+
+Package natbib Warning: Citation `Cherqui2014' on page 2 undefined on input lin
+e 129.
+
+
+Package natbib Warning: Citation `Cherqui2016' on page 2 undefined on input lin
+e 129.
+
+[2]
+
+Package natbib Warning: Citation `Purcell1973' on page 3 undefined on input lin
+e 148.
+
+[3]
+
+Package natbib Warning: Citation `Cherqui2014' on page 4 undefined on input lin
+e 153.
+
+
+LaTeX Warning: Reference `theory_simul' on page 4 undefined on input line 153.
+
+<theory_bem_comparison_fig1.png, id=34, 471.2004pt x 535.7616pt>
+File: theory_bem_comparison_fig1.png Graphic file (type png)
+
+<use theory_bem_comparison_fig1.png>
+Package pdftex.def Info: theory_bem_comparison_fig1.png used on input line 157.
+
+(pdftex.def)             Requested size: 471.19923pt x 535.76028pt.
+
+Overfull \hbox (1.44385pt too wide) in paragraph at lines 157--158
  [] 
  []
 
 
-LaTeX Warning: Float too large for page by 20.23398pt on input line 161.
+LaTeX Warning: Reference `theory_simul' on page 4 undefined on input line 163.
 
-[4] [5 <./theory_bem_comparison_fig1.pdf>]
-<twomer_dimer.pdf, id=1770, 483.69685pt x 202.01457pt>
+[4] [5 <./theory_bem_comparison_fig1.png>]
+<twomer_dimer.pdf, id=43, 483.69685pt x 202.01457pt>
 File: twomer_dimer.pdf Graphic file (type pdf)
  <use twomer_dimer.pdf>
 Package pdftex.def Info: twomer_dimer.pdf used on input line 167.
@@ -692,7 +880,14 @@ Overfull \hbox (13.94028pt too wide) in paragraph at lines 167--168
  [] 
  []
 
-<interactions.pdf, id=1771, 483.69685pt x 360.49641pt>
+
+LaTeX Warning: Reference `twomer_dimer' on page 6 undefined on input line 173.
+
+
+Package natbib Warning: Citation `Cherqui2016' on page 6 undefined on input lin
+e 173.
+
+<interactions.pdf, id=44, 483.69685pt x 360.49641pt>
 File: interactions.pdf Graphic file (type pdf)
  <use interactions.pdf>
 Package pdftex.def Info: interactions.pdf used on input line 177.
@@ -702,8 +897,15 @@ Overfull \hbox (13.94028pt too wide) in paragraph at lines 177--178
  [] 
  []
 
+
+LaTeX Warning: Reference `int_strength' on page 6 undefined on input line 183.
+
+
+Package natbib Warning: Citation `vonPlessen2007' on page 6 undefined on input 
+line 183.
+
 [6 <./twomer_dimer.pdf>] [7 <./interactions.pdf>]
-<coupling_comparison.pdf, id=2114, 241.84843pt x 540.60239pt>
+<coupling_comparison.pdf, id=334, 241.84843pt x 540.60239pt>
 File: coupling_comparison.pdf Graphic file (type pdf)
 
 <use coupling_comparison.pdf>
@@ -713,15 +915,44 @@ Package pdftex.def Info: coupling_comparison.pdf used on input line 187.
 
 LaTeX Warning: Float too large for page by 0.17067pt on input line 191.
 
+
+LaTeX Warning: Reference `ring_spacing' on page 8 undefined on input line 193.
+
+
+LaTeX Warning: Reference `ring_spacing' on page 8 undefined on input line 193.
+
+
+LaTeX Warning: Reference `ring_spacing' on page 8 undefined on input line 200.
+
 [8] [9 <./coupling_comparison.pdf>]
-<diel_magnetization.pdf, id=2787, 458.08937pt x 156.49016pt>
+
+LaTeX Warning: Reference `diel_eff' on page 10 undefined on input line 206.
+
+<diel_magnetization.pdf, id=907, 458.08937pt x 156.49016pt>
 File: diel_magnetization.pdf Graphic file (type pdf)
 
 <use diel_magnetization.pdf>
 Package pdftex.def Info: diel_magnetization.pdf used on input line 210.
 (pdftex.def)             Requested size: 458.08826pt x 156.48976pt.
- [10] [11 <./diel_magnetization.pdf>] [12]
-<contour_n_plot.pdf, id=2811, 483.69685pt x 227.62204pt>
+
+
+LaTeX Warning: Reference `diel_eff' on page 10 undefined on input line 216.
+
+
+Package natbib Warning: Citation `odom_lasing' on page 10 undefined on input li
+ne 216.
+
+[10]
+
+Package natbib Warning: Citation `Alu2006' on page 11 undefined on input line 2
+19.
+
+[11 <./diel_magnetization.pdf>]
+
+LaTeX Warning: Reference `dipolemoment' on page 12 undefined on input line 240.
+
+
+[12] <contour_n_plot.pdf, id=933, 483.69685pt x 227.62204pt>
 File: contour_n_plot.pdf Graphic file (type pdf)
 
 <use contour_n_plot.pdf>
@@ -732,56 +963,90 @@ Overfull \hbox (13.94028pt too wide) in paragraph at lines 251--252
  [] 
  []
 
-[13 <./contour_n_plot.pdf>] [14] (./draft.bbl [15] [16] [17] [18]) [19]
+
+LaTeX Warning: Reference `onemer_twomer_n' on page 13 undefined on input line 2
+57.
+
+
+Package natbib Warning: Citation `Cherqui2014' on page 13 undefined on input li
+ne 257.
+
+[13 <./contour_n_plot.pdf>] [14] (./draft.bbl [15] [16] [17] [18]
+
+LaTeX Warning: Mciteplus max count has changed.
+
+
+LaTeX Warning: Mciteplus max width has changed.
+
+)
+
+Package natbib Warning: There were undefined citations.
+
+
+LaTeX Warning: Rerun to ensure correct mciteplus label max width/count.
+
+[19]
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 285.
 
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 Underfull \vbox (badness 10000) detected at line 285
  []
 
-[20] (./draft.aux) ) 
+[20] (./draft.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 14847 strings out of 493014
- 274612 string characters out of 6133351
- 339573 words of memory out of 5000000
+ 14848 strings out of 493014
+ 274616 string characters out of 6133351
+ 336497 words of memory out of 5000000
  18217 multiletter control sequences out of 15000+600000
  26317 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,94p,10405b,431s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-supe
-r/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmex
-tra/cmmib8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on draft.pdf (20 pages, 1017700 bytes).
+ 60i,12n,94p,10405b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/cm-super/sfbx0800.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/cm-super/sfsi0800.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/cm-super/sfss1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/cm-super/sfss1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/cm-super/sfss1440.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/cm-super/sfti1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/cm-super/sftt0800.pfb>
+Output written on draft.pdf (20 pages, 1226413 bytes).
 PDF statistics:
- 2928 PDF objects out of 2984 (max. 8388607)
- 1780 compressed objects within 18 object streams
+ 1053 PDF objects out of 1200 (max. 8388607)
+ 600 compressed objects within 6 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
