@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
 numPart = 3
 numRings = 1
-# mie_omegas = np.loadtxt('mie_omegas_eV.txt')
+mie_omegas = np.loadtxt('mie_omegas_BEM_drude.txt')
 c = 3.0e8 # speed of light in m/s
 hbar = 1.054e-34 # hbar in J*s
 nm = 1e-9 # how many nanometers are in a meter?
@@ -14,17 +14,17 @@ vacuum_perm = 8.854e-12 # Farads/meter (ugh)
 elec = 1.602e-19 # electric charge (coulombs)
 
 # properties for : silver
-plasma_frequency = 9.15 # eV
-gamma = 0.05/16 # eV, reduced by a factor of 16
-epsinf = 3.77
+plasma_frequency = 9.22 # eV
+gamma = 0.05 # eV, reduced by a factor of 16
+epsinf = 4.98
 
 epsb = 1
 normal_modes = [[],[],[],[],[],[]]
 # create a loop over length scales, defined by particle radius
 radius = np.linspace(1,30,30)
 for rad in radius:
-	omega_sp = plasma_frequency/math.sqrt(epsinf + 2*epsb)
-	# omega_sp = mie_omegas[(rad-1)*10]
+	omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
+	#omega_sp = mie_omegas[(rad-1)*10]
 	a0 = rad * nm
 	inter_particle_dist = 2.2 * a0
 	theta = np.linspace(0,2*math.pi,numPart+1) # angles for placing particles around a circle
@@ -40,13 +40,13 @@ for rad in radius:
 	
 	# initialize loop over modes, frequencies, etc.
 	# this will have to be adjustable for each specific case
-	H = np.zeros((2*numPart,2*numPart),dtype=complex)
+	H = np.zeros((2*numPart,2*numPart),dtype=float)
 	eigen = np.zeros(2*numPart)
 	omega_mode = omega_sp
 	count = 1
 	
 	for mode in range(6):
-		while np.absolute(omega_mode - eigen[2*numPart - (mode+1)]) > 0.001:
+		while np.absolute(np.real(omega_mode) - np.real(eigen[2*numPart - (mode+1)])) > 0.00001:
 			if count == 1:
 				Q = [[1,0],[0,1],[1,0],[0,1],[1,0],[0,1]] # dipole moments in x- and y-direction
 				#count = count + 1
@@ -91,10 +91,10 @@ for rad in radius:
 			identity_block = np.identity(H.shape[0],dtype=complex)
 			gamma_block = -1j*identity_block*gamma/(omega_sp)
 			full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([-H, gamma_block])])
-			print full_matrix
-			eigenValues, eigenVectors = np.linalg.eig(full_matrix)
-			print eigenValues
-			raw_input()
+			#print full_matrix
+			eigenValues, eigenVectors = np.linalg.eig(H)
+			#print eigenValues
+			#raw_input()
 			idx = eigenValues.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 			eigen = np.sqrt(eigenValues[idx]) * omega_sp
 			vec = eigenVectors[:,idx]
