@@ -5,11 +5,8 @@ import matplotlib.pyplot as plt
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
 numPart = 3
 numRings = 1
-<<<<<<< HEAD
+
 mie_omegas = np.loadtxt('mie_omegas_BEM_drude.txt')
-=======
-mie_omegas = np.loadtxt('mie_omegas_eV.txt')
->>>>>>> 19c0a72f65e2595fb39ed61ce4acaaf25e1ed397
 c = 3.0e8 # speed of light in m/s
 hbar = 1.054e-34 # hbar in J*s
 nm = 1e-9 # how many nanometers are in a meter?
@@ -23,17 +20,14 @@ gamma = 0.05 # eV, reduced by a factor of 16
 epsinf = 4.98
 
 epsb = 1
-normal_modes = [[],[],[],[]]
+normal_modes = [[],[],[],[],[],[]]
 # create a loop over length scales, defined by particle radius
 radius = np.linspace(1,30,30)
 for rad in radius:
-<<<<<<< HEAD
-	omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
-	#omega_sp = mie_omegas[(rad-1)*10]
-=======
-	#omega_sp = plasma_frequency/math.sqrt(epsinf + 2*epsb)
-	omega_sp = mie_omegas[(rad-1)*10]
->>>>>>> 19c0a72f65e2595fb39ed61ce4acaaf25e1ed397
+
+	#omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
+	omega_sp = np.sqrt((mie_omegas[(rad-1)*10])**2)# - (gamma/2)**2)
+
 	a0 = rad * nm
 	inter_particle_dist = 2.2 * a0
 	theta = np.linspace(0,2*math.pi,numPart+1) # angles for placing particles around a circle
@@ -53,30 +47,12 @@ for rad in radius:
 	eigen = np.zeros(2*numPart)
 	omega_mode = np.real(omega_sp)
 	count = 1
-	
-<<<<<<< HEAD
+
 	for mode in range(6):
 		while np.absolute(np.real(omega_mode) - np.real(eigen[2*numPart - (mode+1)])) > 0.00001:
-			if count == 1:
-				Q = [[1,0],[0,1],[1,0],[0,1],[1,0],[0,1]] # dipole moments in x- and y-direction
-				#count = count + 1
-			else:
-				pass
-				#Q = np.reshape(vec[2*numPart - (mode+1)],(numPart,2))
-				#print Q
-				#raw_input()
-			omega_mode = eigen[2*numPart - (mode+1)]
-=======
-	for mode in range(4):
-		while np.absolute(np.real(omega_mode) - np.real(eigen[2*numPart - (mode+1)])) > 0.00001:
-			print omega_mode
-			print eigen[2*numPart - (mode+1)]
-			print omega_mode - eigen[2*numPart - (mode+1)]
-			count = count +1
-			print rad
 			Q = [[1,0],[0,1],[1,0],[0,1],[1,0],[0,1]] # dipole moments in x- and y-direction
 			omega_mode = np.real(eigen[2*numPart - (mode+1)])
->>>>>>> 19c0a72f65e2595fb39ed61ce4acaaf25e1ed397
+
 			wavenumber = (omega_mode*elec)/(c*hbar*math.sqrt(epsb))
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			mass = 1/(4*math.pi*vacuum_perm)*(elec**2)/(alpha*(omega_sp*elec/hbar)**2)
@@ -89,7 +65,7 @@ for rad in radius:
 					#print r_ij_mag
 					nhat_ij = (Loc[i/2] - Loc[j/2])/r_ij_mag
 					if i == j:
-						H[i,j] = -1
+						H[i,j] = 1
 					elif r_ij_mag < 0.1*nm:
 						H[i,j] = 0
 					else:
@@ -106,28 +82,29 @@ for rad in radius:
 						exponential = np.exp(1j*wavenumber*r_ij_mag)
 						coupling = (near_field + int_field + far_field) * exponential
 						H[i,j] = -(alpha * coupling)
+			print H
 			zero_block = np.zeros(H.shape,dtype=complex)
 			identity_block = np.identity(H.shape[0],dtype=complex)
-<<<<<<< HEAD
+
 			gamma_block = -1j*identity_block*gamma/(omega_sp)
-			full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([-H, gamma_block])])
+			#full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([H, gamma_block])])
 			#print full_matrix
 			eigenValues, eigenVectors = np.linalg.eig(H)
 			#print eigenValues
 			#raw_input()
-=======
+
 			gamma_block = -identity_block*gamma
 			full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([(omega_sp**2)*H, gamma_block])])
-			print (omega_sp**2)*H
-			eigenValues, eigenVectors = np.linalg.eig(full_matrix)
-			print eigenValues
-			raw_input()
->>>>>>> 19c0a72f65e2595fb39ed61ce4acaaf25e1ed397
+			#print (omega_sp**2)*H
+			#eigenValues, eigenVectors = np.linalg.eig(full_matrix)
+			#print eigenValues
+			#raw_input()
+
 			idx = eigenValues.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 			eigen = np.sqrt(eigenValues[idx]) * omega_sp
 			vec = eigenVectors[:,idx]
 			#print vec
-		#print eigen[2*numPart - (mode+1)]
+		print eigen
 		normal_modes[mode].append(eigen[2*numPart - (mode+1)])
 
 plt.figure()
