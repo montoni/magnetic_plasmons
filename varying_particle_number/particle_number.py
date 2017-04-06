@@ -10,7 +10,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 8; #number of particles
+numPart = 10; #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -26,32 +26,32 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 NN = []
 NS = []
-for r in range (10,301):
-	a0 = .1*r*10**-7; #sphere radius in cm
-	index = r-10
+for r in np.linspace(1,30,30):
+	a0 = r*10**-7; #sphere radius in cm
+	index = r
 	''' now determine geometry.'''
 	print index
 	# make unit vectors in centimeters.
-	rij = 2.2*a0
+	rij = 3*a0
 	part_per_ring = numPart/2 + 1
 	theta = 2*math.pi/part_per_ring
 	phi = theta/2.
-	print theta
-	print phi
-	print np.cos(phi)
-	print np.sin(phi)
+	#print theta
+	#print phi
+	#print np.cos(phi)
+	#print np.sin(phi)
 	cent_dist = rij/(2*np.tan(phi))
 	part_to_cent = math.sqrt((rij/2)**2 + (cent_dist)**2)
 	centers = [np.array([-cent_dist,0]),np.array([cent_dist,0])]
-	print centers
+	#print centers
 	places = []
 	for num in range(part_per_ring-1):
 		if part_per_ring%2 == 0:
-			print 'hello'
+			#print 'hello'
 			places.append(centers[0] + np.array([(part_to_cent*np.cos(phi+theta*(num))),(part_to_cent*np.sin(phi+theta*(num)))]))
 			places.append(centers[1] + np.array([(part_to_cent*np.cos(phi+theta*(num+np.ceil(part_per_ring/2.)))),(part_to_cent*np.sin(phi+theta*(num+np.ceil(part_per_ring/2.))))]))
 		elif part_per_ring%2 == 1:
-			print 'good bye'
+			#print 'good bye'
 			places.append(centers[0] + np.array([(part_to_cent*np.cos(phi+theta*(num))),(part_to_cent*np.sin(phi+theta*(num)))]))
 			places.append(centers[1] + np.array([(part_to_cent*np.cos(theta*(num+np.ceil(part_per_ring/2.)))),(part_to_cent*np.sin(theta*(num+np.ceil(part_per_ring/2.))))]))
 	'''Loc = np.zeros((numPart,2))
@@ -73,13 +73,13 @@ for r in range (10,301):
 	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-	H = (np.zeros((2*numPart,2*numPart),dtype=np.complex64))#initialize Hammy with zeros, twenty by twenty in this case.
+	H = (np.zeros((2*numPart,2*numPart),dtype=float))#initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = (mie_omegas[index])*elec/hbar
+	wsp_0 = (mie_omegas[index*10 - 10])*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
@@ -120,8 +120,8 @@ for r in range (10,301):
 						exponent = np.exp(1j*w_0*Rmag/c)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(np.sqrt(epsb)*ge)/2#*(hbar/elec)*wsp #this has the minus sign we need.
-						H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
+						H[n,m] = -(np.sqrt(epsb)*ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[m,n] = np.conj(-(np.sqrt(epsb)*ge))
 					
 
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
@@ -136,44 +136,25 @@ for r in range (10,301):
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
-			print eigen
+			#print eigen
 			#print eigen
 			#print eigenVectors
 			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
 			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
-			#print new_vec_1
-			#print new_vec_2
-<<<<<<< HEAD
 			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
 			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
-			#raw_input()
-		    #w_old = w_0
-		    #w_0 = eigen[2*numPart-1]
-		            
-		if abs(np.sum(new_vec_2)) < 10e-5:
-			NN.append(eigen[2*numPart-(mode+1)])
-		else:
-			NS.append(eigen[2*numPart-(mode+2)])
-		
-=======
 			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
-			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)
-		#print new_new_vec_1
-		#print new_new_vec_2
-			
-		            
+			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)         
 		if mode == 0:
-			NS.append(eigen[(2*numPart)-(mode+1)])
-			
+			NS.append(eigen[(2*numPart)-(mode+1)])	
 		else:
 			NN.append(eigen[(2*numPart)-(mode+1)])
->>>>>>> 2b3637a10229ec7e34963a643d1786b48a06c83c
 
 
 	
 print len(NN)
 print len(NS)
-r = np.linspace(1,30,291)
+r = np.linspace(1,30,30)
 plt.plot(r,NN,r,NS,linewidth=3)	
 plt.legend(['NN','NS'])
 plt.show()
