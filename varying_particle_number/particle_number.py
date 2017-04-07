@@ -10,7 +10,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 8; #number of particles
+numPart = 10; #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -26,13 +26,14 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 NN = []
 NS = []
+modes = [[],[]]
 for r in range (10,301):
 	a0 = .1*r*10**-7; #sphere radius in cm
 	index = r-10
 	''' now determine geometry.'''
 	print index
 	# make unit vectors in centimeters.
-	rij = 2.2*a0
+	rij = 3*a0
 	part_per_ring = numPart/2 + 1
 	theta = 2*math.pi/part_per_ring
 	phi = theta/2.
@@ -73,7 +74,7 @@ for r in range (10,301):
 	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-	H = (np.zeros((2*numPart,2*numPart),dtype=np.complex64))#initialize Hammy with zeros, twenty by twenty in this case.
+	H = (np.zeros((2*numPart,2*numPart),dtype=float))#initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
 
@@ -100,13 +101,15 @@ for r in range (10,301):
 			#wsp = wsp_0
 			wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2) # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
-				for m in range (n,2*numPart):
+				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
 						H[n,m] = 1#(hbar/elec)*wsp
 					elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 						H[n,m] = 0
+					elif n == m+1 and m%2 == 0: #if m and n are on the same particle, they don't couple
+						H[n,m] = 0
 					else: # all other dipoles are fair game
-						R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
+						R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, compute the distance between them
 						Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
 						nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
@@ -120,8 +123,8 @@ for r in range (10,301):
 						exponent = np.exp(1j*w_0*Rmag/c)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(np.sqrt(epsb)*ge)/2#*(hbar/elec)*wsp #this has the minus sign we need.
-						H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
+						H[n,m] = -(np.sqrt(epsb)*ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						#H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
 					
 
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
@@ -136,45 +139,12 @@ for r in range (10,301):
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
-			print eigen
-			#print eigen
-			#print eigenVectors
-			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
-			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
-			#print new_vec_1
-			#print new_vec_2
-<<<<<<< HEAD
-			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
-			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
-			#raw_input()
-		    #w_old = w_0
-		    #w_0 = eigen[2*numPart-1]
-		            
-		if abs(np.sum(new_vec_2)) < 10e-5:
-			NN.append(eigen[2*numPart-(mode+1)])
-		else:
-			NS.append(eigen[2*numPart-(mode+2)])
-		
-=======
-			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
-			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)
-		#print new_new_vec_1
-		#print new_new_vec_2
-			
-		            
-		if mode == 0:
-			NS.append(eigen[(2*numPart)-(mode+1)])
-			
-		else:
-			NN.append(eigen[(2*numPart)-(mode+1)])
->>>>>>> 2b3637a10229ec7e34963a643d1786b48a06c83c
-
+		modes[mode].append(eigen[(2*numPart)-(mode+1)])
 
 	
-print len(NN)
-print len(NS)
+
 r = np.linspace(1,30,291)
-plt.plot(r,NN,r,NS,linewidth=3)	
+plt.plot(r,modes[0],r,modes[1],linewidth=3)	
 plt.legend(['NN','NS'])
 plt.show()
 
