@@ -26,10 +26,16 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 NN = []
 NS = []
+<<<<<<< HEAD
 modes = [[],[]]
 for r in range (10,301):
 	a0 = .1*r*10**-7; #sphere radius in cm
 	index = r-10
+=======
+for r in np.linspace(1,30,30):
+	a0 = r*10**-7; #sphere radius in cm
+	index = r
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 	''' now determine geometry.'''
 	print index
 	# make unit vectors in centimeters.
@@ -37,22 +43,22 @@ for r in range (10,301):
 	part_per_ring = numPart/2 + 1
 	theta = 2*math.pi/part_per_ring
 	phi = theta/2.
-	print theta
-	print phi
-	print np.cos(phi)
-	print np.sin(phi)
+	#print theta
+	#print phi
+	#print np.cos(phi)
+	#print np.sin(phi)
 	cent_dist = rij/(2*np.tan(phi))
 	part_to_cent = math.sqrt((rij/2)**2 + (cent_dist)**2)
 	centers = [np.array([-cent_dist,0]),np.array([cent_dist,0])]
-	print centers
+	#print centers
 	places = []
 	for num in range(part_per_ring-1):
 		if part_per_ring%2 == 0:
-			print 'hello'
+			#print 'hello'
 			places.append(centers[0] + np.array([(part_to_cent*np.cos(phi+theta*(num))),(part_to_cent*np.sin(phi+theta*(num)))]))
 			places.append(centers[1] + np.array([(part_to_cent*np.cos(phi+theta*(num+np.ceil(part_per_ring/2.)))),(part_to_cent*np.sin(phi+theta*(num+np.ceil(part_per_ring/2.))))]))
 		elif part_per_ring%2 == 1:
-			print 'good bye'
+			#print 'good bye'
 			places.append(centers[0] + np.array([(part_to_cent*np.cos(phi+theta*(num))),(part_to_cent*np.sin(phi+theta*(num)))]))
 			places.append(centers[1] + np.array([(part_to_cent*np.cos(theta*(num+np.ceil(part_per_ring/2.)))),(part_to_cent*np.sin(theta*(num+np.ceil(part_per_ring/2.))))]))
 	'''Loc = np.zeros((numPart,2))
@@ -80,7 +86,7 @@ for r in range (10,301):
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = (mie_omegas[index])*elec/hbar
+	wsp_0 = (mie_omegas[index*10 - 10])*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
@@ -124,7 +130,11 @@ for r in range (10,301):
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
 						H[n,m] = -(np.sqrt(epsb)*ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+<<<<<<< HEAD
 						#H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
+=======
+						H[m,n] = np.conj(-(np.sqrt(epsb)*ge))
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 					
 
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
@@ -139,12 +149,35 @@ for r in range (10,301):
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
+<<<<<<< HEAD
 		modes[mode].append(eigen[(2*numPart)-(mode+1)])
 
 	
 
 r = np.linspace(1,30,291)
 plt.plot(r,modes[0],r,modes[1],linewidth=3)	
+=======
+			#print eigen
+			#print eigen
+			#print eigenVectors
+			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
+			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
+			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
+			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
+			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
+			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)         
+		if mode == 0:
+			NS.append(eigen[(2*numPart)-(mode+1)])	
+		else:
+			NN.append(eigen[(2*numPart)-(mode+1)])
+
+
+	
+print len(NN)
+print len(NS)
+r = np.linspace(1,30,30)
+plt.plot(r,NN,r,NS,linewidth=3)	
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 plt.legend(['NN','NS'])
 plt.show()
 

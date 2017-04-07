@@ -5,7 +5,12 @@ import matplotlib.pyplot as plt
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
 numPart =1
 numRings = 1
+<<<<<<< HEAD
 mie_omegas = np.loadtxt('mie_omegas_scooby.txt')
+=======
+
+mie_omegas = np.loadtxt('mie_omegas_BEM_drude.txt')
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 c = 3.0e8 # speed of light in m/s
 hbar = 1.054e-34 # hbar in J*s
 nm = 1e-9 # how many nanometers are in a meter?
@@ -23,8 +28,14 @@ normal_modes = [[],[],[],[],[],[]]
 # create a loop over length scales, defined by particle radius
 radius = np.linspace(1,30,30)
 for rad in radius:
+<<<<<<< HEAD
 	#omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
 	omega_sp = mie_omegas[(rad-1)*10]
+=======
+
+	#omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
+	omega_sp = np.sqrt((mie_omegas[(rad-1)*10])**2)# - (gamma/2)**2)
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 
 	a0 = rad * nm
 	inter_particle_dist = 2.2 * a0
@@ -45,6 +56,7 @@ for rad in radius:
 	eigen = np.zeros(2*numPart)
 	omega_mode = (omega_sp)*1j
 	count = 1
+<<<<<<< HEAD
 	
 	for mode in range(6):
 		while np.absolute((omega_mode) - np.imag(eigen[2*numPart - (mode+1)])) > 0.00001:
@@ -53,6 +65,14 @@ for rad in radius:
 			
 			omega_mode = np.imag(eigen[2*numPart - (mode+1)])
 			print omega_mode
+=======
+
+	for mode in range(6):
+		while np.absolute(np.real(omega_mode) - np.real(eigen[2*numPart - (mode+1)])) > 0.00001:
+			Q = [[1,0],[0,1],[1,0],[0,1],[1,0],[0,1]] # dipole moments in x- and y-direction
+			omega_mode = np.real(eigen[2*numPart - (mode+1)])
+
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 			wavenumber = (omega_mode*elec)/(c*hbar*math.sqrt(epsb))
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			mass = 1/(4*math.pi*vacuum_perm)*(elec**2)/(alpha*(omega_sp*elec/hbar)**2)
@@ -65,7 +85,11 @@ for rad in radius:
 					#print r_ij_mag
 					nhat_ij = (Loc[i/2] - Loc[j/2])/r_ij_mag
 					if i == j:
+<<<<<<< HEAD
 						H[i,j] = 1 * omega_sp**2
+=======
+						H[i,j] = 1
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 					elif r_ij_mag < 0.1*nm:
 						H[i,j] = 0
 					else:
@@ -77,6 +101,7 @@ for rad in radius:
 						far_field = (Q_dot_Q - Q_nn_Q)/(r_ij_mag) * wavenumber**2
 						exponential = np.exp(1j*wavenumber*r_ij_mag)
 						coupling = (near_field + int_field + far_field) * exponential
+<<<<<<< HEAD
 						H[i,j] = (alpha * coupling) * omega_sp**2
 						#print alpha * coupling
 						#print alpha * coupling * omega_sp**2
@@ -85,8 +110,18 @@ for rad in radius:
 			identity_block = np.identity(H.shape[0],dtype=complex)
 			gamma_block = -identity_block*gamma
 			full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([-H, gamma_block])])
+=======
+						H[i,j] = -(alpha * coupling)
+			print H
+			zero_block = np.zeros(H.shape,dtype=complex)
+			identity_block = np.identity(H.shape[0],dtype=complex)
+
+			gamma_block = -1j*identity_block*gamma/(omega_sp)
+			#full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([H, gamma_block])])
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 			#print full_matrix
 			#raw_input()
+<<<<<<< HEAD
 			eigenValues, eigenVectors = np.linalg.eig(full_matrix)
 			eigenValues = eigenValues[np.where(np.imag(eigenValues) > 0)]
 			#print eigenValues
@@ -99,6 +134,22 @@ for rad in radius:
 			vec = eigenVectors[:,idx]
 		#print eigen
 		normal_modes[mode].append(np.imag(eigen[2*numPart - (mode+1)]))
+=======
+
+			gamma_block = -identity_block*gamma
+			full_matrix = np.vstack([np.hstack([zero_block, identity_block]), np.hstack([(omega_sp**2)*H, gamma_block])])
+			#print (omega_sp**2)*H
+			#eigenValues, eigenVectors = np.linalg.eig(full_matrix)
+			#print eigenValues
+			#raw_input()
+
+			idx = eigenValues.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
+			eigen = np.sqrt(eigenValues[idx]) * omega_sp
+			vec = eigenVectors[:,idx]
+			#print vec
+		print eigen
+		normal_modes[mode].append(eigen[2*numPart - (mode+1)])
+>>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 
 plt.figure()
 plt.plot(radius,normal_modes[0])
