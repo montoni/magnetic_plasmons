@@ -3,14 +3,10 @@ import math
 import matplotlib.pyplot as plt
 
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
-numPart =1
+numPart = 1
 numRings = 1
-<<<<<<< HEAD
-mie_omegas = np.loadtxt('mie_omegas_scooby.txt')
-=======
+mie_omegas = np.loadtxt('mie_omegas_eV.txt')
 
-mie_omegas = np.loadtxt('mie_omegas_BEM_drude.txt')
->>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 c = 3.0e8 # speed of light in m/s
 hbar = 1.054e-34 # hbar in J*s
 nm = 1e-9 # how many nanometers are in a meter?
@@ -28,14 +24,9 @@ normal_modes = [[],[],[],[],[],[]]
 # create a loop over length scales, defined by particle radius
 radius = np.linspace(1,30,30)
 for rad in radius:
-<<<<<<< HEAD
-	#omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
-	omega_sp = mie_omegas[(rad-1)*10]
-=======
 
-	#omega_sp = np.sqrt((plasma_frequency/math.sqrt(epsinf + 2*epsb))**2 - (gamma/2)**2)
-	omega_sp = np.sqrt((mie_omegas[(rad-1)*10])**2)# - (gamma/2)**2)
->>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
+	omega_sp = mie_omegas[(rad-1)*10]
+
 
 	a0 = rad * nm
 	inter_particle_dist = 2.2 * a0

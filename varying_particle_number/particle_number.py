@@ -10,7 +10,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 10; #number of particles
+numPart = 4; #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -26,16 +26,12 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 NN = []
 NS = []
-<<<<<<< HEAD
 modes = [[],[]]
-for r in range (10,301):
-	a0 = .1*r*10**-7; #sphere radius in cm
-	index = r-10
-=======
+interaction = [[],[]]
 for r in np.linspace(1,30,30):
 	a0 = r*10**-7; #sphere radius in cm
+	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
->>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
 	''' now determine geometry.'''
 	print index
 	# make unit vectors in centimeters.
@@ -99,13 +95,14 @@ for r in np.linspace(1,30,30):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
-			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
+			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
+			msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
 			#wsp = wsp_0
-			wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2) # sp frequency (rad/s) corrected for radiation damping
+			#wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2) # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
 				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
@@ -120,21 +117,19 @@ for r in np.linspace(1,30,30):
 						nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 						p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
-						r_cubed = alphasp/(Rmag**3) #this is the 1/r^3 term (static)
-						r_squared = (alphasp*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-						r_unit = (alphasp*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+						r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+						r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+						r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 						#space_exp = np.exp(1j*w_0*Rmag/c)
 						space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 						space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 						exponent = np.exp(1j*w_0*Rmag/c)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(np.sqrt(epsb)*ge)#*(hbar/elec)*wsp #this has the minus sign we need.
-<<<<<<< HEAD
-						#H[m,n] = np.conj(-(np.sqrt(epsb)*ge)/2)
-=======
-						H[m,n] = np.conj(-(np.sqrt(epsb)*ge))
->>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
+						H[n,m] = -(ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[m,n] = np.conj(-ge)
+						
+
 					
 
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
@@ -148,44 +143,49 @@ for r in np.linspace(1,30,30):
 			#print idx
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
+
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
-<<<<<<< HEAD
-		modes[mode].append(eigen[(2*numPart)-(mode+1)])
+		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+		print vec
+		raw_input()
+		coupling = 0
+		for x in range(0,numPart):
+			for y in range(x,numPart):
+				if x == y:
+					continue
+				else:
+					pass
+				Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
+				unit_vector = (Loc[x] - Loc[y])/Rmag
+				unit_dyad_term = np.dot(vec[x],vec[y])
+				n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
+				r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+				r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+				r_unit = (alpha*w_0**2)/(Rmag*(c**2))
+				exponent = np.exp(1j*w_0*Rmag/c)
+				coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
 
-	
 
-r = np.linspace(1,30,291)
-plt.plot(r,modes[0],r,modes[1],linewidth=3)	
-=======
-			#print eigen
-			#print eigen
-			#print eigenVectors
-			new_vec_1 = np.divide(eigenVectors[:,2*numPart - 1] + eigenVectors[:,2*numPart - 2],2)
-			new_vec_2 = np.divide(eigenVectors[:,2*numPart - 1] - eigenVectors[:,2*numPart - 2],2)
-			vectors_1 = np.divide(new_vec_1 + new_vec_2,2)
-			vectors_2 = np.divide(new_vec_1 - new_vec_2,2)
-			new_new_vec_1 = np.divide(new_vec_1 + new_vec_2,2)
-			new_new_vec_2 = np.divide(new_vec_1 - new_vec_2,2)         
-		if mode == 0:
-			NS.append(eigen[(2*numPart)-(mode+1)])	
+
+		#modes[mode].append(eigen[(2*numPart)-(mode+1)]) (hbar/elec)*wsp*np.sqrt
+		#print coupling
+		if np.isclose(abs(np.sum(vec)),0):
+			modes[0].append(eigen[(2*numPart)-(mode+1)])
+			interaction[0].append(coupling)
 		else:
-			NN.append(eigen[(2*numPart)-(mode+1)])
+			modes[1].append(eigen[(2*numPart)-(mode+1)])
+			interaction[1].append(coupling)
 
 
-	
-print len(NN)
-print len(NS)
 r = np.linspace(1,30,30)
-plt.plot(r,NN,r,NS,linewidth=3)	
->>>>>>> b2b5988e943f4dd62c97804ccd526805a9699ad0
+plt.figure()
+plt.plot(r,modes[0],r,modes[1],linewidth=3)		
 plt.legend(['NN','NS'])
 plt.show()
 
-#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
-#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
-#np.savetxt('crossing',crossing)
-#print static_NN
-#print static_NS
+plt.figure()
+plt.plot(r,interaction[0],r,interaction[1],linewidth=3)		
+plt.legend(['NN','NS'])
+plt.show()
+'''New section'''
 
-'''np.savetxt('NN_eps_10.txt',NN)
-np.savetxt('NS_eps_10.txt',NS)'''
