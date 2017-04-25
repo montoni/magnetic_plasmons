@@ -5,15 +5,17 @@ import matplotlib.pyplot as plt
 
 static_NN = []
 static_NS = []
-bem_NN = [3.614, 3.612, 3.61, 3.607, 3.602, 3.596, 3.59, 3.582, 3.572, 3.562, 3.55, 3.538, 3.525, 3.511, 3.501, 3.481, 3.466, 3.452, 3.431, 3.415, 3.4, 3.389, 3.372, 3.345, 3.32, 3.292, 3.261, 3.23, 3.196, 3.164]
-bem_NS = [3.61, 3.609, 3.607, 3.604, 3.60, 3.596, 3.591, 3.584, 3.577, 3.568, 3.558, 3.548, 3.536, 3.522, 3.508, 3.492, 3.474, 3.455, 3.434, 3.412, 3.387, 3.362, 3.334, 3.305, 3.275, 3.243, 3.211, 3.177, 3.144, 3.11]
+#bem_NN = [3.614, 3.612, 3.61, 3.607, 3.602, 3.596, 3.59, 3.582, 3.572, 3.562, 3.55, 3.538, 3.525, 3.511, 3.501, 3.481, 3.466, 3.452, 3.431, 3.415, 3.4, 3.389, 3.372, 3.345, 3.32, 3.292, 3.261, 3.23, 3.196, 3.164]
+#bem_NS = [3.61, 3.609, 3.607, 3.604, 3.60, 3.596, 3.591, 3.584, 3.577, 3.568, 3.558, 3.548, 3.536, 3.522, 3.508, 3.492, 3.474, 3.455, 3.434, 3.412, 3.387, 3.362, 3.334, 3.305, 3.275, 3.243, 3.211, 3.177, 3.144, 3.11]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 10; #number of particles
-
+numPart = 14; #number of particles
+numRings = (numPart + numPart%6)/6
+print numRings
+raw_input()
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
 hbar = 1.054571726e-34; # modified Planck in J*s
@@ -26,8 +28,7 @@ Eplasma = 1.46599161e-18; # J
 gamma = 0.05*elec/(hbar*16)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
-NN = []
-NS = []
+
 modes = [[],[]]
 interaction = [[],[]]
 for r in np.linspace(1,30,30):
@@ -47,7 +48,7 @@ for r in np.linspace(1,30,30):
 	#print np.sin(phi)
 	cent_dist = rij/(2*np.tan(phi))
 	part_to_cent = math.sqrt((rij/2)**2 + (cent_dist)**2)
-	centers = [np.array([-cent_dist,0]),np.array([cent_dist,0])]
+	centers = [np.array([-cent_dist,0]),np.array([cent_dist,0]),np.array([2*cent_dist,0])]
 	#print centers
 	places = []
 	for num in range(part_per_ring-1):

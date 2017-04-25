@@ -8,7 +8,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
-numPart = 14; #number of particles
+numPart = 18; #number of particles
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
 hbar = 1.054571726e-34; # modified Planck in J*s
@@ -29,10 +29,9 @@ for epsb in range(1,2):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
 		''' now determine geometry.'''
-		print r
-		#raw_input()
+		print index
 		# make unit vectors in centimeters.
-		rij = 3*a0
+		rij = 2.2*a0
 		e1 = float(1)/float(2) * (3*a0) ; #short side of 30-60-90 triangle
 		e2 = float(math.sqrt(3))/float(2) * (3*a0); #long side of 30-60-90 triangle
 		Loc = [np.array([-3*e2,2*e1]),np.array([-4*e2,e1]),np.array([-4*e2,-e1]),np.array([-3*e2,-2*e1]),
@@ -42,7 +41,7 @@ for epsb in range(1,2):
 		       #np.array([4*e2,e1]),np.array([3*e2,2*e1])] #location vectors for center of each sphere - they go counterclockwise, with one being the top center particle and six being the bottom center particle.
 		center = [np.array([-3*e2,0]),np.array([-e2, 0]),np.array([e2,0])]#,np.array([3*e2,0])]
 		'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-		H = np.zeros((2*numPart,2*numPart),dtype=complex) #initialize Hammy with zeros, twenty by twenty in this case.
+		H = np.zeros((2*numPart,2*numPart)) #initialize Hammy with zeros, twenty by twenty in this case.
 
 		'''More constants'''
 
@@ -63,39 +62,34 @@ for epsb in range(1,2):
 					count = count + 1
 					w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
 				alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
-				wavenumber = (w_0)/(c*math.sqrt(epsb))
-				alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
-				msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
+				
+				msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 				tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 				gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
 				gamma_eV = gamma_ret*hbar/elec
 				#wsp = wsp_0
-				wsp = wsp_0 # sp frequency (rad/s) corrected for radiation damping
+				wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2) # sp frequency (rad/s) corrected for radiation damping
 				for n in range (0,2*numPart):
-					for m in range (0,2*numPart):
+					for m in range (n,2*numPart):
 						if m == n: #if m and n are the same, the hammy gets the plasmon energy
 							H[n,m] = 1
 						elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 							H[n,m] = 0
-						elif n == m+1 and m%2 == 0:
-							H[m,n] = 0
 						else: # all other dipoles are fair game
 							R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
 							Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
 							nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 							p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 							p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
-							r_cubed = alpha/Rmag**3 #this is the 1/r^3 term (static)
-							r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-							r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+							r_cubed = alphasp/Rmag**3 #this is the 1/r^3 term (static)
+							r_squared = (alphasp*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+							r_unit = (alphasp*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 							#space_exp = np.exp(1j*w_0*Rmag/c)
 							space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 							space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 							ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
-							#print ge
 							gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-							H[n,m] = - ge #this has the minus sign we need.
-							H[m,n] = - ge
+							H[n,m] = -ge #this has the minus sign we need.
 				diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 				Ht = np.matrix.transpose(H) # this is the transpose of H
 				Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
@@ -104,48 +98,57 @@ for epsb in range(1,2):
 				idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 				eigenValues = w[idx] # sorting
 				eigenVectors = v[:,idx] # sorting
-				eigen=np.sqrt(eigenValues)*wsp*hbar/elec # the eigenvalues have units of energy^2, so we take the square root
+				eigen=(eigenValues) # the eigenvalues have units of energy^2, so we take the square root
 				#print eigen
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
 			vec = eigenVectors[:,(2*numPart)-(mode+1)]
 			vec = np.reshape(vec,[numPart,2])
-			'''x,y = zip(*Loc)
-			u,v = zip(*vec)
-			plt.quiver(x,y,u,v)
-			plt.title("radius = " + str(r))
-			plt.show()'''
-			for cent in range(0,3):
+			for cent in range(0,4):
 				cross = []
 				for part in range(0,numPart):
 					disp = center[cent]-Loc[part]
-					if np.sqrt(disp[0]**2+disp[1]**2) < 3.1*a0:
+					if np.sqrt(disp[0]**2+disp[1]**2) < 2.3*a0:
 						cross.append(np.cross(disp,vec[part]))
 				#print cross
 				magnet = np.sum(cross)
 				#print magnet
 				mag_dipole.append(magnet)            
-			if mag_dipole[0]*mag_dipole[2] < 0:
-				N_S.append(eigen[2*numPart-mode-1])
-			elif mag_dipole[0]*mag_dipole[2] > 0:
-				if mag_dipole[0]*mag_dipole[1] < 0:
-					NSN.append(eigen[2*numPart-mode-1])
+			if mag_dipole[0]*mag_dipole[1] > 0:
+				if mag_dipole[0]*mag_dipole[2] > 0:
+					NNNN.append(eigen[2*numPart-mode-1])
 				else:
-					NNN.append(eigen[2*numPart-mode-1])
-		if len(NSN) == len(NNN)+2:
-			print "it's happening!"
-			NNN.append(NSN[r-1])
-			del (NSN[r-1])		
+					NNSS.append(eigen[2*numPart-mode-1])
+
+			elif mag_dipole[0]*mag_dipole[1] < 0:
+				if mag_dipole[0] * mag_dipole[2] < 0:
+					NSSN.append(eigen[2*numPart-mode-1])
+				else:
+					NSNS.append(eigen[2*numPart-mode-1])
+					
+		if len(NSSN) == len(NNNN)+2:
+			NNNN.append(NSSN[index])
+			del(NSSN[index])
+		if len(NSNS) == len(NNSS) + 2:
+			NNSS.append(NSNS[index])
+			del(NSNS[index])
 		
-	print len(NNN)
-	print len(NSN)
-	print len(N_S)
-	
+	print len(NNNN)
+	print len(NSSN)
+	print len(NNSS)
+	print len(NSNS)
 	#print len(NSNS)	
-	r = np.linspace(1,30,30)
-	plt.plot(r,NNN,r,NSN,r,N_S,linewidth=3)
-	plt.legend(['NNN','NSN','N_S'])
+	r = np.linspace(1,30,291)
+	plt.plot(r,NNNN,r,NSNS,r,NSSN,r,NNSS,linewidth=3)
+	plt.legend(['NNNN','NSNS','NSSN','NNSS'])
 	plt.show()
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
+#np.savetxt('crossing',crossing)
+'''print static_NN
+print static_NS'''
 
+np.savetxt('NNNN.txt',NNNN)
+np.savetxt('NSNS.txt',NSNS)
+np.savetxt('NSSN.txt',NSSN)
+np.savetxt('NNSS.txt',NNSS)
