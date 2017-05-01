@@ -2,11 +2,12 @@ import numpy as np
 import math
 import scipy.linalg
 import matplotlib.pyplot as plt
+from scipy.interpolate import spline
 
 static_NN = []
 static_NS = []
-bem_NN = [3.614, 3.612, 3.61, 3.607, 3.602, 3.596, 3.59, 3.582, 3.572, 3.562, 3.55, 3.538, 3.525, 3.511, 3.501, 3.481, 3.466, 3.452, 3.431, 3.415, 3.4, 3.389, 3.372, 3.345, 3.32, 3.292, 3.261, 3.23, 3.196, 3.164]
-bem_NS = [3.61, 3.609, 3.607, 3.604, 3.60, 3.596, 3.591, 3.584, 3.577, 3.568, 3.558, 3.548, 3.536, 3.522, 3.508, 3.492, 3.474, 3.455, 3.434, 3.412, 3.387, 3.362, 3.334, 3.305, 3.275, 3.243, 3.211, 3.177, 3.144, 3.11]
+bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
+bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
@@ -180,8 +181,13 @@ for r in np.linspace(1,30,30):
 
 
 r = np.linspace(1,30,30)
+bem_r = [1,5,10,15,20,25,30]
+
+NN_smooth = spline(bem_r,bem_NN,r)
+NS_smooth = spline(bem_r,bem_NS,r)
+
 plt.figure()
-plt.plot(r,modes[0],r,modes[1],r,bem_NN,r,bem_NS,linewidth=3)		
+plt.plot(r,modes[0],r,modes[1],r,NN_smooth,r,NS_smooth,linewidth=3)		
 plt.legend(['NN','NS','Simulated NN','Simulated NS'])
 plt.show()
 

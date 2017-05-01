@@ -2,12 +2,15 @@ import numpy as np
 import math
 import scipy.linalg
 import matplotlib.pyplot as plt
+from scipy.interpolate import spline
 
-static_NN = []
-static_NS = []
+bem_r = [1, 5, 10, 15, 20, 25]
+bem_NN = [3.616, 3.604, 3.558, 3.482, 3.402, 3.31]
+bem_NS = [3.61, 3.6, 3.568, 3.51, 3.416, 3.288]
+
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
-crossing = []
+interaction = [[],[]]
 elec = 1.60217662e-19 # regular coulombs
 numPart = 13; #number of particles
 me = 9.10938291e-28; # electron mass in g
@@ -92,11 +95,7 @@ for epsb in range(1,2):
 							ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 							gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
 							H[n,m] = -ge #this has the minus sign we need.
-				diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
-				Ht = np.matrix.transpose(H) # this is the transpose of H
-				Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
-				Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-				w,v = np.linalg.eig(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+				w,v = np.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 				idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 				eigenValues = w[idx] # sorting
 				eigenVectors = v[:,idx] # sorting
@@ -106,6 +105,22 @@ for epsb in range(1,2):
 			    #w_0 = eigen[2*numPart-1]
 			vec = eigenVectors[:,(2*numPart)-(mode+1)]
 			vec = np.reshape(vec,[numPart,2])
+			coupling = 0
+			for x in range(0,numPart):
+				for y in range(x,numPart):
+					if x == y:
+						continue
+					else:
+						pass
+					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
+					unit_vector = (Loc[x] - Loc[y])/Rmag
+					unit_dyad_term = np.dot(vec[x],vec[y])
+					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
+					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+					r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
+					exponent = np.exp(1j*w_0*Rmag/c)
+					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
 			'''x,y = zip(*Loc)
 			u,v = zip(*vec)
 			plt.title(''.join(['radius = ',str(r)]))
@@ -114,14 +129,29 @@ for epsb in range(1,2):
 			raw_input()'''
 			if abs(np.sum(vec)) < 10**-5:
 				NN.append(eigen[2*numPart-mode-1])
+				interaction[0].append(coupling)
 			else:
 				NS.append(eigen[2*numPart-mode-1])
-			
+				interaction[1].append(coupling)
+	
+
+	smooth_r = np.linspace(1,25,25)
+	NN_smooth = spline(bem_r,bem_NN,smooth_r)
+	NS_smooth = spline(bem_r,bem_NS,smooth_r)
+
 	print len(NN)
 	print len(NS)
 	NS = np.reshape(NS,[30,2])
+	NS_int = np.reshape(interaction[1],(30,2))
 	r = np.linspace(1,30,30)
-	plt.plot(r,NN,r,NS[:,0],linewidth=3)	
+	plt.figure()
+	plt.plot(r,NN,r,NS[:,0],smooth_r,NN_smooth,smooth_r,NS_smooth,linewidth=3)	
+	plt.legend(['NN','NS','BEM NN','BEM NS'])
+	plt.show()
+
+	plt.figure()
+	plt.plot(r,interaction[0],r,NS_int[:,0],linewidth=3)
+	plt.legend(['NN','NS'])
 	plt.show()
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)

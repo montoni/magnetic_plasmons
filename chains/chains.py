@@ -2,7 +2,12 @@ import numpy as np
 import math
 import scipy.linalg
 import matplotlib.pyplot as plt
+from scipy.interpolate import spline
 
+bem_NNN = [3.614, 3.602, 3.564, 3.494, 3.412, 3.31, 3.2]
+bem_N_S = [3.612, 3.601, 3.566, 3.498, 3.404, 3.294, 3.18]
+bem_NSN = [3.61, 3.6, 3.57, 3.512, 3.42, 3.292, 3.12]
+bem_r = [1, 5, 10, 15, 20, 25, 30]
 
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
@@ -24,6 +29,7 @@ for epsb in range(1,2):
 	NNN = []
 	NSN = []
 	N_S = []
+	interaction = [[],[],[]]
 	#NSNS = []
 	for r in range (1,31):
 		a0 = r*10**-7; #sphere radius in cm
@@ -54,7 +60,7 @@ for epsb in range(1,2):
 		eigen = np.ones(2*numPart)
 		for mode in range(0,3):
 			mag_dipole = []
-			while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
+			while abs(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)]) > 0.00001:
 				if count == 1:
 					wsp = wsp_0
 					count = count + 1
@@ -62,6 +68,7 @@ for epsb in range(1,2):
 				else:
 					count = count + 1
 					w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
+				#print w_0
 				alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 				wavenumber = (w_0)/(c*math.sqrt(epsb))
 				alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
@@ -86,21 +93,21 @@ for epsb in range(1,2):
 							p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 							p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 							r_cubed = alpha/Rmag**3 #this is the 1/r^3 term (static)
-							r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+							r_squared = (-1j*alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
 							r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
-							#space_exp = np.exp(1j*w_0*Rmag/c)
-							space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
-							space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-							ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+							space_exp = np.exp(1j*w_0*Rmag/c)
+							#space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
+							#space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
+							ge = (r_unit * (p_dot_p - p_nn_p) + (r_cubed + r_squared) * (3*p_nn_p - p_dot_p))*space_exp #this is p dot E
 							#print ge
 							gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-							H[n,m] = - ge #this has the minus sign we need.
-							H[m,n] = - ge
-				diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
+							H[n,m] = - np.real(ge) #this has the minus sign we need.
+							H[m,n] = - np.real(ge)
+				'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 				Ht = np.matrix.transpose(H) # this is the transpose of H
 				Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
-				Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-				w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+				Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix'''
+				w,v = np.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 				idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 				eigenValues = w[idx] # sorting
 				eigenVectors = v[:,idx] # sorting
@@ -110,11 +117,28 @@ for epsb in range(1,2):
 			    #w_0 = eigen[2*numPart-1]
 			vec = eigenVectors[:,(2*numPart)-(mode+1)]
 			vec = np.reshape(vec,[numPart,2])
+			coupling = 0
+			for x in range(0,numPart):
+				for y in range(x,numPart):
+					if x == y:
+						continue
+					else:
+						pass
+					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
+					unit_vector = (Loc[x] - Loc[y])/Rmag
+					unit_dyad_term = np.dot(vec[x],vec[y])
+					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
+					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+					r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
+					exponent = np.exp(1j*w_0*Rmag/c)
+					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
 			'''x,y = zip(*Loc)
 			u,v = zip(*vec)
 			plt.quiver(x,y,u,v)
 			plt.title("radius = " + str(r))
 			plt.show()'''
+			#raw_input()
 			for cent in range(0,3):
 				cross = []
 				for part in range(0,numPart):
@@ -127,15 +151,20 @@ for epsb in range(1,2):
 				mag_dipole.append(magnet)            
 			if mag_dipole[0]*mag_dipole[2] < 0:
 				N_S.append(eigen[2*numPart-mode-1])
+				interaction[1].append(coupling)
 			elif mag_dipole[0]*mag_dipole[2] > 0:
 				if mag_dipole[0]*mag_dipole[1] < 0:
 					NSN.append(eigen[2*numPart-mode-1])
+					interaction[2].append(coupling)
 				else:
 					NNN.append(eigen[2*numPart-mode-1])
+					interaction[0].append(coupling)
 		if len(NSN) == len(NNN)+2:
 			print "it's happening!"
 			NNN.append(NSN[r-1])
-			del (NSN[r-1])		
+			del (NSN[r-1])
+			interaction[0].append(interaction[2][r-1])
+			del (interaction[2][r-1])	
 		
 	print len(NNN)
 	print len(NSN)
@@ -143,8 +172,19 @@ for epsb in range(1,2):
 	
 	#print len(NSNS)	
 	r = np.linspace(1,30,30)
-	plt.plot(r,NNN,r,NSN,r,N_S,linewidth=3)
-	plt.legend(['NNN','NSN','N_S'])
+
+	NNN_smooth = spline(bem_r,bem_NNN,r)
+	N_S_smooth = spline(bem_r,bem_N_S,r)
+	NSN_smooth = spline(bem_r,bem_NSN,r)
+
+	plt.figure()
+	plt.plot(r,NNN,r,NSN,r,N_S,r,NNN_smooth,r,N_S_smooth,r,NSN_smooth,linewidth=3)
+	plt.legend(['NNN','NSN','N-S','BEM NNN','BEM N-S','BEM NSN'])
+	plt.show()
+
+	plt.figure()
+	plt.plot(r,interaction[0],r,interaction[1],r,interaction[2],linewidth=3)
+	plt.legend(['NNN','N-S','NSN'])
 	plt.show()
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
