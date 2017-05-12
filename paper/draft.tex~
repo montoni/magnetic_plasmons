@@ -154,7 +154,7 @@ The first systems we examine are a magnetic two-mer\cite{Cherqui2014}, three-mer
 
 \begin{figure}
   \begin{center}
-    \input{theory_bem_comparison_fig1.pdf_tex}
+    \includegraphics{theory_bem_comparison_fig1.png}
     \caption{Eigenvalues for the magnetic two-mer (A), three-mer chain (B), and three-mer triangle (C) as computed from the tight binding model (left) and compared to MNPBEM simulations (right). For all three geometries, the net magnetic mode is higher in energy than the net electric mode(s) at small sizes and becomes lower at a certain critical scale value. The tight binding model incorrectly predicts the critical scale value but otherwise is fairly quantitatively accurate.}
 \label{theory_simul}
 \end{center}

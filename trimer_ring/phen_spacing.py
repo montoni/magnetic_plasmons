@@ -4,10 +4,6 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-bem_r = [1, 5, 10, 15, 20, 25]
-bem_NN = [3.616, 3.604, 3.558, 3.482, 3.402, 3.31]
-bem_NS = [3.61, 3.6, 3.568, 3.51, 3.416, 3.288]
-
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 interaction = [[],[]]
@@ -27,22 +23,25 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 for epsb in range(1,2):
 	NN = []
 	NS = []
-	for r in range (1,31):
+	r = 15
+	for dist in np.linspace(0,10,51):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
 		''' now determine geometry.'''
-		print r
+		print dist
+		NN_count = 0
+		NS_count = 0
 		# make unit vectors in centimeters.
-		rij = 3*a0
-		e1 = float(1)/float(2) * (3*a0) ; #short side of 30-60-90 triangle
-		e2 = float(math.sqrt(3))/float(2) * (3*a0); #long side of 30-60-90 triangle
+		rij = (dist+2)*a0
+		e1 = float(1)/float(2) * rij ; #short side of 30-60-90 triangle
+		e2 = float(math.sqrt(3))/float(2) * rij; #long side of 30-60-90 triangle
 		Loc = [np.array([0, e1]),np.array([-e2, 2*e1]),
 			   np.array([-2*e2, e1]),np.array([-2*e2, -e1]),
 			   np.array([-e2, -2*e1]),np.array([0, -e1]),
 			   np.array([e2, -2*e1]),np.array([2*e2, -e1]),
 			   np.array([2*e2 , e1]),np.array([e2 , 2*e1]),
 			   np.array([-e2,4*e1]),np.array([0,5*e1]),np.array([e2,4*e1])] #location vectors for center of each sphere - they go counterclockwise, with one being the top center particle and six being the bottom center particle.
-
+		center = [np.array([-e2, 0]),np.array([e2,0]),np.array([0, 3*e1])]
 		'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
 		H = np.zeros((2*numPart,2*numPart),dtype=complex) #initialize Hammy with zeros, twenty by twenty in this case.
 
@@ -54,7 +53,11 @@ for epsb in range(1,2):
 		'''initialize w_0 and eigen'''
 		w_0 = 3*elec/hbar
 		eigen = np.ones(2*numPart)
-		for mode in range(0,3):
+		for mode in range(0,10):
+			mag_dipole = []
+			print NN_count + NS_count
+			if NS_count + NN_count == 2:
+				continue
 			while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
 				if count == 1:
 					wsp = wsp_0
@@ -94,7 +97,7 @@ for epsb in range(1,2):
 							space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 							ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 							gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-							H[n,m] = -ge #this has the minus sign we need.
+							H[n,m] = -np.real(ge) #this has the minus sign we need.
 				w,v = np.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 				idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 				eigenValues = w[idx] # sorting
@@ -127,38 +130,50 @@ for epsb in range(1,2):
 			plt.quiver(x,y,u,v)
 			plt.show()
 			raw_input()'''
-			if abs(np.sum(vec)) < 10**-5:
-				NN.append(eigen[2*numPart-mode-1])
-				interaction[0].append(coupling)
-			else:
-				NS.append(eigen[2*numPart-mode-1])
-				interaction[1].append(coupling)
+			for cent in range(0,3):
+				cross = []
+				for part in range(0,numPart):
+					disp = center[cent]-Loc[part]
+					if np.isclose(np.sqrt(disp[0]**2+disp[1]**2), rij):
+						cross.append(np.cross(disp,vec[part]))
+				#print cross
+				magnet = np.sum(cross)
+				#print magnet
+				mag_dipole.append(magnet)
+			if abs(mag_dipole[0]) > 1e-10 or abs(mag_dipole[1]) > 1e-10 or abs(mag_dipole[2]) > 1e-10:
+				if NN_count < 1:    
+					if np.isclose(mag_dipole[0],mag_dipole[1]) and np.isclose(mag_dipole[1],mag_dipole[2]) and np.isclose(mag_dipole[2],mag_dipole[0]):
+						NN.append(eigen[2*numPart-mode-1])
+						interaction[0].append(coupling)
+						NN_count += 1
+				if NS_count < 1:
+					if mag_dipole[0] * mag_dipole[1] < 0: 
+						NS.append(eigen[2*numPart-mode-1])
+						interaction[1].append(coupling)
+						NS_count += 1
 	
-
-	smooth_r = np.linspace(1,25,25)
-	NN_smooth = spline(bem_r,bem_NN,smooth_r)
-	NS_smooth = spline(bem_r,bem_NS,smooth_r)
-
-	print len(NN)
-	print len(NS)
-	NS = np.reshape(NS,[30,2])
-	NS_int = np.reshape(interaction[1],(30,2))
-	r = np.linspace(1,30,30)
+	#print len(NN)
+	#print len(NS)
+	#NN = np.reshape(NN,[51,2])
+	#NS = np.reshape(NS,[51,2])
+	#NN_int = np.reshape(interaction[0],(51,2))
+	#NS_int = np.reshape(interaction[1],(51,2))
+	dist = np.linspace(0,10,51)
 	plt.figure()
-	plt.plot(r,NN,r,NS[:,0],smooth_r,NN_smooth,smooth_r,NS_smooth,linewidth=3)	
+	plt.plot(dist,NN,dist,NS,linewidth=3)	
 	plt.legend(['NN','NS','BEM NN','BEM NS'])
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
-	#plt.savefig('threemer_eigenvalues.pdf')
-	plt.show()
+	#plt.show()
+	plt.savefig('phen_15_spacing.pdf')
 
-	plt.figure()
-	plt.plot(r,interaction[0],r,NS_int[:,0],linewidth=3)
+	'''plt.figure()
+	plt.plot(dist,interaction[0],dist,interaction[1],linewidth=3)
 	plt.legend(['NN','NS'])
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
+	plt.show()'''
 	#plt.savefig('threemer_interactions.pdf')
-	plt.show()
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
 #np.savetxt('crossing',crossing)

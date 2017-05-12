@@ -31,14 +31,14 @@ anticollinear = [np.array([1,0]),np.array([-1,0])]
 r = 10
 elec = 1.60217662e-19 # regular coulombs
 numPart = 2; #number of particles
-a0 = 10e-7; #sphere radius in cm
+a0 = 30e-7; #sphere radius in cm
 
 ''' now determine geometry.'''
 
 # make unit vectors in centimeters.
-for number in range(0,100):
-	dist = float(number+1)/4
-	sep = (2+dist*.25)*a0
+for number in range(0,481):
+	#dist = 
+	sep = ((number+20)*1e-7)+2*a0
 	Loc = [np.array([sep/2, 0]),np.array([-sep/2, 0])]
 
 	#Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
@@ -63,13 +63,15 @@ for number in range(0,100):
 	'''initialize w_0 and eigen'''
 	w_0 = wsp_0
 	eigen = np.ones(2*numPart)
+	wavenumber = (w_0)/(c*math.sqrt(epsb))
 	alphasp = (a0**3)*(3/(epsinf+2*epsb))
+	alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 	R = Loc[(1)]-Loc[(0)] #pick out the location of each dipole, comute the distance between them
 	Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
 	nhat = (Loc[(1)]-Loc[(0)])/float(Rmag)
-	r_cubed = alphasp/Rmag**3 #this is the 1/r^3 term (static)
-	r_squared = (w_0*alphasp)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-	r_unit = (alphasp*w_0**2)/(Rmag*(c**2))
+	r_cubed = alpha/Rmag**3 #this is the 1/r^3 term (static)
+	r_squared = (w_0*alpha)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+	r_unit = (alpha*w_0**2)/(Rmag*(c**2))
 	space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 	space_sin = np.sin(w_0*Rmag/c)
 
@@ -93,38 +95,42 @@ for number in range(0,100):
 	anco_tot.append(anco_near[number] + anco_int[number] + anco_far[number])
 	para_tot.append(para_near[number] + para_int[number] + para_far[number])
 #print coll_tot
-sep = np.linspace(2.5,250,100)
+sep = np.linspace(20,500,481)
 plt.figure(1)
 plt.plot(sep,coll_near,sep,coll_int,sep,coll_far,sep,coll_tot,lw=3)
 plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
-plt.xlim([2.5,250])
+#plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'],loc=4)
-plt.savefig('collinear.pdf')
+#plt.savefig('collinear.pdf')
+plt.show()
 
 plt.figure(2)
 plt.plot(sep,anpa_near,sep,anpa_int,sep,anpa_far,sep,anpa_tot,lw=3)
 plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
-plt.xlim([2.5,250])
+#plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'],loc=4)
-plt.savefig('antiparallel.pdf')
+#plt.savefig('antiparallel.pdf')
+plt.show()
 
 plt.figure(3)
 plt.plot(sep,anco_near,sep,anco_int,sep,anco_far,sep,anco_tot,lw=3)
 plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
-plt.xlim([2.5,250])
+#plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'])
-plt.savefig('anticollinear.pdf')
+#plt.savefig('anticollinear.pdf')
+plt.show()
 
 plt.figure(4)
 plt.plot(sep,para_near,sep,para_int,sep,para_far,sep,para_tot,lw=3)
 plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
-plt.xlim([2.5,250])
+#plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'])
-plt.savefig('parallel.pdf')
-
+#plt.savefig('parallel.pdf')
 plt.show()
+
+#plt.show()
 

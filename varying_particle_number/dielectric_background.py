@@ -4,17 +4,13 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-static_NN = []
-static_NS = []
-bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
-bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
 numPart = 10; #number of particles
-
+omegas = []
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
 hbar = 1.054571726e-34; # modified Planck in J*s
@@ -31,12 +27,13 @@ NN = []
 NS = []
 modes = [[],[]]
 interaction = [[],[]]
-for r in np.linspace(1,30,30):
+r = 15
+for epsb in np.linspace(1,3,21):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
 	''' now determine geometry.'''
-	print index
+	print epsb
 	# make unit vectors in centimeters.
 	rij = 3*a0
 	part_per_ring = numPart/2 + 1
@@ -85,7 +82,8 @@ for r in np.linspace(1,30,30):
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = (mie_omegas[index*10 - 10])*elec/hbar
+	wsp_0 = (mie_omegas[index*10 - 10])*(math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb))    *elec/hbar
+	omegas.append(wsp_0*hbar/elec)
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
@@ -121,16 +119,16 @@ for r in np.linspace(1,30,30):
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 						p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 						r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-						r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-						r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+						r_squared = (alpha*wavenumber)/(Rmag**2) #this is the 1/r^2 term (imaginary part)
+						r_unit = (alpha*wavenumber**2)/(Rmag) #this is the 1/r term (goes with the cross products)
 						#space_exp = np.exp(1j*w_0*Rmag/c)
-						space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
-						space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-						exponent = np.exp(1j*w_0*Rmag/c)
+						space_cos = np.cos(wavenumber*Rmag) #this is the real part of the e^ikr
+						space_sin = np.sin(wavenumber*Rmag) #this is the imaginary part of the e^ikr
+						exponent = np.exp(1j*wavenumber*Rmag)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(ge)#*(hbar/elec)*wsp #this has the minus sign we need.
-						H[m,n] = np.conj(-ge)
+						H[n,m] = -(ge)/epsb#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[m,n] = np.conj(-ge)/epsb
 						
 
 					
@@ -163,9 +161,9 @@ for r in np.linspace(1,30,30):
 				unit_dyad_term = np.dot(vec[x],vec[y])
 				n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
 				r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-				r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-				r_unit = (alpha*w_0**2)/(Rmag*(c**2))
-				exponent = np.exp(1j*w_0*Rmag/c)
+				r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+				r_unit = (alpha*wavenumber**2)/(Rmag)
+				exponent = np.exp(1j*wavenumber*Rmag)
 				coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
 
 
@@ -173,32 +171,30 @@ for r in np.linspace(1,30,30):
 		#modes[mode].append(eigen[(2*numPart)-(mode+1)]) (hbar/elec)*wsp*np.sqrt
 		#print coupling
 		if np.isclose(abs(np.sum(vec)),0):
+			print "north north"
 			modes[0].append(eigen[(2*numPart)-(mode+1)])
 			interaction[0].append(coupling)
 		else:
+			print "north south"
 			modes[1].append(eigen[(2*numPart)-(mode+1)])
 			interaction[1].append(coupling)
 
-
-r = np.linspace(1,30,30)
-bem_r = [1,5,10,15,20,25,30]
-
-NN_smooth = spline(bem_r,bem_NN,r)
-NS_smooth = spline(bem_r,bem_NS,r)
-
+epsb = np.linspace(1,3,21)
 plt.figure()
-plt.plot(r,modes[0],r,modes[1],r,NN_smooth,r,NS_smooth,linewidth=3)
+plt.plot(epsb,modes[0],epsb,modes[1],epsb,omegas,linewidth=3)
 plt.ylabel('Energy (eV)')
-plt.xlabel('Particle Radius r_0 (nm)')		
-plt.legend(['NN','NS','Simulated NN','Simulated NS'])
-plt.savefig('twomer_eigenvalues.pdf')
-
-plt.figure()
-plt.plot(r,interaction[0],r,interaction[1],linewidth=3)	
-plt.ylabel('Energy (eV)')
-plt.xlabel('Particle Radius r_0 (nm)')	
+plt.xlabel('Embedding Medium')		
 plt.legend(['NN','NS'])
-plt.savefig('twomer_interactions.pdf')
+#plt.show()
+plt.savefig('twomer_15_withwsp.pdf')
+
+'''plt.figure()
+plt.plot(epsb,interaction[0],epsb,interaction[1],linewidth=3)	
+plt.ylabel('Energy (eV)')
+plt.xlabel('Embedding Medium')	
+plt.legend(['NN','NS'])
+plt.show()'''
+#plt.savefig('twomer_interactions.pdf')
 
 
 '''New section'''

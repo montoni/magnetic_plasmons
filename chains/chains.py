@@ -180,12 +180,16 @@ for epsb in range(1,2):
 	plt.figure()
 	plt.plot(r,NNN,r,NSN,r,N_S,r,NNN_smooth,r,N_S_smooth,r,NSN_smooth,linewidth=3)
 	plt.legend(['NNN','NSN','N-S','BEM NNN','BEM N-S','BEM NSN'])
-	plt.show()
+	plt.ylabel('Energy (eV)')
+	plt.xlabel('Particle Radius r_0 (nm)')
+	plt.savefig('threemer_eigenvalues.pdf')
 
 	plt.figure()
 	plt.plot(r,interaction[0],r,interaction[1],r,interaction[2],linewidth=3)
 	plt.legend(['NNN','N-S','NSN'])
-	plt.show()
+	plt.ylabel('Energy (eV)')
+	plt.xlabel('Particle Radius r_0 (nm)')
+	plt.savefig('threemer_interactions.pdf')
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
 

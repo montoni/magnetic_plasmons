@@ -4,10 +4,6 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-static_NN = []
-static_NS = []
-bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
-bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
@@ -31,14 +27,16 @@ NN = []
 NS = []
 modes = [[],[]]
 interaction = [[],[]]
-for r in np.linspace(1,30,30):
+r = 15
+for dist in np.linspace(0,10,51):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
+	
 	''' now determine geometry.'''
-	print index
+	print dist
 	# make unit vectors in centimeters.
-	rij = 3*a0
+	rij = (dist+2)*a0
 	part_per_ring = numPart/2 + 1
 	theta = 2*math.pi/part_per_ring
 	phi = theta/2.
@@ -89,7 +87,10 @@ for r in np.linspace(1,30,30):
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
-	for mode in range(0,2):
+	mode_count = 0
+	for mode in range(0,7):
+		mag_dipole = []
+
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00001:
 			if count == 1:
 				wsp = wsp_0
@@ -167,38 +168,50 @@ for r in np.linspace(1,30,30):
 				r_unit = (alpha*w_0**2)/(Rmag*(c**2))
 				exponent = np.exp(1j*w_0*Rmag/c)
 				coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+		for cent in range(0,2):
+				cross = []
+				for part in range(0,numPart):
+					disp = centers[cent]-Loc[part]
+					if np.sqrt(disp[0]**2+disp[1]**2) < (dist+2.1)*a0:
+						cross.append(np.cross(disp,vec[part]))
+				#print cross
+				magnet = np.sum(cross)
+				#print magnet
+				mag_dipole.append(magnet)  
 
-
-
+		
 		#modes[mode].append(eigen[(2*numPart)-(mode+1)]) (hbar/elec)*wsp*np.sqrt
 		#print coupling
-		if np.isclose(abs(np.sum(vec)),0):
-			modes[0].append(eigen[(2*numPart)-(mode+1)])
-			interaction[0].append(coupling)
-		else:
-			modes[1].append(eigen[(2*numPart)-(mode+1)])
-			interaction[1].append(coupling)
+		if mode_count < 2:
+			if abs(mag_dipole[0]) > 1e-8:
+				if mag_dipole[0] * mag_dipole[1] > 0:
+					modes[0].append(eigen[(2*numPart)-(mode+1)])
+					interaction[0].append(coupling)
+					mode_count += 1
+				elif np.isclose(mag_dipole[0],-mag_dipole[1]):
+					modes[1].append(eigen[(2*numPart)-(mode+1)])
+					interaction[1].append(coupling)
+					mode_count += 1
 
-
-r = np.linspace(1,30,30)
-bem_r = [1,5,10,15,20,25,30]
-
-NN_smooth = spline(bem_r,bem_NN,r)
-NS_smooth = spline(bem_r,bem_NS,r)
+#print len(modes[0])
+#print len(modes[1])
+dist = np.linspace(0,10,51)
 
 plt.figure()
-plt.plot(r,modes[0],r,modes[1],r,NN_smooth,r,NS_smooth,linewidth=3)
+plt.plot(dist,modes[0],dist,modes[1],linewidth=3)
 plt.ylabel('Energy (eV)')
 plt.xlabel('Particle Radius r_0 (nm)')		
 plt.legend(['NN','NS','Simulated NN','Simulated NS'])
-plt.savefig('twomer_eigenvalues.pdf')
+#plt.show()
+plt.savefig('twomer_15_spacing.pdf')
 
-plt.figure()
-plt.plot(r,interaction[0],r,interaction[1],linewidth=3)	
+'''plt.figure()
+plt.plot(dist,interaction[0],dist,interaction[1],linewidth=3)	
 plt.ylabel('Energy (eV)')
 plt.xlabel('Particle Radius r_0 (nm)')	
 plt.legend(['NN','NS'])
-plt.savefig('twomer_interactions.pdf')
+plt.show()'''
+#plt.savefig('twomer_interactions.pdf')
 
 
 '''New section'''

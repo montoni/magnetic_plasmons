@@ -71,7 +71,7 @@
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
-    {Towards Tunable Negative-Index Metamaterials}
+    {A Simple Model for Small Collections of Magnetic Plasmonic Oligomers}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
 %% supplied. These should be set up here, and will be printed after
@@ -124,17 +124,34 @@ Ring-like assemblies of metal nanoparticles that exhibit magnetic resonances, ca
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+Metal nanoparticles (MNPs) support collective resonances of thier conductions electrons at optical frequencies. These localized surface plasmon resonances (LSPRs) can interact with each other in assemblies of two or more MNPs to produce hybridized resonances of the assembly, much like the hybridization of atomic orbitals in molecules. When these assemblies are arranged in rings, the single LSPRs can give rise to a fictitious, oscillating current which produces an oscillating magnetic dipole inside of the ring. Such systems are known as magnetic plasmon oligomers. 
+
+Magnetic plasmon oligomers have been of intense focus due to their potential applications in sensing, lensing, cloaking, and information processing. In a recent paper, Engheta \textit{et al}. state that magnetic systems are well-understood on the single oligomer scale and the nearly infinite scale. [\textbf{CITE Engheta 2017}] However, the properties of collections of few magnetic oligomers have not been fully explored. Much work has been done to elucidate the properties of long chains and large arrays of magnetic oligomers. [\textbf{lots of Halas cites, probably}] The work of Cherqui \textit{et al}. has shown the properties of magnetic systems comprising one, two, and six rings. Furthermore, the dependence of the magnetic properties of the systems on individual nanoparticle geometry, and the relative size of the constituent oligomers has also been determined. This formative work has explained much of the physics behind magnetic plasmons, but it has also raised an interesting problem.
+
+In Cherqui's 2014 work on magnetic plasmons, a quasistatic, electric dipole tight-binding model was used to determine the eigenmodes of the magnetic systems. This model maps each  considered only the electric near-field of the single-particle plasmons and only incorporated nearest-neighbor interactions. For one-ring systems, hereafter called monomers, the lowest energy eigenmode was determined to be the magnetic mode. For the two-ring system, called a twomer, the lowest- and second-lowest-energy modes were determined to be an out-of-phase magnetic mode and an in-phase magnetic mode, respectively. However, in confiring their results with full-wave simulations, they found a discrepancy. While the tight-binding model accurately described the eigenmodes, it inaccurately described their energy-ordering. The simulations placed the in-phase magnetic mode lower in energy than the out-of-phase mode, opposite the ordering of the tight-binding model. An explanation was needed to determine why this result, while counterintuitive, was in fact physical.
+
+The simulations were carried out on very large magnetic oligomers: the constituent particles were hundreds of nanometers across, and the overall oligomers were therefore nearly micron sized. It is well known that in large nanoparticles and over large distances, the quasistatic approximation begins to fail and the intermediate- and far-fields must be considered in order to accurately describe the optical properties. In this paper, we show that this apparent discrepancy is not only expected, but is rectifiable through expanding the tight-binding model to include all inter-particle interactions and the fully retarded electric field. Furthermore, we show that for small, multi-oligomer systems, the size, spacing, and environment greatly impact the eigenspectrum and the ordering of magnetic modes, leading to a high degree of tunability. We show this by building into our model a means to continuously manipulate the scale, interparticle distance, and embedding dielectric constant of each magnetic system. Finally, we recommend ways that this tunability might be enhanced and exploited in future studies. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OLD INTRO, SAVE FOR CITES %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Bringing two or more metal nanoparticles (MNPs) together allows their individual electric plasmons to hybridize, producing a new set of plasmonic modes\cite{Lucas1976,ARAVIND1981,Xu1995,Mischenko1995}. Plasmon hybridization theory is applied to aggregates of MNPs and explains their collective behavior within the quasistatic limit in which the speed of light is taken to be infinite\cite{NordHal2003,NordProdan2004,Oubre2004,Gomez2009}. Recently, retardation effects on plasmon hybridization have been the focus of study for large particles\cite{Abajo2008,Gu2010} as well as dimers\cite{vonPlessen2007,Rechbacher2003,Kottman2001}, and 2-D arrays\cite{Schatz2003,Royer2005,Chumanov2010} of nanoparticles. Specific arrangements of nanoparticles in 2-D arrays, such as three or more nanoparticles arranged on the vertices of a regular polygon, support a collective mode in which all of the dipole plasmons are oriented head-to-tail. This generates a fictitious, oscillating current loop resulting in an oscillating magnetic dipole moment in the center of the ring\cite{Alu2006,Alu2008,Liu2011,Nord2006,Cherqui2014,Cherqui2016}. These so-called magnetic plasmons are the lowest-energy collective modes of the oligomers and couple to and enhance the magnetic field of incident light\cite{Shalaev2007,Qian2015,Nord2007}, offering a route to applications such as solar cell enhancement\cite{Graydon2011,Alu2014solar,Le2015solar}, biosensing and detection\cite{Zia2010trans,Noginova2008trans,Wang:13,Fan2015,Wei2015,Shvets2012,Altug2012bio,Nord2011fano}, and information storage and propagation\cite{Zhang2006,NordHal2011,NordHal2012}. The rich plasmonic modes of magnetic-plasmon-supporting systems are well-described using plasmon hybridization theory, but when in the quasistatic limit, the energy-order of the modes is not.
 
 Plasmon hybridization theory treats plasmons as point dipoles centered on their associated nanoparticles that interact through dipole-dipole coupling. In the quasistatic limit, these dipoles couple only through time-independent, electric near-field interactions\cite{jackson_classical_1999}, but when the size of and distance between nanoparticles becomes large, this approximation breaks down and intermediate- and far-field effects must be considered, as well as time-delay effects in the near-field\cite{jackson_classical_1999}. The aim of this paper is to incorporate the fully retarded electric field into plasmon hybridization theory and extend studies of retardation effects to magnetic plasmon oligomers. Specifically, we begin by exploring oligomers comprising two and three rings of nanoparticles and compare to full-wave simulation \cite{Hohenester2012} to verify that our approach qualitatively predicts the energy-ordering of the magnetic modes.\cite{Cherqui2014,Cherqui2016}. Following this, we calaculate the coupling betwen individual rings in various oligomers in order to parametrize an effective magnetic-magnetic coupling between magnetic dipoles. Using this new basis, we describe periodic chains and arrays of oligomers.
 
-The calculations presented here are performed using an electric tight-binding model, parametrizing the magnetic couplings, and then introducing these coupling constants into a magnetic tight-binding model. For all following magnetic oligomers, only the two planar dipoles per particle are considered in the electric tight binding model. The dipoles are mapped onto a set of harmonic oscillators and are described by the following Hamiltonian:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Back to regularly scheduled programming %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The tight-binding model used in this work maps each electric dipole plasmon onto a harmonic oscillator and allows them to interact through the fully retarded dipole-dipole coupling. The system Hamiltonian is
 
 \begin{equation}
-H = \sum_{i}^{n}\frac{\textbf{P}_{i}^{2}}{2m_{\textrm{sp},i}} + \frac{1}{2}m_{\textrm{sp},i}w_{\textrm{sp},i}^2\textbf{X}_{i}^{2} + e^2\sum_{i\neq j}\textbf{X}_i\cdot\boldsymbol{\Lambda}_{\textrm{full},ij}\cdot\textbf{X}_j,\label{elec_hammy_1}
+H = \sum_{i}^{n}\frac{\textbf{P}_{i}^{2}}{2m_{\textrm{sp},i}} + \frac{1}{2}m_{\textrm{sp},i}w_{\textrm{sp},i}^2\textbf{X}_{i}^{2} + e^2\sum_{i\neq j}\textbf{X}_i\cdot\boldsymbol{\Lambda}_{ij}\cdot\textbf{X}_j,\label{elec_hammy_1}
 \end{equation}
 
-where $\textbf{P}_i$ are the momenta conjugate to the coordinates $\textbf{X}_{i}$, $\omega_{sp,i}$ are the individual LSPR frequencies of each oscillator, $m_{sp,i}$ are the LSPR effective masses and $\boldsymbol{\Lambda}_{\textrm{full},ij}$ is the fully retarded dipole-dipole relay tensor (expanded below). To make this Hamiltonian more manageable, it is nondimensionalized using $\textbf{Q}_i = \left(m_{\textrm{sp}}\omega_{\textrm{sp}}/\hbar\right)^{\frac{1}{2}}\textbf{X}_i$ and $\boldsymbol{\Pi}_i = \textbf{P}_i/\sqrt{\hbar m_{\textrm{sp}}\omega_{\textrm{sp}}}$. Substituting into Equation~\ref{elec_hammy_1} and expanding $\boldsymbol{\Lambda}_{\textrm{full},ij}$, we get:
+where $\textbf{P}_i$ are the momenta conjugate to the coordinates $\textbf{X}_{i}$, $\omega_{sp,i}$ are the individual LSPR frequencies of each oscillator, $m_{sp,i}$ are the LSPR effective masses and $\boldsymbol{\Lambda}_{ij}$ is the fully retarded dipole-dipole relay tensor (expanded below). To make this Hamiltonian more manageable, it is nondimensionalized using $\textbf{Q}_i = \left(m_{\textrm{sp}}\omega_{\textrm{sp}}/\hbar\right)^{\frac{1}{2}}\textbf{X}_i$ and $\boldsymbol{\Pi}_i = \textbf{P}_i/\sqrt{\hbar m_{\textrm{sp}}\omega_{\textrm{sp}}}$. Substituting into Equation~\ref{elec_hammy_1} and expanding $\boldsymbol{\Lambda}_{ij}$, we get:
 
 \begin{equation}
 \begin{aligned}
@@ -147,9 +164,68 @@ H =
 
 In this Hamiltonian we introduce the near, intermediate, and far-field coupling terms: $g_{ij}^{\textrm{NF}} = \frac{\alpha_{sp}}{r_{ij}^3}\cos\left(\frac{\omega r_{ij}}{c}\right)$, $g_{ij}^{\textrm{IF}} = \frac{\alpha_{sp}\omega}{r_{ij}^2 c}\sin\left(\frac{\omega r_{ij}}{c}\right)$, and $g_{ij}^{\textrm{FF}} = \frac{\alpha_{sp}\omega^2}{r_{ij} c^2}\cos\left(\frac{\omega r_{ij}}{c}\right)$, respectively. Additionally, the polarizability $\alpha_{sp} = \frac{e^2}{m_{sp}\omega_{sp}^2}$, $r_{ij}$ is the distance between the ith and jth LSPs, and $\hat{\textbf{n}}_{ij}$ is the unit vector connecting two LSPs. Including these terms, we have incorporated all retardation effects associated with point dipoles\cite{Purcell1973}.
 
-It should be noted that this Hamiltonian, when diagonilzed, results in a transcendental equation. The eigenvalues of the Hamiltonian are functions of $\omega$, which are the frequencies of the collective modes, that is, the eigenvalues of the eigenvectors. In order to fully solve this problem, we make a first guess of $\omega$ for a particular mode of interest and iteratively compute the eigenvalues. Using the eigenvalue associated with the mode of interest, the Hamiltonian is diagonalized to convergence. The process is repeated for each mode of interest.
+It should be noted that this Hamiltonian, when diagonilzed, results in a transcendental equation. The eigenvalues of the Hamiltonian are functions of $\omega$, which are the frequencies of the collective modes, that is, the eigenvalues are functions of themselves. In order to fully solve this problem, we make a first guess of $\omega$ for a particular mode of interest and iteratively compute the eigenvalues. Using the eigenvalue associated with the mode of interest, the Hamiltonian is diagonalized to convergence. The process is repeated for each mode of interest.
 
 \section{results and discussion}
+
+We explore and manipulate three magnetic oligomer systems in this work: a twomer, a three-ring chain, and three rings arranged in a triangle. In each manipulation, the particles have radius $r_0$ and interparticle spacing $r_{ij}$. In the first set of model calculations, we compare to full-wave simulations to verify that the model accurately captures the properties of the systems, but beyond that we cease comparison to simulation in order to focus on the predictive power of the model. The first calculations, depicted in Figure~\ref{magmodes} show how the magnetic modes of the twomer and threemers are impacted by the overall scale of the system. In these manipulations, the nearest neighbor distances are held at $r_{ij} = 3 \mtimes r_0$ while $r_0$ varies from 1 nm to 30 nm.
+
+In Figure~\ref{magmodes}a, the magnetic mode eigenvalues are computed for each system. The solid lines depict model calculations, and the dashed lines depict simulated results. Interestingly, the magnetic modes exhibit a dynamic energy ordering, switching order twice as a function of scale. It is presumable that they continue to flip at larger and larger sizes. This is confirmed by simulations, with the model overestimating the eigenvalues by about 0.6\% and underestimating the crossing points by under a nanometer. These small errors are consistent across all three systems. Figure~\ref{magmodes}b displays the computed interaction strength for each eigenmode produced by the tight-binding model. In other words, we have plotted $\sum_{i>j}\textbf{p}_{i}\cdot\textbf{E}$ where $\textbf{p}_{i}$ is an eigenvector and $\textbf{E}$ is the field produced by the other dipoles.
+
+\begin{figure}
+\centering
+\includegraphics[width=.65\paperwidth]{magnetic_mode_eigenvalues_and_interactions.png}
+\caption{Magnetic mode eigenvalues (column a), predicted and simulated, and interaction strengths (\
+column b) for the magnetic twomer (first row), threemer chain (second row), and threemer ring (thir\
+d row). All of the magnetic modes range from ~3.6 eV to ~3.1 eV. In each system, the magnetic modes\
+ exhibit multiple crossings, showing that the eigenspectrum of these magnetic systems depends on th\
+eir scale. The model consistently overestimates the eigenvalues by 0.5 eV, and consistently underes\
+timates the crossing points by less than a nanometer. The twomer has two magnetic modes, one in-pha\
+se mode (blue trace) and one out-of-phase mode (orange trace). The threemer chain has three modes, \
+an in-phase mode (blue trace), a minimally out-of-phase mode (orange trace), and a maximally out-of\
+-phase mode (green trace). The threemer ring exhibits three magnetic modes, but the out-of-phase mo\
+des (orange trace) are degenerate so only one is depicted. The other mode is a maximally in-phase m\
+ode (blue trace). To further emphasize the impact of scale, we have plotted the total interaction s\
+trength of each eigenmode, \textit{i.e.} the sum of each eigenvector's dot product with the electri\
+c field of all of the other dipoles. This calculation reaffirms the scale dependence and predicts m\
+ode crossings at the same scale as both the eigenvalue calculation and the simulations.}
+\label{fig:magmodes}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=.65\paperwidth]{dielectric_study.png}
+\caption{Magnetic mode eigenvalues for twomers (first row), threemer chains (second row), and threemer rings (third row) with particle sizes of 15 nm (column a) and 30 nm (column b) as a func
+tion of the dielectric constant of an embedding medium. As the dielectric constant is increased from 1 to 3, the magnetic mode splitting decreases and the overall energy decreases. At very hi
+gh dielectric values, the magnetic mode eigenvalues converge to the single particle resonance frequency. This can be explained by the increasing opacity of the medium effectively screening in
+ter-particle interactions. It is also important to note that between $\varepsilon_b = 1$ and $\varepsilon_b = 1.5$, the magnetic modes flip order. Thus, the increasing opacity of the medium e
+ffectively decreases the scale of the system.}
+\label{fig:dielectric}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=.65\paperwidth]{spacing_study.png}
+\caption{Magnetic mode eigenvalues for twomers (first row), threemer chains (second row), and threemer rings (third row) with particle sizes of 15 nm (column a) and 30 nm (column b) as a func
+tion of nearest neighbor particle spearation. The separation is plotted as a function of the particle size, in units of radii. It is important to note that as the separation distance increase
+s, the magnetic modes cross multiple times and their eigenvalues converge to, and oscillate about the single particle frequency. This is a result of the decreasing interaction strength. In th
+e limit of particles infinitely far away from each other, their interaction stength is zero. The oscillating nature of the eigenvalues is a result of the complex exponential dependence of the
+ fields.}
+\label{fig:spacing}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.65\paperwidth]{dimer_interaction.png}
+\caption{Relative interaction strengths for the four possible dipole arrangements of a nanoparticle dimer: collinear (a), parallel (b), anti-collinear (c), and anti-parallel (d). Plotted are 
+the near-field (blue), intermediate-field (orange), far-field (green), and total (black, dashed) interaction strengths for each set of dipoles as a function of dipole-dipole distance. Interes
+tingly, and stemming from the form of the dipole relay tensor, the far-field interaction term is zero for both pairs of linear dipoles. From these plots, it can be seen that the favorability 
+of a specific dipole arrangement depends on the separation between the dipoles. This can be seen in the fact that each part of the field depends differently on the separation, and each field 
+term contains an oscillating term. At short length scales, the interaction is dominated by the near-field. However, as the distance increases, the interaction is dominated by the intermediate
+-field (a and c) or the far-field (b and d). As a result, there are separation distances at which normally unfavorable arrangements become favorable. Since magnetic oligomers can be describe through pairwise interactions of electric dipoles, it follows that the eigenvalues must also change order as different arrangements of electric dipoles become more and less favorable.}
+\label{fig:dimers}
+\end{figure}
+
 The first systems we examine are a magnetic two-mer\cite{Cherqui2014}, three-mer chain, and three-mer triangle. Because we are interested in the effects of scale, we must define a scaling parameter for the system. Each of our systems begins from a unit cell called the one-mer: six silver, spherical MNPs placed at the corners of a regular hexagon. To create the two-mer, two unit cells are tiled so that they share an edge, and thus two particles. In general, if any two unit cells share an edge, they also share two nanoparticles, as in the diagrams in Figure~\ref{theory_simul} Each particle has radius $a_0$ and particles are separated by lattice spacing $r=2.2\times a_0$. With the radius of the particles defining the scale of the system, there now exists a way to probe the energy ordering of the modes as a function of size.
 
 The results of our theoretical calculations and full-wave simulations for the aforementioned oligomers are dispayed in Figure~\ref{theory_simul}. Both theory and simulation predict that as a function of size, the energy ordering of the magnetic plasmon modes should change. In the two-mer system, there are two magnetic modes. When the system is small, the lowest energy mode is the alternating north-south (NS) mode and the in-phase north-north mode is highest. When we add a ring to the system, we see a trend emerge. The alternating (NSN) mode is lower than the N-S mode, which is in turn lower than the NNN mode. As a function of size, the modes change order. The triangle system, as a result of its threefold symmetry (as opposed to twofold for the chains) has slightly different properties. At small size, its lowest energy mode is a pair of degenerate NS modes, while its higher energy mode is an all-north mode. These again switch order as a function of size. In chains with more than three rings, the pattern continues - the magnetic resonances with the most nodes between rings are the lowest energy when small, but the highest when large.
