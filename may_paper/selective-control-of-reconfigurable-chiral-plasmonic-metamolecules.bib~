@@ -1,0 +1,13 @@
+@article {Kuzyke1602803,
+	author = {Kuzyk, Anton and Urban, Maximilian J. and Idili, Andrea and Ricci, Francesco and Liu, Na},
+	title = {Selective control of reconfigurable chiral plasmonic metamolecules},
+	volume = {3},
+	number = {4},
+	year = {2017},
+	doi = {10.1126/sciadv.1602803},
+	publisher = {American Association for the Advancement of Science},
+	abstract = {Selective configuration control of plasmonic nanostructures using either top-down or bottom-up approaches has remained challenging in the field of active plasmonics. We demonstrate the realization of DNA-assembled reconfigurable plasmonic metamolecules, which can respond to a wide range of pH changes in a programmable manner. This programmability allows for selective reconfiguration of different plasmonic metamolecule species coexisting in solution through simple pH tuning. This approach enables discrimination of chiral plasmonic quasi-enantiomers and arbitrary tuning of chiroptical effects with unprecedented degrees of freedom. Our work outlines a new blueprint for implementation of advanced active plasmonic systems, in which individual structural species can be programmed to perform multiple tasks and functions in response to independent external stimuli.},
+	URL = {http://advances.sciencemag.org/content/3/4/e1602803},
+	eprint = {http://advances.sciencemag.org/content/3/4/e1602803.full.pdf},
+	journal = {Science Advances}
+}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  12 MAY 2017 11:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 MAY 2017 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -148,8 +148,8 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \acs@tocentry@height=\skip49
 \acs@tocentry@width=\skip50
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/achemso/achemso-apchd5.cfg
-File: achemso-apchd5.cfg 2016/05/10 v3.10c achemso configuration: ACS Photon.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/achemso/achemso-ancac3.cfg
+File: achemso-ancac3.cfg 2016/05/10 v3.10c achemso configuration: ACS Nano
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
@@ -544,18 +544,18 @@ Package: wrapfig 2003/01/31  v 3.6
 (./draft_2.0.aux)
 \openout1 = `draft_2.0.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
 \openout3 = `acs-draft_2.0.bib'.
 
 
@@ -657,9 +657,9 @@ e
 .................................................
 . chemgreek info: "mapping-activated"
 . 
-. Activating mapping `default' on line 87.
+. Activating mapping `default' on line 83.
 .................................................
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 87.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 83.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -667,128 +667,85 @@ File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
  [4]
-<magnetic_mode_eigenvalues_and_interactions.png, id=35, 585.387pt x 651.1527pt>
+<magnetic_mode_eigenvalues_and_interactions.png, id=36, 585.387pt x 651.1527pt>
 File: magnetic_mode_eigenvalues_and_interactions.png Graphic file (type png)
 <use magnetic_mode_eigenvalues_and_interactions.png>
 Package pdftex.def Info: magnetic_mode_eigenvalues_and_interactions.png used on
- input line 166.
-(pdftex.def)             Requested size: 399.288pt x 444.14911pt.
+ input line 163.
+(pdftex.def)             Requested size: 368.58073pt x 409.98991pt.
 
 
-LaTeX Warning: Float too large for page by 35.71872pt on input line 182.
+LaTeX Warning: Float too large for page by 1.55952pt on input line 179.
 
-<dielectric_study.png, id=37, 583.9416pt x 606.3453pt>
-File: dielectric_study.png Graphic file (type png)
-
-<use dielectric_study.png>
-Package pdftex.def Info: dielectric_study.png used on input line 186.
-(pdftex.def)             Requested size: 399.288pt x 414.60387pt.
- <spacing_study.png, id=38, 592.614pt x 630.9171pt>
-File: spacing_study.png Graphic file (type png)
-
-<use spacing_study.png>
-Package pdftex.def Info: spacing_study.png used on input line 197.
-(pdftex.def)             Requested size: 399.288pt x 425.09976pt.
-
-<dimer_interaction.png, id=39, 538.4115pt x 349.7868pt>
+<dimer_interaction.png, id=38, 555.0336pt x 349.7868pt>
 File: dimer_interaction.png Graphic file (type png)
 
 <use dimer_interaction.png>
-Package pdftex.def Info: dimer_interaction.png used on input line 208.
-(pdftex.def)             Requested size: 538.41019pt x 349.78595pt.
+Package pdftex.def Info: dimer_interaction.png used on input line 185.
+(pdftex.def)             Requested size: 368.58073pt x 232.27972pt.
+ [5] [6 <./magnetic_mode_eigenvalues_and_interactions.png>] [7 <./dimer_interac
+tion.png>]
+<dielectric_study.png, id=51, 583.9416pt x 606.3453pt>
+File: dielectric_study.png Graphic file (type png)
 
-Overfull \hbox (68.6548pt too wide) in paragraph at lines 208--214
- [][] 
- []
+<use dielectric_study.png>
+Package pdftex.def Info: dielectric_study.png used on input line 204.
+(pdftex.def)             Requested size: 368.58073pt x 382.72122pt.
+ [8] [9 <./dielectric_study.png>]
+<spacing_study.png, id=59, 592.614pt x 630.9171pt>
+File: spacing_study.png Graphic file (type png)
+ <use spacing_study.png>
+Package pdftex.def Info: spacing_study.png used on input line 214.
+(pdftex.def)             Requested size: 368.58073pt x 392.41606pt.
 
+[10] [11 <./spacing_study.png>] (./draft_2.0.bbl [12] [13] [14] [15] [16])
+[17]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 243.
 
-LaTeX Warning: Reference `theory_simul' on page 5 undefined on input line 218.
-
-
-LaTeX Warning: Reference `theory_simul' on page 5 undefined on input line 220.
-
-[5] [6 <./magnetic_mode_eigenvalues_and_interactions.png>] [7 <./dielectric_stu
-dy.png>] [8 <./spacing_study.png>] [9 <./dimer_interaction.png>]
-
-LaTeX Warning: Reference `twomer_dimer' on page 10 undefined on input line 222.
-
-
-
-LaTeX Warning: Reference `int_strength' on page 10 undefined on input line 224.
-
-
-[10]
-
-LaTeX Warning: Reference `ring_spacing' on page 11 undefined on input line 226.
-
-
-
-LaTeX Warning: Reference `ring_spacing' on page 11 undefined on input line 226.
-
-
-
-LaTeX Warning: Reference `ring_spacing' on page 11 undefined on input line 233.
-
-
-[11]
-
-LaTeX Warning: Reference `diel_eff' on page 12 undefined on input line 239.
-
-
-LaTeX Warning: Reference `diel_eff' on page 12 undefined on input line 241.
-
-[12] (./draft_2.0.bbl [13] [14] [15] [16] [17]) [18]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 261.
-
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \vbox (badness 10000) detected at line 261
+Underfull \vbox (badness 10000) detected at line 243
  []
 
-[19] (./draft_2.0.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[18] (./draft_2.0.aux) ) 
 Here is how much of TeX's memory you used:
- 14837 strings out of 493014
- 274513 string characters out of 6133351
- 358810 words of memory out of 5000000
- 18208 multiletter control sequences out of 15000+600000
+ 14807 strings out of 493014
+ 273939 string characters out of 6133351
+ 350761 words of memory out of 5000000
+ 18178 multiletter control sequences out of 15000+600000
  26317 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,94p,10409b,441s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/cm-super/sfss1000.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/cm-super/sfss1440.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/
-type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/cm-super/sftt0800.pfb>
-Output written on draft_2.0.pdf (19 pages, 963132 bytes).
+ 60i,12n,94p,10409b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-
+super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on draft_2.0.pdf (18 pages, 970069 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+ 169 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

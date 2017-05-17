@@ -26,12 +26,13 @@ NNN = []
 NSN = []
 N_S = []
 interaction = [[],[],[]]
-for epsb in np.linspace(1,3,21):
+omegas=[]
+for epsb in np.linspace(1.28,1.285,21):
 	counter += 1
 	print counter
 	
 	#NSNS = []
-	r = 30
+	r = 20
 	a0 = r*10**-7; #sphere radius in cm
 	index = r*10 - 10
 	''' now determine geometry.'''
@@ -48,16 +49,17 @@ for epsb in np.linspace(1,3,21):
 	       #np.array([4*e2,e1]),np.array([3*e2,2*e1])] #location vectors for center of each sphere - they go counterclockwise, with one being the top center particle and six being the bottom center particle.
 	center = [np.array([-3*e2,0]),np.array([-e2, 0]),np.array([e2,0])]#,np.array([3*e2,0])]
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-	H = np.zeros((2*numPart,2*numPart),dtype=complex) #initialize Hammy with zeros, twenty by twenty in this case.
+	H = np.zeros((2*numPart,2*numPart),dtype=float) #initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
 
 	
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
 	wsp_0 = (mie_omegas[index])*(math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb))*elec/hbar
+	omegas.append(wsp_0*hbar/elec)
 	'''initialize w_0 and eigen'''
-	w_0 = 0*elec/hbar
-	eigen = np.ones(2*numPart)
+	w_0 = wsp_0
+	eigen = np.zeros(2*numPart)
 	for mode in range(0,3):
 		mag_dipole = []
 		while abs(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)]) > 0.00001:
@@ -70,14 +72,14 @@ for epsb in np.linspace(1,3,21):
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
 			#print w_0
 			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
-			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			wavenumber = (w_0*math.sqrt(epsb))/(c)
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
 			#wsp = wsp_0
-			wsp = wsp_0 # sp frequency (rad/s) corrected for radiation damping
+			wsp = np.sqrt(wsp_0**2 - gamma_ret**2) # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
 				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
@@ -93,21 +95,21 @@ for epsb in np.linspace(1,3,21):
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 						p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 						r_cubed = alpha/Rmag**3 #this is the 1/r^3 term (static)
-						r_squared = (-1j*alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+						r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
 						r_unit = (alpha*wavenumber**2)/(Rmag) #this is the 1/r term (goes with the cross products)
 						space_exp = np.exp(1j*wavenumber*Rmag)
-						#space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
-						#space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-						ge = (r_unit * (p_dot_p - p_nn_p) + (r_cubed + r_squared) * (3*p_nn_p - p_dot_p))*space_exp #this is p dot E
+						space_cos = np.cos(wavenumber*Rmag) #this is the real part of the e^ikr
+						space_sin = np.sin(wavenumber*Rmag) #this is the imaginary part of the e^ikr
+						ge = (r_unit*(p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))*space_exp #this is p dot E
 						#print ge
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = - np.real(ge)/epsb #this has the minus sign we need.
-						H[m,n] = - np.real(ge)/epsb
+						H[n,m] = -(ge)/epsb #this has the minus sign we need.
+						#H[m,n] = - np.real(ge)/epsb
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 			Ht = np.matrix.transpose(H) # this is the transpose of H
 			Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 			Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix'''
-			w,v = np.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+			w,v = scipy.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 			idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
@@ -136,9 +138,9 @@ for epsb in np.linspace(1,3,21):
 		'''x,y = zip(*Loc)
 		u,v = zip(*vec)
 		plt.quiver(x,y,u,v)
-		plt.title("radius = " + str(r))
-		plt.show()'''
-		#raw_input()
+		plt.title("epsilon = " + str(epsb))
+		plt.show()
+		raw_input()'''
 		for cent in range(0,3):
 			cross = []
 			for part in range(0,numPart):
@@ -178,12 +180,22 @@ print len(N_S)
 #print len(NSNS)	
 epsb = np.linspace(1,3,21)
 plt.figure()
-plt.plot(epsb,NNN,epsb,NSN,epsb,N_S,linewidth=3)
-plt.legend(['NNN','NSN','N-S','BEM NNN','BEM N-S','BEM NSN'])
+plt.plot(epsb,NNN,epsb,NSN,epsb,N_S,epsb,omegas,linewidth=3)
+plt.legend(['NNN','NSN','N-S','LSPR'])
 plt.ylabel('Energy (eV)')
 plt.xlabel('Embedding Medium')
-#plt.show()
-plt.savefig('threemer_30_dielectric.pdf')
+plt.show()
+#plt.savefig('threemer_20_withwsp.pdf')
+
+zero_vector = np.zeros((len(epsb),1))
+
+plt.figure()
+plt.plot(epsb, np.subtract(NNN,NSN), epsb, np.subtract(NNN,N_S), epsb, np.subtract(NSN,N_S), epsb,zero_vector, linewidth=3)
+plt.xlabel('dielectric')
+plt.ylabel('Energy (eV)')
+plt.legend(['NNN-NSN','NNN-N_S','NSN-N_S'])
+plt.show()
+#plt.savefig('differences.pdf')
 
 '''plt.figure()
 plt.plot(epsb,interaction[0],epsb,interaction[1],epsb,interaction[2],linewidth=3)

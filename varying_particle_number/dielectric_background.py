@@ -27,7 +27,7 @@ NN = []
 NS = []
 modes = [[],[]]
 interaction = [[],[]]
-r = 15
+r = 20
 for epsb in np.linspace(1,3,21):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
@@ -96,7 +96,7 @@ for epsb in np.linspace(1,3,21):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			wavenumber = (w_0*math.sqrt(epsb))/(c)
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
@@ -186,8 +186,15 @@ plt.ylabel('Energy (eV)')
 plt.xlabel('Embedding Medium')		
 plt.legend(['NN','NS'])
 #plt.show()
-plt.savefig('twomer_15_withwsp.pdf')
+plt.savefig('twomer_20_withwsp.pdf')
 
+
+plt.figure()
+plt.plot(epsb, np.subtract(modes[0],modes[1]),epsb,np.zeros((len(epsb),1)), linewidth=3)
+plt.xlabel('dielectric')
+plt.ylabel('Energy (eV)')
+#plt.show()
+plt.savefig('NN-NS.pdf')
 '''plt.figure()
 plt.plot(epsb,interaction[0],epsb,interaction[1],linewidth=3)	
 plt.ylabel('Energy (eV)')

@@ -56,8 +56,8 @@ for epsb in range(1,2):
 		#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
 		wsp_0 = (mie_omegas[index])*elec/hbar
 		'''initialize w_0 and eigen'''
-		w_0 = 0*elec/hbar
-		eigen = np.ones(2*numPart)
+		w_0 = wsp_0
+		eigen = np.zeros(2*numPart)
 		for mode in range(0,3):
 			mag_dipole = []
 			while abs(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)]) > 0.00001:
@@ -182,14 +182,15 @@ for epsb in range(1,2):
 	plt.legend(['NNN','NSN','N-S','BEM NNN','BEM N-S','BEM NSN'])
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
-	plt.savefig('threemer_eigenvalues.pdf')
+	plt.show()
+	#plt.savefig('threemer_eigenvalues.pdf')
 
-	plt.figure()
+	'''plt.figure()
 	plt.plot(r,interaction[0],r,interaction[1],r,interaction[2],linewidth=3)
 	plt.legend(['NNN','N-S','NSN'])
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
-	plt.savefig('threemer_interactions.pdf')
+	plt.savefig('threemer_interactions.pdf')'''
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
 

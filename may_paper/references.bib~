@@ -737,17 +737,3 @@ doi = {10.1117/12.2213004},
 URL = { http://dx.doi.org/10.1117/12.2213004},
 eprint = {}
 }
-
-@article{Draine1993,
-   author = {{Draine}, B.~T. and {Goodman}, J.},
-    title = "{Beyond Clausius-Mossotti - Wave propagation on a polarizable point lattice and the discrete dipole approximation}",
-  journal = {\apj},
- keywords = {Cosmic Dust, Dielectric Polarization, Electromagnetic Absorption, Electromagnetic Scattering, Electromagnetic Wave Transmission, Interstellar Extinction, Lattices (Mathematics), Cubic Lattices, Fast Fourier Transformations, Finite Element Method, Wave Dispersion},
-     year = 1993,
-    month = mar,
-   volume = 405,
-    pages = {685-697},
-      doi = {10.1086/172396},
-   adsurl = {http://adsabs.harvard.edu/abs/1993ApJ...405..685D},
-  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}

@@ -1,0 +1,17 @@
+@proceeding{doi:10.1117/12.2213004,
+author = {Kravets, Vira V. and Pinchuk, Anatoliy O.},
+title = {
+Near-, middle-, and far-field dipolar interactions in gold nanoparticle arrays
+},
+journal = {Proc. SPIE},
+volume = {9724},
+number = {},
+pages = {97240B-97240B-8},
+abstract = {
+The resonance wavelength of collective surface plasmon polariton in a chain of 50 nm gold nanoparticles has been calculated and compared to experimental data. The distance between the nanoparticles in a chain was varied from 100 nm to 1000 nm, and the polarization of the incident light was gradually changed from parallel to perpendicular relative to the axis connecting the nanoparticles in the chain. The calculations explicitly included the near-, middle-, and far-field dipole coupling between the nanoparticles. The numerical results matched the experimental data with less than 2% error. Arrays of noble metal nanoparticles are of interest for plasmonics, nanooptics, photovoltaics, and biochemical applications. They are widely used as biosensors and molecular rulers. Over the last decade, interest has turned towards the localized surface plasmon resonance (LSPR) in single-nanoparticle sensors. Benefits of such an approach include simplicity (it does not require momentum-matching geometry), versatility on the nanoscale level, and the possibility of single-molecule detection. While single-nanoparticle sensors offer a better sensitivity down to a single protein-receptor binding, a high degree of sensor miniaturization tends to result in a worse detection limit because of limited surface coverage. A solution to this problem might be the use arrays of nanoplasmonic sensors, each of which is capable of resolving single protein binding events. Present study provides a background for bio-sensing, waveguiding, and molecular ruler applications.
+},
+year = {2016},
+doi = {10.1117/12.2213004},
+URL = { http://dx.doi.org/10.1117/12.2213004},
+eprint = {}
+}

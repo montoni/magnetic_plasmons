@@ -22,8 +22,9 @@ gamma = 0.05*elec/(hbar*16)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 NN = []
 NS = []
+omegas = []
 for epsb in np.linspace(1,3,21):
-	r = 15
+	r = 20
 	a0 = r*10**-7; #sphere radius in cm
 	index = r*10 - 10
 	''' now determine geometry.'''
@@ -47,6 +48,7 @@ for epsb in np.linspace(1,3,21):
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
 	wsp_0 = (mie_omegas[index])*(math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb))*elec/hbar
+	omegas.append(wsp_0*hbar/elec)
 	'''initialize w_0 and eigen'''
 	w_0 = 0*elec/hbar
 	eigen = np.ones(2*numPart)
@@ -61,7 +63,7 @@ for epsb in np.linspace(1,3,21):
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
 			alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
-			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			wavenumber = (w_0*math.sqrt(epsb))/(c)
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
@@ -152,12 +154,22 @@ NS = np.reshape(NS,(21,3))
 #NS_int = np.reshape(interaction[1],(21,7))
 epsb = np.linspace(1,3,21)
 plt.figure()
-plt.plot(epsb,NN,epsb,NS[:,0],linewidth=3)	
-plt.legend(['NN','NS','BEM NN','BEM NS'])
+plt.plot(epsb,NN,epsb,NS[:,0],epsb,omegas,linewidth=3)	
+plt.legend(['NN','NS','LSPR'])
 plt.ylabel('Energy (eV)')
 plt.xlabel('Embedding Medium')
-plt.savefig('ring_15_dielectric.pdf')
-plt.show()
+plt.savefig('ring_20_dielectric.pdf')
+#plt.show()
+
+zero_vector = np.zeros((len(epsb),1))
+
+plt.figure()
+plt.plot(epsb, np.subtract(NN,NS[:,0]), epsb,zero_vector, linewidth=3)
+plt.xlabel('dielectric')
+plt.ylabel('Energy (eV)')
+plt.legend(['NN-NS'])
+plt.savefig('ring_diff.pdf')
+#plt.show()
 
 '''plt.figure()
 plt.plot(epsb,interaction[0],epsb,NS_int[:,0],linewidth=3)

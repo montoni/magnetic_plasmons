@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{44}
+\begin{mcitethebibliography}{39}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -53,111 +53,6 @@ Mishchenko,~M.~I.; Mackowski,~D.~W.; Travis,~L.~D. Scattering of Light by
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Prodan \latin{et~al.}(2003)Prodan, Radloff, Halas, and
-  Nordlander]{NordHal2003}
-Prodan,~E.; Radloff,~C.; Halas,~N.~J.; Nordlander,~P. A Hybridization Model for
-  the Plasmon Response of Complex Nanostructures. \emph{Science} \textbf{2003},
-  \emph{302}, 419--422\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Prodan and Nordlander(2004)Prodan, and Nordlander]{NordProdan2004}
-Prodan,~E.; Nordlander,~P. Plasmon hybridization in spherical nanoparticles.
-  \emph{J. of Chem. Phys.} \textbf{2004}, \emph{120}, 5444--5454\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Nordlander \latin{et~al.}(2004)Nordlander, Oubre, Prodan, Li, and
-  Stockman]{Oubre2004}
-Nordlander,~P.; Oubre,~C.; Prodan,~E.; Li,~K.; Stockman,~M.~I. Plasmon
-  Hybridization in Nanoparticle Dimers. \emph{Nano Letters} \textbf{2004},
-  \emph{4}, 899--903\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Davis \latin{et~al.}(2009)Davis, Vernon, and G\'omez]{Gomez2009}
-Davis,~T.~J.; Vernon,~K.~C.; G\'omez,~D.~E. Designing plasmonic systems using
-  optical coupling between nanoparticles. \emph{Phys. Rev. B} \textbf{2009},
-  \emph{79}, 155423\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Myroshnychenko \latin{et~al.}(2008)Myroshnychenko,
-  Rodriguez-Fernandez, Pastoriza-Santos, Funston, Novo, Mulvaney, Liz-Marzan,
-  and Garcia~de Abajo]{Abajo2008}
-Myroshnychenko,~V.; Rodriguez-Fernandez,~J.; Pastoriza-Santos,~I.;
-  Funston,~A.~M.; Novo,~C.; Mulvaney,~P.; Liz-Marzan,~L.~M.; Garcia~de
-  Abajo,~F.~J. Modelling the optical response of gold nanoparticles.
-  \emph{Chem. Soc. Rev.} \textbf{2008}, \emph{37}, 1792--1805\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Turner \latin{et~al.}(2010)Turner, Hossain, and Gu]{Gu2010}
-Turner,~M.~D.; Hossain,~M.~M.; Gu,~M. The Effects of Retardation on Plasmon
-  Hybridization within Metallic Nanostructures. \emph{New J. of Phys.}
-  \textbf{2010}, \emph{12}, 083062\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Dahmen \latin{et~al.}(2007)Dahmen, Schmidt, and von
-  Plessen]{vonPlessen2007}
-Dahmen,~C.; Schmidt,~B.; von Plessen,~G. Radiation Damping in Metal
-  Nanoparticle Pairs. \emph{Nano Lett.} \textbf{2007}, \emph{7}, 318--322,
-  PMID: 17243751\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Rechberger \latin{et~al.}(2003)Rechberger, Hohenau, Leitner, Krenn,
-  Lamprecht, and Aussenegg]{Rechbacher2003}
-Rechberger,~W.; Hohenau,~A.; Leitner,~A.; Krenn,~J.; Lamprecht,~B.;
-  Aussenegg,~F. Optical Properties of Two Interacting Gold Nanoparticles.
-  \emph{Opt. Commun.} \textbf{2003}, \emph{220}, 137 -- 141\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Kottmann and Martin(2001)Kottmann, and Martin]{Kottman2001}
-Kottmann,~J.~P.; Martin,~O. J.~F. Retardation-Induced plasmon Resonances in
-  Coupled Nanoparticles. \emph{Opt. Lett.} \textbf{2001}, 1096--1098\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Haynes \latin{et~al.}(2003)Haynes, McFarland, Zhao, Van~Duyne, Schatz,
-  Gunnarsson, Prikulis, Kasemo, and K{\"a}ll]{Schatz2003}
-Haynes,~C.~L.; McFarland,~A.~D.; Zhao,~L.; Van~Duyne,~R.~P.; Schatz,~G.~C.;
-  Gunnarsson,~L.; Prikulis,~J.; Kasemo,~B.; K{\"a}ll,~M. Nanoparticle Optics:
-  The Importance of Radiative Dipole Coupling in Two-Dimensional Nanoparticle
-  Arrays. \emph{J. Phys. Chem. B} \textbf{2003}, \emph{107}, 7337--7342\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Bouhelier \latin{et~al.}(2005)Bouhelier, Bachelot, Im, Wiederrecht,
-  Lerondel, Kostcheev, and Royer]{Royer2005}
-Bouhelier,~A.; Bachelot,~R.; Im,~J.~S.; Wiederrecht,~G.~P.; Lerondel,~G.;
-  Kostcheev,~S.; Royer,~P. Electromagnetic Interactions in Plasmonic
-  Nanoparticle Arrays. \emph{J. Phys. Chem. B} \textbf{2005}, \emph{109},
-  3195--3198, PMID: 16851340\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Kinnan and Chumanov(2010)Kinnan, and Chumanov]{Chumanov2010}
-Kinnan,~M.~K.; Chumanov,~G. Plasmon Coupling in Two-Dimensional Arrays of
-  Silver Nanoparticles: II. Effect of the Particle Size and Interparticle
-  Distance. \emph{J. Phys. Chem. C} \textbf{2010}, \emph{114}, 7496--7501\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Al\`{u} \latin{et~al.}(2006)Al\`{u}, Salandrino, and Engheta]{Alu2006}
 Al\`{u},~A.; Salandrino,~A.; Engheta,~N. Negative Effective Permeability and
   Left-Handed Materials at Optical Frequencies. \emph{Opt. Express}
@@ -204,59 +99,10 @@ Cherqui,~C.; Bigelow,~N.~W.; Vaschillo,~A.; Goldwyn,~H.; Masiello,~D.~J.
 \bibitem[Cherqui \latin{et~al.}(2016)Cherqui, Wu, Li, Quillin, Busche, Thakkar,
   West, Montoni, Rack, Camden, and Masiello]{Cherqui2016}
 Cherqui,~C.; Wu,~Y.; Li,~G.; Quillin,~S.~C.; Busche,~J.~A.; Thakkar,~N.;
-  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~.; Masiello,~D.~J.
+  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~. \latin{et~al.}
   STEM/EELS Imaging of Magnetic Hybridization in Symmetric and Symmetry-Broken
   Plasmon Oligomer Dimers and All-Magnetic Fano Interference. \emph{Nano Lett.}
   \textbf{2016}, \emph{16}, 6668--6676, PMID: 27673696\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Shalaev(2007)]{Shalaev2007}
-Shalaev,~V.~M. Optical negative-index metamaterials. \emph{Nat. Photonics}
-  \textbf{2007}, \emph{1}, 41--48\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Qian \latin{et~al.}(2015)Qian, Hastings, Li, Edward, McGinn, Engheta,
-  Fakhraai, and Park]{Qian2015}
-Qian,~Z.; Hastings,~S.~P.; Li,~C.; Edward,~B.; McGinn,~C.~K.; Engheta,~N.;
-  Fakhraai,~Z.; Park,~S.-J. Raspberry-like Metamolecules Exhibiting Strong
-  Magnetic Resonances. \emph{ACS Nano} \textbf{2015}, \emph{9},
-  1263--1270\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Urzhumov \latin{et~al.}(2007)Urzhumov, Shvets, Fan, Capasso, Brandl,
-  and Nordlander]{Nord2007}
-Urzhumov,~Y.~A.; Shvets,~G.; Fan,~J.~A.; Capasso,~F.; Brandl,~D.;
-  Nordlander,~P. Plasmonic Nanoclusters: a Path towards Negative-Index
-  Metafluids. \emph{Opt. Express} \textbf{2007}, \emph{15}, 14129--14145\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Graydon(2011)]{Graydon2011}
-Graydon,~O. Solar cells: Fano-enhanced performance. \emph{Nat. Photonics}
-  \textbf{2011}, \emph{6}, 4\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Le and Alu(2014)Le, and Alu]{Alu2014solar}
-Le,~K.~Q.; Alu,~A. Fano-Induced Solar Absorption Enhancement in Thin Organic
-  Photovoltaic Cells. \emph{Appl. Phys. Lett.} \textbf{2014}, \emph{105},
-  141118\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Le and Bai(2015)Le, and Bai]{Le2015solar}
-Le,~K.~Q.; Bai,~J. Enhanced Absorption Efficiency of Ultrathin Metamaterial
-  Solar Absorbers by Plasmonic Fano Resonance. \emph{JOSA B} \textbf{2015},
-  \emph{32}, 595--600\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -362,9 +208,12 @@ Liu,~N.; Mukherjee,~S.; Bao,~K.; Li,~Y.; Brown,~L.~V.; Nordlander,~P.;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Jackson(1999)]{jackson_classical_1999}
-Jackson,~J.~D. \emph{Classical Electrodynamics}, 3rd ed.; Wiley: New York,
-  {NY}, 1999\relax
+\bibitem[Greybush \latin{et~al.}(2017)Greybush, Liberal, Malassis, Kikkawa,
+  Engheta, Murray, and Kagan]{Engheta2017}
+Greybush,~N.~J.; Liberal,~I.~n.; Malassis,~L.; Kikkawa,~J.~M.; Engheta,~N.;
+  Murray,~C.~B.; Kagan,~C.~R. Plasmon Resonances in Self-Assembled
+  Two-Dimensional Au Nanocrystal Metamolecules. \emph{ACS Nano} \textbf{2017},
+  \emph{11}, 2917--2927, PMID: 28190335\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -378,10 +227,96 @@ Hohenester,~U.; Tr{\"u}gler,~A. MNPBEM - A Matlab Toolbox for the Simulation of
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Myroshnychenko \latin{et~al.}(2008)Myroshnychenko,
+  Rodriguez-Fernandez, Pastoriza-Santos, Funston, Novo, Mulvaney, Liz-Marzan,
+  and Garcia~de Abajo]{Abajo2008}
+Myroshnychenko,~V.; Rodriguez-Fernandez,~J.; Pastoriza-Santos,~I.;
+  Funston,~A.~M.; Novo,~C.; Mulvaney,~P.; Liz-Marzan,~L.~M.; Garcia~de
+  Abajo,~F.~J. Modelling the optical response of gold nanoparticles.
+  \emph{Chem. Soc. Rev.} \textbf{2008}, \emph{37}, 1792--1805\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Turner \latin{et~al.}(2010)Turner, Hossain, and Gu]{Gu2010}
+Turner,~M.~D.; Hossain,~M.~M.; Gu,~M. The Effects of Retardation on Plasmon
+  Hybridization within Metallic Nanostructures. \emph{New J. of Phys.}
+  \textbf{2010}, \emph{12}, 083062\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Dahmen \latin{et~al.}(2007)Dahmen, Schmidt, and von
+  Plessen]{vonPlessen2007}
+Dahmen,~C.; Schmidt,~B.; von Plessen,~G. Radiation Damping in Metal
+  Nanoparticle Pairs. \emph{Nano Lett.} \textbf{2007}, \emph{7}, 318--322,
+  PMID: 17243751\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rechberger \latin{et~al.}(2003)Rechberger, Hohenau, Leitner, Krenn,
+  Lamprecht, and Aussenegg]{Rechbacher2003}
+Rechberger,~W.; Hohenau,~A.; Leitner,~A.; Krenn,~J.; Lamprecht,~B.;
+  Aussenegg,~F. Optical Properties of Two Interacting Gold Nanoparticles.
+  \emph{Opt. Commun.} \textbf{2003}, \emph{220}, 137 -- 141\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kottmann and Martin(2001)Kottmann, and Martin]{Kottman2001}
+Kottmann,~J.~P.; Martin,~O. J.~F. Retardation-Induced plasmon Resonances in
+  Coupled Nanoparticles. \emph{Opt. Lett.} \textbf{2001}, 1096--1098\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Haynes \latin{et~al.}(2003)Haynes, McFarland, Zhao, Van~Duyne, Schatz,
+  Gunnarsson, Prikulis, Kasemo, and K{\"a}ll]{Schatz2003}
+Haynes,~C.~L.; McFarland,~A.~D.; Zhao,~L.; Van~Duyne,~R.~P.; Schatz,~G.~C.;
+  Gunnarsson,~L.; Prikulis,~J.; Kasemo,~B.; K{\"a}ll,~M. Nanoparticle Optics:
+  The Importance of Radiative Dipole Coupling in Two-Dimensional Nanoparticle
+  Arrays. \emph{J. Phys. Chem. B} \textbf{2003}, \emph{107}, 7337--7342\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bouhelier \latin{et~al.}(2005)Bouhelier, Bachelot, Im, Wiederrecht,
+  Lerondel, Kostcheev, and Royer]{Royer2005}
+Bouhelier,~A.; Bachelot,~R.; Im,~J.~S.; Wiederrecht,~G.~P.; Lerondel,~G.;
+  Kostcheev,~S.; Royer,~P. Electromagnetic Interactions in Plasmonic
+  Nanoparticle Arrays. \emph{J. Phys. Chem. B} \textbf{2005}, \emph{109},
+  3195--3198, PMID: 16851340\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kinnan and Chumanov(2010)Kinnan, and Chumanov]{Chumanov2010}
+Kinnan,~M.~K.; Chumanov,~G. Plasmon Coupling in Two-Dimensional Arrays of
+  Silver Nanoparticles: II. Effect of the Particle Size and Interparticle
+  Distance. \emph{J. Phys. Chem. C} \textbf{2010}, \emph{114}, 7496--7501\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jackson(1999)]{jackson_classical_1999}
+Jackson,~J.~D. \emph{Classical Electrodynamics}, 3rd ed.; Wiley: New York,
+  {NY}, 1999\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Purcell and Pennypacker(1973)Purcell, and Pennypacker]{Purcell1973}
 Purcell,~E.~M.; Pennypacker,~C.~R. Scattering and Absorption of Light by
   Nonspherical Dielectric Grains. \emph{Astrophys. J.} \textbf{1973},
   \emph{186}, 705--714\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kravets and Pinchuk(2016)Kravets, and Pinchuk]{Pinchuk2016}
+Near-, middle-, and far-field dipolar interactions in gold nanoparticle arrays.
+  2016; pp 97240B--97240B--8\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -391,6 +326,34 @@ Purcell,~E.~M.; Pennypacker,~C.~R. Scattering and Absorption of Light by
 {Yang},~A.; {Hoang},~T.~B.; {Dridi},~M.; {Deeb},~C.; {Mikkelson},~M.~H.;
   {Schatz},~G.~C.; {Odom},~T.~W. {Real-time tunable lasing from plasmonic
   nanocavity arrays}. \emph{Nature Comm.} \textbf{2015}, \emph{6}, 6939\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Qian \latin{et~al.}(2017)Qian, Guye, Masiello, and Ginger]{Ginger2017}
+Qian,~Z.; Guye,~K.~N.; Masiello,~D.~J.; Ginger,~D.~S. Dynamic Optical Switching
+  of Polymer/Plasmonic Nanoparticle Hybrids with Sparse Loading. \emph{The
+  Journal of Physical Chemistry B} \textbf{2017}, \emph{121}, 1092--1099, PMID:
+  28075134\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Cheng \latin{et~al.}(2009)Cheng, Campolongo, Cha, Tan, Umbach, Muller,
+  and Luo]{DanLuo2009}
+Cheng,~W.; Campolongo,~M.~J.; Cha,~J.~J.; Tan,~S.~J.; Umbach,~C.~C.;
+  Muller,~D.~A.; Luo,~D. Free-standing nanoparticle superlattice sheets
+  controlled by DNA. \emph{Nature Materials} \textbf{2009}, \emph{8},
+  519--525\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kuzyk \latin{et~al.}(2017)Kuzyk, Urban, Idili, Ricci, and
+  Liu]{NaLiu2017}
+Kuzyk,~A.; Urban,~M.~J.; Idili,~A.; Ricci,~F.; Liu,~N. Selective control of
+  reconfigurable chiral plasmonic metamolecules. \emph{Science Advances}
+  \textbf{2017}, \emph{3}\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
