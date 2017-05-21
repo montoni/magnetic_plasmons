@@ -4,9 +4,9 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-bem_r = [1, 5, 10, 15, 20, 25]
-bem_NN = [3.616, 3.604, 3.558, 3.482, 3.402, 3.31]
-bem_NS = [3.61, 3.6, 3.568, 3.51, 3.416, 3.288]
+bem_r = [1, 5, 10, 15, 20, 25, 30]
+bem_NN = [3.616, 3.604, 3.558, 3.482, 3.402, 3.31, 3.19]
+bem_NS = [3.61, 3.6, 3.568, 3.51, 3.416, 3.288, 3.11]
 
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
@@ -27,6 +27,9 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 for epsb in range(1,2):
 	NN = []
 	NS = []
+	NF = [[],[]]
+	IF = [[],[]]
+	FF = [[],[]]
 	for r in range (1,31):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
@@ -106,6 +109,9 @@ for epsb in range(1,2):
 			vec = eigenVectors[:,(2*numPart)-(mode+1)]
 			vec = np.reshape(vec,[numPart,2])
 			coupling = 0
+			nearfield = 0
+			midfield = 0
+			farfield = 0
 			for x in range(0,numPart):
 				for y in range(x,numPart):
 					if x == y:
@@ -121,6 +127,9 @@ for epsb in range(1,2):
 					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
 					exponent = np.exp(1j*w_0*Rmag/c)
 					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+					nearfield += -(hbar/elec) * wsp * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+					midfield += -(hbar/elec) * wsp * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+					farfield += -(hbar/elec) * wsp * r_unit * exponent * (unit_dyad_term - n_dyad_term)
 			'''x,y = zip(*Loc)
 			u,v = zip(*vec)
 			plt.title(''.join(['radius = ',str(r)]))
@@ -130,12 +139,18 @@ for epsb in range(1,2):
 			if abs(np.sum(vec)) < 10**-5:
 				NN.append(eigen[2*numPart-mode-1])
 				interaction[0].append(coupling)
+				NF[0].append(nearfield)
+				IF[0].append(midfield)
+				FF[0].append(farfield)
 			else:
 				NS.append(eigen[2*numPart-mode-1])
 				interaction[1].append(coupling)
+				NF[1].append(nearfield)
+				IF[1].append(midfield)
+				FF[1].append(farfield)
 	
 
-	smooth_r = np.linspace(1,25,25)
+	smooth_r = np.linspace(1,30,30)
 	NN_smooth = spline(bem_r,bem_NN,smooth_r)
 	NS_smooth = spline(bem_r,bem_NS,smooth_r)
 
@@ -143,21 +158,31 @@ for epsb in range(1,2):
 	print len(NS)
 	NS = np.reshape(NS,[30,2])
 	NS_int = np.reshape(interaction[1],(30,2))
+	NN_NFIF = np.add(NF[0],IF[0])
+	NS_NF = np.reshape(NF[1],(30,2))
+	NS_IF = np.reshape(IF[1],(30,2))
+	NS_FF = np.reshape(FF[1],(30,2))
+	NS_NFIF = np.add(NS_NF[:,0],NS_IF[:,0])
 	r = np.linspace(1,30,30)
 	plt.figure()
 	plt.plot(r,NN,r,NS[:,0],smooth_r,NN_smooth,smooth_r,NS_smooth,linewidth=3)	
 	plt.legend(['NN','NS','BEM NN','BEM NS'])
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
-	#plt.savefig('threemer_eigenvalues.pdf')
+	plt.savefig('threemer_new_eigenvalues.pdf')
 	plt.show()
 
 	plt.figure()
-	plt.plot(r,interaction[0],r,NS_int[:,0],linewidth=3)
-	plt.legend(['NN','NS'])
+	plt.plot(r,interaction[0],linewidth=3,label='NNN')
+	plt.plot(r,NS_int[:,0],linewidth=3,label='NS')
+	plt.scatter(r,NN_NFIF, color = 'C0', marker = 'o')
+	plt.scatter(r,FF[0], color = 'C0', marker = 's')
+	plt.scatter(r,NS_NFIF, color = 'C1', marker = 'o')
+	plt.scatter(r,NS_FF[:,0], color = 'C1', marker = 's')
+	plt.legend()
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
-	#plt.savefig('threemer_interactions.pdf')
+	#plt.savefig('ring_all_interactions.pdf')
 	plt.show()
 	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
 	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)

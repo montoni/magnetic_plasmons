@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 MAY 2017 18:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  21 MAY 2017 13:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -148,8 +148,8 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \acs@tocentry@height=\skip49
 \acs@tocentry@width=\skip50
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/achemso/achemso-ancac3.cfg
-File: achemso-ancac3.cfg 2016/05/10 v3.10c achemso configuration: ACS Nano
+(/usr/local/texlive/2016/texmf-dist/tex/latex/achemso/achemso-apchd5.cfg
+File: achemso-apchd5.cfg 2016/05/10 v3.10c achemso configuration: ACS Photon.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
@@ -666,86 +666,90 @@ File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4]
-<magnetic_mode_eigenvalues_and_interactions.png, id=36, 585.387pt x 651.1527pt>
-File: magnetic_mode_eigenvalues_and_interactions.png Graphic file (type png)
-<use magnetic_mode_eigenvalues_and_interactions.png>
-Package pdftex.def Info: magnetic_mode_eigenvalues_and_interactions.png used on
- input line 163.
-(pdftex.def)             Requested size: 368.58073pt x 409.98991pt.
 
+<magnetic_mode_eigenvalues_and_interactions.pdf, id=33, 372.73111pt x 410.81801
+pt>
+File: magnetic_mode_eigenvalues_and_interactions.pdf Graphic file (type pdf)
+ <use magnetic_mode_eigenvalues_and_interactions.pdf>
+Package pdftex.def Info: magnetic_mode_eigenvalues_and_interactions.pdf used on
+ input line 139.
+(pdftex.def)             Requested size: 372.73018pt x 410.817pt.
+ [4] [5 <./magnetic_mode_eigenvalues_and_interactions.pdf>]
+<interaction_strength.pdf, id=202, 244.18155pt x 357.20294pt>
+File: interaction_strength.pdf Graphic file (type pdf)
 
-LaTeX Warning: Float too large for page by 1.55952pt on input line 179.
+<use interaction_strength.pdf>
+Package pdftex.def Info: interaction_strength.pdf used on input line 157.
+(pdftex.def)             Requested size: 326.07634pt x 476.98683pt.
+ [6] [7 <./interaction_strength.pdf>]
+<dimer_interaction.pdf, id=1617, 369.88583pt x 236.85782pt>
+File: dimer_interaction.pdf Graphic file (type pdf)
 
-<dimer_interaction.png, id=38, 555.0336pt x 349.7868pt>
-File: dimer_interaction.png Graphic file (type png)
+<use dimer_interaction.pdf>
+Package pdftex.def Info: dimer_interaction.pdf used on input line 184.
+(pdftex.def)             Requested size: 368.58073pt x 236.02596pt.
 
-<use dimer_interaction.png>
-Package pdftex.def Info: dimer_interaction.png used on input line 185.
-(pdftex.def)             Requested size: 368.58073pt x 232.27972pt.
- [5] [6 <./magnetic_mode_eigenvalues_and_interactions.png>] [7 <./dimer_interac
-tion.png>]
-<dielectric_study.png, id=51, 583.9416pt x 606.3453pt>
-File: dielectric_study.png Graphic file (type png)
+<dielectric_study.pdf, id=1618, 372.73111pt x 372.66583pt>
+File: dielectric_study.pdf Graphic file (type pdf)
 
-<use dielectric_study.png>
-Package pdftex.def Info: dielectric_study.png used on input line 204.
-(pdftex.def)             Requested size: 368.58073pt x 382.72122pt.
- [8] [9 <./dielectric_study.png>]
-<spacing_study.png, id=59, 592.614pt x 630.9171pt>
-File: spacing_study.png Graphic file (type png)
- <use spacing_study.png>
-Package pdftex.def Info: spacing_study.png used on input line 214.
-(pdftex.def)             Requested size: 368.58073pt x 392.41606pt.
+<use dielectric_study.pdf>
+Package pdftex.def Info: dielectric_study.pdf used on input line 194.
+(pdftex.def)             Requested size: 372.73018pt x 372.6649pt.
+ [8] [9 <./dimer_interaction.pdf>] [10 <./dielectric_study.pdf>] <spacing_study
+.pdf, id=1730, 372.73111pt x 375.79646pt>
+File: spacing_study.pdf Graphic file (type pdf)
 
-[10] [11 <./spacing_study.png>] (./draft_2.0.bbl [12] [13] [14] [15] [16])
-[17]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 243.
+<use spacing_study.pdf>
+Package pdftex.def Info: spacing_study.pdf used on input line 204.
+(pdftex.def)             Requested size: 368.58073pt x 371.62103pt.
+ [11] [12 <./spacing_study.pdf>] (./draft_2.0.bbl
+[13] [14] [15] [16] [17]) [18]
+<toc_graphic.pdf, id=1903, 256.0748pt x 99.58464pt>
+File: toc_graphic.pdf Graphic file (type pdf)
+ <use toc_graphic.pdf>
+Package pdftex.def Info: toc_graphic.pdf used on input line 233.
+(pdftex.def)             Requested size: 256.07416pt x 99.58438pt.
 
- (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-Underfull \vbox (badness 10000) detected at line 243
+Underfull \vbox (badness 10000) detected at line 233
  []
 
-[18] (./draft_2.0.aux) ) 
+[19 <./toc_graphic.pdf>] (./draft_2.0.aux) ) 
 Here is how much of TeX's memory you used:
- 14807 strings out of 493014
- 273939 string characters out of 6133351
- 350761 words of memory out of 5000000
- 18178 multiletter control sequences out of 15000+600000
- 26317 words of font info for 61 fonts, out of 8000000 for 9000
+ 14815 strings out of 493014
+ 273940 string characters out of 6133351
+ 349187 words of memory out of 5000000
+ 18190 multiletter control sequences out of 15000+600000
+ 25190 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,94p,10409b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-
-super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfsi0800.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on draft_2.0.pdf (18 pages, 970069 bytes).
+{/usr/local/texlive/2016/texmf-dist
+/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm
+/lmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on draft_2.0.pdf (19 pages, 22180911 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
+ 1996 PDF objects out of 2073 (max. 8388607)
+ 1264 compressed objects within 13 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

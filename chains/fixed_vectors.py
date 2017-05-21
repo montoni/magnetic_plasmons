@@ -24,13 +24,13 @@ epsinf = 3.77; # does this have units?
 '''Properties for silver.'''
 Eplasma = 1.46599161e-18; # J
 gamma = 0.05*elec/(hbar*16)
+mode = []
+interaction = []
+NF = [[],[]]
+IF = [[],[]]
+FF = [[],[]]
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
-for epsb in range(1,2):
-	NNN = []
-	NSN = []
-	N_S = []
-	interaction = [[],[],[]]
-	#NSNS = []
+for epsb in np.linspace(1,1,1):
 	for r in range (1,31):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
@@ -54,39 +54,72 @@ for epsb in range(1,2):
 		alphasp = a0**3 * (3/(epsinf+2))
 		count = 1
 		#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-		wsp_0 = (mie_omegas[index])*elec/hbar
+		wsp_0 = ((mie_omegas[index])*elec/hbar)*(math.sqrt(epsinf+2))/(math.sqrt(epsinf+2*epsb))
 		'''initialize w_0 and eigen'''
-		w_mode = wsp_0
+		w_mode = 0
 		
-		vec = [[-1,0],[-.5,-math.sqrt(3)/2],[.5,-math.sqrt(3)/2],[1,0],[-1,0],[-1,0],[-1,0],[1,0],[1,0],[1,0],[1,0],[.5,math.sqrt(3/2)],[-.5,math.sqrt(3/2)],[-1,0]]
-		#vec = [[-1,0],[-.5,-math.sqrt(3)/2],[.5,-math.sqrt(3)/2],[1,0],[0,-1],[1,0],[0,1],[0,1],[-1,0],[0,-1],[1,0],[.5,math.sqrt(3/2)],[-.5,math.sqrt(3/2)],[-1,0]]
-		#vec = [[-1,0],[-.5,-math.sqrt(3)/2],[.5,-math.sqrt(3)/2],[1,0],[.5,math.sqrt(3)/2],[0,0],[-.5,math.sqrt(3)/2],[.5,math.sqrt(3)/2],[0,0],[-.5,math.sqrt(3)/2],[-1,0],[-.5,-math.sqrt(3/2)],[.5,-math.sqrt(3/2)],[1,0]]
-		vec = np.reshape(vec,[numPart,2])
+		vec_NSN = np.loadtxt('mode_vec_0.txt')
+		vec_N_S = np.loadtxt('mode_vec_1.txt')
+		vec_NNN = np.loadtxt('mode_vec_2.txt')
+		vec = vec_N_S
 		coupling = 0
-		for x in range(0,numPart):
-			for y in range(x,numPart):
-				if x == y:
-					continue
-				else:
-					pass
-				Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
-				unit_vector = (Loc[x] - Loc[y])/Rmag
-				unit_dyad_term = np.dot(vec[x]/math.sqrt(14),vec[y]/math.sqrt(14))
-				n_dyad_term = np.dot(vec[x]/math.sqrt(14),unit_vector)*np.dot(unit_vector,vec[y]/math.sqrt(14))
-				r_cubed = alphasp/(Rmag**3) #this is the 1/r^3 term (static)
-				r_squared = (alphasp*w_mode)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-				r_unit = (alphasp*w_mode**2)/(Rmag*(c**2))
-				exponent = np.exp(1j*w_mode*Rmag/c)
-				coupling += -(hbar/elec)*wsp_0*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+		count = 0
+		while abs(np.real(w_mode)*hbar/elec - (np.real(wsp_0)*hbar/elec + np.real(coupling))) > 0.000001:
+			if count == 0:
+				w_mode = 0
+				count += 1
+				print count
+			else:
+				w_mode = np.real((wsp_0*hbar/elec + coupling) * elec/hbar)
+				count += 1
+				#print count
+				print w_mode*hbar/elec
+			wavenumber = math.sqrt(epsb)*w_mode/c
+			alpha = ((alphasp**-1) - 1j*(2./3.)*wavenumber**3)**-1
+			coupling = 0
+			nearfield = 0
+			midfield = 0
+			farfield = 0
+			for x in range(0,numPart):
+				for y in range(x,numPart):
+					if x == y:
+						continue
+					else:
+						pass
+					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
+					unit_vector = (Loc[x] - Loc[y])/Rmag
+					unit_dyad_term = np.dot(vec[x],vec[y])
+					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
+					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+					r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alpha*wavenumber**2)/(Rmag)
+					exponent = np.exp(1j*wavenumber*Rmag)
+					coupling += -(hbar/elec)*wsp_0/epsb*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+					nearfield += -(hbar/elec) * wsp_0 * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+					midfield += -(hbar/elec) * wsp_0 * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+					farfield += -(hbar/elec) * wsp_0 * r_unit * exponent * (unit_dyad_term - n_dyad_term)
 		w_mode = wsp_0*hbar/elec+coupling
-		NNN.append(w_mode)
+		interaction.append(coupling)
+		mode.append(w_mode)
+		NF[0].append(nearfield)
+		IF[0].append(midfield)
+		FF[0].append(farfield)
 
 	
 	#print len(NSNS)	
-	r = np.linspace(1,30,30)
+epsb = np.linspace(1,30,30)
 
-	plt.figure()
-	plt.plot(r,NNN,linewidth=3)
-	plt.show()
+plt.figure()
+#plt.subplot(2,1,1)
+#plt.plot(epsb,mode,linewidth=3)
+#plt.subplot(2,1,2)
+plt.plot(epsb,interaction,linewidth=3,label='NNN')
+plt.scatter(epsb,np.add(NF[0],IF[0]),label = 'NNN NF + IF', color = 'C0', marker = 'o')
+plt.scatter(epsb,FF[0],label = 'NNN FF', color = 'C0', marker = 's')
+plt.show()
+#np.savetxt('dielectric_N_S.txt',np.real(mode))
+np.savetxt('N_S_coupling.txt',np.real(interaction))
+np.savetxt('N_S_near_mid.txt',np.real(np.add(NF[0],IF[0])))
+np.savetxt('N_S_far.txt',np.real(FF[0]))
 
-	np.savetxt('NNN.txt',NNN)
+

@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{39}
+\begin{mcitethebibliography}{43}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -99,7 +99,7 @@ Cherqui,~C.; Bigelow,~N.~W.; Vaschillo,~A.; Goldwyn,~H.; Masiello,~D.~J.
 \bibitem[Cherqui \latin{et~al.}(2016)Cherqui, Wu, Li, Quillin, Busche, Thakkar,
   West, Montoni, Rack, Camden, and Masiello]{Cherqui2016}
 Cherqui,~C.; Wu,~Y.; Li,~G.; Quillin,~S.~C.; Busche,~J.~A.; Thakkar,~N.;
-  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~. \latin{et~al.}
+  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~.; Masiello,~D.~J.
   STEM/EELS Imaging of Magnetic Hybridization in Symmetric and Symmetry-Broken
   Plasmon Oligomer Dimers and All-Magnetic Fano Interference. \emph{Nano Lett.}
   \textbf{2016}, \emph{16}, 6668--6676, PMID: 27673696\relax
@@ -174,6 +174,31 @@ Zhang,~S.; Bao,~K.; Halas,~N.~J.; Xu,~H.; Nordlander,~P. Substrate-Induced Fano
   Resonances of a Plasmonic Nanocube: a Route to Increased-Sensitivity
   Localized Surface Plasmon Resonance Sensors Revealed. \emph{Nano Lett.}
   \textbf{2011}, \emph{11}, 1657--1663\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Fang \latin{et~al.}(2005)Fang, Lee, Sun, and Zhang]{Fang2005}
+Fang,~N.; Lee,~H.; Sun,~C.; Zhang,~X. Sub-Diffraction-Limited Optical Imaging
+  with a Silver Superlens. \emph{Science} \textbf{2005}, \emph{308},
+  534--537\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Valentine} \latin{et~al.}(2008){Valentine}, {Zhang}, {Zentgraf},
+  {Ulin-Avila}, {Genov}, {Bartal}, and {Zhang}]{Valentine2008}
+{Valentine},~J.; {Zhang},~S.; {Zentgraf},~T.; {Ulin-Avila},~E.; {Genov},~D.~A.;
+  {Bartal},~G.; {Zhang},~X. Three-dimensional optical metamaterial with a
+  negative refractive index. \emph{Nature} \textbf{2008}, \emph{455},
+  376--379\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Shalaev}(2008)]{Shalaev2008}
+{Shalaev},~V.~M. {Transforming Light}. \emph{Science} \textbf{2008},
+  \emph{322}, 376--379\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -299,6 +324,13 @@ Kinnan,~M.~K.; Chumanov,~G. Plasmon Coupling in Two-Dimensional Arrays of
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Kravets and Pinchuk(2016)Kravets, and Pinchuk]{Pinchuk2016}
+Near-, middle-, and far-field dipolar interactions in gold nanoparticle arrays.
+  2016; pp 97240B--97240B--8\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Jackson(1999)]{jackson_classical_1999}
 Jackson,~J.~D. \emph{Classical Electrodynamics}, 3rd ed.; Wiley: New York,
   {NY}, 1999\relax
@@ -314,9 +346,10 @@ Purcell,~E.~M.; Pennypacker,~C.~R. Scattering and Absorption of Light by
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Kravets and Pinchuk(2016)Kravets, and Pinchuk]{Pinchuk2016}
-Near-, middle-, and far-field dipolar interactions in gold nanoparticle arrays.
-  2016; pp 97240B--97240B--8\relax
+\bibitem[{Draine} and {Goodman}(1993){Draine}, and {Goodman}]{Draine1993}
+{Draine},~B.~T.; {Goodman},~J. {Beyond Clausius-Mossotti - Wave propagation on
+  a polarizable point lattice and the discrete dipole approximation}.
+  \emph{Astrophys. J.} \textbf{1993}, \emph{405}, 685--697\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

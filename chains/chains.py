@@ -31,7 +31,7 @@ for epsb in range(1,2):
 	N_S = []
 	interaction = [[],[],[]]
 	#NSNS = []
-	for r in range (1,31):
+	for r in range (1,2):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
 		''' now determine geometry.'''
@@ -133,12 +133,13 @@ for epsb in range(1,2):
 					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
 					exponent = np.exp(1j*w_0*Rmag/c)
 					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
-			'''x,y = zip(*Loc)
+			x,y = zip(*Loc)
 			u,v = zip(*vec)
 			plt.quiver(x,y,u,v)
 			plt.title("radius = " + str(r))
-			plt.show()'''
-			#raw_input()
+			plt.show()
+			raw_input()
+			np.savetxt('mode_vec_'+ str(mode) + '.txt',np.real(vec))
 			for cent in range(0,3):
 				cross = []
 				for part in range(0,numPart):
@@ -183,14 +184,5 @@ for epsb in range(1,2):
 	plt.ylabel('Energy (eV)')
 	plt.xlabel('Particle Radius r_0 (nm)')
 	plt.show()
-	#plt.savefig('threemer_eigenvalues.pdf')
-
-	'''plt.figure()
-	plt.plot(r,interaction[0],r,interaction[1],r,interaction[2],linewidth=3)
-	plt.legend(['NNN','N-S','NSN'])
-	plt.ylabel('Energy (eV)')
-	plt.xlabel('Particle Radius r_0 (nm)')
-	plt.savefig('threemer_interactions.pdf')'''
-	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
-	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
+	
 

@@ -28,17 +28,17 @@ collinear = [np.array([1,0]),np.array([1,0])]
 antiparallel = [np.array([0,1]),np.array([0,-1])]
 parallel = [np.array([0,1]),np.array([0,1])]
 anticollinear = [np.array([1,0]),np.array([-1,0])]
-r = 10
+r = 30
 elec = 1.60217662e-19 # regular coulombs
 numPart = 2; #number of particles
-a0 = 30e-7; #sphere radius in cm
+a0 = r*(1e-7); #sphere radius in cm
 
 ''' now determine geometry.'''
 
 # make unit vectors in centimeters.
-for number in range(0,481):
-	#dist = 
-	sep = ((number+20)*1e-7)+2*a0
+for number in range(0,101):
+	dist = number/10.
+	sep = dist*a0+(2*a0)
 	Loc = [np.array([sep/2, 0]),np.array([-sep/2, 0])]
 
 	#Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
@@ -95,7 +95,7 @@ for number in range(0,481):
 	anco_tot.append(anco_near[number] + anco_int[number] + anco_far[number])
 	para_tot.append(para_near[number] + para_int[number] + para_far[number])
 #print coll_tot
-sep = np.linspace(20,500,481)
+sep = np.linspace(0,10,101)
 plt.figure(1)
 plt.plot(sep,coll_near,sep,coll_int,sep,coll_far,sep,coll_tot,lw=3)
 plt.xlabel('Separation Distance (nm)')

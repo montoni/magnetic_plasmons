@@ -31,6 +31,10 @@ NN = []
 NS = []
 modes = [[],[]]
 interaction = [[],[]]
+NF = [[],[]]
+IF = [[],[]]
+FF = [[],[]]
+NFIF = [[],[]]
 for r in np.linspace(1,30,30):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
@@ -152,6 +156,10 @@ for r in np.linspace(1,30,30):
 		#print vec
 		#raw_input()
 		coupling = 0
+		nearfield = 0
+		midfield = 0
+		farfield = 0
+		partial_sum = 0
 		for x in range(0,numPart):
 			for y in range(x,numPart):
 				if x == y:
@@ -167,6 +175,10 @@ for r in np.linspace(1,30,30):
 				r_unit = (alpha*w_0**2)/(Rmag*(c**2))
 				exponent = np.exp(1j*w_0*Rmag/c)
 				coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+				nearfield += -(hbar/elec) * wsp * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+				midfield += -(hbar/elec) * wsp * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+				farfield += -(hbar/elec) * wsp * r_unit * exponent * (unit_dyad_term - n_dyad_term)
+				#partial_sum += (nearfield + midfield)/2
 
 
 
@@ -175,9 +187,17 @@ for r in np.linspace(1,30,30):
 		if np.isclose(abs(np.sum(vec)),0):
 			modes[0].append(eigen[(2*numPart)-(mode+1)])
 			interaction[0].append(coupling)
+			NF[0].append(nearfield)
+			IF[0].append(midfield)
+			FF[0].append(farfield)
+			#NFIF[0].append(partial_sum)
 		else:
 			modes[1].append(eigen[(2*numPart)-(mode+1)])
 			interaction[1].append(coupling)
+			NF[1].append(nearfield)
+			IF[1].append(midfield)
+			FF[1].append(farfield)
+			#NFIF[1].append(partial_sum)
 
 
 r = np.linspace(1,30,30)
@@ -191,14 +211,25 @@ plt.plot(r,modes[0],r,modes[1],r,NN_smooth,r,NS_smooth,linewidth=3)
 plt.ylabel('Energy (eV)')
 plt.xlabel('Particle Radius r_0 (nm)')		
 plt.legend(['NN','NS','Simulated NN','Simulated NS'])
-plt.savefig('twomer_eigenvalues.pdf')
+plt.show()
+#plt.savefig('twomer_eigenvalues.pdf')
 
 plt.figure()
-plt.plot(r,interaction[0],r,interaction[1],linewidth=3)	
+plt.plot(r,interaction[0],linewidth=3,label = 'NN')	
+plt.plot(r,interaction[1],linewidth=3,label = 'NS')
+#plt.scatter(r,NF[0],label = 'NN NF', color = 'C0', marker = 'o')
+#plt.scatter(r,IF[0],label = 'NN IF', color = 'C0', marker = '+')
+plt.scatter(r,np.add(NF[0],IF[0]),label = 'NN NF + IF', color = 'C0', marker = 'o')
+plt.scatter(r,FF[0],label = 'NN FF', color = 'C0', marker = 's')
+#plt.scatter(r,NF[1],label = 'NS NF', color = 'C1', marker = 'o')
+#plt.scatter(r,IF[1],label = 'NS IF', color = 'C1', marker = '+')
+plt.scatter(r,np.add(NF[1],IF[1]),label = 'NS NF + IF', color = 'C1', marker = 'o')
+plt.scatter(r,FF[1],label = 'NS FF', color = 'C1', marker = 's')
 plt.ylabel('Energy (eV)')
 plt.xlabel('Particle Radius r_0 (nm)')	
-plt.legend(['NN','NS'])
-plt.savefig('twomer_interactions.pdf')
+plt.legend()
+#plt.show()
+plt.savefig('twomer_all_interactions.pdf')
 
 
 '''New section'''
