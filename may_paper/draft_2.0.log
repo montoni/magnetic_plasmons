@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  21 MAY 2017 13:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  22 MAY 2017 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -667,6 +667,11 @@ File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 
+
+LaTeX Warning: Reference `interaction_strength' on page 4 undefined on input li
+ne 135.
+
+
 <magnetic_mode_eigenvalues_and_interactions.pdf, id=33, 372.73111pt x 410.81801
 pt>
 File: magnetic_mode_eigenvalues_and_interactions.pdf Graphic file (type pdf)
@@ -680,14 +685,14 @@ File: interaction_strength.pdf Graphic file (type pdf)
 
 <use interaction_strength.pdf>
 Package pdftex.def Info: interaction_strength.pdf used on input line 157.
-(pdftex.def)             Requested size: 326.07634pt x 476.98683pt.
+(pdftex.def)             Requested size: 244.18094pt x 357.20207pt.
  [6] [7 <./interaction_strength.pdf>]
 <dimer_interaction.pdf, id=1617, 369.88583pt x 236.85782pt>
 File: dimer_interaction.pdf Graphic file (type pdf)
 
 <use dimer_interaction.pdf>
 Package pdftex.def Info: dimer_interaction.pdf used on input line 184.
-(pdftex.def)             Requested size: 368.58073pt x 236.02596pt.
+(pdftex.def)             Requested size: 369.88492pt x 236.85722pt.
 
 <dielectric_study.pdf, id=1618, 372.73111pt x 372.66583pt>
 File: dielectric_study.pdf Graphic file (type pdf)
@@ -701,55 +706,59 @@ File: spacing_study.pdf Graphic file (type pdf)
 
 <use spacing_study.pdf>
 Package pdftex.def Info: spacing_study.pdf used on input line 204.
-(pdftex.def)             Requested size: 368.58073pt x 371.62103pt.
+(pdftex.def)             Requested size: 372.73018pt x 375.79553pt.
  [11] [12 <./spacing_study.pdf>] (./draft_2.0.bbl
 [13] [14] [15] [16] [17]) [18]
-<toc_graphic.pdf, id=1903, 256.0748pt x 99.58464pt>
-File: toc_graphic.pdf Graphic file (type pdf)
- <use toc_graphic.pdf>
-Package pdftex.def Info: toc_graphic.pdf used on input line 233.
+<toc_graphic_2.pdf, id=1903, 256.0748pt x 99.58464pt>
+File: toc_graphic_2.pdf Graphic file (type pdf)
+ <use toc_graphic_2.pdf>
+Package pdftex.def Info: toc_graphic_2.pdf used on input line 233.
 (pdftex.def)             Requested size: 256.07416pt x 99.58438pt.
 
 Underfull \vbox (badness 10000) detected at line 233
  []
 
-[19 <./toc_graphic.pdf>] (./draft_2.0.aux) ) 
+[19 <./toc_graphic_2.pdf>] (./draft_2.0.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 14815 strings out of 493014
- 273940 string characters out of 6133351
- 349187 words of memory out of 5000000
- 18190 multiletter control sequences out of 15000+600000
+ 14816 strings out of 493014
+ 273972 string characters out of 6133351
+ 349080 words of memory out of 5000000
+ 18191 multiletter control sequences out of 15000+600000
  25190 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,94p,10409b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist
-/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm
-/lmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/cm-super/sfsx2074.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on draft_2.0.pdf (19 pages, 22180911 bytes).
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts
+/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/cm-super/sfrm0800.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/cm-super/sfrm1095.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/cm-super/sfss1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+cm-super/sfss1440.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm
+-super/sfsx2074.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-s
+uper/sfti1200.pfb>
+Output written on draft_2.0.pdf (19 pages, 24840795 bytes).
 PDF statistics:
- 1996 PDF objects out of 2073 (max. 8388607)
- 1264 compressed objects within 13 object streams
+ 2055 PDF objects out of 2073 (max. 8388607)
+ 1295 compressed objects within 13 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
