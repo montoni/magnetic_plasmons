@@ -106,86 +106,41 @@ for epsb in range(1,2):
 				#print eigen
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
-			vec = eigenVectors[:,(2*numPart)-(mode+1)]
-			vec = np.reshape(vec,[numPart,2])
-			coupling = 0
-			nearfield = 0
-			midfield = 0
-			farfield = 0
-			for x in range(0,numPart):
-				for y in range(x,numPart):
-					if x == y:
-						continue
-					else:
-						pass
-					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
-					unit_vector = (Loc[x] - Loc[y])/Rmag
-					unit_dyad_term = np.dot(vec[x],vec[y])
-					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
-					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-					r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
-					exponent = np.exp(1j*w_0*Rmag/c)
-					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
-					nearfield += -(hbar/elec) * wsp * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
-					midfield += -(hbar/elec) * wsp * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
-					farfield += -(hbar/elec) * wsp * r_unit * exponent * (unit_dyad_term - n_dyad_term)
-			'''x,y = zip(*Loc)
+			vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+			grid_x = 2.5*e2
+			grid_y = 2.5*e1
+			size = 251
+			Bfield_total = np.zeros((size,size),dtype=float)
+			for number in range(0,13):
+				point = Loc[number]
+				xcount = 0
+				Bfield = np.empty((size,size),dtype=float)
+				for xx in np.linspace(-2.5*e1,5.5*e1,size):
+					ycount = 0
+					for yy in np.linspace(-2.5*e2,2.5*e2,size):
+						rmag = np.sqrt((point[0]-yy)**2 + (point[1]-xx)**2)
+						nhat = -([yy,xx]-point)/rmag
+						#print rmag
+						#raw_input()
+						#vec[number][0],vec[number][1] = vec[number][1],vec[number][0]
+						if rmag < .5*a0:
+							Bfield[xcount,ycount] = 0
+						else:
+							Bfield[xcount,ycount] = np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))
+						ycount += 1
+					xcount += 1
+				Bfield_total = Bfield_total + Bfield
+			# ,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
+			xx = np.linspace(-2.5*e2,2.5*e2,size)
+			yy = np.linspace(-2.5*e1,5.5*e1,size)
+			
 			u,v = zip(*vec)
-			plt.title(''.join(['radius = ',str(r)]))
-			plt.quiver(x,y,u,v)
+			xloc, yloc = zip(*Loc)
+			plt.figure()
+			plt.contourf(xx,yy,Bfield_total,cmap='bwr',levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30))
+			#plt.colorbar()
+			plt.tight_layout()
+			plt.scatter(xloc,yloc)
+			plt.quiver(xloc,yloc,u,v)
+			plt.savefig('mode_'+str(mode)+ '_field.pdf')
 			plt.show()
-			raw_input()'''
-			if abs(np.sum(vec)) < 10**-5:
-				NN.append(eigen[2*numPart-mode-1])
-				interaction[0].append(coupling)
-				NF[0].append(nearfield)
-				IF[0].append(midfield)
-				FF[0].append(farfield)
-			else:
-				NS.append(eigen[2*numPart-mode-1])
-				interaction[1].append(coupling)
-				NF[1].append(nearfield)
-				IF[1].append(midfield)
-				FF[1].append(farfield)
-	
-
-	smooth_r = np.linspace(1,30,30)
-	NN_smooth = spline(bem_r,bem_NN,smooth_r)
-	NS_smooth = spline(bem_r,bem_NS,smooth_r)
-
-	print len(NN)
-	print len(NS)
-	NS = np.reshape(NS,[30,2])
-	NS_int = np.reshape(interaction[1],(30,2))
-	NN_NFIF = np.add(NF[0],IF[0])
-	NS_NF = np.reshape(NF[1],(30,2))
-	NS_IF = np.reshape(IF[1],(30,2))
-	NS_FF = np.reshape(FF[1],(30,2))
-	NS_NFIF = np.add(NS_NF[:,0],NS_IF[:,0])
-	r = np.linspace(1,30,30)
-	plt.figure()
-	plt.plot(r,NN,r,NS[:,0],smooth_r,NN_smooth,smooth_r,NS_smooth,linewidth=3)	
-	plt.legend(['NN','NS','BEM NN','BEM NS'])
-	plt.ylabel('Energy (eV)')
-	plt.xlabel('Particle Radius r_0 (nm)')
-	plt.savefig('threemer_new_eigenvalues.pdf')
-	plt.show()
-
-	plt.figure()
-	plt.plot(r,interaction[0],linewidth=3,label='NNN')
-	plt.plot(r,NS_int[:,0],linewidth=3,label='NS')
-	plt.scatter(r,NN_NFIF, color = 'C0', marker = 'o')
-	plt.scatter(r,FF[0], color = 'C0', marker = 's')
-	plt.scatter(r,NS_NFIF, color = 'C1', marker = 'o')
-	plt.scatter(r,NS_FF[:,0], color = 'C1', marker = 's')
-	plt.legend()
-	plt.ylabel('Energy (eV)')
-	plt.xlabel('Particle Radius r_0 (nm)')
-	#plt.savefig('ring_all_interactions.pdf')
-	plt.show()
-	#np.savetxt('_'.join([str(epsb),'NN.txt']),NN)
-	#np.savetxt('_'.join([str(epsb),'NS.txt']),NS)
-#np.savetxt('crossing',crossing)
-#print static_NN
-#print static_NS

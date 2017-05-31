@@ -115,74 +115,41 @@ for epsb in range(1,2):
 				#print eigen
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
-			vec = eigenVectors[:,(2*numPart)-(mode+1)]
-			vec = np.reshape(vec,[numPart,2])
-			coupling = 0
-			for x in range(0,numPart):
-				for y in range(x,numPart):
-					if x == y:
-						continue
-					else:
-						pass
-					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
-					unit_vector = (Loc[x] - Loc[y])/Rmag
-					unit_dyad_term = np.dot(vec[x],vec[y])
-					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
-					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-					r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-					r_unit = (alpha*w_0**2)/(Rmag*(c**2))
-					exponent = np.exp(1j*w_0*Rmag/c)
-					coupling += -(hbar/elec)*wsp*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
-			x,y = zip(*Loc)
+			vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+			grid_x = 2.5*e2
+			grid_y = 2.5*e1
+			size = 251
+			Bfield_total = np.zeros((size,size),dtype=float)
+			for number in range(0,14):
+				point = Loc[number]
+				xcount = 0
+				Bfield = np.empty((size,size),dtype=float)
+				for xx in np.linspace(-grid_y,grid_y,size):
+					ycount = 0
+					for yy in np.linspace(-4.5*e2,2.5*e2,size):
+						rmag = np.sqrt((point[0]-yy)**2 + (point[1]-xx)**2)
+						nhat = -([yy,xx]-point)/rmag
+						#print rmag
+						#raw_input()
+						#vec[number][0],vec[number][1] = vec[number][1],vec[number][0]
+						if rmag < .5*a0:
+							Bfield[xcount,ycount] = 0
+						else:
+							Bfield[xcount,ycount] = np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))
+						ycount += 1
+					xcount += 1
+				Bfield_total = Bfield_total + Bfield
+			# ,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
+			xx = np.linspace(-4.5*e2,2.5*e2,size)
+			yy = np.linspace(-grid_y,grid_y,size)
+			
 			u,v = zip(*vec)
-			plt.quiver(x,y,u,v)
-			plt.title("radius = " + str(r))
+			xloc, yloc = zip(*Loc)
+			plt.figure()
+			plt.contourf(xx,yy,Bfield_total,cmap='bwr',levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30))
+			#plt.colorbar()
+			plt.tight_layout()
+			plt.scatter(xloc,yloc)
+			plt.quiver(xloc,yloc,u,v)
+			plt.savefig('mode_'+str(mode)+ '_field.pdf')
 			plt.show()
-			raw_input()
-			np.savetxt('mode_vec_'+ str(mode) + '.txt',np.real(vec))
-			for cent in range(0,3):
-				cross = []
-				for part in range(0,numPart):
-					disp = center[cent]-Loc[part]
-					if np.sqrt(disp[0]**2+disp[1]**2) < 3.1*a0:
-						cross.append(np.cross(disp,vec[part]))
-				#print cross
-				magnet = np.sum(cross)
-				#print magnet
-				mag_dipole.append(magnet)            
-			if mag_dipole[0]*mag_dipole[2] < 0:
-				N_S.append(eigen[2*numPart-mode-1])
-				interaction[1].append(coupling)
-			elif mag_dipole[0]*mag_dipole[2] > 0:
-				if mag_dipole[0]*mag_dipole[1] < 0:
-					NSN.append(eigen[2*numPart-mode-1])
-					interaction[2].append(coupling)
-				else:
-					NNN.append(eigen[2*numPart-mode-1])
-					interaction[0].append(coupling)
-		if len(NSN) == len(NNN)+2:
-			print "it's happening!"
-			NNN.append(NSN[r-1])
-			del (NSN[r-1])
-			interaction[0].append(interaction[2][r-1])
-			del (interaction[2][r-1])	
-		
-	print len(NNN)
-	print len(NSN)
-	print len(N_S)
-	
-	#print len(NSNS)	
-	r = np.linspace(1,30,30)
-
-	NNN_smooth = spline(bem_r,bem_NNN,r)
-	N_S_smooth = spline(bem_r,bem_N_S,r)
-	NSN_smooth = spline(bem_r,bem_NSN,r)
-
-	plt.figure()
-	plt.plot(r,NNN,r,NSN,r,N_S,r,NNN_smooth,r,N_S_smooth,r,NSN_smooth,linewidth=3)
-	plt.legend(['NNN','NSN','N-S','BEM NNN','BEM N-S','BEM NSN'])
-	plt.ylabel('Energy (eV)')
-	plt.xlabel('Particle Radius r_0 (nm)')
-	plt.show()
-	
-

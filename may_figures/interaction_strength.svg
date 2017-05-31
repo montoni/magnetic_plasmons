@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.73712"
-     inkscape:cx="112.17596"
-     inkscape:cy="106.15769"
+     inkscape:zoom="1"
+     inkscape:cx="162.33766"
+     inkscape:cy="210.1179"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -5024,7 +5024,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -12507,15 +12507,15 @@
        id="text9537-1"
        y="578.22687"
        x="62.817093"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000134px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        xml:space="preserve"><tspan
          y="578.22687"
          x="62.817093"
          id="tspan9539-1"
-         sodipodi:role="line">North-South Mode</tspan></text>
+         sodipodi:role="line">North-South</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000134px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        x="63.636917"
        y="644.00476"
        id="text9541-1"
@@ -12523,62 +12523,62 @@
          sodipodi:role="line"
          id="tspan9543-5"
          x="63.636917"
-         y="644.00476">North-North Mode</tspan></text>
+         y="644.00476">North-North</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000095px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="154.34932"
-       y="721.75018"
+       y="723.75018"
        id="text10143-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan10145-3"
          x="154.34932"
-         y="721.75018">North-South Mode</tspan></text>
+         y="723.75018">North-South</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10149-4"
        y="765.19971"
        x="63.37455"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000134px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
        xml:space="preserve"><tspan
          y="765.19971"
          x="63.37455"
          id="tspan10151-6"
-         sodipodi:role="line">North-South-North Mode</tspan></text>
+         sodipodi:role="line">North-South-North</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10155"
-       y="700.92365"
+       y="702.92365"
        x="63.241756"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000095px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="700.92365"
+         y="702.92365"
          x="63.241756"
          id="tspan10157"
-         sodipodi:role="line">All-North Mode</tspan></text>
+         sodipodi:role="line">All-North</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10179-9"
-       y="910.40143"
+       y="912.40143"
        x="67.354042"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000095px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="910.40143"
+         y="912.40143"
          x="67.354042"
          id="tspan10181-8"
-         sodipodi:role="line">North-South Mode</tspan></text>
+         sodipodi:role="line">North-South</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10191-3"
-       y="846.08148"
+       y="848.08148"
        x="66.613785"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.78214788px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25000095px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="846.08148"
+         y="848.08148"
          x="66.613785"
          id="tspan10193-0"
-         sodipodi:role="line">All-North Mode</tspan></text>
+         sodipodi:role="line">All-North</tspan></text>
     <g
        id="g12149"
        transform="translate(-37.925266,8.7121383)">
@@ -12676,21 +12676,21 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/bluegradient.png"
          xlink:href="bluegradient.png"
-         width="22.704"
-         height="22.704"
-         preserveAspectRatio="none"
-         id="image8072"
+         y="681.99377"
          x="209.91972"
-         y="681.99377" />
-      <image
-         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
-         xlink:href="redgradient.png"
-         y="682.43414"
-         x="176.03062"
-         id="image8141"
+         id="image8072"
          preserveAspectRatio="none"
          height="22.704"
          width="22.704" />
+      <image
+         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
+         xlink:href="redgradient.png"
+         width="22.704"
+         height="22.704"
+         preserveAspectRatio="none"
+         id="image8141"
+         x="176.03062"
+         y="682.43414" />
     </g>
     <g
        id="g12204"
@@ -12784,21 +12784,21 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/bluegradient.png"
          xlink:href="bluegradient.png"
-         width="22.704"
-         height="22.704"
-         preserveAspectRatio="none"
-         id="image8059"
+         y="886.08246"
          x="198.01866"
-         y="886.08246" />
+         id="image8059"
+         preserveAspectRatio="none"
+         height="22.704"
+         width="22.704" />
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
-         width="22.704"
-         height="22.704"
-         preserveAspectRatio="none"
-         id="image8149"
+         y="886.54614"
          x="180.16838"
-         y="886.54614" />
+         id="image8149"
+         preserveAspectRatio="none"
+         height="22.704"
+         width="22.704" />
     </g>
     <g
        id="g12135"
@@ -12871,21 +12871,21 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
-         y="586.77905"
-         x="203.10779"
-         id="image8143"
-         preserveAspectRatio="none"
+         width="22.704"
          height="22.704"
-         width="22.704" />
+         preserveAspectRatio="none"
+         id="image8143"
+         x="203.10779"
+         y="586.77905" />
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
-         y="587.32812"
-         x="181.96797"
-         id="image8155"
-         preserveAspectRatio="none"
+         width="22.704"
          height="22.704"
-         width="22.704" />
+         preserveAspectRatio="none"
+         id="image8155"
+         x="181.96797"
+         y="587.32812" />
     </g>
     <g
        id="g12121"
@@ -12958,21 +12958,21 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/bluegradient.png"
          xlink:href="bluegradient.png"
-         y="532.28754"
-         x="202.82083"
-         id="image8064"
-         preserveAspectRatio="none"
-         height="22.704"
-         width="22.704" />
-      <image
-         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
-         xlink:href="redgradient.png"
          width="22.704"
          height="22.704"
          preserveAspectRatio="none"
-         id="image8159"
+         id="image8064"
+         x="202.82083"
+         y="532.28754" />
+      <image
+         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
+         xlink:href="redgradient.png"
+         y="532.83667"
          x="181.681"
-         y="532.83667" />
+         id="image8159"
+         preserveAspectRatio="none"
+         height="22.704"
+         width="22.704" />
     </g>
     <g
        id="g18490"
@@ -13071,30 +13071,30 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
-         width="22.704"
-         height="22.704"
-         preserveAspectRatio="none"
-         id="image8145"
+         y="667.41254"
          x="-272.94226"
-         y="667.41254" />
-      <image
-         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
-         xlink:href="redgradient.png"
-         width="22.704"
-         height="22.704"
+         id="image8145"
          preserveAspectRatio="none"
-         id="image8157"
-         x="-289.89743"
-         y="667.85291" />
+         height="22.704"
+         width="22.704" />
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
          y="667.85291"
-         x="-307.14294"
-         id="image8161"
+         x="-289.89743"
+         id="image8157"
          preserveAspectRatio="none"
          height="22.704"
          width="22.704" />
+      <image
+         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
+         xlink:href="redgradient.png"
+         width="22.704"
+         height="22.704"
+         preserveAspectRatio="none"
+         id="image8161"
+         x="-307.14294"
+         y="667.85291" />
     </g>
     <g
        id="g12186"
@@ -13188,30 +13188,30 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
-         y="824.05078"
-         x="197.74545"
+         width="22.704"
+         height="22.704"
+         preserveAspectRatio="none"
          id="image8153"
-         preserveAspectRatio="none"
-         height="22.704"
-         width="22.704" />
-      <image
-         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
-         xlink:href="redgradient.png"
-         y="808.28003"
-         x="189.33435"
-         id="image8165"
-         preserveAspectRatio="none"
-         height="22.704"
-         width="22.704" />
+         x="197.74545"
+         y="824.05078" />
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
          xlink:href="redgradient.png"
          width="22.704"
          height="22.704"
          preserveAspectRatio="none"
-         id="image8169"
+         id="image8165"
+         x="189.33435"
+         y="808.28003" />
+      <image
+         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
+         xlink:href="redgradient.png"
+         y="824.51447"
          x="179.89519"
-         y="824.51447" />
+         id="image8169"
+         preserveAspectRatio="none"
+         height="22.704"
+         width="22.704" />
     </g>
     <g
        id="g12167"
@@ -13310,9 +13310,18 @@
       <image
          sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/bluegradient.png"
          xlink:href="bluegradient.png"
-         y="728.24158"
-         x="193.48769"
+         width="22.704"
+         height="22.704"
+         preserveAspectRatio="none"
          id="image8074"
+         x="193.48769"
+         y="728.24158" />
+      <image
+         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
+         xlink:href="redgradient.png"
+         y="728.68201"
+         x="210.15138"
+         id="image8173"
          preserveAspectRatio="none"
          height="22.704"
          width="22.704" />
@@ -13322,18 +13331,9 @@
          width="22.704"
          height="22.704"
          preserveAspectRatio="none"
-         id="image8173"
-         x="210.15138"
-         y="728.68201" />
-      <image
-         sodipodi:absref="/Users/peacenick36/Documents/Graduate School/RESEARCH/magnetic_plasmons/may_figures/redgradient.png"
-         xlink:href="redgradient.png"
-         y="728.68201"
-         x="176.53249"
          id="image8177"
-         preserveAspectRatio="none"
-         height="22.704"
-         width="22.704" />
+         x="176.53249"
+         y="728.68201" />
     </g>
   </g>
 </svg>

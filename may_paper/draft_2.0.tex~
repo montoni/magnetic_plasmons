@@ -89,7 +89,7 @@
 %% be automatically moved as appropriate.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{tocentry}
-\includegraphics{toc_graphic_2.pdf}
+\includegraphics{toc_graphic_2.png}
 
 \end{tocentry}
 
@@ -132,11 +132,11 @@ It should be noted that this Hamiltonian, when diagonalized, results in a transc
 
 \section{Results and Discussion}
 
-In this work, we model silver nanoparticles using a Drude model with $\omega_p = 9.1$ eV, $\varepsilon_{\infty} = 3.77$, and $\gamma = 0.003$ eV. Note that we have greatly reduced the damping constant in order to better resolve the magnetic modes in the simulations. The oligomer unit cell is a six-member ring, with silver nanoparticles located at the vertices of a regular hexagon. We explore and manipulate three magnetic oligomer systems: a twomer, a linear threemer, and a triangular threemer. The number of rings in a magnetic system corresponds to the number of magnetic modes in the system\cite{Cherqui2014}. The twomer supports an in-phase mode (North-North, or NN) and an out-of-phase mode (North-South, or NS). The linear threemer supports an all in-phase mode (All-North, or AN), a minimally out-of-phase mode (North-South, or NS), and a maximally out-of-phase mode (North-South-North, or NSN). The triangular threemer supports an all in-phase mode (All-North, or AN) and two degenerate out-of-phase modes (North-South, or NS). These modes and their relative magnetic fields are depicted as insets in Figures~\ref{magmodes},~\ref{interactionenergy},~\ref{dielectric}, and~\ref{spacing}. In each exploration, the particles have radius $r_0$ and nearest-neighbor spacing $r_{\textrm{nn}}$. In the first set of model calculations, we compare to full-wave simulations to verify that the model accurately captures the properties of the systems, but beyond that we cease comparison to simulation in order to focus on the predictive power of the model. The first calculations, depicted in Figure~\ref{magmodes} show how the magnetic modes of the twomer and threemers are impacted by the overall scale of the system. In these calculations, the nearest neighbor distances are held at $r_{\textrm{nn}} = 3 \times r_0$ while $r_0$ varies from 1 nm to 30 nm.
+In this work, we model silver nanoparticles using a Drude model with $\omega_p = 9.1$ eV, $\varepsilon_{\infty} = 3.77$, and $\gamma = 0.003$ eV. Note that we have greatly reduced the damping constant in order to better resolve the magnetic modes in the simulations. The oligomer unit cell is a six-member ring, with silver nanoparticles located at the vertices of a regular hexagon. We explore and manipulate three magnetic oligomer systems: a twomer, a linear threemer, and a triangular threemer. The number of rings in a magnetic system corresponds to the number of magnetic modes in the system\cite{Cherqui2014}. The twomer supports an in-phase mode (North-North, or NN) and an out-of-phase mode (North-South, or NS). The linear threemer supports an all in-phase mode (All-North, or AN), a minimally out-of-phase mode (North-South, or NS), and a maximally out-of-phase mode (North-South-North, or NSN). The triangular threemer supports an all in-phase mode (All-North, or AN) and two degenerate out-of-phase modes (North-South, or NS). These modes and their relative magnetic fields are depicted as insets in Figures~\ref{magmodes},~\ref{interaction_strength},~\ref{dielectric}, and~\ref{spacing}. In each exploration, the particles have radius $r_0$ and nearest-neighbor spacing $r_{\textrm{nn}}$. In the first set of model calculations, we compare to full-wave simulations to verify that the model accurately captures the properties of the systems, but beyond that we cease comparison to simulation in order to focus on the predictive power of the model. The first calculations, depicted in Figure~\ref{magmodes} show how the magnetic modes of the twomer and threemers are impacted by the overall scale of the system. In these calculations, the nearest neighbor distances are held at $r_{\textrm{nn}} = 3 \times r_0$ while $r_0$ varies from 1 nm to 30 nm.
 
 \begin{figure}
 \centering
-\includegraphics{magnetic_mode_eigenvalues_and_interactions.pdf}
+\includegraphics{magmodes.png}
 \caption{Magnetic mode eigenvalues (column a), predicted and simulated, and interaction strengths (column b) for the magnetic twomer (first row), linear threemer (second row), and triangular threemer (third row). All of the magnetic modes range from 3.1 eV to 3.6 eV. In each system, the magnetic modes exhibit multiple crossings, showing that the eigenspectrum of these magnetic systems depends on their scale. The model consistently overestimates the eigenvalues by 0.05 eV, and consistently underestimates the crossing points by less than a nanometer. To further emphasize the impact of scale, we have plotted the total interaction strength of each eigenmode, \textit{i.e.} the sum of each eigenvector's dot product with the electric field of all of the other dipoles. This calculation reaffirms the scale-dependence and predicts the same mode crossings as both the eigenvalue calculation and the simulations.}
 \label{magmodes}
 \end{figure}
@@ -154,7 +154,7 @@ U_{\textrm{int}} = -\sum_{i>j}\textbf{p}_{i}\cdot\boldsymbol{\Lambda}_{ij}\cdot\
 
 \begin{figure}
 \centering
-\includegraphics{interaction_strength.pdf}
+\includegraphics{interaction_strength.png}
 \caption{Interactions strengths for the magnetic modes of the twomer (first row), linear threemer (second row), and triangular threemer (third row). We plot the total interaction strength between the electric plasmons (solid line), the near-field and intermediate-field interaction strength summed (circles), and the far-field interaction strength (squares) as a function of scaling. The near- and intermediate- fields do not exhibit any crossings and diverge with greater scaling. The far-field terms exhibit one crossing. The interplay of far-field with near- and intermediate-field interactions causes mode-switching in magnetic systems.}
 \label{interactions}
 \end{figure}
@@ -181,7 +181,7 @@ To gain a more complete understanding of this mode-switchings, we compute the to
 
 \begin{figure}
 \centering
-\includegraphics{dimer_interaction.pdf}
+\includegraphics{dimer_interaction.png}
 \caption{Relative interaction strengths for the four possible dipole arrangements of a nanoparticle dimer: collinear (a), parallel (b), anti-collinear (c), and anti-parallel (d). Plotted are the near-field (blue), intermediate-field (orange), far-field (green), and total (black, dashed) interaction strengths for each set of dipoles as a function of dipole-dipole distance. Interestingly, and stemming from the form of the dipole relay tensor, the far-field interaction term is zero for both pairs of linear dipoles. From these plots, it can be seen that the favorability of a specific dipole arrangement depends on the separation between the dipoles. This can be seen in the fact that each part of the field depends differently on the separation, and each field term contains an oscillating term. At short length scales, the interaction is dominated by the near-field. However, as the distance increases, the interaction is dominated by the intermediate field (a and c) or the far-field (b and d). As a result, there are separation distances at which normally unfavorable arrangements become favorable. Since magnetic oligomers can be described through pairwise interactions of electric dipoles, it follows that the eigenvalues must also change order as different arrangements of electric dipoles become more and less favorable.}
 \label{dimers}
 \end{figure}
@@ -191,7 +191,7 @@ We have convinced ourselves that 1) the quasistatic, nearest-neighbors tight-bin
 
 \begin{figure}
 \centering
-\includegraphics{dielectric_study.pdf}
+\includegraphics{dielectric_study.png}
 \caption{Magnetic mode eigenvalues (column a) for the twomer (first row), linear threemer (second row), and triangular threemer (third row) with particle sizes of 20 nm and magnetic mode eigenvalue differences (column b) as a function of the dielectric constant of an embedding medium. As the dielectric constant is increased from 1 to 3, the magnetic mode splitting approaches zero and the overall energy decreases. At very high dielectric values, the magnetic mode eigenvalues converge to the single particle resonance frequency. This is the result of the dielectric constant reducing the inter-particle interactions. It is also important to note that between $\varepsilon_b = 1$ and $\varepsilon_b = 1.5$, the magnetic mode differences vary sharply, either becoming much more positive or much more negative. This is indicative of mode-switching that is difficult to see in the eigenvalue plots. The increasing dielectric constant has a similar effect to increasing the scale of the system, as it recovers the same energy ordering for $r_0 > 20$ nm.}
 \label{dielectric}
 \end{figure}
@@ -201,7 +201,7 @@ From these two observations we conclude that increasing the dielectric constant 
 
 \begin{figure}
 \centering
-\includegraphics{spacing_study.pdf}
+\includegraphics{spacing_study.png}
 \caption{Magnetic mode eigenvalues for the twomer (first row), linear threemer (second row), and triangular threemer (third row) with particle sizes of 15 nm (column a) and 30 nm (column b) as a function of nearest neighbor particle separation in units of radii. As the separation distance increases, the magnetic mode eigenvalues converge to and oscillate about the single particle frequency, exhibiting multiple crossings. As in Equation~\ref{elec_hammy_2}, the interaction strength decays with increasing separation and oscillates due to its dependence on trigonometric functions.}
 \label{spacing}
 \end{figure}

@@ -12,16 +12,16 @@ all_N = [] #all north
 out_N_in_S = [] # that weird "excited state"
 alt_NS = [] # maximally out of phase magnets
 center = np.zeros(7,dtype=object)
-for r in range(10,301):
+for r in range(1,2):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 24; #number of particles
-	a0 = 0.1*r*10**-7; #sphere radius in cm
-	index = r - 10
+	a0 = r*10**-7; #sphere radius in cm
+	index = (r - 1) * 10
 	''' now determine geometry.'''
 
 	# make unit vectors in centimeters.
-	e1 = float(1)/float(2) * (2.2*a0) ; #short side of 30-60-90 triangle
-	e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
+	e1 = float(1)/float(2) * (3*a0) ; #short side of 30-60-90 triangle
+	e2 = float(math.sqrt(3))/float(2) * (3*a0); #long side of 30-60-90 triangle
 	Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),np.array([0,-2*e1]),
 		   np.array([e2,-e1]),np.array([e2,e1]),np.array([2*e2,2*e1]),np.array([3*e2,e1]),
 		   np.array([3*e2,-e1]),np.array([2*e2,-2*e1]),np.array([2*e2,-4*e1]),np.array([e2,-5*e1]),
@@ -68,19 +68,23 @@ for r in range(10,301):
 			else:
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
 				count = count + 1
-			print count
-			print eigen[2*numPart-(mode+1)]
+			#print count
+			#print eigen[2*numPart-(mode+1)]
 			alphasp = (a0**3)*(3/(epsinf+2)); # polarizability (cm^3)
+			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(wsp**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
-			wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2); # sp frequency (rad/s) corrected for radiation damping
+			wsp = wsp_0#math.sqrt((wsp_0)**2 - (gamma_ret/2)**2); # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
-				for m in range (n,2*numPart):
+				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
-						H[n,m] = (hbar*wsp/elec)
+						H[n,m] = 1#(hbar*wsp/elec)
 					elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
+						H[n,m] = 0
+					elif n == m+1 and m%2 == 0: #if m and n are on the same particle, they don't couple
 						H[n,m] = 0
 					else: # all other dipoles are fair game
 						R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, comute the distance between them
@@ -88,32 +92,33 @@ for r in range(10,301):
 						nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 						p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
-						r_cubed = alphasp/Rmag**3 #this is the 1/r^3 term (static)
-						r_squared = (alphasp*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-						r_unit = (alphasp*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+						r_cubed = alpha/Rmag**3 #this is the 1/r^3 term (static)
+						r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
+						r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
 						#space_exp = np.exp(1j*w_0*Rmag/c)
 						space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 						space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 						ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -(ge)*((hbar/elec)*wsp) #this has the minus sign we need.
-			diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
-			Ht = np.matrix.transpose(H) # this is the transpose of H
-			Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
-			Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-			w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+						H[n,m] = -np.real(ge) #this has the minus sign we need.
+			#diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
+			#Ht = np.matrix.transpose(H) # this is the transpose of H
+			#Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
+			#Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
+			w,v = scipy.linalg.eigh(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 			idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 			eigenValues = w[idx] # sorting
 			eigenVectors = v[:,idx] # sorting
-			eigen=(eigenValues) # the eigenvalues have units of energy^2, so we take the square root
+			eigen=np.sqrt(eigenValues)*wsp*hbar/elec # the eigenvalues have units of energy^2, so we take the square root
 			#print eigen
 		vec = np.reshape(eigenVectors[:,2*numPart-(mode+1)],(numPart,2))
-		'''x,y = zip(*Loc)
+		x,y = zip(*Loc)
 		u,v = zip(*vec)
 		plt.title(''.join(['mode = ',str(mode+1)]))
 		plt.quiver(x,y,u,v)
-		plt.show()'''
-		mag_dipole = []
+		plt.show()
+		#np.savetxt('coro_' + str(mode) + '_vec',vec)
+		'''mag_dipole = []
 		for cent in range(0,7):
 			cr_pr = []
 			for num in range(0,numPart):
@@ -173,7 +178,7 @@ for r in range(10,301):
 		all_N.append(out_N_in_S[index])
 		out_N_in_S.append(all_N[index])
 		del all_N[index]
-		del out_N_in_S[index]
+		del out_N_in_S[index]'''
 	'''if index == 290:
 		all_N.append(out_N_in_S[index])
 		alt_NS.append(all_N[index])
@@ -181,7 +186,7 @@ for r in range(10,301):
 		del all_N[index]
 		del alt_NS[index]
 		del out_N_in_S[index]'''
-	if out_N_in_S[index-1] < all_N[index-1]:
+	'''if out_N_in_S[index-1] < all_N[index-1]:
 		print index
 		print len(out_N_in_S)
 		print len(all_N)
@@ -193,11 +198,11 @@ for r in range(10,301):
 	print len(no_dipole)
 	print len(alt_NS)
 	print len(out_N_in_S)
-	print len(all_N)
+	print len(all_N)'''
 	#raw_input("press enter")
 
 
-print crossing
+'''print crossing
 print len(dipole)
 print len(no_dipole)
 print len(alt_NS)
@@ -217,4 +222,4 @@ np.savetxt('nodipole_eigen',no_dipole)
 np.savetxt('alt_NS_eigen',alt_NS)
 np.savetxt('altl_N_eigen',all_N)
 np.savetxt('out_N_in_S_eigen',out_N_in_S)
-#np.savetxt('crossing',crossing)
+#np.savetxt('crossing',crossing)'''
