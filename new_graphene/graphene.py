@@ -19,11 +19,11 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 
 
-for r in range(1,2):
-	preset = {'no_coupling':1,'nearest':4,'nextnear':10}
-	numPart = preset['nearest']
+for r in range(30,31):
+	preset = {'no_coupling':1,'nearest':4,'nextnear':10,'nextnext':13}
+	numPart = preset['nextnext']
 	radius = r*1e-7 #(in centimeters)
-	rnn = 3*radius
+	rnn = 2*radius
 	ex = rnn*math.sqrt(3)/2
 	ey = rnn/2.
 	if numPart == 1:
@@ -31,12 +31,14 @@ for r in range(1,2):
 	elif numPart == 4:
 		loc = [[0,0],[ex,ey],[-ex,ey],[0,-2*ey]]
 	elif numPart == 10:
-		loc = [[0,0],[ex,ey],[-ex,ey],[0,-2*ey],[2*ex,0],[ex,3*ey],[-ex,3*ey],[-2*ex,0],[-ex,-3*ey],[ex,3*ey]]
+		loc = [[0,0],[ex,ey],[-ex,ey],[0,-2*ey],[2*ex,0],[ex,3*ey],[-ex,3*ey],[-2*ex,0],[-ex,-3*ey],[ex,-3*ey]]
+	elif numPart == 13:
+		loc = [[0,0],[ex,ey],[-ex,ey],[0,-2*ey],[2*ex,0],[ex,3*ey],[-ex,3*ey],[-2*ex,0],[-ex,-3*ey],[ex,-3*ey],[2*ex,ey],[-2*ex,ey],[0,-4*ey]]
 	else:
 		pass
 
 	'''pick a polarization direction'''
-	pol = [0,0] # x-directed for now
+	pol = [0,0] # z-directed for now
 
 	wsp_0 = mie_omegas[(r-1)*10]
 	coupling = 0
@@ -44,7 +46,7 @@ for r in range(1,2):
 	omega_system = 0
 	H_int = np.zeros((numPart,numPart))
 	count = 0
-	while abs(np.real(omega_system)*hbar/elec - np.real(wsp_0+coupling)) > 0.00001:
+	while abs(np.real(omega_system)*hbar/elec - np.real(wsp_0+coupling)) > 0.0001:
 		if count == 0:
 			omega_system = 0
 			count += 1
@@ -91,13 +93,22 @@ for r in range(1,2):
 					pass
 				else:
 					loc_count += 1
+<<<<<<< HEAD
 					k_dot_products += H_int[0,loc_count]*(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))	
+=======
+					k_dot_products += H_int[0,loc_count]*np.sqrt(np.square(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1]))))
+>>>>>>> 23f1ea348cb13ea4d3c878b1d00b348a5a2b4147
 			omega_plus[i_count-1,j_count-1] = wsp_0 + wsp_0*k_dot_products#wsp_0*np.sqrt(1 + 2*k_dot_products)
 			omega_minus[i_count-1,j_count-1] = wsp_0 - wsp_0*k_dot_products#wsp_0*np.sqrt(1 - 2*k_dot_products)
 	[iii,jjj] = np.meshgrid(np.linspace(-math.pi,math.pi,grid_size),np.linspace(-math.pi,math.pi,grid_size))
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
+<<<<<<< HEAD
 	ax.plot_surface(iii,jjj,omega_minus,cmap='bwr',linewidth=0)
+=======
+	ax.plot_surface(iii,jjj,omega_minus,color='blue')
+	ax.plot_surface(iii,jjj,omega_plus,color='red')
+>>>>>>> 23f1ea348cb13ea4d3c878b1d00b348a5a2b4147
 	plt.show()
 
 
