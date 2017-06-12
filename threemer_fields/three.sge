@@ -1,0 +1,13 @@
+#$ -N NNN
+#$ -S /bin/csh
+#$ -cwd
+#$ -l cores_per_node=24
+#$ -l mem=64G,h_vmem=64G
+#$ -A dmasiell
+#$ -j y
+#$ -o NNN.out
+#$ -q long*
+matlab -nodisplay -r threemer_NNN
+
+#END  
+

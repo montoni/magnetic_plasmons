@@ -91,17 +91,15 @@ for r in range(1,2):
 					pass
 				else:
 					loc_count += 1
-					k_dot_products += H_int[0,loc_count]*abs(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))	
+					k_dot_products += H_int[0,loc_count]*(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))	
 			omega_plus[i_count-1,j_count-1] = wsp_0 + wsp_0*k_dot_products#wsp_0*np.sqrt(1 + 2*k_dot_products)
 			omega_minus[i_count-1,j_count-1] = wsp_0 - wsp_0*k_dot_products#wsp_0*np.sqrt(1 - 2*k_dot_products)
 	[iii,jjj] = np.meshgrid(np.linspace(-math.pi,math.pi,grid_size),np.linspace(-math.pi,math.pi,grid_size))
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
-	ax.plot_surface(iii,jjj,omega_minus)
+	ax.plot_surface(iii,jjj,omega_minus,cmap='bwr',linewidth=0)
 	plt.show()
 
 
 #plt.contourf(iii,jjj,omega_minus,cmap='bwr')
 	#plt.colorbar()
-
-
