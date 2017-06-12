@@ -30,8 +30,8 @@ NF = [[],[]]
 IF = [[],[]]
 FF = [[],[]]
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
-for epsb in np.linspace(1,1,1):
-	for r in range (1,31):
+for epsb in np.linspace(0.1,5,50):
+	for r in range (15,16):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
 		''' now determine geometry.'''
@@ -61,7 +61,7 @@ for epsb in np.linspace(1,1,1):
 		vec_NSN = np.loadtxt('mode_vec_0.txt')
 		vec_N_S = np.loadtxt('mode_vec_1.txt')
 		vec_NNN = np.loadtxt('mode_vec_2.txt')
-		vec = vec_N_S
+		vec = vec_NNN
 		coupling = 0
 		count = 0
 		while abs(np.real(w_mode)*hbar/elec - (np.real(wsp_0)*hbar/elec + np.real(coupling))) > 0.000001:
@@ -95,9 +95,9 @@ for epsb in np.linspace(1,1,1):
 					r_unit = (alpha*wavenumber**2)/(Rmag)
 					exponent = np.exp(1j*wavenumber*Rmag)
 					coupling += -(hbar/elec)*wsp_0/epsb*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
-					nearfield += -(hbar/elec) * wsp_0 * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
-					midfield += -(hbar/elec) * wsp_0 * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
-					farfield += -(hbar/elec) * wsp_0 * r_unit * exponent * (unit_dyad_term - n_dyad_term)
+					nearfield += -(hbar/elec) * wsp_0/epsb * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+					midfield += -(hbar/elec) * wsp_0/epsb * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+					farfield += -(hbar/elec) * wsp_0/epsb * r_unit * exponent * (unit_dyad_term - n_dyad_term)
 		w_mode = wsp_0*hbar/elec+coupling
 		interaction.append(coupling)
 		mode.append(w_mode)
@@ -107,7 +107,7 @@ for epsb in np.linspace(1,1,1):
 
 	
 	#print len(NSNS)	
-epsb = np.linspace(1,30,30)
+epsb = np.linspace(0.1,5,50)
 
 plt.figure()
 #plt.subplot(2,1,1)
@@ -117,9 +117,9 @@ plt.plot(epsb,interaction,linewidth=3,label='NNN')
 plt.scatter(epsb,np.add(NF[0],IF[0]),label = 'NNN NF + IF', color = 'C0', marker = 'o')
 plt.scatter(epsb,FF[0],label = 'NNN FF', color = 'C0', marker = 's')
 plt.show()
-#np.savetxt('dielectric_N_S.txt',np.real(mode))
-np.savetxt('N_S_coupling.txt',np.real(interaction))
-np.savetxt('N_S_near_mid.txt',np.real(np.add(NF[0],IF[0])))
-np.savetxt('N_S_far.txt',np.real(FF[0]))
+np.savetxt('dielectric_NNN.txt',np.real(mode))
+np.savetxt('NNN_coupling.txt',np.real(interaction))
+np.savetxt('NNN_near_mid.txt',np.real(np.add(NF[0],IF[0])))
+np.savetxt('NNN_far.txt',np.real(FF[0]))
 
 

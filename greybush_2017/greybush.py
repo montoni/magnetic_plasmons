@@ -13,7 +13,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 31 #number of particles
+numPart = 13 #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -21,15 +21,15 @@ hbar = 1.054571726e-34; # modified Planck in J*s
 c = 2.99e10; # speed of light in cm/s
 eps0 = 8.85418782e-12; # permittivity of free space
 Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
-epsinf = 3.77; 
+epsinf = 9.84; 
 '''Properties for silver.'''
-Eplasma = 1.46599161e-18; # J
-gamma = 0.05*elec/(hbar)
+Eplasma = 9.0*elec/hbar; # J
+gamma = 0.069*elec/(hbar)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
-epsb = 1
+epsb = 2.1
 
-for r in range(25,26):
-	a0 = r*10**-7; #sphere radius in cm
+for r in range(1,2):
+	a0 = 27.5*r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = (r-1)*10
 	''' now determine geometry.'''
@@ -87,11 +87,11 @@ for r in range(25,26):
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = mie_omegas[index]*elec/hbar
+	wsp_0 = 1.7*elec/hbar#(2.6*elec/hbar)*math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb) #mie_omegas[index]*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
-	for mode in range(0,5):
+	for mode in range(0,10):
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.0000001:
 			if count == 1:
 				wsp = wsp_0
@@ -100,7 +100,7 @@ for r in range(25,26):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			wavenumber = (w_0*math.sqrt(epsb))/(c)
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
@@ -131,7 +131,7 @@ for r in range(25,26):
 						exponent = np.exp(1j*w_0*Rmag/c)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -np.real(ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[n,m] = -np.real(ge)/epsb#*(hbar/elec)*wsp #this has the minus sign we need.
 						#H[m,n] = np.conj(-ge)
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 			Ht = np.matrix.transpose(H) # this is the transpose of H
@@ -146,6 +146,7 @@ for r in range(25,26):
 			eigenVectors = v[:,idx] # sorting
 
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
+		print w_0*hbar/elec
 		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
 		x,y = zip(*Loc)
 		u,v = zip(*vec)
