@@ -1,0 +1,26 @@
+#!/bin/bash
+##
+## !! _NEVER_ remove # signs from in front of PBS or from the line above !!
+##
+## RENAME FOR YOUR JOB
+#PBS -N three_chains_nm1
+
+## Run the job on 8 cores.
+##
+## WALLTIME DEFAULTS TO ONE HOUR - ALWAYS SPECIFY FOR LONGER JOBS
+## If the job doesn't finish in 30 minutes, cancel it
+#PBS -l nodes=4:ppn=16,walltime=168:00:00
+
+## EDIT FOR YOUR JOB
+## Put the output from jobs into the below directory
+#PBS -o /gscratch/stf/montoni/magnets_narrow/twomer
+## Put both the stderr and stdout into a single file
+#PBS -j oe
+
+## EDIT FOR YOUR JOB
+## Sepcify the working directory for this job
+#PBS -d /gscratch/stf/montoni/magnets_narrow/twomer
+
+module load matlab_2015b
+
+matlab -nodisplay -r two_15_nm

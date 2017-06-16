@@ -104,6 +104,7 @@ for r in range(8,9):
 					pass
 				else:
 					loc_count += 1
+<<<<<<< HEAD
 					k_dot_products_near += (3*p_nn_p[0,loc_count] - p_dot_p[0,loc_count])*(np.exp(1j*(neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))
 					k_dot_products_mid += (3*p_nn_p[0,loc_count] - p_dot_p[0,loc_count])*(np.exp(1j*(neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))
 					k_dot_products_far += (-p_nn_p[0,loc_count] + p_dot_p[0,loc_count])*(np.exp(1j*(neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))
@@ -113,15 +114,26 @@ for r in range(8,9):
 			k_dot_products = near_tot * np.absolute(k_dot_products_near) + mid_tot * np.absolute(k_dot_products_mid) + far_tot * np.absolute(k_dot_products_far)
 			omega_plus[i_count-1,j_count-1] = np.sqrt(1 + 1*(k_dot_products))#wsp_0*np.sqrt(1 + 2*k_dot_products)
 			omega_minus[i_count-1,j_count-1] = np.sqrt(1 - 1*(k_dot_products))#wsp_0*np.sqrt(1 - 2*k_dot_products)
+=======
+<<<<<<< HEAD
+					k_dot_products += H_int[0,loc_count]*(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1])))	
+=======
+					k_dot_products += H_int[0,loc_count]*np.sqrt(np.square(np.cos((neighbor[0]*k_vector[0] + neighbor[1]*k_vector[1]))))
+>>>>>>> 23f1ea348cb13ea4d3c878b1d00b348a5a2b4147
+			omega_plus[i_count-1,j_count-1] = wsp_0 + wsp_0*k_dot_products#wsp_0*np.sqrt(1 + 2*k_dot_products)
+			omega_minus[i_count-1,j_count-1] = wsp_0 - wsp_0*k_dot_products#wsp_0*np.sqrt(1 - 2*k_dot_products)
+>>>>>>> e94e67c4331899ceaee706b1b970aa0f0b26448f
 	[iii,jjj] = np.meshgrid(np.linspace(-math.pi,math.pi,grid_size),np.linspace(-math.pi,math.pi,grid_size))
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
+<<<<<<< HEAD
+	ax.plot_surface(iii,jjj,omega_minus,cmap='bwr',linewidth=0)
+=======
 	ax.plot_surface(iii,jjj,omega_minus,color='blue')
 	ax.plot_surface(iii,jjj,omega_plus,color='red')
+>>>>>>> 23f1ea348cb13ea4d3c878b1d00b348a5a2b4147
 	plt.show()
 
 
 #plt.contourf(iii,jjj,omega_minus,cmap='bwr')
 	#plt.colorbar()
-
-

@@ -3,7 +3,7 @@ close all
 clc
 
 epsinf = 3.77;
-gamma = 0.05/50;
+gamma = 0.05;
 wp = 9.1;
 
 omega = linspace(1,6,251);
@@ -19,4 +19,4 @@ k = sqrt((epsmag - epsr)/2);
 plot(omega,epsr,omega,epsi)
 
 thing_to_save = [omega',n',k'];
-save('silver_smallgamma.dat','thing_to_save','-ascii')
+save('silver_normal.dat','thing_to_save','-ascii')
