@@ -4,8 +4,8 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-static_NN = []
-static_NS = []
+NN = []
+NS = []
 bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
 bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
@@ -28,7 +28,7 @@ gamma = 0.05*elec/(hbar*16)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 
-for r in range(1,2):
+for r in range(1,31):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = (r-1)*10
@@ -86,7 +86,7 @@ for r in range(1,2):
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
-	for mode in range(0,3):
+	for mode in range(0,2):
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.0000001:
 			if count == 1:
 				wsp = wsp_0
@@ -147,4 +147,14 @@ for r in range(1,2):
 		plt.quiver(x,y,u,v)
 		plt.title("radius = " + str(r))
 		plt.show()'''
-		np.savetxt('quad_' + str(mode) + '_vec.txt',vec)
+		#np.savetxt('quad_' + str(mode) + '_vec.txt',vec)
+		if abs(np.sum(vec)) < 1e-10:
+			NN.append(eigen[2*numPart - (mode+1)])
+		else:
+			NS.append(eigen[2*numPart - (mode+1)])
+
+nearest = np.subtract(NN,NS)
+plt.figure()
+plt.plot(np.linspace(1,30,30),nearest,linewidth=3)
+plt.show()
+np.savetxt('nearest_magnetic_coupling.txt',nearest)

@@ -4,8 +4,8 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
-nn_near = np.loadtxt('../dielectric_study/NN_right.txt')
-ns_near = np.loadtxt('../dielectric_study/NS_right.txt')
+nearest = np.loadtxt('../varying_particle_number/nearest_magnetic_coupling.txt')
+#ns_near = np.loadtxt('../dielectric_study/NS_right.txt')
 #nn_sec = np.loadtxt('../unfused_twomer/NN_sec_near')
 #ns_sec = np.loadtxt('../unfused_twomer/NS_sec_near')
 #nn_third = np.loadtxt('../unfused_twomer/NN_third_near')
@@ -17,7 +17,7 @@ dipole =[]
 nodipole =[]
 excited = []
 
-for r in range(10,301):
+for r in range(1,31):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 6 #number of particles
 	a0 = .1*r*10**-7 #sphere radius in cm
@@ -27,8 +27,8 @@ for r in range(10,301):
 	''' now determine geometry.'''
 	''' begin with electric dipole on the six-member ring '''
 	# make unit vectors in centimeters.
-	e1 = float(1)/float(2) * (2.2*a0) ; #short side of 30-60-90 triangle
-	e2 = float(math.sqrt(3))/float(2) * (2.2*a0); #long side of 30-60-90 triangle
+	e1 = float(1)/float(2) * (3*a0) ; #short side of 30-60-90 triangle
+	e2 = float(math.sqrt(3))/float(2) * (3*a0); #long side of 30-60-90 triangle
 	m_sep = 2*e2
 	Loc = [np.array([0,2*e1]),np.array([-e2,e1]),np.array([-e2,-e1]),
 		   np.array([0,-2*e1]),np.array([e2,-e1]),np.array([e2,e1])]
@@ -70,18 +70,20 @@ for r in range(10,301):
 			#if w_0 > wsp:
 			#	w_0 = 3.5*elec/hbar
 		print eigen[2*numPart-1]
+		wavenumber = math.sqrt(epsb) * w_0 / c
 		alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
-		msp = (ch**2)/(alphasp*((wsp)**2)); # sp mass (grams)
+		alpha = (alphasp**-1 - 1j*(2./3.)*wavennumber**3)**-1
+		msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 		tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 		gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 		#print gamma_ret
 		gamma_eV = gamma_ret*hbar/elec
-		wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2); # sp frequency (rad/s) corrected for radiation damping
+		wsp = math.sqrt((wsp_0)**2); # sp frequency (rad/s) corrected for radiation damping
 		print wsp
 		for n in range (0,2*numPart):
-			for m in range (n,2*numPart):
+			for m in range (0,2*numPart):
 				if m == n: #if m and n are the same, the hammy gets the plasmon energy
-					H[n,m] = (hbar*wsp/elec)**2
+					H[n,m] = 1
 					#print H[n,m]
 				elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 					H[n,m] = 0
@@ -91,22 +93,16 @@ for r in range(10,301):
 					nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 					p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 					p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
-					r_cubed = Rmag**-3 #this is the 1/r^3 term (static)
-					r_squared = (w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-					r_unit = (w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
-					#space_exp = np.exp(1j*w_0*Rmag/c)
+					r_cubed = alpha*Rmag**-3 #this is the 1/r^3 term (static)
+					r_squared = alpha*(wwavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = alpha*(wavenumber**2)/(Rmag)
 					space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-					ge = (ch**2)*(r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
+					ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 					gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-					H[n,m] = -(ge/msp)*((hbar/elec)**2) #this has the minus sign we need.
+					H[n,m] = -(ge) #this has the minus sign we need.
 					#print H[n,m]
-		diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
-		Ht = np.matrix.transpose(H) # this is the transpose of H
-		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
-		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-		#print Hfull
-		w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		w,v = scipy.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 		#print w
 		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 		eigenValues = w[idx] # sorting
@@ -115,7 +111,7 @@ for r in range(10,301):
 		print eigen
 	print eigen[2*numPart-1]
 	#raw_input("press Enter to continue...")
-	numRings = 16
+	numRings = 2
 	E_ring = eigen[2*numPart-1]
 	omega_ring = E_ring*elec/hbar
 	Loc_mag = [np.array([0,0,0]),np.array([2*e2,0,0]),np.array([4*e2,0,0]),np.array([6*e2,0,0]),
