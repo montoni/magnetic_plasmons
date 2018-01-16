@@ -30,7 +30,7 @@ for epsb in range(1,2):
 	NF = [[],[]]
 	IF = [[],[]]
 	FF = [[],[]]
-	for r in range (1,31):
+	for r in range (1,2):
 		a0 = r*10**-7; #sphere radius in cm
 		index = r*10 - 10
 		''' now determine geometry.'''
@@ -57,7 +57,7 @@ for epsb in range(1,2):
 		'''initialize w_0 and eigen'''
 		w_0 = 3*elec/hbar
 		eigen = np.ones(2*numPart)
-		for mode in range(0,3):
+		for mode in range(2,3):
 			while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00000001:
 				if count == 1:
 					wsp = wsp_0
@@ -107,17 +107,19 @@ for epsb in range(1,2):
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
 			vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+			#np.savetxt('vec_mode_'+str(mode),np.real(vec))
+			#continue
 			grid_x = 2.5*e2
 			grid_y = 2.5*e1
-			size = 251
+			size = 101
 			Bfield_total = np.zeros((size,size),dtype=float)
 			for number in range(0,13):
 				point = Loc[number]
 				xcount = 0
 				Bfield = np.empty((size,size),dtype=float)
-				for xx in np.linspace(-2.5*e1,5.5*e1,size):
+				for xx in np.linspace(-3*e1,6*e1,size):
 					ycount = 0
-					for yy in np.linspace(-2.5*e2,2.5*e2,size):
+					for yy in np.linspace(-3*e2,3*e2,size):
 						rmag = np.sqrt((point[0]-yy)**2 + (point[1]-xx)**2)
 						nhat = -([yy,xx]-point)/rmag
 						#print rmag
@@ -131,16 +133,16 @@ for epsb in range(1,2):
 					xcount += 1
 				Bfield_total = Bfield_total + Bfield
 			# ,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
-			xx = np.linspace(-2.5*e2,2.5*e2,size)
-			yy = np.linspace(-2.5*e1,5.5*e1,size)
+			xx = np.linspace(-3*e2,3*e2,size)
+			yy = np.linspace(-3*e1,6*e1,size)
 			
 			u,v = zip(*vec)
 			xloc, yloc = zip(*Loc)
 			plt.figure()
-			plt.contourf(xx,yy,Bfield_total,cmap='bwr',levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30))
+			plt.contourf(xx,yy,Bfield_total/np.amin(Bfield_total),cmap='bwr',levels=np.linspace(-1,1,21))
 			#plt.colorbar()
 			plt.tight_layout()
-			plt.scatter(xloc,yloc)
+			#plt.scatter(xloc,yloc)
 			plt.quiver(xloc,yloc,u,v)
 			plt.savefig('mode_'+str(mode)+ '_field.pdf')
 			plt.show()

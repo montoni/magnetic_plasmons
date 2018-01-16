@@ -1,0 +1,245 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a (brief) model paper using the achemso class
+%% The document class accepts keyval options, which should include
+%% the target journal and optionally the manuscript type.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal=jpccck,manuscript=article]{achemso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional packages needed here.  Only include packages
+%% which are essential, to avoid problems later. Do NOT use any
+%% packages which require e-TeX (for example etoolbox): the e-TeX
+%% extensions are not currently available on the ACS conversion
+%% servers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage[T1]{fontenc}       % Use modern font encodings
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If issues arise when submitting your manuscript, you may want to
+%% un-comment the next line.  This provides information on the
+%% version of every file you have used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Meta-data block
+%% ---------------
+%% Each author should be given as a separate \author command.
+%%
+%% Corresponding authors should have an e-mail given after the author
+%% name as an \email command. Phone and fax numbers can be given
+%% using \phone and \fax, respectively; this information is optional.
+%%
+%% The affiliation of authors is given after the authors; each
+%% \affiliation command applies to all preceding authors not already
+%% assigned an affiliation.
+%%
+%% The affiliation takes an option argument for the short name.  This
+%% will typically be something like "University of Somewhere".
+%%
+%% The \altaffiliation macro should be used for new address, etc.
+%% On the other hand, \alsoaffiliation is used on a per author basis
+%% when authors are associated with multiple institutions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Nicholas P. Montoni}
+\author{Steven C. Quillin}
+\author{Charles Cherqui}
+\affiliation[Department of Chemistry, University of Washington]
+{Department of Chemistry, University of Washington, Seattle, WA 98195}
+\author{Niket Thakkar}
+\affiliation[Department of Applied Mathematics, University of Washington]
+{Department of Applied Mathematics, University of Washington, Seattle, WA 98195}
+\author{David J. Masiello}
+\affiliation[Department of Chemistry, University of Washington]
+{Department of Chemistry, University of Washington, Seattle, WA 98195}
+\alsoaffiliation[Department of Applied Mathematics, University of Washington]
+{Department of Applied Mathematics, University of Washington, Seattle, WA 98195}
+\email{masiello@chem.washington.edu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The document title should be given as usual. Some journals require
+%% a running title from the author: this should be supplied as an
+%% optional argument to \title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[]
+    {Understanding Retardation Effects on the Energy Ordering of Magnetic Plasmons}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Some journals require a list of abbreviations or keywords to be
+%% supplied. These should be set up here, and will be printed after
+%% the title and author information, if needed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abbreviations{MNP, LSPR, EELS}
+\keywords{plasmon, hybridization, magnetic, retardation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The manuscript does not need to include \maketitle, which is
+%% executed automatically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The "tocentry" environment can be used to create an entry for the
+%% graphical table of contents. It is given here as some journals
+%% require that it is printed as part of the abstract page. It will
+%% be automatically moved as appropriate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tocentry}
+
+Some journals require a graphical entry for the Table of Contents.
+This should be laid out ``print ready'' so that the sizing of the
+text is correct.
+
+Inside the \texttt{tocentry} environment, the font used is Helvetica
+8\,pt, as required by \emph{Journal of the American Chemical
+Society}.
+
+The surrounding frame is 9\,cm by 3.5\,cm, which is the maximum
+permitted for  \emph{Journal of the American Chemical Society}
+graphical table of content entries. The box will not resize if the
+content is too big: instead it will overflow the edge of the box.
+
+This box and the associated title will always be printed on a
+separate page at the end of the document.
+
+\end{tocentry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The abstract environment will automatically gobble the contents
+%% if an abstract is not used by the target journal.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Magnetic plasmons, the collective response of cyclic arrangements of electric plasmon-supporting metal nanoparticles, have been of recent theoretical and experimental interest. As magnetic-plasmon-supporting aggregates are often large (hundreds of nanometers to microns in size), information takes time to propagate across such nanostructures. As a result, they are not well-described in the quasistatic, or infinite speed of light, limit. In this Letter we show that for small magnetic systems the quasistatic approximation is a good one, but as the systems grow in size retardation effects must be considered. We further exemplify that retardation effects contribute to changes in the energy-ordering of collective plasmonic modes.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+When the conduction electrons in a metal are confined by a surface much smaller than their mean free path, for example, a small metal nanosphere, an external electric field can force these electrons to collect on one side of the sphere\cite{KREIBIG1985}. Releasing the force causes the electrons to oscillate collectively and coherently about their equilibrium configuration. This quantized plasma oscillation is known as a localized surface plasmon resonance (LSPR) or simply as a plasmon. The lowest energy LSPR of a sphere is its dipole plasmon, so named because at any given instant there are two distinct regions of positive and negative charge on the surface of the sphere.
+
+The plasmons of metal nanoparticles (MNPs) oscillate at optical frequencies, and the dipole plasmons couple to the electromagnetic field of light. When two MNPs are brought together, their plasmons can hybridize, or mix, producing a new set of plasmonic modes\cite{Lucas1976,ARAVIND1981,Xu1995,Mischenko1995}. The study of these collective plasmonic modes is the focus of plasmon hybridization theory, which seeks to explain how they arise and behave in large collections of nanoparticles. Plasmon hybridization theory implements the quasistatic approximation, which takes the speed of light to be infinite and thus neglects the idea that it takes time for information to propogate through space. However, when studying large particles or aggregates of particles with large spatial extent, retardation effects play a role in the collective plasmonic behavior\cite{Kottman2001,Gu2010}. From dimers, to chains of nanoparticles, to 2-D arrays of increasing size, determining the effects of retardation on plasmon hybridization has been of recent interest\cite{Rechbacher2003,Chumanov2010,Abajo2008,vonPlessen2007,Schatz2003,Royer2005} .
+
+A second, but related, new development in plasmon hybridization theory are rings of three or more metal nanoparticles arranged on the vertices of a regular polygon that support a collective mode in which all of the dipole plasmons are oriented head-to-tail, as demonstrated in Figure~\ref{fig1}. This effectively generates a fictitious, oscillating current loop which sets up an oscillating magnetic dipole moment in the center of the ring\cite{Alu2006,Alu2008,Liu2011,Nord2006,Cherqui2014}. These so-called magnetic plasmons are the lowest-energy collective modes of the oligomers and couple to and enhance the magnetic field of incident light\cite{Shalaev2007,Qian2015,Nord2007}, offering a route to applications such as solar cell enhancement\cite{Graydon2011,Alu2014solar,Le2015solar}, biosensing and detection\cite{Zia2010trans,Noginova2008trans,Wang:13,Fan2015,Wei2015,Shvets2012,Altug2012bio,Nord2011fano}, and information storage and propagation\cite{Zhang2006,NordHal2011,NordHal2012}. In this Letter, the magnetic modes of metal nanoparticle oligomers are analyzed using an extension of plasmon hybridization theory to include retardation effects as well as electron energy-loss spectroscopy (EELS) simulations in order to unravel the energy-ordering of the magnetic modes of multi-ring oligomer systems. It is further shown that the hybridization of magnetic plasmons\cite{Zhang2007} is well-described through the retarded hybridization of electric plasmons.
+
+Plasmon hybridization theory treats localized surface plasmon resonances as point dipoles centered on the nanoparticles with which they are associated that interact through dipole-dipole coupling. In the quasistatic limit, these dipoles couple only through time-independent, electric near-field interactions\cite{jackson_classical_1999}:
+
+\begin{equation}
+  U_{\textrm{qs}} = -\textbf{p}_2 \cdot \textbf{E}_{\textrm{qs},1} = -\frac{1}{4\pi\varepsilon_0}\left[\frac{3(\textbf{p}_2 \cdot \hat{\textbf{r}}) (\hat{\textbf{r}} \cdot \textbf{p}_1) - \textbf{p}_2 \cdot \textbf{p}_1}{r^3}\right] = -\textbf{p}_2 \cdot \boldsymbol{\Lambda}_{\textrm{qs}} \cdot \textbf{p}_1. \label{eqn1}
+  \end{equation}
+
+Here, $\textbf{p}_i$ is the dipole moment of each plasmon, $\textbf{E}_{\textrm{qs}}$ is the near-electric field in the quasistatic limit, and $r$ is the distance between dipoles with associated unit vector $\hat{\textbf{r}}$.
+
+When the distance between nanoparticles becomes large, this approximation breaks down and intermediate- and far-field effects must be considered, as well as the time-delay effects in the near-field\cite{jackson_classical_1999}:
+
+\begin{equation}
+  U_{\textrm{nf}} = U_{\textrm{qs}}\, \cos\left(\frac{\omega r}{c}\right)=-\textbf{p}_2 \cdot \boldsymbol{\Lambda}_{\textrm{nf}} \cdot \textbf{p}_1 ;\label{near}
+  \end{equation}
+
+\begin{equation}
+  U_{\textrm{if}} = -\textbf{p}_2 \cdot \textbf{E}_{\textrm{if},1} = -\frac{1}{4\pi\varepsilon_0}\frac{\omega}{c}\left[\frac{3(\textbf{p}_2 \cdot \hat{\textbf{r}})( \hat{\textbf{r}} \cdot \textbf{p}_1) - \textbf{p}_2 \cdot \textbf{p}_1}{r^2}\right]\,\sin\left(\frac{\omega r}{c}\right)=-\textbf{p}_2 \cdot \boldsymbol{\Lambda}_{\textrm{if}} \cdot \textbf{p}_1 ; \label{eqn2}
+\end{equation}
+
+\begin{equation}
+  U_{\textrm{ff}} = -\textbf{p}_2 \cdot \textbf{E}_{\textrm{ff},1} = -\frac{1}{4\pi\varepsilon_0}\frac{\omega^2}{c^2}\left[\frac{\textbf{p}_2 \cdot \textbf{p}_1 -(\textbf{p}_2 \cdot \hat{\textbf{r}}) (\hat{\textbf{r}} \cdot \textbf{p}_1)}{r}\right]\,\cos\left(\frac{\omega r}{c}\right)=-\textbf{p}_2 \cdot \boldsymbol{\Lambda}_{\textrm{ff}} \cdot \textbf{p}_1. \label{eqn3}
+\end{equation}
+
+Here, the $\omega$ term refers to the resonance frequency of a particular plasmonic mode of interest. The aim of this Letter is to incorporate the fully retarded electric field into plasmon hybridization theory and extend studies of retardation effects to magnetic plasmon oligomers. Specifically, systems of metal nanoparticles arranged in shapes analogous to benzene and naphthalene are explored\cite{Cherqui2014}. The benzene-like ring, comprising six nanoparticles as diagrammed in the fourth panel of Figure~\ref{fig1}, is denoted the magnetic monomer and forms the basic magnetic unit cell. The naphthalene-like ring comprises ten nanoparticles and is constructed with two monomers sharing two central nanoparticles; consequently, it is denoted the magnetic dimer and it is diagrammed in Figure~\ref{fig2}. Through theory and simulation, it will be shown that the rich mode structure of the dimer system is not accurately described by quasistatic plasmon hybridization theory for large particle sizes and separation distances. Rather, in order to fully capture the nuance of the energy ordering of the magnetic modes, retardation effects must be considered.
+
+%\begin{wrapfigure}
+\begin{figure}
+  \begin{center}
+  \includegraphics[scale=0.4,trim = 0.4in 4in 0.4in 0.5in,clip=true]{monomer_diagram_3.png}
+  \caption{Four examples of magnetic oligomer rings and their lowest-energy collective mode exhibiting a magnetic dipole moment. Note that each dipole is oriented ``tip-to-tail.'' This is similar to the lowest-energy mode of aromatic rings as diagrammed in various Frost diagrams in which the carbon ring has no nodes in its electron density. The hexamer system (bottom right) is the unit cell of this work.}
+  \label{fig1}
+  \end{center}
+\end{figure}
+%\end{wrapfigure}
+
+To implement plasmon hybridization theory in planar aggregates of nanoparticles, two orthognal, point dipoles are placed at the center of each nanoparticle and oriented in the plane of the aggregate. The dipoles are mapped onto a set of harmonic oscillators and are described by the following Hamiltonian\textbf{cite someone}:
+
+\begin{equation}
+  H = \sum_{i=1}^{n}\left[\frac{1}{2m_{sp,i}}\textbf{P}_{i}^{2}+\frac{1}{2}m_{sp,i}\omega_{sp,i}^{2}\right]-\sum_{i\neq j}\textbf{Q}_{i}\cdot\boldsymbol{\Lambda}_{\textrm{full},ij}\cdot\textbf{Q}_{j} \label{eqn4}
+\end{equation}
+where $\textbf{P}_i$ are the momenta conjugate to the coordinates $\textbf{Q}_{i}$, $\omega_{sp,i}$ are the individual LSPR frequencies of each oscillator, $m_{sp,i}$ are the LSPR masses and $\boldsymbol{\Lambda}_{\textrm{full},ij}=\boldsymbol{\Lambda}_{\textrm{nf},ij}+\boldsymbol{\Lambda}_{\textrm{if},ij}+\boldsymbol{\Lambda}_{\textrm{ff},ij}$. In order to reduce this to the quasistatic limit, $\boldsymbol{\Lambda}_{\textrm{full},ij}$ is replaced with $\boldsymbol{\Lambda}_{\textrm{qs},ij}$ as in Equation~\ref{eqn1}. Diagonalizing this Hamiltonian yields a set of eigenvalues and eigenmodes which correspond to the plasmonic modes of the system.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[trim = 1in 0.75in 1in 0.75in,clip=true,scale=0.4]{diagram_3.png}
+  \caption{A diagram of the magnetic dimer system of interest. Here, $r_0$ is the radius of each sphere and $r=2.2r_0$ is the center-to-center separation distance between spheres. Later in the Letter, electron energy-loss spectroscopy simulations are presented. Placing the electron beam at the blue dot selectively excites the north-south mode, and placing the beam at the purple dot selectively excites the north-north mode.}
+  \label{fig2}
+  \end{center}
+\end{figure}
+
+In the theoretical studies of Cherqui \textit{et al.}\cite{Cherqui2014}, it was found using the quasistatic tight-binding model described above that the magnetic dimer system supported twenty planar modes; the lowest-energy mode was characterized by two out-of-phase effective current loops around the rings, as shown in Figure~\ref{fig3}A, resulting in out-of-phase magnetic moments in each ring (denoted the North-South or NS mode) and the second lowest-energy mode was characterized by a single, in-phase, fictitious current loop about the entire system, as shown in Figure~\ref{fig3}B, so as to generate two in-phase magnetic dipole moments within the rings (denoted North-North or NN).
+
+However, at odds with the tight-binding model results, previous full-wave electrodynamics simulations\cite{Bigelow2012,Hohenester2012} conclude the opposite: the NN mode lies at lower energy than the NS mode. This discrepancy is the result of retardation effects, as the original tight-binding model used the quasistatic approximation to determine the energy-ordering of modes, while the simulations used the fully retarded electric field. Because retardation effects contribute more with growing size, small particle and ring sizes behave predictably within the quasistatic approximation and the NS mode is the lowest in energy. At larger sizes, when retardation effects contribute, the NN mode is the lowest in energy.
+
+The electric field in the quasistatic approximation is proportional to $\frac{1}{r^3}$ and it dictates that all dipole-dipole interactions are effectively nearest-neighbor interactions. In both the NN and NS mode, all of the nearest-neighbor interactions are ``bonding,'' energetically preferred interactions. However, considering only the central two particles shows a significant difference: the NS mode consists of head-to-tail, collinear dipoles at the center (Figure~\ref{fig3}A, green box), while the NN mode consists of anti-parallel dipoles at the center (Figure~\ref{fig3}B, red box). The $3(\textbf{p}_2 \cdot \hat{\textbf{r}}) (\hat{\textbf{r}} \cdot \textbf{p}_1)$ term in the coupling dictates that collinear dipoles are more energetically preferable than anti-parallel dipoles, despite the fact that these are both ``bonding'' interactions, so the NS mode is energetically preferred, followed by the NN mode. When the fully retarded field in taken into account, different dipole arrangements are preferred in different size and distance regimes.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[trim = 0.75in 0.8in 0.7in 1in,clip=true,scale=0.4]{nn-ns-boxes_3.png}
+  \caption{Two diagrams of the NS (A) and NN (B) modes of the magnetic dimer system. The diagrams show the differing dipole arrangements in each mode. The green and red boxes highlight the interactions between the center two nanoparticles in the NS and NN modes respectively. In the NS mode, the dipoles are in a collinear arrangement, which is energetically favorable over the anti-parallel arrangement of the NN mode. The blue and purple boxes show some of the long-distance interactions in the NS and NN modes, respetively. The blue box contains an anti-collinear arrangement of dipoles, which is more energetically unfavorable than the collinear arrangement contained within the purple box. This motif is repeated in both modes, making the long-distance interactions in the NN mode overall more favorable than those in the NS mode.}
+  \label{fig3}
+  \end{center}
+\end{figure}
+
+The fully retarded electric field is composed of three parts: the near-field term (Equation 2), the intermediate-field term that scales as $\frac{1}{r^2} $ (Equation 3), and the far-field term that scales as $ \frac{1}{r} $ (Equation 4). The intermediate-field term contributes the same energy ordering as the near-field term: collinear is favored more than anti-parallel. The far-field term, however, is energetically unfavorable for electrically ``bonding'' interactions and energetically preferable for electrically ``anti-bonding'' interactions. These three terms account for all of the retardation effects\cite{Purcell1973}.
+
+\begin{figure}
+  \includegraphics[scale=0.4]{dimer_interaction_3.png}
+  \caption{A comparison of the distance dependence of each of the portions of the fully retarded electric field for four dipole arrangements: from top left to bottom right, collinear, anti-parallel, anti-collinear, and parallel. The collinear and anti-collinear interactions are stronger at close range than the parallel and anti-parallel interactions. The anti-/collinear dipoles do not interact \textit{via} the far-field. The far-field term prefers the opposite energy orderingof the near- and intermediate-field terms for parallel and antiparallel arrangements. Finally, there are various regimes in which one term contributes the most negative (favorable) interaction energy.}
+  \label{fig4}
+\end{figure}
+
+To gain a better understanding of the three parts of the fully retarded electric field and how they dictate the interactions between dipole plasmons, the interaction strengths for the near-, intermediate-, and far-field were each computed for four hybridized modes of a silver nanosphere dimer: collinear, anti-parallel, anti-collinear, and parallel. The results of these computations are displayed in Figure~\ref{fig4} and show how the interactions terms behave in various size regimes. The most obvious trait to note is that the far-field term is zero for both collinear and anti-collinear arrangements of dipoles. Second, the collinear and anti-collinear interactions are exact opposites of each other, with the same being true for the parallel and anti-parallel arrangements, because these represent equal and opposite interactions. Third, due to the term in the fields that oscillates with space and frequency, the interaction strengths also have oscillatory behavior. Fourth, and perhaps most importantly, there are distinct distance regimes in which each term is more energetically favorable than the others. What this means is that at different length scales, different hybridized modes are more favorable than in the quasistatic limit. This final observation lends credence to the idea that the long-distance interactions in the NN mode are more favorable than those in the NS mode.
+
+Because the fully retarded electric field includes intermediate- and far-field interactions, the inter-particle coupling is no longer approximately a nearest-neighbor interaction, but rather a short- and long-distance coupling that accounts for the interactions among all particles. As the system grows larger, intermediate- and far-field interactions become stronger in proportion to the dominant near-field interactions. Focusing on the the blue and purple boxes in Figure~\ref{fig3}, there are two different interactions occurring. In the red box, the dipoles are in an anti-collinear, anti-bonding arrangement: an energetically unfavorable interaction in both the near- and intermediate-field terms. Conversely, the dipole arrangement in the green box is a bonding interaction, which is energetically preferred. Additionally, observing all of the complementary dipoles around the two ring system for both modes, it can be seen that the long-distance interactions in the NN mode are energetically preferable, and the long-distance interactions in the NS mode are energetically unfavorable. In the quasistatic limit, these interactions are weak, but when the intermediate- and far-field contributions are included, these interactions contribute to the total energy of each mode and the NN mode becomes energetically preferred over the NS mode at large enough sizes and separation distances.
+
+Returning to the tight-binding model, retardation effects are included by using the full interaction term in the Hamiltonian. The interaction terms depend on $\omega$, the frequency at which the collective mode resonates. This means that the Hamiltonian must now be diagonalized iteratively, beginning by using the LSPR frequency $\omega_{sp}$ and resubstituting the resonant frequency of the mode of interest until the value converges. Additionally, the contribution of radiation damping\cite{vonPlessen2007} is introduced by adding a term to the bulk damping coefficient proportional to $\tau=\frac{2e^2}{3m_{sp}c^3}$ which causes a slight redshift in the LSPR frequency. Figure~\ref{fig5} tracks the eigenvalues of the NN and NS mode as a function of radius using the full Hamiltonian. The nanoparticle radius ranges from 1 nm to 20 nm, and the center-to-center distance bewteen nanoparticles is always $2.2 \times r_0$, as in the diagram in Figure~\ref{fig2}. Below 10 nm, NS is the lowest-energy mode. Between 10 and 11 nm, the eigenvalues cross, and from 11 nm onward NN is the lowest-energy mode.
+
+\begin{figure}
+  \begin{center}
+  \includegraphics[trim= 0 0 0 0,clip=true,scale=0.25]{nn-ns-eigen_3.png}
+  \caption{The eigenenergies of the NS and NN modes are tracked as a function of increasing radius. The critical radius is between 10 and 11 nm, where the NN mode becomes energetically preferential to the NS mode.}
+  \label{fig5}
+  \end{center}
+\end{figure}
+
+This is further verified by full-wave electrodynamics simulations. EELS simulations on magnetic dimer systems of different sizes show that in the quasistatic limit the NN mode is always higher in energy than the NS mode. Conversely, fully retarded simulations show that the NN mode eventually redshifts past the NS mode with increasing dimer size. The NS and NN modes are normally lossy and energetically nearly degenerate, so a Drude model for silver with a reduced damping coefficient was used as the dielectric function for the spheres. Running simulations for sphere radii between 1 nm and 10 nm and separation distances of $2.2\times r_0$, it is found that the NN mode redshifts past the NS mode between 5 and 10 nm. The simulated EEL spectra are presented in Figure~\ref{fig6}. In the quasistatic limit, just as predicted, the modes did not change in energy with increasing particle size, due to the fact that the separation distances are parameterized by the radius. The interaction energy scales as $\frac{1}{r_{0}^{3}}$ and the polarizability scales as $r_{0}^{3}$, so these effects directly cancel and the modes don't change with increasing particle size in the quasistatic limit.
+
+\begin{figure}
+  \includegraphics[scale=0.4]{bem_spectra_2.png}
+  \caption{Simulated quasistatic and fully retarded EEL spectra for the magnetic dimer with $r_0$ = 1 nm, 2.5 nm, 5 nm, and 10 nm. When the particles are very small, the quasistatic NS (green) and NN (red) modes are nearly energetically degenerate with the fully retarded NS (blue) and NN (purple) modes. As the size increases, the red and green traces do not move, but the blue and purple traces begin to redshift. Between 5 and 10 nm, the purple trace redshifts past the blue trace, indicating that in this size regime the NN mode is energetically favorable.}
+  \label{fig6}
+\end{figure}
+
+It has been shown that for small magnetic oligomer systems, specifically naphthalene-like decamers of silver nanospheres, quasistatic plasmon hybridization theory and fully retarded, full-wave numerical simulations agree on the energy-ordering of the magnetic modes. However, as the individual nanoparticles become larger and proportionally farther apart, the quasistatic limit breaks down and the simulations predict a different energy-ordering than the tight-binding model. Introducing retardation effects into the tight-binding model requires including the time-dependence of the near-field as well as the entire intermediate- and far-field terms. Consideration of these retardation effects also introduces radiation damping, which further impacts the resonant frequencies and broadening of the collective modes. Implementing this and iteratively solving for the eigenvalues of the collective magnetic modes, it is shown that incuding the fully retarded electric field is all that is needed to properly predict the energy-ordering in agreement with simulation. This gives a new route to the qualitative characterization of large, multi-constituent nanoparticle aggregates and accurately prediciting the energy-ordering of the collective modes in various size regimes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The ``Acknowledgement'' section can be given in all manuscript
+%% classes.  This should be given within the ``acknowledgement''
+%% environment, which will make the correct section or running title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acknowledgement}
+Thanks everyone.
+\end{acknowledgement}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The appropriate \bibliography command should be placed here.
+%% Notice that the class file automatically sets \bibliographystyle
+%% and also names the section correctly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{references}
+\end{document}

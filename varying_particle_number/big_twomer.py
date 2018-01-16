@@ -4,7 +4,8 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 
-
+NN = []
+NS = []
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 
 elec = 1.60217662e-19 # regular coulombs
@@ -23,15 +24,16 @@ Eplasma = 1.46599161e-18; # J
 gamma = 0.05*elec/(hbar*16)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
-
-for r in range(100,101):
+wsp_0 = np.multiply([3.49, 3.31, 3.07, 2.75, 2.41, 2.11, 1.88, 1.7],elec/hbar)
+rcount = 0
+for r in [30,40,50,60,70,80,90,100]:
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
 	''' now determine geometry.'''
 	print index
 	# make unit vectors in centimeters.
-	rij = 2.75*a0
+	rij = 3*a0
 	part_per_ring = numPart/2 + 1
 	theta = 2*math.pi/part_per_ring
 	phi = theta/2.
@@ -76,16 +78,17 @@ for r in range(100,101):
 
 	'''More constants'''
 
-	count = 1
+	
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = (1.8)*elec/hbar
+	
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
 	for mode in range(0,2):
+		count = 0
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.0000001:
-			if count == 1:
-				wsp = wsp_0
+			if count == 0:
+				wsp = wsp_0[rcount]
 				count = count + 1
 				w_0 = 0
 			else:
@@ -98,7 +101,7 @@ for r in range(100,101):
 			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
 			#wsp = wsp_0
-			wsp = math.sqrt((np.real(wsp_0))**2 - (np.real(gamma_ret)/2)**2) # sp frequency (rad/s) corrected for radiation damping
+			wsp = math.sqrt((np.real(wsp_0[rcount]))**2 - (np.real(gamma_ret)/2)**2) # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
 				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
@@ -140,7 +143,21 @@ for r in range(100,101):
 		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
 		x,y = zip(*Loc)
 		u,v = zip(*vec)
-		plt.quiver(x,y,u,v)
+		'''plt.quiver(x,y,u,v)
 		plt.title("radius = " + str(r))
-		plt.show()
+		plt.show()'''
+		#np.savetxt('ten_mode_'+str(mode)+'.txt',vec)
+		if abs(np.sum(vec)) > 1e-10:
+			NS.append(eigen[2*numPart-(mode+1)])
+		else:
+			NN.append(eigen[2*numPart-(mode+1)])
+	rcount += 1
+r = [30,40,50,60,70,80,90,100]
+plt.figure()
+plt.scatter(r,NN)
+plt.scatter(r,NS)
+plt.xlabel('radius (nm)')
+plt.ylabel('energy (eV)')
+plt.savefig('bigger_particles.pdf')
+plt.show()
 		

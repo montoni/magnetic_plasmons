@@ -35,7 +35,7 @@ NF = [[],[]]
 IF = [[],[]]
 FF = [[],[]]
 NFIF = [[],[]]
-for r in np.linspace(1,1,1):
+for r in range(20,21):
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
@@ -94,7 +94,12 @@ for r in np.linspace(1,1,1):
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
+	grid_x = 3*e2
+	grid_y = 3*e1
+	size = 101
+	
 	for mode in range(0,2):
+		Bfield_total = np.zeros((size,size),dtype=complex)
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00001:
 			if count == 1:
 				wsp = wsp_0
@@ -153,18 +158,17 @@ for r in np.linspace(1,1,1):
 			eigenVectors = v[:,idx] # sorting
 
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
-		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
-		grid_x = 2.5*e2
-		grid_y = 2.5*e1
-		size = 251
-		Bfield_total = np.zeros((size,size),dtype=float)
+		vec = (mode+1)*np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+		
+		
 		for number in range(0,10):
 			point = Loc[number]
 			xcount = 0
-			Bfield = np.empty((size,size),dtype=float)
+			Bfield = np.empty((size,size),dtype=complex)
 			for xx in np.linspace(-grid_y,grid_y,size):
 				ycount = 0
 				for yy in np.linspace(-grid_x,grid_x,size):
+
 					rmag = np.sqrt((point[0]-yy)**2 + (point[1]-xx)**2)
 					nhat = -([yy,xx]-point)/rmag
 					#print rmag
@@ -173,7 +177,7 @@ for r in np.linspace(1,1,1):
 					if rmag < .5*a0:
 						Bfield[xcount,ycount] = 0
 					else:
-						Bfield[xcount,ycount] = np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))
+						Bfield[xcount,ycount] = (wavenumber**2)*np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))#*np.exp(1j*wavenumber*rmag)
 					ycount += 1
 				xcount += 1
 			Bfield_total = Bfield_total + Bfield
@@ -184,10 +188,10 @@ for r in np.linspace(1,1,1):
 		u,v = zip(*vec)
 		xloc, yloc = zip(*Loc)
 		plt.figure()
-		plt.contourf(xx,yy,Bfield_total,cmap='bwr',levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30))
-		#plt.colorbar()
+		plt.contourf(xx,yy,np.real(Bfield_total)/np.amax(np.real(Bfield_total)),levels=np.linspace(-1,1,21),cmap='bwr')
+		plt.colorbar()
 		plt.tight_layout()
-		plt.scatter(xloc,yloc)
-		plt.quiver(xloc,yloc,u,v)
-		plt.savefig('mode_'+str(mode)+ '_field.pdf')
+		#plt.scatter(xloc,yloc)
+		plt.quiver(xloc,yloc,u,v) #
+		plt.savefig('mode_'+str(mode)+ '_field.pdf') #,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
 		plt.show()
