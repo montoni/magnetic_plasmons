@@ -1,13 +1,23 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+from scipy.interpolate import spline
+
+
+omegas = [2.76,2.755,2.745,2.74,2.735,2.73,2.715,2.71,2.7,2.685,2.67,2.655,2.64,2.625,2.595,
+		  2.58,2.55,2.52,2.505,2.475,2.46,2.43,2.4,2.385,2.355,2.34,2.31,2.28,2.265,2.235]
+rad = np.linspace(1,30,30)
+radrad = np.linspace(1,30,300) #300 represents number of points to make between T.min and T.max
+
+omegas_smooth = spline(rad,omegas,radrad)
 
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
-numPart = 3
-numRings = 1
-
+numPart = 6
+numRings = 2
+Q = [[-math.sqrt(3)/2,-.5],[math.sqrt(3)/2,-.5],[0,1],
+	 [0,1],[-math.sqrt(3)/2,-.5],[math.sqrt(3)/2,-.5]]
 #mie_omegas = np.loadtxt('mie_omegas_eV.txt')
-
+# [.5,-math.sqrt(3)/2],[.5,math.sqrt(3)/2],[1,0],[-.5,-math.sqrt(3)/2],[-.5,math.sqrt(3)/2],[-1,0]
 light = 3.0e8 # speed of light in m/s
 hbar = 1.054e-34 # hbar in J*s
 nm = 1e-9 # how many nanometers are in a meter?
@@ -21,21 +31,26 @@ gamma = 0.05 # eV, reduced by a factor of 16
 epsinf = 3.77
 
 epsb = 1
-normal_modes = [[],[],[],[],[],[]]
+normal_modes = [[],[],[],[],[],[],[],[],[],[],[],[]]
 # create a loop over length scales, defined by particle radius
-radius = np.linspace(1,40,40)
+radius = np.linspace(1,30,30)
 for rad in radius:
 	
 	a0 = rad * nm
+	rij = 3*a0
 	inter_particle_dist = 3 * a0
 	theta = np.linspace(0,2*math.pi,numPart+1) # angles for placing particles around a circle
 	phi = math.pi/numPart # angle for determining distance from center of circle
 	dist_to_center = inter_particle_dist/(2*math.sin(phi)) # compute distance to center of ring
-	center = np.zeros((2,numRings))
-	# quick loop to place particles in the world
-	Loc = []
-	for part in range(numPart):
-		Loc.append(np.array([dist_to_center*math.cos(theta[part]), dist_to_center*math.sin(theta[part])]))
+	ey = .5 * rij
+	ex = math.sqrt(3)/2 * rij
+	Loc = [np.array([-ey-ex,ey]),np.array([-ey-ex,-ey]),np.array([-ey,0]),
+		   np.array([ey,0]),np.array([ey+ex,-ey]),np.array([ey+ex,ey])]
+	'''center = 
+				# quick loop to place particles in the world
+				Loc = []
+				for part in range(numPart):
+					Loc.append(np.array([dist_to_center*math.cos(theta[part]), dist_to_center*math.sin(theta[part])]))'''
 	#print Loc
 	#raw_input()
 	# particle axes lengths
@@ -57,13 +72,13 @@ for rad in radius:
 	if a == b:
 		L_gamma = [1/3,1/3]
 	# generate polarizability
-
+	alphasp = 0
 	for direction in [0,1]:
-		alphasp = (volume_ellipsoid/(4*math.pi))*(epsinf - epsb)/(epsinf + L_gamma[0]*(epsinf - epsb))
+		alphasp += (volume_ellipsoid/(4*math.pi))*(epsinf - epsb)/(epsinf + L_gamma[0]*(epsinf - epsb))
 
 	#print alphasp
 	#raw_input()
-	omega_sp = 2.8#np.sqrt((plasma_frequency/math.sqrt(epsinf + L_gamma[0]*(epsinf - epsb)))**2 - (gamma/2)**2)
+	omega_sp = omegas_smooth[int((rad-1)*10)]#np.sqrt((plasma_frequency/math.sqrt(epsinf + L_gamma[0]*(epsinf - epsb)))**2 - (gamma/2)**2)
 	#print omega_sp
 	#raw_input()
 	# initialize loop over modes, frequencies, etc.
@@ -73,10 +88,8 @@ for rad in radius:
 	omega_mode = omega_sp
 	count = 1
 
-	for mode in range(2*numPart):
+	for mode in range(3):
 		while np.absolute((omega_mode) - (eigen[2*numPart - (mode+1)])) > 0.0001:
-			Q = [[1,0],[0,1]] # dipole moments in x- and y-direction
-			
 			omega_mode = (eigen[2*numPart - (mode+1)])
 			print omega_mode
 
@@ -104,7 +117,7 @@ for rad in radius:
 						far_field = (Q_dot_Q - Q_nn_Q)/(r_ij_mag) * wavenumber**2
 						exponential = np.exp(1j*wavenumber*r_ij_mag)
 						coupling = (near_field + int_field + far_field) * exponential
-						H[i,j] = -(alpha * coupling)
+						H[i,j] = -(alpha*coupling)
 			#print H
 			#raw_input()
 			v, w = np.linalg.eig(H)
@@ -113,9 +126,9 @@ for rad in radius:
 			eigenVectors = w[:,idx]
 		normal_modes[mode].append(eigen[2*numPart - (mode+1)])
 		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],(numPart,2))
-		x,y = zip(*Loc)
+		'''x,y = zip(*Loc)
 		u,v = zip(*vec)
-		'''plt.figure()
+		plt.figure()
 		plt.quiver(x,y,u,v)
 		plt.show()'''
 

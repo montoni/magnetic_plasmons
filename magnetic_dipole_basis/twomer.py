@@ -4,6 +4,7 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
+nearest = np.loadtxt('../varying_particle_number/nearest_magnetic_coupling.txt')
 #north_north = np.loadtxt('../dielectric_study/NN_right.txt')
 #north_south = np.loadtxt('../dielectric_study/NS_right.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
@@ -101,7 +102,7 @@ for r in range(1,31):
 		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
 		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
 		#print Hfull
-		w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		w,v = scipy.linalg.eigh(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 		#print w
 		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 		eigenValues = w[idx] # sorting
@@ -109,6 +110,7 @@ for r in range(1,31):
 		eigen=np.sqrt(eigenValues)*wsp*hbar/elec # the eigenvalues have units of energy^2, so we take the square root
 		print eigen
 	print eigen[2*numPart-1]
+	#raw_input()
 	#raw_input("press Enter to continue...")
 	numRings = 2
 	E_ring = eigen[2*numPart-1]
@@ -156,9 +158,9 @@ for r in range(1,31):
 						space_exp = np.exp(1j*w_mag*Rmag/c)
 						space_cos = np.cos(w_mag*Rmag/c) #this is the real part of the e^ikr
 						space_sin = np.sin(w_mag*Rmag/c) #this is the imaginary part of the e^ikr
-						gm = (r_unit * (p_dot_p - p_nn_p) + (r_cubed + r_squared) * (3*p_nn_p - p_dot_p))*space_exp #this is p dot E
+						#gm = (r_unit * (p_dot_p - p_nn_p) + (r_cubed + r_squared) * (3*p_nn_p - p_dot_p))*space_exp #this is p dot E
 						#gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H_mag[n,m] = -np.real(gm) #this has the minus sign we need.
+						H_mag[n,m] = nearest[r-1]/2 #this has the minus sign we need.
 						#raw_input("press enter")
 			diag_mag = np.diag(np.diag(H_mag)) # this produces a matrix of only the diagonal terms of H
 			Ht_mag = np.matrix.transpose(H_mag) # this is the transpose of H
@@ -183,7 +185,7 @@ np.savetxt('NS_wrong.txt',NS)'''
 
 r = np.linspace(1,30,30)
 plt.plot(r,NN,r,NS,linewidth=3)	
-plt.legend(['Mode 1','Mode 2'])
+plt.legend(['NN','NS'])
 plt.xlabel('Particle Radius (nm) / Scale Factor')
 plt.ylabel('Energy (eV)')
 plt.show()

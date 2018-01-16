@@ -1,0 +1,28 @@
+clear all
+close all
+clc
+
+num = 15
+A = importdata(strcat('drude_polarization_plots/twomer_spectrum_nm',num2str(num)),' ',1);
+D = importdata(strcat('drude_polarization_plots/twomer_optical_nm',num2str(num)),' ',1);
+E = importdata(strcat('polarization_plots/twomer_eels_nm',num2str(num)),' ',1);
+clf
+eV = A.data(:,1);
+for ene = linspace(min(eV),max(eV),101);
+    B = load(strcat('drude_polarization_plots/twomer_pols_rad_',num2str(num),'_energy_',num2str(ene)));
+    clf
+    figure(1)
+    plot(eV,A.data(:,3)./max(A.data(:,3)),eV,D.data(:,3)./max(A.data(:,3)),eV,D.data(:,5)./max(A.data(:,3)),eV,E.data(:,2)./max(A.data(:,3)),eV,E.data(:,3)./max(A.data(:,3)))
+    hold on
+    plot([ene,ene],[0,1],'Color','black')
+    legend('Both Polarizations','Magnetic','Electric','NS','NN')
+    hold off
+    
+    figure(2)
+    C = reshape(B,[length(B)/2,2]);
+    plot(C(:,1),C(:,2))
+    xlabel('Y-Direction')
+    ylabel('Z-Direction')
+    pause
+
+end
