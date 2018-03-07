@@ -1,11 +1,33 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+'''for rad in [5]:
+	for eV in np.linspace(3,3.8,41):
+		if eV == 3.0:
+			eV = 3
+		else:
+			pass
+		NN_field = np.loadtxt('fields/2mer_nn/NN_2merBfield_'+str(rad)+'_nm_'+str(eV))
+		NS_field = np.loadtxt('fields/2mer_ns/NS_2merBfield_'+str(rad)+'_nm_'+str(eV))
+		NN_field = np.nan_to_num(NN_field)
+		NS_field = np.nan_to_num(NS_field)
+		Nlevels = np.linspace(NN_field.min(),NN_field.max(),21)
+		Slevels = np.linspace(NS_field.min(),NS_field.max(),21)
+		plt.subplot(2,1,1)
+		plt.contourf(NN_field,levels=Nlevels,cmap='bwr')
+		plt.colorbar()
+		plt.title('NN '+str(eV))
+		plt.subplot(2,1,2)
+		plt.contourf(NS_field,levels=Slevels,cmap='bwr')
+		plt.colorbar()
+		plt.title('NS '+str(eV))
+		plt.show()'''
+
 '''80:-1'''
 '''0:101'''
 '''eV = np.linspace(3.3,3.6,31)'''
 
-A = np.loadtxt('../eegs_seels/eegs_rod_3.3')
+'''A = np.loadtxt('../eegs_seels/eegs_rod_3.3')
 AA = np.loadtxt('../eegs_seels/eels_rod_3.3')
 AAA = np.loadtxt('../eegs_seels/seels_rod_3.3')
 
@@ -17,7 +39,7 @@ plt.legend(['EELS','SEELS'])
 plt.xlabel('Energy (eV)')
 plt.ylabel('Probability')
 plt.savefig('../eegs_seels/eels_seels_rod_3.3.pdf')
-plt.show()
+plt.show()'''
 
 '''n = 1
 eV = 1.6
@@ -53,13 +75,13 @@ plt.savefig('../eegs_seels/rod_diff_n='+str(n)+'_'+str(eV)+'.pdf')
 plt.show()'''
 
 
-'''for num in [30]:
+for num in [50]:
 	#B = np.loadtxt('CL_points/nm'+str(num)+'_anth_CL_NSN',skiprows=1)
-	A = np.loadtxt('greybush_2017/nm'+str(num)+'_31_CL_NN',skiprows=1)
-	C = np.loadtxt('greybush_2017/nm'+str(num)+'_31_CL_NS',skiprows=1)
+	A = np.loadtxt('greybush_2017/nm'+str(num)+'_13_CL_NN',skiprows=1)
+	C = np.loadtxt('greybush_2017/nm'+str(num)+'_13_CL_NS',skiprows=1)
 	#plt.subplot(2,1,1)
 	plt.figure()
-	plt.plot(A[:,0],A[:,2],C[:,0],C[:,2])
+	plt.plot(A[:,0],A[:,2],C[:,0],C[:,4])
 	plt.legend(['NN xz','NS z'])
 	#plt.subplot(2,1,2)
 	#plt.plot(A[80:-1,0],B[80:-1,1],A[80:-1,0],B[80:-1,4])
@@ -67,8 +89,8 @@ plt.show()'''
 	#plt.subplot(3,1,3)
 	#plt.plot(C[:,0],C[:,1],C[:,0],C[:,4])
 	#plt.legend(['x xz', 'x yz'])
-	plt.savefig('31_CL_'+str(num)+'nm.pdf')
-	plt.show()'''
+	#plt.savefig('greybush_2017/31_CL_'+str(num)+'nm.pdf')
+	plt.show()
 
 '''for num in [1]:
 	A = np.loadtxt('CL_points/nm15_phen_CL_NN1',skiprows=1)

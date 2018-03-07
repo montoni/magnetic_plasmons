@@ -8,7 +8,7 @@ static_NN = []
 static_NS = []
 bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
 bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
-mie_omegas = np.loadtxt('../mie_omegas_vacuum.txt')
+mie_omegas = np.loadtxt('../mie/mie_omegas_vacuum.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
@@ -23,13 +23,13 @@ eps0 = 8.85418782e-12; # permittivity of free space
 Q = [np.array([1,0]),np.array([0,1])] #dipole moments: 1st in x-direction, 2nd in y-direction
 epsinf = 3.77; 
 '''Properties for silver.'''
-Eplasma = 9.0*elec/hbar; # J
-gamma = 0.069*elec/(hbar)
+Eplasma = 9.15*elec/hbar; # J
+gamma = 0.05*elec/(hbar)
 wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 
 
-for r in range(10,11):
+for r in [30]:
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r-1
@@ -80,25 +80,25 @@ for r in range(10,11):
 	#print places
 	Loc = places
 	xloc, yloc = zip(*Loc)
-	plt.scatter(xloc,yloc)
+	#plt.scatter(xloc,yloc)
 	#raw_input()
-	plt.show()
+	#plt.show()
 	#raw_input()
 	'''This part builds the Hamiltonian. We start by initializing and choosing an initial omega value.'''
-	H = (np.zeros((2*numPart,2*numPart),dtype=float))#initialize Hammy with zeros, twenty by twenty in this case.
+	H = (np.zeros((2*numPart,2*numPart),dtype=complex))#initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = mie_omegas[index]*elec/hbar
+	wsp_0 = mie_omegas[index]*elec/hbar + (gamma/2)*1j
 	'''initialize w_0 and eigen'''
-	w_0 = 0
-	eigen = np.ones(2*numPart)
+	w_0 = wsp_0
+	eigen = np.zeros(2*numPart,dtype=complex)
 
-	for mode in range(0,2):
+	for mode in range(15,30):
 		Bfield_total = np.zeros((size,size),dtype=complex)
-		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.0000001:
+		while abs(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)]) > 0.000001:
 			if count == 1:
 				wsp = wsp_0
 				count = count + 1
@@ -131,9 +131,8 @@ for r in range(10,11):
 						r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
 						r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
 						r_unit = (alpha*wavenumber**2)/(Rmag) #this is the 1/r term (goes with the cross products)
-						#space_exp = np.exp(1j*w_0*Rmag/c)
-						space_cos = np.cos(wavenumber*Rmag) #this is the real part of the e^ikr
-						space_sin = np.sin(wavenumber*Rmag) #this is the imaginary part of the e^ikr
+						#space_cos = np.cos(wavenumber*Rmag) #this is the real part of the e^ikr
+						#space_sin = np.sin(wavenumber*Rmag) #this is the imaginary part of the e^ikr
 						exponent = np.exp(1j*wavenumber*Rmag)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
@@ -193,4 +192,4 @@ for r in range(10,11):
 		plt.quiver(x,y,u,v)
 		plt.title("radius = " + str(r))
 		plt.show()
-		np.savetxt('31_' + str(mode) + '_vec.txt',vec)
+		#np.savetxt('31_' + str(mode) + '_vec.txt',vec)

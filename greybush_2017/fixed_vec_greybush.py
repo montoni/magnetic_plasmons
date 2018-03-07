@@ -8,12 +8,12 @@ static_NN = []
 static_NS = []
 bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
 bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
-mie_omegas = np.loadtxt('../mie_omegas_vacuum.txt')
+mie_omegas = np.loadtxt('../mie/mie_omegas_vacuum.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 crossing = []
 elec = 1.60217662e-19 # regular coulombs
 
-numPart = 13 #number of particles
+numPart = 31 #number of particles
 
 me = 9.10938291e-28; # electron mass in g
 ch = 4.80326e-10; # electron charge in g^1/2 cm^3/2 s^-1
@@ -33,8 +33,8 @@ interaction = [[],[]]
 NF = [[],[]]
 IF = [[],[]]
 FF = [[],[]]
-NN_vec = np.loadtxt('13_0_vec.txt')
-NS_vec = np.loadtxt('13_4_vec.txt')
+NN_vec = np.loadtxt('31_0_vec.txt')
+NS_vec = np.loadtxt('31_1_vec.txt')
 vectors = [NN_vec,NS_vec]
 for r in range(1,51):
 	a0 = r*10**-7; #sphere radius in cm
@@ -95,7 +95,7 @@ for r in range(1,51):
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = mie_omegas[index]*elec/hbar
+	wsp_0 = mie_omegas[index]*elec/hbar + (gamma/2)*1j
 	#print mie_omegas[index]
 	#raw_input()
 	'''initialize w_0 and eigen'''
@@ -114,16 +114,17 @@ for r in range(1,51):
 		coupling = 0
 		w_mode = 0
 		count = 0
-		while abs(np.real(w_mode*hbar/elec) - np.real((1 + coupling)*wsp_0*hbar/elec)) > 0.000001:
+		while abs((w_mode*hbar/elec) - ((1 + coupling)*wsp_0*hbar/elec)) > 0.0001:
+			#print abs((w_mode*hbar/elec) - ((1 + coupling)*wsp_0*hbar/elec))
 			if count == 0:
 				w_mode = 0
 				count += 1
-				print count
+				#print count
 			else:
-				w_mode = (1 + np.real(coupling))*wsp_0
+				w_mode = (1 + (coupling))*wsp_0
 				count += 1
 				#print count
-				#print w_mode*hbar/elec
+				print w_mode*hbar/elec
 			wavenumber = math.sqrt(epsb)*w_mode/c
 			alpha = alphasp/(1 - 1j*(2./(3.*epsb))*(wavenumber**3)*alphasp)
 			coupling = 0
@@ -131,7 +132,7 @@ for r in range(1,51):
 			mid = 0
 			far = 0
 			for x in range(0,numPart):
-				for y in range(0,numPart):
+				for y in range(x,numPart):
 					if x == y:
 						continue
 					else:
@@ -144,11 +145,11 @@ for r in range(1,51):
 					r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
 					r_unit = (alpha*wavenumber**2)/(Rmag)
 					exponent = np.exp(1j*wavenumber*Rmag)
-					coupling += -(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)/2.
-					near += -r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)/2.
-					mid += 1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent/2.
-					far += -r_unit * exponent * (unit_dyad_term - n_dyad_term)/2.
-		w_mode = (1 + (coupling))*wsp_0*hbar/elec
+					coupling += -1*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+					near += -1*r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+					mid += 1*1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+					far += -1*r_unit * exponent * (unit_dyad_term - n_dyad_term)
+		w_mode = (1 + coupling)*wsp_0*hbar/elec
 		if mode == 0:
 			NN.append(w_mode)
 			interaction[0].append(coupling)
