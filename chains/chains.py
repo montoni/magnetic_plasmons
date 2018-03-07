@@ -58,7 +58,7 @@ for epsb in range(1,2):
 		'''initialize w_0 and eigen'''
 		w_0 = wsp_0
 		eigen = np.zeros(2*numPart)
-		for mode in range(0,3):
+		for mode in range(2,3):
 			mag_dipole = []
 			while abs(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)]) > 0.00001:
 				if count == 1:
@@ -116,33 +116,33 @@ for epsb in range(1,2):
 			    #w_old = w_0
 			    #w_0 = eigen[2*numPart-1]
 			vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
-			grid_x = 2.5*e2
+			grid_x = 4.5*e2
 			grid_y = 2.5*e1
 			size = 251
 			Bfield_total = np.zeros((size,size),dtype=float)
-			for number in range(0,14):
+			for number in range(0,numPart):
 				point = Loc[number]
 				xcount = 0
 				Bfield = np.empty((size,size),dtype=float)
 				for xx in np.linspace(-grid_y,grid_y,size):
 					ycount = 0
-					for yy in np.linspace(-4.5*e2,2.5*e2,size):
+					for yy in np.linspace(-grid_x,2.5*e2,size):
 						rmag = np.sqrt((point[0]-yy)**2 + (point[1]-xx)**2)
-						nhat = -([yy,xx]-point)/rmag
 						#print rmag
 						#raw_input()
 						#vec[number][0],vec[number][1] = vec[number][1],vec[number][0]
 						if rmag < .5*a0:
 							Bfield[xcount,ycount] = 0
 						else:
-							Bfield[xcount,ycount] = np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))
+							nhat = -([yy,xx]-point)/rmag
+							Bfield[xcount,ycount] = (wavenumber**2)*np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))#*np.exp(1j*wavenumber*rmag)
 						ycount += 1
 					xcount += 1
 				Bfield_total = Bfield_total + Bfield
 			# ,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
-			xx = np.linspace(-4.5*e2,2.5*e2,size)
+			xx = np.linspace(-grid_x,2.5*e2,size)
 			yy = np.linspace(-grid_y,grid_y,size)
-			
+			#Loc = places
 			u,v = zip(*vec)
 			xloc, yloc = zip(*Loc)
 			plt.figure()
@@ -153,3 +153,31 @@ for epsb in range(1,2):
 			plt.quiver(xloc,yloc,u,v)
 			plt.savefig('mode_'+str(mode)+ '_field.pdf')
 			plt.show()
+			'''screen_dist = 20*a0
+			Bfield_total = np.zeros((361,3),dtype=complex)
+			Efield_total = np.zeros((361,3),dtype=complex)
+			for number in range(0,numPart):
+				location = list(Loc[number])
+				location.append(0)
+				
+				Bfield = np.empty((361,3),dtype=complex)
+				Efield = np.empty((361,3),dtype=complex)
+				theta_count = 0
+				for theta in np.linspace(0,2*math.pi,361):
+					nhat = [0, np.cos(theta), np.sin(theta)]
+					point = np.multiply(screen_dist,nhat)
+					
+					rmag = np.sqrt((point[0]-location[0])**2 + (point[1]-location[1])**2 + point[2]**2)
+					nhat_dip = (location-point)/rmag
+					Bfield[theta_count] = (wavenumber**2)*np.cross(nhat_dip,vec[number])*np.exp(1j*wavenumber*rmag)
+					Efield[theta_count] = np.cross(Bfield[theta_count],nhat_dip)
+					theta_count += 1
+				Bfield_total = Bfield_total + Bfield
+				Efield_total = Efield_total + Efield
+			poynting = np.empty((361,1),dtype=complex)
+			for idx in range(361):
+				poynting[idx] = np.linalg.norm(np.real(np.cross(Efield_total[idx],np.conj(Bfield_total[idx]))))
+			theta = np.linspace(0,2*math.pi,361)
+			plt.figure()
+			plt.polar(theta,poynting)
+			plt.show()'''

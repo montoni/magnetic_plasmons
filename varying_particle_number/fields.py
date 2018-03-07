@@ -173,7 +173,7 @@ for r in np.linspace(1,1,1):
 					if rmag < .5*a0:
 						Bfield[xcount,ycount] = 0
 					else:
-						Bfield[xcount,ycount] = np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))
+						Bfield[xcount,ycount] = (wavenumber**2)*np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))*np.exp(1j*wavenumber*rmag)
 					ycount += 1
 				xcount += 1
 			Bfield_total = Bfield_total + Bfield
@@ -189,5 +189,5 @@ for r in np.linspace(1,1,1):
 		plt.tight_layout()
 		plt.scatter(xloc,yloc)
 		plt.quiver(xloc,yloc,u,v)
-		plt.savefig('mode_'+str(mode)+ '_field.pdf')
+		#plt.savefig('mode_'+str(mode)+ '_field.pdf')
 		plt.show()

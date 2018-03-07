@@ -14,8 +14,7 @@ omegas_smooth = spline(rad,omegas,radrad)
 '''Begin by choosing a number of particles and a number of rings, defining constants and material properties'''
 numPart = 6
 numRings = 2
-Q = [[-math.sqrt(3)/2,-.5],[math.sqrt(3)/2,-.5],[0,1],
-	 [0,1],[-math.sqrt(3)/2,-.5],[math.sqrt(3)/2,-.5]]
+Q = [[1,0],[0,1]]
 #mie_omegas = np.loadtxt('mie_omegas_eV.txt')
 # [.5,-math.sqrt(3)/2],[.5,math.sqrt(3)/2],[1,0],[-.5,-math.sqrt(3)/2],[-.5,math.sqrt(3)/2],[-1,0]
 light = 3.0e8 # speed of light in m/s
@@ -38,12 +37,14 @@ for rad in radius:
 	
 	a0 = rad * nm
 	rij = 3*a0
+	minor = a0
+	major = 5*a0
 	inter_particle_dist = 3 * a0
 	theta = np.linspace(0,2*math.pi,numPart+1) # angles for placing particles around a circle
 	phi = math.pi/numPart # angle for determining distance from center of circle
 	dist_to_center = inter_particle_dist/(2*math.sin(phi)) # compute distance to center of ring
-	ey = .5 * rij
-	ex = math.sqrt(3)/2 * rij
+	ey = rij/2
+	ex = math.sqrt(3) * rij/2
 	Loc = [np.array([-ey-ex,ey]),np.array([-ey-ex,-ey]),np.array([-ey,0]),
 		   np.array([ey,0]),np.array([ey+ex,-ey]),np.array([ey+ex,ey])]
 	'''center = 
@@ -54,7 +55,7 @@ for rad in radius:
 	#print Loc
 	#raw_input()
 	# particle axes lengths
-	a = 2.5*a0
+	a = 5*a0
 	b = a0
 	c = a0
 	volume_ellipsoid = (4./3.)*math.pi*a*b*c
@@ -88,7 +89,7 @@ for rad in radius:
 	omega_mode = omega_sp
 	count = 1
 
-	for mode in range(3):
+	for mode in range(5):
 		while np.absolute((omega_mode) - (eigen[2*numPart - (mode+1)])) > 0.0001:
 			omega_mode = (eigen[2*numPart - (mode+1)])
 			print omega_mode
@@ -137,6 +138,8 @@ plt.figure()
 plt.plot(radius,normal_modes[0])
 plt.plot(radius,normal_modes[1])
 plt.plot(radius,normal_modes[2])
+plt.plot(radius,normal_modes[3])
+plt.plot(radius,normal_modes[4])
 plt.show()
 
 

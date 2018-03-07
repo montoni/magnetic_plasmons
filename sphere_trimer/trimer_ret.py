@@ -9,7 +9,7 @@ mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 #north_south = np.loadtxt('../dielectric_study/NS_right.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 mag = []
-for r in range(10,301):
+for r in range(10,11):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 3 #number of particles
 	a0 = .1*r*10**-7 #sphere radius in cm
@@ -71,12 +71,14 @@ for r in range(10,301):
 		wsp = math.sqrt((wsp_0)**2 - (gamma_ret/2)**2); # sp frequency (rad/s) corrected for radiation damping
 		print wsp
 		for n in range (0,2*numPart):
-			for m in range (n,2*numPart):
+			for m in range (0,2*numPart):
 				if m == n: #if m and n are the same, the hammy gets the plasmon energy
 					H[n,m] = 1
 					#print H[n,m]
 				elif m == n+1 and n%2 == 0: #if m and n are on the same particle, they don't couple
 					H[n,m] = 0
+				elif n == m+1 and m%2 == 0: #if m and n are on the same particle, they don't couple
+					H[m,n] = 0
 				else: # all other dipoles are fair game
 					R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, compute the distance between them
 					Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
@@ -91,20 +93,17 @@ for r in range(10,301):
 					space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
 					ge = (r_unit *space_cos* (p_dot_p - p_nn_p) + (r_cubed*space_cos + r_squared*space_sin) * (3*p_nn_p - p_dot_p)) #this is p dot E
 					gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-					H[n,m] = -(ge) #this has the minus sign we need.
+					H[n,m] = -np.real(ge) #this has the minus sign we need.
+					H[m,n] = -np.real(ge)
 					#print H[n,m]
-		diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
-		Ht = np.matrix.transpose(H) # this is the transpose of H
-		Hedit = diag - Ht # this produces a matrix with zeros on the diagonal and the upper triangle, and the lower triangle has all the leftover values of H with the opposite sign
-		Hfull = H - Hedit # this combines H with the lower triangle (all negative) to produce a symmetric, full matrix
-		#print Hfull
-		w,v = scipy.linalg.eigh(Hfull) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
+		w,v = np.linalg.eig(H) #this solves the eigenvalue problem, producing eigenvalues w and eigenvectors v.
 		#print w
 		idx = w.argsort()[::-1] # this is the idx that sorts the eigenvalues from largest to smallest
 		eigenValues = w[idx] # sorting
-		eigenVectors = v[:,idx] # sorting
+		eigenVectors = v[idx,:] # sorting
 		eigen=np.sqrt(eigenValues)*wsp*hbar/elec # the eigenvalues have units of energy^2, so we take the square root
-		print eigen
+		print eigenVectors
+		raw_input()
 	print eigen[2*numPart-1]
 			#print eigenVectors[0:2,2*numPart-1]
 			#print eigen
