@@ -16194,7 +16194,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -18132,11 +18132,11 @@
        sodipodi:linespacing="125%"
        id="text68593"
        y="1447.2438"
-       x="-592.2124"
+       x="-607.91351"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.35853291px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="1447.2438"
-         x="-592.2124"
+         x="-607.91351"
          id="tspan68595"
          sodipodi:role="line">Far-Field</tspan></text>
     <text
@@ -18144,12 +18144,12 @@
        sodipodi:linespacing="125%"
        id="text68597"
        y="1489.6017"
-       x="-592.55859"
+       x="-608.25977"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.35853291px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          id="tspan68599"
          y="1489.6017"
-         x="-592.55859"
+         x="-608.25977"
          sodipodi:role="line">Near-+ Intermediate-Field</tspan></text>
     <path
        inkscape:connector-curvature="0"
@@ -19083,25 +19083,25 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.35853291px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-840.2619"
+       x="-844.18719"
        y="1449.9957"
        id="text22805"
        sodipodi:linespacing="125%"
        transform="scale(1.0190473,0.98130872)"><tspan
          sodipodi:role="line"
          id="tspan22807"
-         x="-840.2619"
+         x="-844.18719"
          y="1449.9957">Far-Field</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.35853291px;line-height:125%;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-840.60809"
+       x="-844.53339"
        y="1492.3538"
        id="text22809"
        sodipodi:linespacing="125%"
        transform="scale(1.0190473,0.98130872)"><tspan
          sodipodi:role="line"
-         x="-840.60809"
+         x="-844.53339"
          y="1492.3538"
          id="tspan22811">Near-+ Intermediate-Field</tspan></text>
     <path

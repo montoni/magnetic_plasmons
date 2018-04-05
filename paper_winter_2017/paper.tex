@@ -107,13 +107,13 @@ Abstract.
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Plasmon oligomers, or plasmon metamolecules, are clusters of noble metal nanoparticles (MNPs) that exhibit anomalously strong magnetic fields even though their individual nanoparticle building blocks do not. Since their discovery in 2004, such magnetic plasmon resonances have impacted a variety of applied and fundamental research from negative index metamaterials to quantum tunneling and Fano interferences \cite{Alu2006,Alu2008,Liu2011,Dionne2011,Qian2015,Dionne2016} [CITE US, NORDLANDER, SHALAEV]. Magnetic plasmons have been shown to couple to and enhance the magnetic field of light and hybridize analogously to electric plasmon resonances \cite{Zhang2006,Zhang2007,NordHal2011,NordHal2012,Cherqui2014,Cherqui2016,Engheta2017}. The magnetic properties of single oligomers, i.e. those clusters composed of only one ring of MNPs, are now well understood based upon quasistatic models \cite{Nord2006,Dionne2011,Dionne2016,Capolino2017}. So too are extendend two-dimensional networks of oligomers using quasistatic tight-binding models \cite{Schatz2003,Weick2013}. However, recently, a disconnect between these extremes and methods has been highlighted, revealing a lack of understanding of how oligomer assemblies behave in the so-called intermediate size regime \cite{NordHal2011,NordHal2012,Cherqui2014,Cherqui2016,Engheta2017}.
+Plasmon oligomers, or plasmon metamolecules, are clusters of noble metal nanoparticles (MNPs) that exhibit anomalously strong magnetic fields even though their individual nanoparticle building blocks do not. Since their discovery in 2004, such magnetic plasmon resonances have impacted a variety of applied and fundamental research from negative index metamaterials to quantum tunneling and Fano interferences \cite{Prodan2003,Shalaev2004,Alu2006,Alu2008,Liu2011,Dionne2011,Cherqui2014,Qian2015,Dionne2016,Cherqui2016}. Magnetic plasmons have been shown to couple to and enhance the magnetic field of light and hybridize analogously to electric plasmon resonances \cite{Zhang2006,Zhang2007,NordHal2011,NordHal2012,Cherqui2014,Cherqui2016,Engheta2017}. The magnetic properties of single oligomers, i.e. those clusters composed of only one ring of MNPs, are now well understood based upon quasistatic models \cite{Nord2006,Dionne2011,Dionne2016,Capolino2017}. So too are extendend two-dimensional networks of oligomers using quasistatic tight-binding models \cite{Schatz2003,Weick2013}. However, recently, a disconnect between these extremes and methods has been highlighted, revealing a lack of understanding of how oligomer assemblies behave in the so-called intermediate size regime \cite{NordHal2011,NordHal2012,Cherqui2014,Cherqui2016,Engheta2017,Fakhraai2018,Scherer2018}.
 
 Most crucial to this disconnect is the question of when and how retardation effects matter. For example, in the case of the two oligomer cluster the quasistatic approximation has been shown to deviate from full-wave numerical electrodynamics simulations in that it predicts a different energy-ordering of the two magnetic plasmon resonances \cite{Cherqui2014}. Retardation effects have been incorporated into models of single MNPs \cite{Gu2010}, dimers\cite{Oubre2004,vonPlessen2007}, and infinite chains and arrays \cite{Lucas1976,ARAVIND1981,Kottman2001,NordHal2003,NordProdan2004,Rechbacher2003,Schatz2003,Royer2005,Abajo2008,Gomez2009,Chumanov2010,Pinchuk2016}. However, with the exception of numerical studies, no analytical models to date include retardation effects in the description of magnetic plasmon resonances. It is the purpose of this paper to show that the incorporation of retardation effects corrects the aforementioned disagreement between model and simulation, and further points to the facile ability to tune the magnetic plasmon spectrum by changing the oligomer's size. The latter observation is important because it enables manipulation of the system's effective permittivity and permeability, thereby facilitating the design of future tunable optical metamaterials.
 
 
 
-In the following, we build a simple analytically-solvable model to demonstrate the size-dependent evolution of the magnetic plasmons in intermediate-size $N$-mers by including the effects of retardation in the mutual interaction of their underlying electric dipole plasmon resonances. Interestingly, as a function of size, the magnetic plasmons switch their ordering in analogy to the way that electric plasmons in hybridized nanoparticles switch order \cite{vonPlessen2007}. We further analyze the distinct radiative properties of these magnetic plasmons by computing the angle-resolved cathodoluminescence (CL) spectrum \cite{Hohenester2014,Coenen2011,CoPol2011,Polman2014}. Building from the intuition gained, we finally analyze the size-dependent evolution of the intermediate-size plasmonic nanoclusters measured in Ref. \cite{Engheta2017}. We find that the spectral ordering depends not only on aggregate size but also upon morphology, offering the ability to tune the magnetic plasmon spectrum. Such understanding may someday lead to advances in superlensing and electromagnetic cloaking at optical frequencies, as these applications benefit directly from the tunability of system's electric and magnetic response \cite{Pendry03,Fang2005,Cai2007,Pinchuk07,Shalaev2008,Valentine2008,Ferrari09}.
+In the following, we build a simple analytically-solvable model to demonstrate the size-dependent evolution of the magnetic plasmons in intermediate-size $N$-mers by including the effects of retardation in the mutual interaction of their underlying electric dipole plasmon resonances. Interestingly, as a function of size, the magnetic plasmons switch their ordering in analogy to the way that electric plasmons in hybridized nanoparticles switch order \cite{vonPlessen2007}. We further analyze the distinct radiative properties of these magnetic plasmons by computing the angle-resolved cathodoluminescence (CL) spectrum \cite{Hohenester2014,Coenen2011,CoPol2011,Polman2014}. Building from the intuition gained, we finally analyze the size-dependent evolution of the intermediate-size plasmonic nanoclusters measured in Ref. \cite{Engheta2017}. We find that the spectral ordering depends not only on aggregate size but also upon morphology, offering the ability to tune the magnetic plasmon spectrum. Such understanding may someday lead to advances in superlensing and electromagnetic cloaking at optical frequencies, as these applications benefit directly from the tunability of system's electric and magnetic response \cite{Pendry03,Fang2005,Cai2007,Pinchuk07,Shalaev2008,Valentine2008,Ferrari09,Tian2018}.
 
 
 
@@ -124,12 +124,12 @@ In the following, we build a simple analytically-solvable model to demonstrate t
 \section{Model Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{2mer_3mer_fields.pdf}
+\includegraphics{fig1.pdf}
 \caption{Magnetic field plots of the 2mer (a and b) and 3mer (c, d, and e) oligomers. Each system supports a number of closed-loop magnetic plasmon resonances equal to the number of rings in the system. The magnetic plasmons support an electric dipole moment (a, c, and d) support out-of-phase magnetic fields. The nodeless magnetic modes (b and e) support a net magnetic dipole moment are accessible to the magnetic field of light.}
 \label{field_plots}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Fig. \ref{field_plots} displays two model oligomer systems, the 2-mer and 3-mer, comprising 10 and 13 silver nanospheres in analogy to the molecules naphthalene and phenalene. Mapping the electric plasmons of each nanoparticle onto harmonic oscillators is now well-understood \cite{ARPC} [CITE US], and forms the basis for modeling the collective magnetic plasmon responses. In the limit where each nanoparticle, here restricted to a spherical geometry of radius $a$, possesses only an electric dipole plasmon resonance, the equations of motion dictating the electromagnetic behavior of the oligomer are
+Fig. \ref{field_plots} displays two model oligomer systems, the 2-mer and 3-mer, comprising 10 and 13 silver nanospheres in analogy to the molecules naphthalene and phenalene. Mapping the electric plasmons of each nanoparticle onto harmonic oscillators is now well-understood \cite{Cherqui2014,ARPC}, and forms the basis for modeling the collective magnetic plasmon responses. In the limit where each nanoparticle, here restricted to a spherical geometry of radius $a$, possesses only an electric dipole plasmon resonance, the equations of motion dictating the electromagnetic behavior of the oligomer are
 \begin{equation}
 \ddot{\textbf{q}}_i +\omega_{\textrm{sp}}^2\textbf{q}_i = \frac{e}{m_{\textrm{sp}}}\sum_{j\neq i}\textbf{E}_j(\textbf{r}_i),
 \label{equation_of_motion}
@@ -170,7 +170,7 @@ Retardation effects, however, remove this invariance and introduce radius-depend
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{2mer-3mer-eig.pdf}
+\includegraphics{fig2.pdf}
 \caption{Eigenenergies (a and c) and interaction energies (b and d) for the 2mer and 3mer. At small scales $r_0 < 5$ nm the magnetic modes are ordered as predicted using a quasistatic model, with NS (orange) lower in energy than aN (blue). This implies that for very small oligomer systems, the quasistatic approximation is still accurate. However, at sizes greater than $r_0 = 5$ nm and smaller than $r_0 = 20$ nm, the eigenmodes switch order. This is due to the dominance of the far-field term, which is evident from (b and d). Finally, at sizes greater than $r_0 = 20$ nm, the eigenmodes switch order again. Also plotted are simulated peak positions of each mode (dashed lines) to show agreement within 0.1 eV.}
 \label{scaling}
 \end{figure}
@@ -181,8 +181,6 @@ U = -\frac{1}{2} \sum_{ij} \textbf{d}_i \cdot \textbf{E}_j(\textbf{r}_i),
 \label{interactionenergy}
 \end{equation}
 between each pair of electric dipole plasmons within each magnetic plasmon mode. It is the inclusion of the far-field that causes the mode switching, as it carries the opposite sign of the near- and intermediate-field terms. Fig. \ref{scaling} shows the competition between these field components as well as their relative contributions to the total interaction energy. Inspection of Fig. \ref{scaling}c reveals that the crossing points occur where the splitting in the near- and intermediate-fields is equal and opposite to that of the far-field. Perhaps more interestingly, in any dielectric medium with $\varepsilon_b > 1$ the crossing points are shifted towards smaller scale due to wavelength contraction. This can be explained through the impact of dielectric medium upon the interaction energy $U,$ which increases with increasing $\varepsilon_b$ due mostly to the far-field term's dependence upon $k^2$ \cite{Elsayed2008}. While previous work has explored the oscillatory nature of hybridized electric dipole plasmon resonances and radiation damping as a function of separation in noble metal dimers \cite{vonPlessen2007}, our work shows that magnetic plasmon resonances also oscillate with interparticle separation and can be understood by analysis of the different contributions to the dipole-dipole interaction.
-
-
 
 
 \section{Radiative Properties of Intermediate-Size $N$-mers}
@@ -207,16 +205,12 @@ Notice that the first two terms are due to the radiation produced by electric an
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{differential_power_diagrams.pdf}
+\includegraphics{fig3.pdf}
 \caption{Magnetic field distributions of a magnetic dipole mode (a) and an electric dipole mode (c) in the xy-plane with corresponding radiation patterns (b and d) in the yz-plane. The magnetic dipole exhibits the expected dipolar doughnut, or two lobe, shape with a node along the z-axis. The electric dipole moment also shows the expected pattern with a node along the y-axis.}
 \label{scattering}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Fig. \ref{scattering} displays the differential scattering power profiles associated with the aN (a) and NS (b) magnetic plasmon resonances as well as their interference (c) for any $N$-mer with electric and magnetic dipoles oriented as descibed above. Since the aN mode has only a $z$-oriented magnetic dipole, its radiation pattern is orthogonal to that of the $y$-directed electric dipole of the NS mode. This means that asymmetry in the radiation pattern is due to the excitation of both modes. Thus, examination of the radiation directionality allows one to determine the net electric or magnetic dipole character. Such forward/backward scattering asymmetries have been predicted and demonstrated in metal-semiconductor core-shell nanoparticle assemblies, that similarly exploit the interference between electric and magnetic plasmons to direct light \cite{Kivshar2012}.
-
-
-
-
 
 
 Recent studies have demonstrated the utility of angle-resolved CL spectroscopy to characterize plasmon resonances in noble metal nanoparticles\cite{Coenen2011,CoPol2011,Polman2014}. Using an electron microscope fitted with a parabolic mirror, emitted CL radiation can be collected across a large portion of the backward scattering hemisphere\cite{Coenen2011,CoPol2011,Polman2014}. Here we show that with the selection rules imposed by the location of the electron beam and the specific directionality of light emission, the size-dependent spectral order of the $N$-mers' magnetic plasmon modes can be observed in angle-resolved CL spectra. 
@@ -228,7 +222,7 @@ Recent studies have demonstrated the utility of angle-resolved CL spectroscopy t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{CL_incomplete.pdf}
+\includegraphics{fig4.pdf}
 \caption{Angle-resolved cathodoluminescence spectra of the 2mer (a and b) and 3mer (c and d). By choosing the beam positions marked on the diagrams and choosing different angles at which to measure the light emitted, the magnetic modes of each oligomer can be disentangled. The colored "x's" correspond to colored traces. The blue traces show a collection angle of $\phi = 3\pi/2$ and the orange traces are for $\phi = \pi$, while both have $\theta = \pi/4$. Simulating these CL experiments with $r_0 = 15$ nm shows the aN modes lower in energy than the NS modes, as predicted. WIth $r_0 = 30$ nm, the modes switch, again as predicted.}
 \label{CL_2mer_3mer}
 \end{figure}
@@ -252,7 +246,7 @@ Ref. \cite{Engheta2017} synthesizes and optically characterizes hexagonally-pack
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{kagan_fields.pdf}
+\includegraphics{fig5.pdf}
 \caption{Signed magnetic field magnitudes of the modes of the 13-particle (a, b, and c), 19-particle (d, e, and f), and 31-particle (g, h, and i) clusters. Similarly to the 2mer and 3mer from before, we present only those magnetic modes with either NS and electric dipole character (a, b, d, e, g, and h) or with aN and magnetic dipole character (c, f, and i).}
 \label{kagan_fields}
 \end{figure}
@@ -263,7 +257,7 @@ Fig. \ref{kagan_fields} displays the signed magnetic field magnitude of the aN (
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{13_19_31_eigen.pdf}
+\includegraphics{fig6.pdf}
 \caption{Eigenenergies and interaction energies for the magnetic modes of the 13- (a and b), 19- (c and d), and 31-particle (e and f) clusters. Unlike the 2mer and 3mer, at very small values of $r_0$, the aN modes are lower in energy than the NS modes. However, for each system a crossing point does occur between $r_0 = 30$ nm and $r_0 = 40$ nm. While the modes of the 13-particle system behave as expected, the aN and NS modes of the larger clusters behave contrary to the intuition built from the earlier model systems. At larger sizes, instead of a monotonic decrease in eigenenergies, the modes exhibit an increase in energy. Looking at the interaction energies, it becomes clear that this is again due to retardation effects, as the term that contributes the most anti-bonding character to the total interaction energy is the far-field. Furthermore, the 31-particle system exhibits a second crossing, unlike the other two structures, and the increase in its eigenenergies is maximized at smaller sizes.}
 \label{kagan_eigen}
 \end{figure}
@@ -281,7 +275,7 @@ Fig. \ref{kagan_eigen} displays the evolution of the aN and NS magnetic resonanc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\includegraphics{kagan_CL_spectra.pdf}
+\includegraphics{fig7.pdf}
 \caption{Simulated angle-resolved cathodoluminescence spectra of the 13-, 19-, and 31-particle systems. Blue spectra were acquired at the beam positions marked with a blue x in order to preferentially excite the aN mode. Orange spectra were collected at the points marked with an orange x in order to preferentially excite the x-polarized NS mode. Spectra for the 13-particle aggregate were computed for $r_0 = 10$ nm (a) and $r_0 = 50$ nm (b). Spectra for the 19-particle aggregate were computed for $r_0 = 10$ nm (c) and $r_0 = 40$ nm (d). Spectra for the 31-particle aggregate were computed for $r_0 = 10$ nm (e) and $r_0 = 30$ nm (f). The dashed lines in each spectrum indicate the peak location of the aN modes (blue curves) and the NS modes (orange curves). Each panel also displays the collection angles for each spectrum.}
 \label{kagan_CL}
 \end{figure}
@@ -313,7 +307,7 @@ which is Eq. \ref{equation_of_motion}. Assuming sinusoidal oscillation in time a
 (\omega_{\textrm{sp}}^2-\omega^2)\textbf{q}_i -\frac{e^2}{m_\textrm{sp}}\sum_{j\neq i}\boldsymbol{\Lambda}_{ij}(\omega)\cdot\textbf{q}_j = 0.
 \label{fourier_eom}
 \end{equation}
-It is this system of equations for the plasmon oscillator coordinates that we solve to determine the magnetic plasmon resonances. Considering two identical, coupled, collinear oscillators as an example, Eq. \ref{fourier_eom} becomes
+It is this system of equations for the plasmon oscillator coordinates that we solve to determine the magnetic plasmon resonances. Considering two identical, coupled, collinear oscillators as an example and projecting out the directional-dependence, Eq. \ref{fourier_eom} becomes
 \begin{equation}
 \begin{split}
 (\omega_{\textrm{sp}}^2-\omega^2)q_1 -g_{12}(\omega)q_2 &= 0\\
@@ -338,7 +332,7 @@ q_2
 \end{bmatrix}.
 \label{eom_matrix}
 \end{equation}
-where $g_{12}=[HEY NICK!!!].$ Solution of this system produces the hybridized plasmon resonance frequencies and modes of the dimer. Specifically, they are
+where $g_{12}=-e^2/m_{\textrm{sp}}(2r_{12}^{-3} - 2ikr_{12}^{-2}).$ Solution of this system produces the hybridized plasmon resonance frequencies and modes of the dimer. Specifically, they are
 \begin{equation}
 \omega_{\pm} = \sqrt{\omega_{\textrm{sp}}^2 \pm g_{12}(\omega)}
 \label{eigenvalues}

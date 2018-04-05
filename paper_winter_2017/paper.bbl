@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{51}
+\begin{mcitethebibliography}{55}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -20,6 +20,21 @@
   {\relax}
   {\relax}
 
+\bibitem[Prodan \latin{et~al.}(2003)Prodan, Radloff, Halas, and
+  Nordlander]{Prodan2003}
+Prodan,~E.; Radloff,~C.; Halas,~N.~J.; Nordlander,~P. A Hybridization Model for
+  the Plasmon Response of Complex Nanostructures. \emph{Science} \textbf{2003},
+  \emph{302}, 419--422\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Andrey K.~Sarychev(2004)]{Shalaev2004}
+Magnetic resonance in metal nanoantennas. 2004; pp 5508 -- 5508 -- 10\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Al\`{u} \latin{et~al.}(2006)Al\`{u}, Salandrino, and Engheta]{Alu2006}
 Al\`{u},~A.; Salandrino,~A.; Engheta,~N. Negative effective permeability and
   left-handed materials at optical frequencies. \emph{Opt. Express}
@@ -54,6 +69,16 @@ Sheikholeslami,~S.~N.; Garc\'{i}a-Etxarri,~A.; Dionne,~J.~A. Controlling the
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Cherqui \latin{et~al.}(2014)Cherqui, Bigelow, Vaschillo, Goldwyn, and
+  Masiello]{Cherqui2014}
+Cherqui,~C.; Bigelow,~N.~W.; Vaschillo,~A.; Goldwyn,~H.; Masiello,~D.~J.
+  Combined tight-binding and numerical electrodynamics understanding of the
+  STEM/EELS magneto-optical responses of aromatic plasmon-supporting metal
+  oligomers. \emph{ACS Photonics} \textbf{2014}, \emph{1}, 1013--1024\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Qian \latin{et~al.}(2015)Qian, Hastings, Li, Edward, McGinn, Engheta,
   Fakhraai, and Park]{Qian2015}
 Qian,~Z.; Hastings,~S.~P.; Li,~C.; Edward,~B.; McGinn,~C.~K.; Engheta,~N.;
@@ -70,6 +95,17 @@ Scholl,~J.~A.; Garc\'{i}a-Etxarri,~A.; Aguirregabiria,~G.; Esteban,~R.;
   Narayan,~T.~C.; Koh,~A.~L.; Aizpurua,~J.; Dionne,~J.~A. Evolution of
   plasmonic metamolecule modes in the quantum tunneling regime. \emph{ACS Nano}
   \textbf{2016}, \emph{10}, 1346--1354\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Cherqui \latin{et~al.}(2016)Cherqui, Wu, Li, Quillin, Busche, Thakkar,
+  West, Montoni, Rack, Camden, and Masiello]{Cherqui2016}
+Cherqui,~C.; Wu,~Y.; Li,~G.; Quillin,~S.~C.; Busche,~J.~A.; Thakkar,~N.;
+  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~.; Masiello,~D.~J.
+  STEM/EELS imaging of magnetic hybridization in symmetric and symmetry-broken
+  plasmon oligomer dimers and all-magnetic fano interference. \emph{Nano Lett.}
+  \textbf{2016}, \emph{16}, 6668--6676\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -110,27 +146,6 @@ Liu,~N.; Mukherjee,~S.; Bao,~K.; Li,~Y.; Brown,~L.~V.; Nordlander,~P.;
   Halas,~N.~J. Manipulating magnetic plasmon propagation in metallic
   nanocluster networks. \emph{ACS Nano} \textbf{2012}, \emph{6},
   5482--5488\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Cherqui \latin{et~al.}(2014)Cherqui, Bigelow, Vaschillo, Goldwyn, and
-  Masiello]{Cherqui2014}
-Cherqui,~C.; Bigelow,~N.~W.; Vaschillo,~A.; Goldwyn,~H.; Masiello,~D.~J.
-  Combined tight-binding and numerical electrodynamics understanding of the
-  STEM/EELS magneto-optical responses of aromatic plasmon-supporting metal
-  oligomers. \emph{ACS Photonics} \textbf{2014}, \emph{1}, 1013--1024\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Cherqui \latin{et~al.}(2016)Cherqui, Wu, Li, Quillin, Busche, Thakkar,
-  West, Montoni, Rack, Camden, and Masiello]{Cherqui2016}
-Cherqui,~C.; Wu,~Y.; Li,~G.; Quillin,~S.~C.; Busche,~J.~A.; Thakkar,~N.;
-  West,~C.~A.; Montoni,~N.~P.; Rack,~P.~D.; Camden,~J. P.~.; Masiello,~D.~J.
-  STEM/EELS imaging of magnetic hybridization in symmetric and symmetry-broken
-  plasmon oligomer dimers and all-magnetic fano interference. \emph{Nano Lett.}
-  \textbf{2016}, \emph{16}, 6668--6676\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -177,6 +192,22 @@ Haynes,~C.~L.; McFarland,~A.~D.; Zhao,~L.; Van~Duyne,~R.~P.; Schatz,~G.~C.;
 Weick,~G.; Woollacott,~C.; Barnes,~W.~L.; Hess,~O.; Mariani,~E. Dirac-like
   plasmons in honeycomb lattices of metallic nanoparticles. \emph{Phys. Rev.
   Lett.} \textbf{2013}, \emph{110}, 106801\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Li \latin{et~al.}(2018)Li, Lee, Qian, Woods, Park, and
+  Fakhraai]{Fakhraai2018}
+Li,~C.; Lee,~S.; Qian,~Z.; Woods,~C.; Park,~S.-J.; Fakhraai,~Z. Controlling
+  Magnetic Dipole Resonance in Raspberry-like Metamolecules. \emph{The Journal
+  of Physical Chemistry C} \textbf{2018}, \emph{122}, 6808--6817\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[John~Parker(2018)]{Scherer2018}
+Optical magnetism in core-satellite nanostructures excited by vector beams.
+  2018; pp 10541 -- 10541 -- 9\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -390,6 +421,16 @@ Ferrari,~J.~A.; Perciante,~C.~D. Superlenses, metamaterials, and negative
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Chen \latin{et~al.}(0)Chen, Zhang, Shih, Yang, Hu, Hu, Li, Ren, Mao,
+  Yang, and Tian]{Tian2018}
+Chen,~S.; Zhang,~Y.; Shih,~T.-M.; Yang,~W.; Hu,~S.; Hu,~X.; Li,~J.; Ren,~B.;
+  Mao,~B.; Yang,~Z.; Tian,~Z. Plasmon-Induced Magnetic Resonance Enhanced Raman
+  Spectroscopy. \emph{Nano Letters} \textbf{0}, \emph{0}, null, PMID:
+  29504760\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Cherqui \latin{et~al.}(2016)Cherqui, Thakkar, Li, Camden, and
   Masiello]{ARPC}
 Cherqui,~C.; Thakkar,~N.; Li,~G.; Camden,~J.~P.; Masiello,~D.~J. Characterizing
@@ -444,14 +485,6 @@ Schwinger,~J.; Deraad,~L.; Milton,~K.; Tsai,~W.; Norton,~J. \emph{Classical
 Liu,~W.; Miroshnichenko,~A.~E.; Neshev,~D.~N.; Kivshar,~Y.~S. Broadband
   unidirectional scattering by magneto-electric core-shell nanoparticles.
   \emph{ACS Nano} \textbf{2012}, \emph{6}, 5489--5497\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Asenjo-Garcia and Garc\'{i}a~de Abajo(2013)Asenjo-Garcia, and
-  Garc\'{i}a~de Abajo]{Abajo2013}
-Asenjo-Garcia,~A.; Garc\'{i}a~de Abajo,~F.~J. Plasmon electron energy-gain
-  spectroscopy. \emph{New J. Phys.} \textbf{2013}, \emph{15}, 103021\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
