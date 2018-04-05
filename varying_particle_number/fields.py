@@ -177,7 +177,11 @@ for r in range(20,21):
 					if rmag < .5*a0:
 						Bfield[xcount,ycount] = 0
 					else:
+<<<<<<< HEAD
+						Bfield[xcount,ycount] = (wavenumber**2)*np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))*np.exp(1j*wavenumber*rmag)
+=======
 						Bfield[xcount,ycount] = (wavenumber**2)*np.cross(nhat,vec[number])*(rmag**-1)*(1-((1j*wavenumber*rmag)**-1))#*np.exp(1j*wavenumber*rmag)
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 					ycount += 1
 				xcount += 1
 			Bfield_total = Bfield_total + Bfield
@@ -191,7 +195,13 @@ for r in range(20,21):
 		plt.contourf(xx,yy,np.real(Bfield_total)/np.amax(np.real(Bfield_total)),levels=np.linspace(-1,1,21),cmap='bwr')
 		plt.colorbar()
 		plt.tight_layout()
+<<<<<<< HEAD
+		plt.scatter(xloc,yloc)
+		plt.quiver(xloc,yloc,u,v)
+		#plt.savefig('mode_'+str(mode)+ '_field.pdf')
+=======
 		#plt.scatter(xloc,yloc)
 		plt.quiver(xloc,yloc,u,v) #
 		plt.savefig('mode_'+str(mode)+ '_field.pdf') #,levels=np.linspace(np.amin(Bfield_total),np.amax(Bfield_total),30)
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 		plt.show()

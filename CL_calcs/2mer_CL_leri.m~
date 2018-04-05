@@ -1,0 +1,91 @@
+addpath(genpath('/usr/lusers/montoni/MNPBEM14'));
+op2 = bemoptions( 'sim', 'ret', 'interp', 'curv' );
+
+epstab = {epsconst( 1 ),epstable('silver_normal.dat')};
+num = [50];
+for sep = [3,4];
+radius2 = num;
+r = sep*radius2;
+diameter2 = 2*radius2;
+
+ps = trisphere(144,diameter2);
+
+ex = sqrt(3)/2 * r;
+ey = (1/2) * r;
+
+p5 = shift(ps,[-ex,-ey,0]);
+p6 = shift(ps,[0,-2*ey,0]);
+p7 = shift(ps,[ex,-ey,0]);
+p8 = shift(ps,[2*ex,-2*ey,0]);
+p9 = shift(ps,[3*ex,-ey,0]);
+p10 = shift(ps,[3*ex,ey,0]);
+p11 = shift(ps,[2*ex,2*ey,0]);
+p12 = shift(ps,[ex,ey,0]);
+p13 = shift(ps,[0,2*ey,0]);
+p14 = shift(ps,[-ex,ey,0]);
+
+Ptot= {p5,p6,p7,p8,p9,p10,p11,p12,p13,p14};
+
+pret=comparticle(epstab,Ptot,[2,1;2,1;2,1;2,1;2,1;2,1;2,1;2,1;2,1;2,1],1,2,3,4,5,6,7,8,9,10,op2);
+
+units;
+enei = eV2nm./linspace( 1.5, 3.5, 201 );
+%  set up BEM solver
+bem = bemsolver( pret, op2 );
+
+units
+pol = [0,1,0];
+dir = [1,0,0];
+%  plane wave excitation
+exc = planewave( [ 0, 1, 0], [1, 0, 0], op2);%[ 0, 1, 0; 0, 0, 1], op2 );
+%  light wavelength in vacuum
+%  allocate scattering and extinction cross sections
+
+sca   = zeros( length( enei ), 1 );
+sca_left = zeros( length( enei ), 1 );
+sca_right = zeros( length( enei ), 1 );
+
+%  loop over wavelengths
+for ien = 1 : length( enei )
+  %  surface charge
+	    sig = bem \ exc( pret, enei( ien ) );
+
+  %  scattering and extinction cross sections
+  [ sca( ien, : ), dsca1 ] = exc.sca( sig );
+    
+  %The differential scattering function computes scattering on surface
+  %elements of a sphere at infinity. We are going to grab the coordinates
+  %for the surface elements.
+  coords = dsca1.p.nvec; 
+  
+% Next, let us find the column of coordinates that corresponds to the
+  % direction of propogation.
+  col = find(pol == 1);
+    
+for j = 1:length(coords)
+    % The following if statement determines if the coordinates of the
+    % surface elements of the sphere at infinity are positive or negative
+    % for the direction of propogation
+	  if coords(j, col ) > sqrt(3)/2 
+        % If greater that zero, back scattering (check if this is true, or
+        % if the labels somehow are flipped)
+        sca_left(ien) = sca_left(ien) + dsca1.dsca(j)*dsca1.p.area(j);
+    else
+        % Otherwise we say it is forward scattering.
+        sca_right(ien) = sca_right(ien) + dsca1.dsca(j)*dsca1.p.area(j);
+    end
+end
+  
+
+end
+
+fid = fopen(strcat('vac_twomer_leri_50_sca_sep',num2str(sep)),'wt')
+fprintf(fid, ' %s', 'Energy(eV)     Sca_U     Sca_D');
+fprintf(fid, '\n');
+for i = 1:length(enei)
+	  fprintf(fid, ' %g', enei(i));
+fprintf(fid, ' %g', sca_left(i));
+fprintf(fid, ' %g', sca_right(i));
+fprintf(fid,'\n');
+end
+end
