@@ -4,8 +4,14 @@ import scipy.linalg
 import matplotlib.pyplot as plt
 from scipy.interpolate import spline
 import mpl_toolkits.mplot3d.axes3d as axes3d
+<<<<<<< HEAD
 
 
+=======
+from matplotlib import cm
+
+poynting_points = 91
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 static_NN = []
 static_NS = []
 bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
@@ -37,14 +43,26 @@ NF = [[],[]]
 IF = [[],[]]
 FF = [[],[]]
 NFIF = [[],[]]
+<<<<<<< HEAD
 for r in np.linspace(1,1,1):
+=======
+r = 20
+for dist in np.linspace(1,1,1):
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = r
 	''' now determine geometry.'''
+<<<<<<< HEAD
 	print index
 	# make unit vectors in centimeters.
 	rij = 3*a0
+=======
+	
+	# make unit vectors in centimeters.
+	rij = (2+dist)*a0
+	# print 2+dist
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 	e1 = .5*rij
 	e2 = rij*math.sqrt(3)/2
 	part_per_ring = numPart/2 + 1
@@ -92,11 +110,21 @@ for r in np.linspace(1,1,1):
 
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
+<<<<<<< HEAD
 	wsp_0 = (mie_omegas[index*10 - 10])*elec/hbar
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
 	for mode in range(0,2):
+=======
+	wsp_0 = (mie_omegas[index*10 - 10])*math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb)*elec/hbar
+	'''initialize w_0 and eigen'''
+	w_0 = 0
+	eigen = np.ones(2*numPart)
+	Bfield_total = np.zeros((poynting_points,3),dtype=complex)
+	Efield_total = np.zeros((poynting_points,3),dtype=complex)
+	for mode in [0,1,5]:
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.00001:
 			if count == 1:
 				wsp = wsp_0
@@ -136,8 +164,13 @@ for r in np.linspace(1,1,1):
 						exponent = np.exp(1j*w_0*Rmag/c)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
+<<<<<<< HEAD
 						H[n,m] = -(ge)#*(hbar/elec)*wsp #this has the minus sign we need.
 						H[m,n] = np.conj(-ge)
+=======
+						H[n,m] = -(ge)/(epsb)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[m,n] = np.conj(-ge)/(epsb)
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d
 						
 
 					
@@ -156,6 +189,7 @@ for r in np.linspace(1,1,1):
 
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
 		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
+<<<<<<< HEAD
 		screen_dist = 1000*a0
 		Bfield_total = np.zeros((16,16,3),dtype=complex)
 		Efield_total = np.zeros((16,16,3),dtype=complex)
@@ -194,3 +228,87 @@ for r in np.linspace(1,1,1):
 		ax = fig.add_subplot(1,1,1, projection='3d')
 		plot = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap('jet'),linewidth=0, antialiased=False, alpha=0.5)
 		plt.show()
+=======
+		u,v = zip(*vec)
+		x,y = zip(*Loc)
+		plt.figure()
+		plt.quiver(x,y,u,v)
+		plt.show()
+		if mode == 0:
+			NN = np.multiply(vec,1)
+		if mode == 1:
+			NS = np.multiply(vec,1)
+		if mode == 5:
+			dip = np.multiply(vec,1)
+	screen_dist = 10000000*a0
+	vec = NN + NS + dip
+	u,v = zip(*vec)
+	x,y = zip(*Loc)
+	plt.figure()
+	plt.quiver(x,y,u,v)
+	plt.show()
+	for number in range(0,numPart):
+		location = list(Loc[number])
+		location.append(0)
+		
+		Bfield = np.empty((poynting_points,3),dtype=complex)
+		Efield = np.empty((poynting_points,3),dtype=complex)
+		phi_count = 0
+		
+		for phi in np.linspace(0,2*math.pi,poynting_points):
+			nhat = [np.cos(phi), 0, np.sin(phi)]
+			point = np.multiply(screen_dist,nhat)
+			rmag = np.sqrt((point[0]-location[0])**2 + (point[1]-location[1])**2 + point[2]**2)
+			nhat_dip = (location-point)/rmag
+			Bfield[phi_count] = (wavenumber**2)*np.cross(nhat_dip,vec[number])*np.exp(1j*wavenumber*rmag)/rmag #
+			Efield[phi_count] = np.cross(Bfield[phi_count],nhat_dip)/(epsb)
+			phi_count += 1
+		Bfield_total = Bfield_total + Bfield
+		Efield_total = Efield_total + Efield
+poynting = np.empty((poynting_points),dtype=float)
+for idx1 in range(poynting_points):
+	poynting[idx1] = (screen_dist**2)*np.linalg.norm(np.real(np.cross(Efield_total[idx1],np.conj(Bfield_total[idx1]))))
+#theta = np.linspace(0,math.pi,poynting_points)
+phi = np.linspace(0,2*math.pi,poynting_points)
+plt.figure()
+plt.polar(phi,poynting)
+#plt.savefig('em_dipole.pdf')
+plt.show()
+
+'''for number in range(0,numPart):
+location = list(Loc[number])
+location.append(0)
+
+Bfield = np.empty((poynting_points,poynting_points,3),dtype=complex)
+Efield = np.empty((poynting_points,poynting_points,3),dtype=complex)
+phi_count = 0
+
+for phi in np.linspace(0,2*math.pi,poynting_points):
+theta_count = 0
+for theta in np.linspace(0,math.pi,poynting_points):
+nhat = [np.cos(phi)*np.sin(theta), np.sin(phi)*np.sin(theta), np.cos(theta)]
+point = np.multiply(screen_dist,nhat)
+rmag = np.sqrt((point[0]-location[0])**2 + (point[1]-location[1])**2 + point[2]**2)
+nhat_dip = (location-point)/rmag
+Bfield[theta_count,phi_count] = (wavenumber**2)*np.cross(nhat_dip,vec[number])*np.exp(1j*wavenumber*rmag)/rmag #
+Efield[theta_count,phi_count] = np.cross(Bfield[theta_count,phi_count],nhat_dip)/(epsb)
+theta_count += 1
+phi_count += 1
+Bfield_total = Bfield_total + Bfield
+Efield_total = Efield_total + Efield
+poynting = np.empty((poynting_points,poynting_points),dtype=float)
+for idx1 in range(poynting_points):
+for idx2 in range(poynting_points):
+poynting[idx1,idx2] = (screen_dist**2)*np.linalg.norm(np.real(np.cross(Efield_total[idx1,idx2],np.conj(Bfield_total[idx1,idx2]))))
+theta = np.linspace(0,math.pi,poynting_points)
+phi = np.linspace(0,2*math.pi,poynting_points)
+PHI,THETA = np.meshgrid(phi,theta)
+X = poynting * np.cos(PHI)*np.sin(THETA)
+Y = poynting * np.sin(PHI)*np.sin(THETA)
+Z = poynting * np.cos(THETA)
+norm = poynting/poynting.max()
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1, projection='3d')
+plot = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, facecolors=cm.jet(norm),linewidth=0, antialiased=False, alpha=0.5)
+plt.show()'''
+>>>>>>> 248f1ce6598f71d449290d94abddb91ea29a5b3d

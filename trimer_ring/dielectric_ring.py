@@ -23,8 +23,9 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 NN = []
 NS = []
 omegas = []
-for epsb in np.linspace(1,3,21):
-	r = 20
+epsb = 1.77
+for r in range(1,31):
+	#for r = 20
 	a0 = r*10**-7; #sphere radius in cm
 	index = r*10 - 10
 	''' now determine geometry.'''
@@ -149,26 +150,26 @@ for epsb in np.linspace(1,3,21):
 print len(NN)
 print len(NS)
 #NN = np.reshape(NN,(21,1))
-NS = np.reshape(NS,(21,3))
+NS = np.reshape(NS,(30,3))
 #NN_int = np.reshape(interaction[0],(21,2))
 #NS_int = np.reshape(interaction[1],(21,7))
-epsb = np.linspace(1,3,21)
+epsb = np.linspace(1,30,30)
 plt.figure()
-plt.plot(epsb,NN,epsb,NS[:,0],epsb,omegas,linewidth=3)	
+plt.plot(epsb,NN,epsb,NS[:,0],linewidth=3)	
 plt.legend(['NN','NS','LSPR'])
 plt.ylabel('Energy (eV)')
 plt.xlabel('Embedding Medium')
-plt.savefig('ring_20_dielectric.pdf')
-#plt.show()
+plt.savefig('water_ring_threemer_eig.pdf')
+plt.show()
 
-zero_vector = np.zeros((len(epsb),1))
+'''zero_vector = np.zeros((len(epsb),1))
 
 plt.figure()
 plt.plot(epsb, np.subtract(NN,NS[:,0]), epsb,zero_vector, linewidth=3)
 plt.xlabel('dielectric')
 plt.ylabel('Energy (eV)')
 plt.legend(['NN-NS'])
-plt.savefig('ring_diff.pdf')
+plt.savefig('ring_diff.pdf')'''
 #plt.show()
 
 '''plt.figure()

@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[     19224,        479]
-NotebookOptionsPosition[     18162,        436]
-NotebookOutlinePosition[     18519,        452]
-CellTagsIndexPosition[     18476,        449]
+NotebookDataLength[     29290,        717]
+NotebookOptionsPosition[     27808,        664]
+NotebookOutlinePosition[     28164,        680]
+CellTagsIndexPosition[     28121,        677]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -14,9 +14,11 @@ Notebook[{
 
 Cell[CellGroupData[{
 Cell[BoxData[{
- RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
- RowBox[{"Needs", "[", "\"\<PhysicalConstants`\>\"", 
-  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Needs", "[", "\"\<PhysicalConstants`\>\"", "]"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Epsilon]", "[", "\[Omega]_", "]"}], ":=", 
   RowBox[{"\[Epsilon]inf", "-", 
@@ -103,7 +105,7 @@ Cell[BoxData[{
    3.657992944846383*^9}, {3.658002193116995*^9, 3.658002207021451*^9}, {
    3.658002253561152*^9, 3.6580022576987886`*^9}, {3.6853832072377853`*^9, 
    3.6853832075571947`*^9}, {3.685384842033383*^9, 3.6853848434944153`*^9}, 
-   3.69850244915923*^9}],
+   3.69850244915923*^9, {3.715687996900446*^9, 3.7156880081042433`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -118,7 +120,10 @@ Cell[BoxData[
    3.685384795539768*^9, 3.6853848448584538`*^9}, {3.688587814262393*^9, 
    3.688587852394381*^9}, {3.688587888749106*^9, 3.6885879056513157`*^9}, {
    3.698502462074501*^9, 3.698502475351301*^9}, {3.701441025233334*^9, 
-   3.701441039585517*^9}, {3.7014410780598583`*^9, 3.7014410897258167`*^9}}],
+   3.701441039585517*^9}, {3.7014410780598583`*^9, 3.7014410897258167`*^9}, {
+   3.715687933414916*^9, 3.7156879538996964`*^9}, 3.715688010680193*^9, 
+   3.715688131270697*^9, 3.715688183817254*^9, 3.7156882759391603`*^9, 
+   3.71569427250741*^9, 3.715694313224594*^9, 3.720975392813038*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -133,7 +138,10 @@ Cell[BoxData[
    3.685384795539768*^9, 3.6853848448584538`*^9}, {3.688587814262393*^9, 
    3.688587852394381*^9}, {3.688587888749106*^9, 3.6885879056513157`*^9}, {
    3.698502462074501*^9, 3.698502475351301*^9}, {3.701441025233334*^9, 
-   3.701441039585517*^9}, {3.7014410780598583`*^9, 3.701441089735849*^9}}]
+   3.701441039585517*^9}, {3.7014410780598583`*^9, 3.7014410897258167`*^9}, {
+   3.715687933414916*^9, 3.7156879538996964`*^9}, 3.715688010680193*^9, 
+   3.715688131270697*^9, 3.715688183817254*^9, 3.7156882759391603`*^9, 
+   3.71569427250741*^9, 3.715694313224594*^9, 3.72097539283013*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -177,10 +185,10 @@ Cell[BoxData[{
   RowBox[{"\[Gamma]", "=", "0.05"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"c", "=", 
-   RowBox[{"3", "*", 
+   RowBox[{"2", "*", 
     RowBox[{"10", "^", 
      RowBox[{"(", 
-      RowBox[{"-", "6"}], ")"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+      RowBox[{"-", "7"}], ")"}]}]}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"LHSb", "\[Equal]", "RHSb"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -191,8 +199,30 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{"LHSb", "\[Equal]", "RHSb"}], ",", "\[Omega]"}], "]"}], "[", 
     RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"Re", "[", 
+     RowBox[{"\[Omega]", "/.", 
+      RowBox[{
+       RowBox[{"Solve", "[", 
+        RowBox[{
+         RowBox[{"LHSb", "\[Equal]", "RHSb"}], ",", "\[Omega]"}], "]"}], "[", 
+       
+       RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", 
+     RowBox[{"1", "*", 
+      RowBox[{"10", "^", 
+       RowBox[{"(", 
+        RowBox[{"-", "9"}], ")"}]}]}], ",", 
+     RowBox[{"50", "*", 
+      RowBox[{"10", "^", 
+       RowBox[{"(", 
+        RowBox[{"-", "9"}], ")"}]}]}]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "Full"}]}], "]"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"Plot", "[", 
+  RowBox[{"Table", "[", 
    RowBox[{
     RowBox[{"-", 
      RowBox[{"Re", "[", 
@@ -204,16 +234,48 @@ Cell[BoxData[{
         RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ",", 
     RowBox[{"{", 
      RowBox[{"a", ",", 
-      RowBox[{"20", "*", 
+      RowBox[{"1", "*", 
        RowBox[{"10", "^", 
         RowBox[{"(", 
          RowBox[{"-", "9"}], ")"}]}]}], ",", 
-      RowBox[{"400", "*", 
+      RowBox[{"50", "*", 
        RowBox[{"10", "^", 
         RowBox[{"(", 
-         RowBox[{"-", "9"}], ")"}]}]}]}], "}"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", "Full"}]}], "]"}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+         RowBox[{"-", "9"}], ")"}]}]}], ",", 
+      RowBox[{"1", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "9"}], ")"}]}]}]}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<mie_omegas_water.txt\>\"", ",", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"Re", "[", 
+        RowBox[{"\[Omega]", "/.", 
+         RowBox[{
+          RowBox[{"Solve", "[", 
+           RowBox[{
+            RowBox[{"LHSb", "\[Equal]", "RHSb"}], ",", "\[Omega]"}], "]"}], 
+          "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"a", ",", 
+        RowBox[{"1", "*", 
+         RowBox[{"10", "^", 
+          RowBox[{"(", 
+           RowBox[{"-", "9"}], ")"}]}]}], ",", 
+        RowBox[{"50", "*", 
+         RowBox[{"10", "^", 
+          RowBox[{"(", 
+           RowBox[{"-", "9"}], ")"}]}]}], ",", 
+        RowBox[{"1", "*", 
+         RowBox[{"10", "^", 
+          RowBox[{"(", 
+           RowBox[{"-", "9"}], ")"}]}]}]}], "}"}]}], "]"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.657989298178626*^9, 3.657989311131434*^9}, {
    3.657989949658702*^9, 3.6579899537404003`*^9}, {3.6579899846435328`*^9, 
    3.657989997276135*^9}, {3.657990032431264*^9, 3.6579900479331017`*^9}, {
@@ -242,50 +304,100 @@ Cell[BoxData[{
    3.6853847794945993`*^9, 3.685384838198015*^9}, {3.688587827394724*^9, 
    3.688587871173649*^9}, 3.688587901251335*^9, {3.698502455885128*^9, 
    3.6985024678700867`*^9}, 3.7014410381824837`*^9, {3.701441076164188*^9, 
-   3.701441109716218*^9}}],
+   3.701441109716218*^9}, {3.715687925439353*^9, 3.715687927773345*^9}, {
+   3.71568812107765*^9, 3.7156881280371647`*^9}, {3.7156881692385387`*^9, 
+   3.7156882017421513`*^9}, {3.7156882732361927`*^9, 3.715688273752878*^9}, {
+   3.7156908303536243`*^9, 3.715690830965321*^9}, {3.715693145413966*^9, 
+   3.7156931646911497`*^9}, {3.715693328365039*^9, 3.715693328522152*^9}, {
+   3.715693365779324*^9, 3.715693367937908*^9}, 3.715693456799115*^9, {
+   3.715693763237129*^9, 3.715693783687565*^9}, {3.715693889069434*^9, 
+   3.715693893308234*^9}, {3.715694153981662*^9, 3.715694155024889*^9}, {
+   3.715694247550638*^9, 3.7156942678619013`*^9}, {3.715694305496141*^9, 
+   3.7156943110095654`*^9}, {3.720975385620351*^9, 3.720975385769651*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975394307316*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.7209753953834753`*^9}],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
    {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], Opacity[
     1.], LineBox[CompressedData["
-1:eJwVz3s0lHkYB3C3Lc2+71suuW2UI+RsalmK6PGrtrKsNJoZURoamnKpVC6N
-S5GhlcltXOZVxGqTS8pMiCapQWxJtx0d0WW1Nh0iRilqf/3xnOd8zveP5/ma
-7z7gE6Khpqa2C8+33VA+GJF5lA2trxSrtWIpZKY9cLpQwgaGet9CdezUMGVt
-6TU2NDzd9G42hkIs+65x6TQbtM4tFn/AHmupjeo9yoHr7Y/PD2Mv6xMkmAt8
-YW/m5jf3sQt1dERSgR+wKkzH8rG/HmFcuk77wcWKfqdc7D29mvfbmvzA5tj7
-+Exsh5KpBb2f/ECSafIhDbtn+TPxjMAfmnbzpLHY2u4XzmyM2wEr/+7x9MOO
-TVxbrYwLADejl58NsFcNDJTlFAdAVg3XRxd7cu1xiVdrADD8A/8gsQ/M3kq9
-PWcXyLqGHLS+3Y93D6rN3gXNHaTBeDSF2IJtBmkXuODztqqnE9u42QEVvQmE
-pRN9VjHYU/UelR4LefCDhROrNQr3SeaLkix5YMPZf6UZW9s75WCjIw+Y48p5
-9dgmQ/JVVhwevFy5sboSGwztbqsX4DwutSEXWxhj+KzRKBj+EkuGgrH1nQZJ
-60Uh0MCorNHEtruWEKlpwYcV5eJu+yMUCixiGAYtCoMM2badQYcotFe7IHI6
-7ACIOpJT9A9S6KNb3nNVYyRk5E/1l0RQyKZ1IJAYOgyeUt/pklDcz57NVDGi
-wfDKI00On0Kty7xdvmfEwlWmaaaKRyF68M4xcBDAO+nqvSouheos2+XFzvEw
-JuFvHdpBIQVnLPSBQyLw19huPudLoVIrr2tZtsfhxibZULkPhZIG/3H2XpEE
-YpVNQLUXhQyFTfwzvyTDvKVam0c3U6jyrPW9h+wTYB7le2J0HYX6Yzm1JawU
-mCt8OaDhSqGOVW3wea8QQvpP27k4UojZoPIYCU0FD6LGOmsFhbJN9mjtT04D
-7g5W7ZQVhbpV4Sql+CRIFuXKzRZTqCrXkdcr/h0m2+TWUYYUctOHRH5lOnSc
-Zc0oKAod9tU2ENWcghaziiHPORQq1933uqgqA17yoOf8LIlOXZ6327lFBA6/
-KS6/mCCRnk74joibpyEhcHt68DCJmCxK4ydlJlSNHjC++pxE7WkWYxFHssDp
-bXbgvcckkrWfM50/mQXrpofT1nWRaHZKXhqTmA1MJbrPv0GifG3X4Kqv2bBP
-fMJ/oo5EthzhrW2JORCgdz7Y7wKJluTtj7k9NxdCpr485tAk4l1tDP2Slguf
-+7YT90QkUu8ok6npieFPIVGlOEaid9dGXLvFYohc4WnldohEff9pBi3Qz4NI
-A2+TwmASWcxr6jMuzgNlBC+MwyZRM+OBeNQsHyy7BZLqTSS6NJtWnl6ZD8Kb
-5Y7MVSQqWc7YWvRzASQO0BZ3LEn0wnXEOUZaALXq7kkjC0mUAAcFJlAI+Ytf
-jG3QIlGoOWv6ZEshhEsT97AmCMRGmvrhIIEfRQr2llcEKtrqIzS4I4EUWnF1
-530C2a/XcMxwp6FQuOWNq5xALyC6u9ODhsOfHn0dvk6g0y7D/LleNGxwkZES
-7LcOD+lkJg2topT5qmYClVuXqR31p6EnNrCquolABuT6uyHhNCjevt5g0kig
-aWUSzy2Lhv4o+w+jdQSqeKyaic+hQXbj7scibM6DfflNYhpsE+Tj7th1XcxO
-RwkNvk9LO8uuEChUbr5yeRkN4vRDOpzLBHpW1vrJSEZDqqWRenMNgdJLHMWc
-evzPc0YsH9vpzEVbcSMN2sY+/+ph5+VlB86X0zCb2V8RXk2gLSeD2r9rp8HI
-43WbaRWBZlKecDfcoWFnfeyHzkoCVSb9On28i4YnUu6SaOy5cXbLZ7ppsB+1
-3t59kUD1MefbnB/QsG1cmy/ADj5izI15RIO17toIK2zdSNFH2RMaljkoQh9W
-EOhmhHrOeyUNk2uKuYnY/wMnwZ0V
+1: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
+lsL/Ad3qJvQ=
      "]]}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
   AxesLabel->{None, None},
-  AxesOrigin->{5.*^-8, 3.5700000000000003`},
+  AxesOrigin->{0, 2.95},
   DisplayFunction->Identity,
   Frame->{{False, False}, {False, False}},
   FrameLabel->{{None, None}, {None, None}},
@@ -295,9 +407,9 @@ EOhmhHrOeyUNk2uKuYnY/wMnwZ0V
     GrayLevel[0.5, 0.4]],
   Method->{"DefaultBoundaryStyle" -> Automatic, "ScalingFunctions" -> None},
   PlotRange->NCache[{{
-      Rational[1, 50000000], 
-      Rational[1, 2500000]}, {3.5822722883379985`, 3.808601794906594}}, {{
-    2.*^-8, 4.*^-7}, {3.5822722883379985`, 3.808601794906594}}],
+      Rational[1, 1000000000], 
+      Rational[1, 20000000]}, {2.956629365080932, 3.808825398386393}}, {{
+    1.*^-9, 5.*^-8}, {2.956629365080932, 3.808825398386393}}],
   PlotRangeClipping->True,
   PlotRangePadding->{{
      Scaled[0.02], 
@@ -305,22 +417,138 @@ EOhmhHrOeyUNk2uKuYnY/wMnwZ0V
      Scaled[0.05], 
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
- CellChangeTimes->{{3.657992160624838*^9, 3.6579922695009212`*^9}, 
-   3.657992323908456*^9, {3.6579923553370457`*^9, 3.6579923740156717`*^9}, {
-   3.657992480329588*^9, 3.657992556242496*^9}, {3.657992630192075*^9, 
-   3.6579926853528976`*^9}, {3.657992729241502*^9, 3.6579928436330757`*^9}, {
-   3.657992946653496*^9, 3.657993046015609*^9}, {3.657993131674079*^9, 
-   3.6579931924845533`*^9}, {3.65799331905943*^9, 3.657993441805562*^9}, {
-   3.6579934972149754`*^9, 3.6579935141750307`*^9}, {3.657993552901937*^9, 
-   3.6579935878937407`*^9}, {3.6579936196733227`*^9, 3.657993824059355*^9}, {
-   3.6579938605426207`*^9, 3.6579939375781183`*^9}, 3.657994501577854*^9, 
-   3.6580021535878153`*^9, 3.6580842145115967`*^9, 3.658084762135991*^9, 
-   3.6580848452127666`*^9, 3.6580849464620943`*^9, 3.6760437785749397`*^9, 
-   3.6835750474890738`*^9, 3.685383215420279*^9, {3.685384687269472*^9, 
-   3.685384729913987*^9}, {3.685384786668486*^9, 3.685384848770027*^9}, {
-   3.6885878145851183`*^9, 3.688587905908126*^9}, {3.6985024646231003`*^9, 
-   3.698502477629088*^9}, {3.7014410286668653`*^9, 3.701441041994553*^9}, {
-   3.701441082749816*^9, 3.701441111614359*^9}}]
+ CellChangeTimes->{{3.7156881787604837`*^9, 3.715688203520001*^9}, 
+   3.715688278910088*^9, {3.715690836543086*^9, 3.715690838570907*^9}, 
+   3.715693951438961*^9, 3.7156942757304296`*^9, 3.71569431603238*^9, 
+   3.720975396262995*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975396366666*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975396508582*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975396673527*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Solve :: \
+ratnz\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975397008684*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975397437086*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975397555237*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ratnz"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Solve was unable to solve the system with inexact \
+coefficients. The answer was obtained by solving a corresponding exact system \
+and numericizing the result. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/Solve\\\", ButtonNote -> \
+\\\"Solve::ratnz\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975397688745*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Solve :: \
+ratnz\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.7156881780565042`*^9, 3.715688202714348*^9}, 
+   3.715688278058831*^9, {3.715690835661107*^9, 3.715690837777211*^9}, 
+   3.715693950585191*^9, 3.715694274859623*^9, 3.715694315208193*^9, 
+   3.720975397782462*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -434,9 +662,9 @@ Cell[BoxData["\[IndentingNewLine]"], "Input",
    3.658003526711934*^9, 3.658003646785186*^9}, {3.6580685574239893`*^9, 
    3.658068566627133*^9}, 3.6580842538461018`*^9}]
 },
-WindowSize->{1306, 948},
-WindowMargins->{{Automatic, 31}, {Automatic, 0}},
-FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+WindowSize->{709, 948},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September 9, \
 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -452,28 +680,38 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[422, 15, 3453, 90, 216, "Input"],
-Cell[3878, 107, 742, 13, 52, "Output"],
-Cell[4623, 122, 735, 13, 50, "Output"]
+Cell[422, 15, 3542, 92, 216, "Input"],
+Cell[3967, 109, 957, 16, 52, "Output"],
+Cell[4927, 127, 951, 16, 50, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5395, 140, 4575, 104, 233, "Input"],
-Cell[9973, 246, 4176, 76, 283, "Output"]
+Cell[5915, 148, 6907, 167, 301, "Input"],
+Cell[12825, 317, 717, 14, 59, "Message"],
+Cell[13545, 333, 719, 14, 59, "Message"],
+Cell[14267, 349, 3756, 73, 231, "Output"],
+Cell[18026, 424, 717, 14, 59, "Message"],
+Cell[18746, 440, 717, 14, 59, "Message"],
+Cell[19466, 456, 717, 14, 59, "Message"],
+Cell[20186, 472, 723, 14, 24, "Message"],
+Cell[20912, 488, 717, 14, 59, "Message"],
+Cell[21632, 504, 717, 14, 59, "Message"],
+Cell[22352, 520, 717, 14, 59, "Message"],
+Cell[23072, 536, 723, 14, 24, "Message"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14186, 327, 159, 3, 28, "Input"],
-Cell[14348, 332, 547, 11, 52, "Output"]
+Cell[23832, 555, 159, 3, 28, "Input"],
+Cell[23994, 560, 547, 11, 52, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14932, 348, 263, 5, 28, "Input"],
-Cell[15198, 355, 523, 9, 32, "Output"]
+Cell[24578, 576, 263, 5, 28, "Input"],
+Cell[24844, 583, 523, 9, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[15758, 369, 897, 26, 46, "Input"],
-Cell[16658, 397, 718, 17, 57, "Output"],
-Cell[17379, 416, 526, 12, 50, "Output"]
+Cell[25404, 597, 897, 26, 46, "Input"],
+Cell[26304, 625, 718, 17, 57, "Output"],
+Cell[27025, 644, 526, 12, 50, "Output"]
 }, Open  ]],
-Cell[17920, 431, 238, 3, 46, "Input"]
+Cell[27566, 659, 238, 3, 46, "Input"]
 }
 ]
 *)

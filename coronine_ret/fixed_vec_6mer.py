@@ -2,8 +2,11 @@ import numpy as np
 import math
 import scipy.linalg
 import matplotlib.pyplot as plt
+from scipy.interpolate import spline
+import mpl_toolkits.mplot3d.axes3d as axes3d
+from matplotlib import cm
 
-
+poynting_points = 16
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 dipole = [] # doubly degenerate
@@ -17,7 +20,7 @@ interaction = []
 NF = [[],[]]
 IF = [[],[]]
 FF = [[],[]]
-for r in range(1,31):
+for r in range(15,16):
 	elec = 1.60217662e-19 # regular coulombs
 	numPart = 24; #number of particles
 	a0 = r*10**-7; #sphere radius in cm
@@ -73,65 +76,124 @@ for r in range(1,31):
 	All_N = np.loadtxt('coro_6_vec')
 	#Alt = np.loadtxt('coro_0_vec.txt')
 	#Alt = np.loadtxt('coro_0_vec.txt')
-	vec = All_N
+	vector = [Alt,All_N,Dipole,TwoNode,RadNode]
 	coupling = 0
 	count = 0
-	while abs(np.real(w_mode)*hbar/elec - (np.real(wsp_0)*hbar/elec + np.real(coupling))) > 0.000001:
-		if count == 0:
-			w_mode = 0
-			count += 1
-			print count
-		else:
-			w_mode = np.real((wsp_0*hbar/elec + coupling) * elec/hbar)
-			count += 1
-			#print count
-			print w_mode*hbar/elec
-		wavenumber = math.sqrt(epsb)*w_mode/c
-		alpha = ((alphasp**-1) - 1j*(2./3.)*wavenumber**3)**-1
-		coupling = 0
-		nearfield = 0
-		midfield = 0
-		farfield = 0
-		for x in range(0,numPart):
-			for y in range(x,numPart):
-				if x == y:
-					continue
-				else:
-					pass
-				Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
-				unit_vector = (Loc[x] - Loc[y])/Rmag
-				unit_dyad_term = np.dot(vec[x],vec[y])
-				n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
-				r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-				r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
-				r_unit = (alpha*wavenumber**2)/(Rmag)
-				exponent = np.exp(1j*wavenumber*Rmag)
-				coupling += -(hbar/elec)*wsp_0/epsb*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
-				nearfield += -(hbar/elec) * wsp_0 * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
-				midfield += -(hbar/elec) * wsp_0 * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
-				farfield += -(hbar/elec) * wsp_0 * r_unit * exponent * (unit_dyad_term - n_dyad_term)
-	w_mode = np.real(wsp_0*hbar/elec+coupling)
-	interaction.append(coupling)
-	mode.append(w_mode)
-	NF[0].append(nearfield)
-	IF[0].append(midfield)
-	FF[0].append(farfield)
+	Bfield_total = np.zeros((poynting_points,poynting_points,3),dtype=complex)
+	Efield_total = np.zeros((poynting_points,poynting_points,3),dtype=complex)
+	for mode in [1,2]:
+		vec = vector[mode]
+		while abs(np.real(w_mode)*hbar/elec - (np.real(wsp_0)*hbar/elec + np.real(coupling))) > 0.000001:
+			if count == 0:
+				w_mode = 0
+				count += 1
+				print count
+			else:
+				w_mode = np.real((wsp_0*hbar/elec + coupling) * elec/hbar)
+				count += 1
+				#print count
+				print w_mode*hbar/elec
+			wavenumber = math.sqrt(epsb)*w_mode/c
+			alpha = ((alphasp**-1) - 1j*(2./3.)*wavenumber**3)**-1
+			coupling = 0
+			nearfield = 0
+			midfield = 0
+			farfield = 0
+			for x in range(0,numPart):
+				for y in range(x,numPart):
+					if x == y:
+						continue
+					else:
+						pass
+					Rmag = math.hypot(Loc[x][0]-Loc[y][0], Loc[x][1]-Loc[y][1])
+					unit_vector = (Loc[x] - Loc[y])/Rmag
+					unit_dyad_term = np.dot(vec[x],vec[y])
+					n_dyad_term = np.dot(vec[x],unit_vector)*np.dot(unit_vector,vec[y])
+					r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
+					r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+					r_unit = (alpha*wavenumber**2)/(Rmag)
+					exponent = np.exp(1j*wavenumber*Rmag)
+					coupling += -(hbar/elec)*wsp_0/epsb*(((r_unit * (unit_dyad_term - n_dyad_term) + (r_cubed - 1j*r_squared) * (3*n_dyad_term - unit_dyad_term))) * exponent)
+					nearfield += -(hbar/elec) * wsp_0 * r_cubed*exponent*(3*n_dyad_term - unit_dyad_term)
+					midfield += -(hbar/elec) * wsp_0 * -1j*r_squared * (3*n_dyad_term - unit_dyad_term) * exponent
+					farfield += -(hbar/elec) * wsp_0 * r_unit * exponent * (unit_dyad_term - n_dyad_term)
+		w_mode = np.real(wsp_0*hbar/elec+coupling)
+		u,v = zip(*vec)
+		x,y = zip(*Loc)
+		plt.figure()
+		plt.quiver(x,y,u,v)
+		plt.show()
+		#raw_input()
+		screen_dist = 100000000*a0
+		
+		for number in range(0,numPart):
+			location = list(Loc[number])
+			location.append(0)
+			
+			Bfield = np.empty((poynting_points,poynting_points,3),dtype=complex)
+			Efield = np.empty((poynting_points,poynting_points,3),dtype=complex)
+			phi_count = 0
+			
+			for phi in np.linspace(0,2*math.pi,poynting_points):
+				theta_count = 0
+				for theta in np.linspace(0,math.pi,poynting_points):
+					nhat = [np.cos(phi)*np.sin(theta), np.sin(phi)*np.sin(theta), np.cos(theta)]
+					point = np.multiply(screen_dist,nhat)
+					rmag = np.sqrt((point[0]-location[0])**2 + (point[1]-location[1])**2 + point[2]**2)
+					nhat_dip = (location-point)/rmag
+					Bfield[theta_count,phi_count] = np.sqrt(alpha*hbar*wsp_0)*(wavenumber**2)*np.cross(nhat_dip,vec[number])*np.exp(1j*wavenumber*rmag)/(rmag) #
+					Efield[theta_count,phi_count] = np.cross(Bfield[theta_count,phi_count],nhat_dip)/math.sqrt(epsb)
+					theta_count += 1
+				phi_count += 1
+			Bfield_total = Bfield_total + Bfield
+			Efield_total = Efield_total + Efield
+	poynting = np.empty((poynting_points,poynting_points),dtype=float)
+	for idx1 in range(poynting_points):
+		for idx2 in range(poynting_points):
+			poynting[idx1,idx2] = (screen_dist**2)*np.linalg.norm(0.5*np.real(np.cross(Efield_total[idx1,idx2],np.conj(Bfield_total[idx1,idx2]))))
+	theta = np.linspace(0,math.pi,poynting_points)
+	phi = np.linspace(0,2*math.pi,poynting_points)
+	PHI,THETA = np.meshgrid(phi,theta)
+	X = poynting * np.cos(PHI)*np.sin(THETA)
+	Y = poynting * np.sin(PHI)*np.sin(THETA)
+	Z = poynting * np.cos(THETA)
+	norm = poynting/poynting.max()
+	fig = plt.figure()
+	ax = fig.add_subplot(1,1,1, projection='3d')
+	plot = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, facecolors=cm.jet(norm),linewidth=0, antialiased=False, alpha=0.5)
+	#ax.colorbar()
+	plt.show()
+
+		
 
 
-#print len(NSNS)	
-epsb = np.linspace(1,30,30)
-
-plt.figure()
-plt.subplot(2,1,1)
-plt.plot(epsb,mode,linewidth=3)
-plt.subplot(2,1,2)
-plt.plot(epsb,interaction,linewidth=3)
-plt.scatter(epsb,np.add(NF[0],IF[0]),label = 'NF + IF', color = 'C0', marker = 'o')
-plt.scatter(epsb,FF[0],label = 'FF', color = 'C0', marker = 's')
-plt.show()
-#np.savetxt('dielectric_N_S.txt',np.real(mode))
-np.savetxt('allN_coupling.txt',np.real(interaction))
-np.savetxt('allN_near_mid.txt',np.real(np.add(NF[0],IF[0])))
-np.savetxt('allN_far.txt',np.real(FF[0]))
 
 
+
+
+
+'''interaction.append(coupling)
+		mode.append(w_mode)
+		NF[0].append(nearfield)
+		IF[0].append(midfield)
+		FF[0].append(farfield)
+
+
+	#print len(NSNS)	
+	epsb = np.linspace(1,30,30)
+
+	plt.figure()
+	plt.subplot(2,1,1)
+	plt.plot(epsb,mode,linewidth=3)
+	plt.subplot(2,1,2)
+	plt.plot(epsb,interaction,linewidth=3)
+	plt.scatter(epsb,np.add(NF[0],IF[0]),label = 'NF + IF', color = 'C0', marker = 'o')
+	plt.scatter(epsb,FF[0],label = 'FF', color = 'C0', marker = 's')
+	plt.show()
+	#np.savetxt('dielectric_N_S.txt',np.real(mode))
+	np.savetxt('allN_coupling.txt',np.real(interaction))
+	np.savetxt('allN_near_mid.txt',np.real(np.add(NF[0],IF[0])))
+	np.savetxt('allN_far.txt',np.real(FF[0]))
+
+
+'''

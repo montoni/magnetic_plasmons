@@ -6,6 +6,10 @@ from scipy.interpolate import spline
 
 NN = []
 NS = []
+<<<<<<< HEAD
+max_length = []
+=======
+>>>>>>> 27976288aefe91e15672a56bcf6099455bdfb385
 bem_NN = [3.614, 3.603, 3.562, 3.5, 3.405, 3.295, 3.17]
 bem_NS = [3.61, 3.6, 3.569, 3.509, 3.413, 3.276, 3.112]
 mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
@@ -29,6 +33,10 @@ wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 epsb = 1
 
 for r in range(1,31):
+<<<<<<< HEAD
+	numPart = 10
+=======
+>>>>>>> 27976288aefe91e15672a56bcf6099455bdfb385
 	a0 = r*10**-7; #sphere radius in cm
 	alphasp = (a0**3)*(3/(epsinf+2*epsb)); # polarizability (cm^3)
 	index = (r-1)*10
@@ -65,8 +73,9 @@ for r in range(1,31):
 			pass
 		else:
 			Loc[count] = x'''
-
-
+	numPart = 12
+	places.append(centers[0])
+	places.append(centers[1])
 	#Loc = np.unique(Loc)
 	#print places
 	Loc = places
@@ -79,14 +88,18 @@ for r in range(1,31):
 	H = (np.zeros((2*numPart,2*numPart),dtype=float))#initialize Hammy with zeros, twenty by twenty in this case.
 
 	'''More constants'''
-
+	distances = []
 	count = 1
 	#wsp_0 = math.sqrt((wplasma/math.sqrt(epsinf+2*epsb))**2 - (gamma/2)**2);
-	wsp_0 = mie_omegas[index]*elec/hbar
+	wsp_0 = (mie_omegas[index]*elec/hbar)*math.sqrt(epsinf+2)/math.sqrt(epsinf+2*epsb)
 	'''initialize w_0 and eigen'''
 	w_0 = 0
 	eigen = np.ones(2*numPart)
+<<<<<<< HEAD
+	for mode in range(2):
+=======
 	for mode in range(0,2):
+>>>>>>> 27976288aefe91e15672a56bcf6099455bdfb385
 		while np.sqrt(np.square(w_0*hbar/elec - eigen[(2*numPart)-(mode+1)])) > 0.0000001:
 			if count == 1:
 				wsp = wsp_0
@@ -95,14 +108,14 @@ for r in range(1,31):
 			else:
 				count = count + 1
 				w_0 = eigen[2*numPart-(mode+1)]*elec/hbar
-			wavenumber = (w_0)/(c*math.sqrt(epsb))
+			wavenumber = (w_0*math.sqrt(epsb))/(c)
 			alpha = alphasp/(1 - 1j*(2./3.)*(wavenumber**3)*alphasp)
 			msp = (ch**2)/(alpha*((wsp)**2)); # sp mass (grams)
 			tau = (2*ch**2)/(3*msp*c**3) # radiation damping time
 			gamma_ret = gamma+tau*(w_0**2) # I pulled this from the beats paper
 			gamma_eV = gamma_ret*hbar/elec
 			#wsp = wsp_0
-			wsp = math.sqrt((np.real(wsp_0))**2 - (np.real(gamma_ret)/2)**2) # sp frequency (rad/s) corrected for radiation damping
+			wsp = math.sqrt((np.real(wsp_0))**2)# - (np.real(gamma_ret)/2)**2) # sp frequency (rad/s) corrected for radiation damping
 			for n in range (0,2*numPart):
 				for m in range (0,2*numPart):
 					if m == n: #if m and n are the same, the hammy gets the plasmon energy
@@ -114,19 +127,20 @@ for r in range(1,31):
 					else: # all other dipoles are fair game
 						R = Loc[(n/2)]-Loc[(m/2)] #pick out the location of each dipole, compute the distance between them
 						Rmag = math.sqrt(R[0]**2+R[1]**2) #compute magnitude of distance
+						distances.append(Rmag)
 						nhat = (Loc[(n/2)]-Loc[(m/2)])/float(Rmag) #compute unit vector between dipoles
 						p_dot_p = np.dot(Q[n%2],Q[m%2]) # this is one dipole dotted into the other
 						p_nn_p = np.dot(Q[n%2],nhat)*np.dot(nhat,Q[m%2]) # this is one dipole dotted into the unit vector, times the other dipole dotted into the unit vector
 						r_cubed = alpha/(Rmag**3) #this is the 1/r^3 term (static)
-						r_squared = (alpha*w_0)/(c*(Rmag**2)) #this is the 1/r^2 term (imaginary part)
-						r_unit = (alpha*w_0**2)/(Rmag*(c**2)) #this is the 1/r term (goes with the cross products)
+						r_squared = (alpha*wavenumber)/((Rmag**2)) #this is the 1/r^2 term (imaginary part)
+						r_unit = (alpha*wavenumber**2)/(Rmag) #this is the 1/r term (goes with the cross products)
 						#space_exp = np.exp(1j*w_0*Rmag/c)
 						space_cos = np.cos(w_0*Rmag/c) #this is the real part of the e^ikr
 						space_sin = np.sin(w_0*Rmag/c) #this is the imaginary part of the e^ikr
-						exponent = np.exp(1j*w_0*Rmag/c)
+						exponent = np.exp(1j*wavenumber*Rmag)
 						ge = ((r_unit * (p_dot_p - p_nn_p) + (r_cubed - 1j*r_squared) * (3*p_nn_p - p_dot_p))) * exponent #this is p dot E
 						gm = 0 #set magnetic coupling to zero. we can include this later if necessary.
-						H[n,m] = -np.real(ge)#*(hbar/elec)*wsp #this has the minus sign we need.
+						H[n,m] = -np.real(ge)/epsb#*(hbar/elec)*wsp #this has the minus sign we need.
 						#H[m,n] = np.conj(-ge)
 			'''diag = np.diag(np.diag(H)) # this produces a matrix of only the diagonal terms of H
 			Ht = np.matrix.transpose(H) # this is the transpose of H
@@ -142,10 +156,30 @@ for r in range(1,31):
 
 			eigen=((hbar/elec)*wsp)*(np.sqrt(eigenValues))# the eigenvalues have units of energy^2, so we take the square root
 		vec = np.reshape(eigenVectors[:,2*numPart - (mode+1)],[numPart,2])
-		'''x,y = zip(*Loc)
+		x,y = zip(*Loc)
 		u,v = zip(*vec)
 		plt.quiver(x,y,u,v)
 		plt.title("radius = " + str(r))
+<<<<<<< HEAD
+		plt.show()
+		#np.savetxt('ten_mode_'+str(mode)+'.txt',vec)
+		if abs(np.sum(vec)) > 1e-10:
+			NS.append(eigen[2*numPart-(mode+1)])
+		else:
+			NN.append(eigen[2*numPart-(mode+1)])
+	#max_length.append(max(distances))
+#np.savetxt('NN_eig.txt',np.real(NN))
+#np.savetxt('NS_eig.txt',np.real(NS))
+#np.savetxt('distances.txt',max_length)
+'''r = np.linspace(1,30,30)
+plt.figure()
+plt.plot(r,NN,r,NS)
+plt.legend(['NN','NS'])
+plt.xlabel('radius')
+plt.ylabel('energy (eV)')
+plt.savefig('water_twomer_eigenvalues.pdf')
+plt.show()'''
+=======
 		plt.show()'''
 		#np.savetxt('quad_' + str(mode) + '_vec.txt',vec)
 		if abs(np.sum(vec)) < 1e-10:
@@ -158,3 +192,4 @@ plt.figure()
 plt.plot(np.linspace(1,30,30),nearest,linewidth=3)
 plt.show()
 np.savetxt('nearest_magnetic_coupling.txt',nearest)
+>>>>>>> 27976288aefe91e15672a56bcf6099455bdfb385
