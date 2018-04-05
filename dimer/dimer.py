@@ -3,7 +3,7 @@ import math
 import scipy.linalg
 import matplotlib.pyplot as plt
 
-mie_omegas = np.loadtxt('../mie_omegas_eV.txt')
+mie_omegas = np.loadtxt('../mie/mie_omegas_eV.txt')
 ''' So all the units are cgs, but the hamiltonian gets loaded up with energies in eVs, so the first constant below is the charge of an electron in coulombs and the rest of the units are cgs. Every constant should be labeled.'''
 coll_near=[]
 coll_int=[]
@@ -28,7 +28,7 @@ collinear = [np.array([1,0]),np.array([1,0])]
 antiparallel = [np.array([0,1]),np.array([0,-1])]
 parallel = [np.array([0,1]),np.array([0,1])]
 anticollinear = [np.array([1,0]),np.array([-1,0])]
-r = 30
+r = 20
 elec = 1.60217662e-19 # regular coulombs
 numPart = 2; #number of particles
 a0 = r*(1e-7); #sphere radius in cm
@@ -57,11 +57,11 @@ for number in range(0,101):
 	epsinf = 3.77; # does this have units?
 	'''Properties for silver.'''
 	Eplasma = 1.46599161e-18; # J
-	gamma = 0.05*elec/(hbar*16)
+	gamma = 0.05*elec/(hbar)
 	wplasma = Eplasma/hbar; # plasma frequency (rad/s)
 	wsp_0 = mie_omegas[(r-1)*10]*elec/hbar
 	'''initialize w_0 and eigen'''
-	w_0 = wsp_0
+	w_0 = 0
 	eigen = np.ones(2*numPart)
 	wavenumber = (w_0)/(c*math.sqrt(epsb))
 	alphasp = (a0**3)*(3/(epsinf+2*epsb))
@@ -102,7 +102,7 @@ plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
 #plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'],loc=4)
-#plt.savefig('collinear.pdf')
+plt.savefig('collinear_stat.pdf')
 plt.show()
 
 plt.figure(2)
@@ -111,7 +111,7 @@ plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
 #plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'],loc=4)
-#plt.savefig('antiparallel.pdf')
+plt.savefig('antiparallel_stat.pdf')
 plt.show()
 
 plt.figure(3)
@@ -120,7 +120,7 @@ plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
 #plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'])
-#plt.savefig('anticollinear.pdf')
+plt.savefig('anticollinear_stat.pdf')
 plt.show()
 
 plt.figure(4)
@@ -129,8 +129,15 @@ plt.xlabel('Separation Distance (nm)')
 plt.ylabel('Interaction Strength')
 #plt.xlim([2.5,250])
 plt.legend(['near','int','far','total'])
-#plt.savefig('parallel.pdf')
+plt.savefig('parallel_stat.pdf')
 plt.show()
 
-#plt.show()
+plt.figure(5)
+plt.plot(sep,coll_tot,sep,anpa_tot,sep,para_tot,sep,anco_tot,lw=3)
+plt.xlabel('Separation Distance (nm)')
+plt.ylabel('Interaction Strength')
+#plt.xlim([2.5,250])
+plt.legend(['co','ap','pa','ac'])
+plt.savefig('all_stat.pdf')
+plt.show()
 
